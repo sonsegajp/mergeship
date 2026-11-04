@@ -1,4 +1,4 @@
-# MergeShip2
+# MergeShip
 
 Ocarina of Time and Majora's Mask as one game on PC. One program, `mergeship.exe`, runs both
 [Ship of Harkinian](https://github.com/HarbourMasters/Shipwright) (Hyrule) and
@@ -52,5 +52,5 @@ Keep line endings as they are (`git config core.autocrlf false`): libultraship's
 ## Credits and licenses
 
 Ship of Harkinian and 2 Ship 2 Harkinian are by [HarbourMasters](https://github.com/HarbourMasters) and their
-contributors. Each port, and each library under them, keeps its own license file in its folder. MergeShip2 is built on
+contributors. Each port, and each library under them, keeps its own license file in its folder. MergeShip is built on
 their work.

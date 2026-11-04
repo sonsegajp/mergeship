@@ -495,6 +495,8 @@ u8 ActionItem(const Action& action) {
 bool sTestUnified = false; // harness: "unified test"
 RandoCheckId sTestCheck = RC_UNKNOWN;
 bool sLastProxyHeld = false;
+// The concrete step the last proxy gave of a progressive Hyrule item (ProxyStep), MSI_MAX for any other item.
+MsItemKey sLastProxyStep = MSI_MAX;
 // Termina's six bottles as they were before this frame's gives (OnGameStateUpdate): a bottle item is held only when
 // the give changed one (all six full: MM's Item_Give adds nothing).
 std::array<u8, 6> sBottleSnapshot{};
@@ -809,10 +811,50 @@ bool ProxyHeldInTermina(RandoItemId proxy) {
     return (ProxyCounterpart(KeyOfRI(proxy)) < MSI_MAX) || (NativeAction(KeyOfRI(proxy)).kind != Native::None);
 }
 
+// The step a progressive Hyrule item found here gave, read off what Termina holds of Hyrule's after the give; MSI_MAX for
+// an item that is not progressive. The ledger names that step (OnCheckObtained), never the pool item: Termina's give
+// already raised Hyrule's bags and ownership in the shared save, so Hyrule resolving "Progressive Bow" again from them
+// gave the next step on top -- the user's file (2026-11-03): a Big Quiver and no bow, which then vanished from both
+// worlds. `hadBefore`: Hyrule owned the item's base (the bow, the slingshot, an ocarina) before the give.
+MsItemKey ProxyStep(MsItemKey key, bool hadBefore) {
+    switch (key) {
+        case MSI_PROGRESSIVE_BOW: {
+            const s32 level = MergeShip_Own_OoTUpgrade(UPG_QUIVER);
+            return !hadBefore ? MSI_FAIRY_BOW : (level >= 3) ? MSI_BIGGEST_QUIVER : (level == 2) ? MSI_BIG_QUIVER
+                                                                                                  : MSI_FAIRY_BOW;
+        }
+        case MSI_PROGRESSIVE_BOMB_BAG: {
+            const s32 level = MergeShip_Own_OoTUpgrade(UPG_BOMB_BAG);
+            return (level >= 3) ? MSI_BIGGEST_BOMB_BAG : (level == 2) ? MSI_BIG_BOMB_BAG : MSI_BOMB_BAG;
+        }
+        case MSI_PROGRESSIVE_STRENGTH:
+            return (OoTEquip().strength >= 3) ? MSI_GOLDEN_GAUNTLETS
+                   : (OoTEquip().strength == 2) ? MSI_SILVER_GAUNTLETS
+                                                 : MSI_GORONS_BRACELET;
+        case MSI_PROGRESSIVE_SCALE:
+            return (OoTEquip().scale >= 2) ? MSI_GOLDEN_SCALE : MSI_SILVER_SCALE;
+        case MSI_PROGRESSIVE_SLINGSHOT:
+            return !hadBefore ? MSI_FAIRY_SLINGSHOT : (OoTItems().bulletBag >= 3) ? MSI_BIGGEST_BULLET_BAG
+                                                    : (OoTItems().bulletBag == 2) ? MSI_BIG_BULLET_BAG
+                                                                                 : MSI_FAIRY_SLINGSHOT;
+        case MSI_PROGRESSIVE_HOOKSHOT:
+            return (MergeShip_OoTItems_HookshotLevel() >= 2) ? MSI_LONGSHOT : MSI_HOOKSHOT;
+        case MSI_PROGRESSIVE_OCARINA:
+            return hadBefore ? MSI_OCARINA_OF_TIME : MSI_FAIRY_OCARINA;
+        default:
+            return MSI_MAX;
+    }
+}
+
 bool GiveProxy(RandoItemId proxy) {
     const MsItemKey key = KeyOfRI(proxy);
     const MsItemKey counterpart = ProxyCounterpart(key);
+    const bool hadBefore = (key == MSI_PROGRESSIVE_BOW)         ? (MergeShip_Own_OoTOwns(ITEM_BOW) != 0)
+                           : (key == MSI_PROGRESSIVE_SLINGSHOT) ? OwnsSlingshot()
+                           : (key == MSI_PROGRESSIVE_OCARINA)   ? (MergeShip_Own_OoTOwns(ITEM_OCARINA_OF_TIME) != 0)
+                                                                : false;
     sLastProxyHeld = GiveNative(NativeAction(key));
+    sLastProxyStep = sLastProxyHeld ? ProxyStep(key, hadBefore) : MSI_MAX;
     if (counterpart < MSI_MAX) {
         sLastProxyHeld = GiveTermina(counterpart, false) || sLastProxyHeld;
     }
@@ -870,7 +912,12 @@ void OnCheckObtained(RandoCheckId randoCheckId, RandoItemId placed, RandoItemId 
     } else if (KeyOfRI(converted) < MSI_MAX) {
         item = converted;
     }
-    const MsItemKey key = KeyOfRI(item);
+    MsItemKey key = KeyOfRI(item);
+    // A progressive Hyrule item: the step the proxy gave (ProxyStep), so Hyrule gives that step and not its next one.
+    if (IsProxy(item) && (sLastProxyStep < MSI_MAX)) {
+        key = sLastProxyStep;
+    }
+    sLastProxyStep = MSI_MAX;
     if (key >= MSI_MAX) {
         return; // not an item of the table (RI_JUNK, RI_NONE ...)
     }

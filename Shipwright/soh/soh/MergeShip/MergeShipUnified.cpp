@@ -440,10 +440,42 @@ void Record(MsSharedSave* shared, RandomizerCheck rc, MsItemKey key, uint8_t fla
         std::string(EnumToString(rc)).c_str(), KeyName((uint16_t)key), flags);
 }
 
-// A Hyrule check holding `rg` was found; `held`: SoH gave it (not Termina's alone, not a fifth bottle).
-void RecordHyruleCheck(RandomizerCheck rc, RandomizerGet rg, bool held, bool commit) {
+// The step a progressive Majora's Mask item found here gave (GiveMMCopyHere / the MM sword gives ran first: the check
+// is marked found once the item is received), read off Hyrule's MM items; MSI_MAX for any other item. The ledger names
+// that step, never the pool item: the shared save carries the step to Termina already (the swords, the bow, the bags),
+// so Termina resolving "Progressive Sword (MM)" again from its own state gave the next step on top -- one Progressive
+// Sword (MM) became two, and an MM bow found here gave Termina nothing (2026-11-03).
+MsItemKey MmProgressiveStep(RandomizerGet rg) {
+    switch (rg) {
+        case RG_PROGRESSIVE_MM_SWORD:
+            return MergeShip_MMEquip_Owns(MMEQUIP_GILDED)   ? MSI_MM_GILDED_SWORD
+                   : MergeShip_MMEquip_Owns(MMEQUIP_RAZOR)  ? MSI_MM_RAZOR_SWORD
+                   : MergeShip_MMEquip_Owns(MMEQUIP_KOKIRI) ? MSI_MM_KOKIRI_SWORD
+                                                            : MSI_MAX;
+        case RG_MM_PROGRESSIVE_BOW: {
+            const s32 level = MergeShip_Own_MMUpgrade(UPG_QUIVER);
+            return (level >= 3)                             ? MSI_MM_BIGGEST_QUIVER
+                   : (level == 2)                           ? MSI_MM_BIG_QUIVER
+                   : MergeShip_MMEquip_Owns(MMEQUIP_BOW)    ? MSI_MM_HEROS_BOW
+                                                            : MSI_MAX;
+        }
+        case RG_MM_PROGRESSIVE_BOMB_BAG: {
+            const s32 level = MergeShip_Own_MMUpgrade(UPG_BOMB_BAG);
+            return (level >= 3) ? MSI_MM_BIGGEST_BOMB_BAG
+                   : (level == 2) ? MSI_MM_BIG_BOMB_BAG
+                   : (level == 1) ? MSI_MM_BOMB_BAG
+                                  : MSI_MAX;
+        }
+        default:
+            return MSI_MAX;
+    }
+}
+
+// A Hyrule check holding `rg` was found; `held`: SoH gave it (not Termina's alone, not a fifth bottle). `stepKey`: the
+// step a progressive item gave (MmProgressiveStep), MSI_MAX to record the placed item.
+void RecordHyruleCheck(RandomizerCheck rc, RandomizerGet rg, bool held, bool commit, MsItemKey stepKey = MSI_MAX) {
     MsSharedSave* shared = Shared();
-    const MsItemKey key = MsItems_KeyOfRG(rg);
+    const MsItemKey key = (stepKey < MSI_MAX) ? stepKey : MsItems_KeyOfRG(rg);
     const MsItemInfo* info = MsItems_Get(key);
     if ((shared == nullptr) || (info == nullptr)) {
         return;
@@ -630,7 +662,7 @@ void OnCheckStatus(RandomizerCheck rc, RandomizerCheckStatus status) {
         return;
     }
     const RandomizerGet rg = loc->GetPlacedRandomizerGet();
-    RecordHyruleCheck(rc, rg, HeldInHyrule(rg, true), true);
+    RecordHyruleCheck(rc, rg, HeldInHyrule(rg, true), true, MmProgressiveStep(rg));
 }
 
 void OnFrame() {

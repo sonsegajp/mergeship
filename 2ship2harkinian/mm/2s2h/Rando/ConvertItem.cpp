@@ -183,6 +183,11 @@ static RegisterShipInitFunc refreshInitFunc(
     { "IS_RANDO" });
 
 RandoItemId Rando::CurrentJunkItem(RandoCheckId randoCheckId) {
+    // MergeShip2: the pool is filled for a randomizer file only (IS_RANDO above); a unified delivery on another file
+    // (the door harness's "unified test") resolving an item already held to junk read past an empty pool and crashed.
+    if (obtainableJunkItems.empty()) {
+        return RI_RUPEE_BLUE;
+    }
     if (CVarGetInteger("gRando.JunkItems", 0) == 0) {
         Ship_Random_Seed(gSaveContext.save.shipSaveInfo.rando.finalSeed + randoCheckId +
                          (gPlayState->gameplayFrames / 30));

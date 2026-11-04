@@ -1,0 +1,54 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_and/object_and.h"
+
+#define gAndBouquetDL mm_gAndBouquetDL
+#define gAndCalvesDL mm_gAndCalvesDL
+#define gAndCenterLeavesDL mm_gAndCenterLeavesDL
+#define gAndCenterLeavesTipDL mm_gAndCenterLeavesTipDL
+#define gAndDressCircleTex mm_gAndDressCircleTex
+#define gAndDressGradientTex mm_gAndDressGradientTex
+#define gAndDressSpotsTex mm_gAndDressSpotsTex
+#define gAndDressSymbolTex mm_gAndDressSymbolTex
+#define gAndEarTex mm_gAndEarTex
+#define gAndEyeClosedTex mm_gAndEyeClosedTex
+#define gAndEyeClosingTex mm_gAndEyeClosingTex
+#define gAndEyeOpenTex mm_gAndEyeOpenTex
+#define gAndEyeOpeningTex mm_gAndEyeOpeningTex
+#define gAndFingersTex mm_gAndFingersTex
+#define gAndFlowerTex mm_gAndFlowerTex
+#define gAndHairTex mm_gAndHairTex
+#define gAndHeadDL mm_gAndHeadDL
+#define gAndIdleAnim mm_gAndIdleAnim
+#define gAndLeavesTex mm_gAndLeavesTex
+#define gAndLeftForearmDL mm_gAndLeftForearmDL
+#define gAndLeftHandDL mm_gAndLeftHandDL
+#define gAndLeftLeavesDL mm_gAndLeftLeavesDL
+#define gAndLeftLeavesTipDL mm_gAndLeftLeavesTipDL
+#define gAndLeftUpperArmDL mm_gAndLeftUpperArmDL
+#define gAndLowerVeilDL mm_gAndLowerVeilDL
+#define gAndMouthNeutralTex mm_gAndMouthNeutralTex
+#define gAndMouthSmileTex mm_gAndMouthSmileTex
+#define gAndPearlTex mm_gAndPearlTex
+#define gAndPelvisDL mm_gAndPelvisDL
+#define gAndRaiseHandAnim mm_gAndRaiseHandAnim
+#define gAndRaiseHeadAnim mm_gAndRaiseHeadAnim
+#define gAndRaisedHandLoopAnim mm_gAndRaisedHandLoopAnim
+#define gAndRaisedHandWalkAnim mm_gAndRaisedHandWalkAnim
+#define gAndRaisedHeadLoopAnim mm_gAndRaisedHeadLoopAnim
+#define gAndRightForearmDL mm_gAndRightForearmDL
+#define gAndRightHandDL mm_gAndRightHandDL
+#define gAndRightLeavesDL mm_gAndRightLeavesDL
+#define gAndRightLeavesTipDL mm_gAndRightLeavesTipDL
+#define gAndRightUpperArmDL mm_gAndRightUpperArmDL
+#define gAndShinsDL mm_gAndShinsDL
+#define gAndSkel mm_gAndSkel
+#define gAndSkinShadowTex mm_gAndSkinShadowTex
+#define gAndStaticAnim mm_gAndStaticAnim
+#define gAndSymbolDL mm_gAndSymbolDL
+#define gAndThighsDL mm_gAndThighsDL
+#define gAndTorsoDL mm_gAndTorsoDL
+#define gAndTrainDL mm_gAndTrainDL
+#define gAndUpperVeilDL mm_gAndUpperVeilDL
+#define gAndVeilBaseDL mm_gAndVeilBaseDL
+#define gAndWalkAnim mm_gAndWalkAnim

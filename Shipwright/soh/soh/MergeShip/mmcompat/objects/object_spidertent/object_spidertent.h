@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_spidertent/object_spidertent.h"
+
+#define object_spidertent_Colheader_0011AC mm_object_spidertent_Colheader_0011AC
+#define object_spidertent_Colheader_00238C mm_object_spidertent_Colheader_00238C
+#define object_spidertent_DL_000070 mm_object_spidertent_DL_000070
+#define object_spidertent_DL_000108 mm_object_spidertent_DL_000108
+#define object_spidertent_DL_001250 mm_object_spidertent_DL_001250
+#define object_spidertent_DL_0012E8 mm_object_spidertent_DL_0012E8
+#define object_spidertent_Tex_000110 mm_object_spidertent_Tex_000110
+#define object_spidertent_Tex_0012F0 mm_object_spidertent_Tex_0012F0

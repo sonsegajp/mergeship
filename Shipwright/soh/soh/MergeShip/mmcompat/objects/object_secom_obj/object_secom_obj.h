@@ -1,0 +1,15 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_secom_obj/object_secom_obj.h"
+
+#define object_secom_obj_Colheader_0001C0 mm_object_secom_obj_Colheader_0001C0
+#define object_secom_obj_Colheader_002CB8 mm_object_secom_obj_Colheader_002CB8
+#define object_secom_obj_DL_000080 mm_object_secom_obj_DL_000080
+#define object_secom_obj_DL_001230 mm_object_secom_obj_DL_001230
+#define object_secom_obj_DL_001300 mm_object_secom_obj_DL_001300
+#define object_secom_obj_DL_001A50 mm_object_secom_obj_DL_001A50
+#define object_secom_obj_DL_001A58 mm_object_secom_obj_DL_001A58
+#define object_secom_obj_Tex_0001F0 mm_object_secom_obj_Tex_0001F0
+#define object_secom_obj_Tex_001390 mm_object_secom_obj_Tex_001390
+#define object_secom_obj_Tex_001750 mm_object_secom_obj_Tex_001750
+#define object_secom_obj_Tex_001B08 mm_object_secom_obj_Tex_001B08

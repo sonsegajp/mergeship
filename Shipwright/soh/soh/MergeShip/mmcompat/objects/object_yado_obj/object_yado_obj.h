@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_yado_obj/object_yado_obj.h"
+
+#define object_yado_obj_DL_000320 mm_object_yado_obj_DL_000320
+#define object_yado_obj_DL_000430 mm_object_yado_obj_DL_000430
+#define object_yado_obj_Matanimheader_0012E8 mm_object_yado_obj_Matanimheader_0012E8
+#define object_yado_obj_Tex_0005D8 mm_object_yado_obj_Tex_0005D8
+#define object_yado_obj_Tex_0009D8 mm_object_yado_obj_Tex_0009D8
+#define object_yado_obj_Tex_000DD8 mm_object_yado_obj_Tex_000DD8
+#define object_yado_obj_Tex_000ED8 mm_object_yado_obj_Tex_000ED8

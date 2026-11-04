@@ -1,0 +1,10 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_gi_bottle_22/object_gi_bottle_22.h"
+
+#define gGiHylianLoachBottleContentsDL mm_gGiHylianLoachBottleContentsDL
+#define gGiHylianLoachBottleCorkTex mm_gGiHylianLoachBottleCorkTex
+#define gGiHylianLoachBottleGlassCorkWaterDL mm_gGiHylianLoachBottleGlassCorkWaterDL
+#define gGiHylianLoachBottleGlassTex mm_gGiHylianLoachBottleGlassTex
+#define gGiHylianLoachBottleLoachTex mm_gGiHylianLoachBottleLoachTex
+#define gGiHylianLoachBottleWaterTex mm_gGiHylianLoachBottleWaterTex

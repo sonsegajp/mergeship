@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_LOST_WOODS/Z2_LOST_WOODS/Z2_LOST_WOODS.h"
+
+#define Z2_LOST_WOODSCollisionHeader_005DF8 mm_Z2_LOST_WOODSCollisionHeader_005DF8
+#define Z2_LOST_WOODSCutsceneData_000194 mm_Z2_LOST_WOODSCutsceneData_000194
+#define Z2_LOST_WOODSCutsceneData_001104 mm_Z2_LOST_WOODSCutsceneData_001104
+#define Z2_LOST_WOODSCutsceneData_005F48 mm_Z2_LOST_WOODSCutsceneData_005F48
+#define Z2_LOST_WOODSCutsceneData_00A778 mm_Z2_LOST_WOODSCutsceneData_00A778
+#define Z2_LOST_WOODSCutsceneData_00AEF8 mm_Z2_LOST_WOODSCutsceneData_00AEF8
+#define Z2_LOST_WOODSTex_00B9D0 mm_Z2_LOST_WOODSTex_00B9D0
+#define Z2_LOST_WOODSTex_00D9D0 mm_Z2_LOST_WOODSTex_00D9D0
+#define Z2_LOST_WOODSTex_00E9D0 mm_Z2_LOST_WOODSTex_00E9D0

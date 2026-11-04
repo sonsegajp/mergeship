@@ -1,0 +1,14 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_gi_mask11/object_gi_mask11.h"
+
+#define gGiCircusLeaderMaskEarTex mm_gGiCircusLeaderMaskEarTex
+#define gGiCircusLeaderMaskEyeTex mm_gGiCircusLeaderMaskEyeTex
+#define gGiCircusLeaderMaskEyebrowTex mm_gGiCircusLeaderMaskEyebrowTex
+#define gGiCircusLeaderMaskEyebrowsDL mm_gGiCircusLeaderMaskEyebrowsDL
+#define gGiCircusLeaderMaskFaceDL mm_gGiCircusLeaderMaskFaceDL
+#define gGiCircusLeaderMaskFaceTLUT mm_gGiCircusLeaderMaskFaceTLUT
+#define gGiCircusLeaderMaskHairTex mm_gGiCircusLeaderMaskHairTex
+#define gGiCircusLeaderMaskHairlineTex mm_gGiCircusLeaderMaskHairlineTex
+#define gGiCircusLeaderMaskSideBurnTex mm_gGiCircusLeaderMaskSideBurnTex
+#define gGiCircusLeaderMaskSkinTex mm_gGiCircusLeaderMaskSkinTex

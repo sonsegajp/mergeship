@@ -1,0 +1,47 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ani/object_ani.h"
+
+#define gAniClosedEyeTex mm_gAniClosedEyeTex
+#define gAniClosingEyeTex mm_gAniClosingEyeTex
+#define gAniEarTex mm_gAniEarTex
+#define gAniEyeTLUT mm_gAniEyeTLUT
+#define gAniFallOverHoldingFootAnim mm_gAniFallOverHoldingFootAnim
+#define gAniFingersTex mm_gAniFingersTex
+#define gAniGeneralTLUT mm_gAniGeneralTLUT
+#define gAniHairTex mm_gAniHairTex
+#define gAniHandBehindHeadApologyAnim mm_gAniHandBehindHeadApologyAnim
+#define gAniHeadDL mm_gAniHeadDL
+#define gAniHoldUpHandAnim mm_gAniHoldUpHandAnim
+#define gAniHoldingFootWrithingInPainAnim mm_gAniHoldingFootWrithingInPainAnim
+#define gAniKnockBackAnim mm_gAniKnockBackAnim
+#define gAniKnockBackGettingUpAnim mm_gAniKnockBackGettingUpAnim
+#define gAniLandingThenStandingUpAnim mm_gAniLandingThenStandingUpAnim
+#define gAniLeftFootDL mm_gAniLeftFootDL
+#define gAniLeftForearmDL mm_gAniLeftForearmDL
+#define gAniLeftHandDL mm_gAniLeftHandDL
+#define gAniLeftShinDL mm_gAniLeftShinDL
+#define gAniLeftThighDL mm_gAniLeftThighDL
+#define gAniLeftUpperArmDL mm_gAniLeftUpperArmDL
+#define gAniMouthTex mm_gAniMouthTex
+#define gAniOpenEyeTex mm_gAniOpenEyeTex
+#define gAniPantsTex mm_gAniPantsTex
+#define gAniPelvisDL mm_gAniPelvisDL
+#define gAniRightFootDL mm_gAniRightFootDL
+#define gAniRightForearmDL mm_gAniRightForearmDL
+#define gAniRightHandDL mm_gAniRightHandDL
+#define gAniRightShinDL mm_gAniRightShinDL
+#define gAniRightThighDL mm_gAniRightThighDL
+#define gAniRightUpperArmDL mm_gAniRightUpperArmDL
+#define gAniSandleBuckleTex mm_gAniSandleBuckleTex
+#define gAniShirtEdgeTex mm_gAniShirtEdgeTex
+#define gAniSittingBackAnim mm_gAniSittingBackAnim
+#define gAniSkel mm_gAniSkel
+#define gAniStandingNormalAnim mm_gAniStandingNormalAnim
+#define gAniTorsoDL mm_gAniTorsoDL
+#define gAniTreeHangLosingBalanceAnim mm_gAniTreeHangLosingBalanceAnim
+#define gAniTreeHangingAnim mm_gAniTreeHangingAnim
+#define gAniTreeHangingReachAnim mm_gAniTreeHangingReachAnim
+#define gAniUnkGradient2Tex mm_gAniUnkGradient2Tex
+#define gAniUnkGradientTex mm_gAniUnkGradientTex
+#define gAniUnusedSidesteppingAnim mm_gAniUnusedSidesteppingAnim

@@ -1,0 +1,25 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_kujiya/object_kujiya.h"
+
+#define gLotteryShopBackSignDL mm_gLotteryShopBackSignDL
+#define gLotteryShopBlueRupeesDL mm_gLotteryShopBlueRupeesDL
+#define gLotteryShopBoxBaseTex mm_gLotteryShopBoxBaseTex
+#define gLotteryShopCylinderDL mm_gLotteryShopCylinderDL
+#define gLotteryShopCylinderMiddleStripesTex mm_gLotteryShopCylinderMiddleStripesTex
+#define gLotteryShopCylinderTopBottomTex mm_gLotteryShopCylinderTopBottomTex
+#define gLotteryShopGradientTex mm_gLotteryShopGradientTex
+#define gLotteryShopGreenRupeesDL mm_gLotteryShopGreenRupeesDL
+#define gLotteryShopMaskDL mm_gLotteryShopMaskDL
+#define gLotteryShopMaskPosMtx mm_gLotteryShopMaskPosMtx
+#define gLotteryShopMaskTex mm_gLotteryShopMaskTex
+#define gLotteryShopOpenBoxDL mm_gLotteryShopOpenBoxDL
+#define gLotteryShopRainbowTex mm_gLotteryShopRainbowTex
+#define gLotteryShopRedRupeesDL mm_gLotteryShopRedRupeesDL
+#define gLotteryShopRupeesTex mm_gLotteryShopRupeesTex
+#define gLotteryShopScrollingArrowDL mm_gLotteryShopScrollingArrowDL
+#define gLotteryShopScrollingEffectsDL mm_gLotteryShopScrollingEffectsDL
+#define gLotteryShopSignBorderTex mm_gLotteryShopSignBorderTex
+#define gLotteryShopSignTextTex mm_gLotteryShopSignTextTex
+#define gLotteryShopTargetArrowAndSignDL mm_gLotteryShopTargetArrowAndSignDL
+#define gLotteryShopTexAnim mm_gLotteryShopTexAnim

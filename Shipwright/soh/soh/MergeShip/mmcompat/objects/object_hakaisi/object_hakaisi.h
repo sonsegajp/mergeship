@@ -1,0 +1,15 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_hakaisi/object_hakaisi.h"
+
+#define object_hakaisi_Colheader_002FC4 mm_object_hakaisi_Colheader_002FC4
+#define object_hakaisi_DL_001F10 mm_object_hakaisi_DL_001F10
+#define object_hakaisi_DL_0021B0 mm_object_hakaisi_DL_0021B0
+#define object_hakaisi_DL_002650 mm_object_hakaisi_DL_002650
+#define object_hakaisi_DL_0029C0 mm_object_hakaisi_DL_0029C0
+#define object_hakaisi_DL_002CC0 mm_object_hakaisi_DL_002CC0
+#define object_hakaisi_Tex_000000 mm_object_hakaisi_Tex_000000
+#define object_hakaisi_Tex_000200 mm_object_hakaisi_Tex_000200
+#define object_hakaisi_Tex_000300 mm_object_hakaisi_Tex_000300
+#define object_hakaisi_Tex_000500 mm_object_hakaisi_Tex_000500
+#define object_hakaisi_Tex_001500 mm_object_hakaisi_Tex_001500

@@ -1,0 +1,52 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_kgy/object_kgy.h"
+
+#define object_kgy_Anim_0008FC mm_object_kgy_Anim_0008FC
+#define object_kgy_Anim_001764 mm_object_kgy_Anim_001764
+#define object_kgy_Anim_001EA4 mm_object_kgy_Anim_001EA4
+#define object_kgy_Anim_00292C mm_object_kgy_Anim_00292C
+#define object_kgy_Anim_003334 mm_object_kgy_Anim_003334
+#define object_kgy_Anim_003D88 mm_object_kgy_Anim_003D88
+#define object_kgy_Anim_0042E4 mm_object_kgy_Anim_0042E4
+#define object_kgy_Anim_004B98 mm_object_kgy_Anim_004B98
+#define object_kgy_Anim_0101F0 mm_object_kgy_Anim_0101F0
+#define object_kgy_Anim_010B84 mm_object_kgy_Anim_010B84
+#define object_kgy_DL_009C80 mm_object_kgy_DL_009C80
+#define object_kgy_DL_009DA0 mm_object_kgy_DL_009DA0
+#define object_kgy_DL_009F28 mm_object_kgy_DL_009F28
+#define object_kgy_DL_00A0A0 mm_object_kgy_DL_00A0A0
+#define object_kgy_DL_00A1C0 mm_object_kgy_DL_00A1C0
+#define object_kgy_DL_00A300 mm_object_kgy_DL_00A300
+#define object_kgy_DL_00A490 mm_object_kgy_DL_00A490
+#define object_kgy_DL_00A618 mm_object_kgy_DL_00A618
+#define object_kgy_DL_00A790 mm_object_kgy_DL_00A790
+#define object_kgy_DL_00A998 mm_object_kgy_DL_00A998
+#define object_kgy_DL_00AD60 mm_object_kgy_DL_00AD60
+#define object_kgy_DL_00B028 mm_object_kgy_DL_00B028
+#define object_kgy_DL_00B130 mm_object_kgy_DL_00B130
+#define object_kgy_DL_00B280 mm_object_kgy_DL_00B280
+#define object_kgy_DL_00B3C8 mm_object_kgy_DL_00B3C8
+#define object_kgy_DL_00B678 mm_object_kgy_DL_00B678
+#define object_kgy_DL_00B7B8 mm_object_kgy_DL_00B7B8
+#define object_kgy_DL_00B978 mm_object_kgy_DL_00B978
+#define object_kgy_DL_00E8E8 mm_object_kgy_DL_00E8E8
+#define object_kgy_DL_00E8F0 mm_object_kgy_DL_00E8F0
+#define object_kgy_DL_00F178 mm_object_kgy_DL_00F178
+#define object_kgy_DL_00F180 mm_object_kgy_DL_00F180
+#define object_kgy_Matanimheader_00EE58 mm_object_kgy_Matanimheader_00EE58
+#define object_kgy_Matanimheader_00F6A0 mm_object_kgy_Matanimheader_00F6A0
+#define object_kgy_Skel_00F910 mm_object_kgy_Skel_00F910
+#define object_kgy_TLUT_00BC28 mm_object_kgy_TLUT_00BC28
+#define object_kgy_Tex_00BE28 mm_object_kgy_Tex_00BE28
+#define object_kgy_Tex_00C628 mm_object_kgy_Tex_00C628
+#define object_kgy_Tex_00C728 mm_object_kgy_Tex_00C728
+#define object_kgy_Tex_00C828 mm_object_kgy_Tex_00C828
+#define object_kgy_Tex_00CC28 mm_object_kgy_Tex_00CC28
+#define object_kgy_Tex_00D028 mm_object_kgy_Tex_00D028
+#define object_kgy_Tex_00D828 mm_object_kgy_Tex_00D828
+#define object_kgy_Tex_00D928 mm_object_kgy_Tex_00D928
+#define object_kgy_Tex_00E128 mm_object_kgy_Tex_00E128
+#define object_kgy_Tex_00E228 mm_object_kgy_Tex_00E228
+#define object_kgy_Tex_00E628 mm_object_kgy_Tex_00E628
+#define object_kgy_Tex_00F6B0 mm_object_kgy_Tex_00F6B0

@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mask_bakuretu/object_mask_bakuretu.h"
+
+#define object_mask_bakuretu_DL_000440 mm_object_mask_bakuretu_DL_000440
+#define object_mask_bakuretu_DL_0005C0 mm_object_mask_bakuretu_DL_0005C0
+#define object_mask_bakuretu_Matanimheader_0011F8 mm_object_mask_bakuretu_Matanimheader_0011F8
+#define object_mask_bakuretu_Tex_0007B0 mm_object_mask_bakuretu_Tex_0007B0
+#define object_mask_bakuretu_Tex_000BB0 mm_object_mask_bakuretu_Tex_000BB0
+#define object_mask_bakuretu_Tex_000BF0 mm_object_mask_bakuretu_Tex_000BF0
+#define object_mask_bakuretu_Tex_000DF0 mm_object_mask_bakuretu_Tex_000DF0

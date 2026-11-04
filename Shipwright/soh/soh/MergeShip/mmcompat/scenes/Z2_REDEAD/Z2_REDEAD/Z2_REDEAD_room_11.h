@@ -1,0 +1,22 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_REDEAD/Z2_REDEAD/Z2_REDEAD_room_11.h"
+
+#define Z2_REDEAD_room_11DL_000900 mm_Z2_REDEAD_room_11DL_000900
+#define Z2_REDEAD_room_11DL_002298 mm_Z2_REDEAD_room_11DL_002298
+#define Z2_REDEAD_room_11DL_003588 mm_Z2_REDEAD_room_11DL_003588
+#define Z2_REDEAD_room_11DL_003AB0 mm_Z2_REDEAD_room_11DL_003AB0
+#define Z2_REDEAD_room_11DL_004350 mm_Z2_REDEAD_room_11DL_004350
+#define Z2_REDEAD_room_11DL_0044E8 mm_Z2_REDEAD_room_11DL_0044E8
+#define Z2_REDEAD_room_11DL_007160 mm_Z2_REDEAD_room_11DL_007160
+#define Z2_REDEAD_room_11DL_007668 mm_Z2_REDEAD_room_11DL_007668
+#define Z2_REDEAD_room_11DL_007B90 mm_Z2_REDEAD_room_11DL_007B90
+#define Z2_REDEAD_room_11DL_007E48 mm_Z2_REDEAD_room_11DL_007E48
+#define Z2_REDEAD_room_11DL_007F50 mm_Z2_REDEAD_room_11DL_007F50
+#define Z2_REDEAD_room_11Tex_004518 mm_Z2_REDEAD_room_11Tex_004518
+#define Z2_REDEAD_room_11Tex_005518 mm_Z2_REDEAD_room_11Tex_005518
+#define Z2_REDEAD_room_11Tex_006518 mm_Z2_REDEAD_room_11Tex_006518
+#define Z2_REDEAD_room_11Tex_006918 mm_Z2_REDEAD_room_11Tex_006918
+#define Z2_REDEAD_room_11Tex_007F78 mm_Z2_REDEAD_room_11Tex_007F78
+#define Z2_REDEAD_room_11Tex_008778 mm_Z2_REDEAD_room_11Tex_008778
+#define Z2_REDEAD_room_11Tex_008F78 mm_Z2_REDEAD_room_11Tex_008F78

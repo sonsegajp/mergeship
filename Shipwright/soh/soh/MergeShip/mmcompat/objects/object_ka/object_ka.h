@@ -1,0 +1,42 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ka/object_ka.h"
+
+#define object_ka_Anim_000214 mm_object_ka_Anim_000214
+#define object_ka_Anim_00686C mm_object_ka_Anim_00686C
+#define object_ka_Anim_006A6C mm_object_ka_Anim_006A6C
+#define object_ka_Anim_0071EC mm_object_ka_Anim_0071EC
+#define object_ka_Anim_007444 mm_object_ka_Anim_007444
+#define object_ka_Anim_007B90 mm_object_ka_Anim_007B90
+#define object_ka_Anim_0081A4 mm_object_ka_Anim_0081A4
+#define object_ka_DL_001550 mm_object_ka_DL_001550
+#define object_ka_DL_001600 mm_object_ka_DL_001600
+#define object_ka_DL_0017D8 mm_object_ka_DL_0017D8
+#define object_ka_DL_001878 mm_object_ka_DL_001878
+#define object_ka_DL_001918 mm_object_ka_DL_001918
+#define object_ka_DL_0019B8 mm_object_ka_DL_0019B8
+#define object_ka_DL_001CD8 mm_object_ka_DL_001CD8
+#define object_ka_DL_001F68 mm_object_ka_DL_001F68
+#define object_ka_DL_002020 mm_object_ka_DL_002020
+#define object_ka_DL_0020C0 mm_object_ka_DL_0020C0
+#define object_ka_DL_002160 mm_object_ka_DL_002160
+#define object_ka_DL_002200 mm_object_ka_DL_002200
+#define object_ka_DL_0022A0 mm_object_ka_DL_0022A0
+#define object_ka_DL_002340 mm_object_ka_DL_002340
+#define object_ka_DL_002430 mm_object_ka_DL_002430
+#define object_ka_DL_0024D0 mm_object_ka_DL_0024D0
+#define object_ka_DL_002570 mm_object_ka_DL_002570
+#define object_ka_DL_002610 mm_object_ka_DL_002610
+#define object_ka_DL_0027A0 mm_object_ka_DL_0027A0
+#define object_ka_DL_002890 mm_object_ka_DL_002890
+#define object_ka_DL_002930 mm_object_ka_DL_002930
+#define object_ka_DL_0029D0 mm_object_ka_DL_0029D0
+#define object_ka_DL_002A70 mm_object_ka_DL_002A70
+#define object_ka_Skel_0065B0 mm_object_ka_Skel_0065B0
+#define object_ka_Tex_002C00 mm_object_ka_Tex_002C00
+#define object_ka_Tex_003400 mm_object_ka_Tex_003400
+#define object_ka_Tex_003C00 mm_object_ka_Tex_003C00
+#define object_ka_Tex_004400 mm_object_ka_Tex_004400
+#define object_ka_Tex_004C00 mm_object_ka_Tex_004C00
+#define object_ka_Tex_005400 mm_object_ka_Tex_005400
+#define object_ka_Tex_005C00 mm_object_ka_Tex_005C00

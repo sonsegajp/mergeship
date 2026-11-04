@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_driftice/object_driftice.h"
+
+#define object_driftice_Colheader_001AA8 mm_object_driftice_Colheader_001AA8
+#define object_driftice_DL_0016A0 mm_object_driftice_DL_0016A0
+#define object_driftice_TLUT_000400 mm_object_driftice_TLUT_000400
+#define object_driftice_TLUT_000420 mm_object_driftice_TLUT_000420
+#define object_driftice_Tex_000000 mm_object_driftice_Tex_000000
+#define object_driftice_Tex_000440 mm_object_driftice_Tex_000440
+#define object_driftice_Tex_000C40 mm_object_driftice_Tex_000C40

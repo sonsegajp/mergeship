@@ -1,0 +1,27 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_rb/object_rb.h"
+
+#define gLeeverBottomHalfDL mm_gLeeverBottomHalfDL
+#define gLeeverBottomHalfWrapper1DL mm_gLeeverBottomHalfWrapper1DL
+#define gLeeverBottomHalfWrapper2DL mm_gLeeverBottomHalfWrapper2DL
+#define gLeeverFlowerTex mm_gLeeverFlowerTex
+#define gLeeverSideTex mm_gLeeverSideTex
+#define gLeeverSkel mm_gLeeverSkel
+#define gLeeverSpike1DL mm_gLeeverSpike1DL
+#define gLeeverSpike1Wrapper1DL mm_gLeeverSpike1Wrapper1DL
+#define gLeeverSpike1Wrapper2DL mm_gLeeverSpike1Wrapper2DL
+#define gLeeverSpike2DL mm_gLeeverSpike2DL
+#define gLeeverSpike2Wrapper1DL mm_gLeeverSpike2Wrapper1DL
+#define gLeeverSpike2Wrapper2DL mm_gLeeverSpike2Wrapper2DL
+#define gLeeverSpike3DL mm_gLeeverSpike3DL
+#define gLeeverSpike3Wrapper1DL mm_gLeeverSpike3Wrapper1DL
+#define gLeeverSpike3Wrapper2DL mm_gLeeverSpike3Wrapper2DL
+#define gLeeverSpike4DL mm_gLeeverSpike4DL
+#define gLeeverSpike4Wrapper1DL mm_gLeeverSpike4Wrapper1DL
+#define gLeeverSpike4Wrapper2DL mm_gLeeverSpike4Wrapper2DL
+#define gLeeverSpikeTex mm_gLeeverSpikeTex
+#define gLeeverSpinAnim mm_gLeeverSpinAnim
+#define gLeeverTopHalfDL mm_gLeeverTopHalfDL
+#define gLeeverTopHalfWrapper1DL mm_gLeeverTopHalfWrapper1DL
+#define gLeeverTopHalfWrapper2DL mm_gLeeverTopHalfWrapper2DL

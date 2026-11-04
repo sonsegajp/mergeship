@@ -1,0 +1,46 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tl/object_tl.h"
+
+#define gSnapperBackLeftFootDL mm_gSnapperBackLeftFootDL
+#define gSnapperBackLeftLegDL mm_gSnapperBackLeftLegDL
+#define gSnapperBackRightFootDL mm_gSnapperBackRightFootDL
+#define gSnapperBackRightLegDL mm_gSnapperBackRightLegDL
+#define gSnapperBodyDL mm_gSnapperBodyDL
+#define gSnapperBodyTex mm_gSnapperBodyTex
+#define gSnapperBouncedUprightAnim mm_gSnapperBouncedUprightAnim
+#define gSnapperDamageAnim mm_gSnapperDamageAnim
+#define gSnapperDeathAnim mm_gSnapperDeathAnim
+#define gSnapperEmergeFromShellAnim mm_gSnapperEmergeFromShellAnim
+#define gSnapperEyeClosedTex mm_gSnapperEyeClosedTex
+#define gSnapperEyeHalfTex mm_gSnapperEyeHalfTex
+#define gSnapperEyeOpenTex mm_gSnapperEyeOpenTex
+#define gSnapperEyeTexAnim mm_gSnapperEyeTexAnim
+#define gSnapperEyesDL mm_gSnapperEyesDL
+#define gSnapperFailToFlipUprightAnim mm_gSnapperFailToFlipUprightAnim
+#define gSnapperFlipOverAnim mm_gSnapperFlipOverAnim
+#define gSnapperFlipUprightAnim mm_gSnapperFlipUprightAnim
+#define gSnapperFrontLeftFootDL mm_gSnapperFrontLeftFootDL
+#define gSnapperFrontLeftLegDL mm_gSnapperFrontLeftLegDL
+#define gSnapperFrontRightFootDL mm_gSnapperFrontRightFootDL
+#define gSnapperFrontRightLegDL mm_gSnapperFrontRightLegDL
+#define gSnapperHeadDL mm_gSnapperHeadDL
+#define gSnapperHeadTex mm_gSnapperHeadTex
+#define gSnapperHoleTex mm_gSnapperHoleTex
+#define gSnapperIdleAnim mm_gSnapperIdleAnim
+#define gSnapperJawDL mm_gSnapperJawDL
+#define gSnapperLegTex mm_gSnapperLegTex
+#define gSnapperMouthTex mm_gSnapperMouthTex
+#define gSnapperRearUpAnim mm_gSnapperRearUpAnim
+#define gSnapperRetreatIntoShellAnim mm_gSnapperRetreatIntoShellAnim
+#define gSnapperShellTex mm_gSnapperShellTex
+#define gSnapperSkel mm_gSnapperSkel
+#define gSnapperSpikeSkinTex mm_gSnapperSpikeSkinTex
+#define gSnapperSpikeTex mm_gSnapperSpikeTex
+#define gSnapperWalkAnim mm_gSnapperWalkAnim
+#define gSnapperWiggleLegsAnim mm_gSnapperWiggleLegsAnim
+#define gSpikedSnapperBodyDL mm_gSpikedSnapperBodyDL
+#define gSpikedSnapperIdleAnim mm_gSpikedSnapperIdleAnim
+#define gSpikedSnapperShellDL mm_gSpikedSnapperShellDL
+#define gSpikedSnapperSkel mm_gSpikedSnapperSkel
+#define gSpikedSnapperSpikesDL mm_gSpikedSnapperSpikesDL

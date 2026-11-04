@@ -1,0 +1,101 @@
+#ifndef MM_Z2_WITCH_SHOP_Z2_WITCH_SHOP_H
+#define MM_Z2_WITCH_SHOP_Z2_WITCH_SHOP_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_WITCH_SHOPCollisionHeader_0018D4 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPCollisionHeader_0018D4"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPCollisionHeader_0018D4[] = dmm_Z2_WITCH_SHOPCollisionHeader_0018D4;
+
+#define dmm_Z2_WITCH_SHOPTex_004600 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_004600"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_004600[] = dmm_Z2_WITCH_SHOPTex_004600;
+
+#define dmm_Z2_WITCH_SHOPTLUT_00A9C0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTLUT_00A9C0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTLUT_00A9C0[] = dmm_Z2_WITCH_SHOPTLUT_00A9C0;
+
+#define dmm_Z2_WITCH_SHOPTex_007EC0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_007EC0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_007EC0[] = dmm_Z2_WITCH_SHOPTex_007EC0;
+
+#define dmm_Z2_WITCH_SHOPTex_0062C0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_0062C0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_0062C0[] = dmm_Z2_WITCH_SHOPTex_0062C0;
+
+#define dmm_Z2_WITCH_SHOPTex_008AC0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_008AC0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_008AC0[] = dmm_Z2_WITCH_SHOPTex_008AC0;
+
+#define dmm_Z2_WITCH_SHOPTex_002C00 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_002C00"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_002C00[] = dmm_Z2_WITCH_SHOPTex_002C00;
+
+#define dmm_Z2_WITCH_SHOPTex_003000 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_003000"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_003000[] = dmm_Z2_WITCH_SHOPTex_003000;
+
+#define dmm_Z2_WITCH_SHOPTex_009BC0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_009BC0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_009BC0[] = dmm_Z2_WITCH_SHOPTex_009BC0;
+
+#define dmm_Z2_WITCH_SHOPTex_005C80 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_005C80"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_005C80[] = dmm_Z2_WITCH_SHOPTex_005C80;
+
+#define dmm_Z2_WITCH_SHOPTex_005CC0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_005CC0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_005CC0[] = dmm_Z2_WITCH_SHOPTex_005CC0;
+
+#define dmm_Z2_WITCH_SHOPTex_004680 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_004680"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_004680[] = dmm_Z2_WITCH_SHOPTex_004680;
+
+#define dmm_Z2_WITCH_SHOPTex_004F80 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_004F80"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_004F80[] = dmm_Z2_WITCH_SHOPTex_004F80;
+
+#define dmm_Z2_WITCH_SHOPTex_005080 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_005080"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_005080[] = dmm_Z2_WITCH_SHOPTex_005080;
+
+#define dmm_Z2_WITCH_SHOPTex_005880 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_005880"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_005880[] = dmm_Z2_WITCH_SHOPTex_005880;
+
+#define dmm_Z2_WITCH_SHOPTex_0082C0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_0082C0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_0082C0[] = dmm_Z2_WITCH_SHOPTex_0082C0;
+
+#define dmm_Z2_WITCH_SHOPTex_0086C0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_0086C0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_0086C0[] = dmm_Z2_WITCH_SHOPTex_0086C0;
+
+#define dmm_Z2_WITCH_SHOPTex_00A3C0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_00A3C0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_00A3C0[] = dmm_Z2_WITCH_SHOPTex_00A3C0;
+
+#define dmm_Z2_WITCH_SHOPTex_003600 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_003600"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_003600[] = dmm_Z2_WITCH_SHOPTex_003600;
+
+#define dmm_Z2_WITCH_SHOPTex_0060C0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_0060C0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_0060C0[] = dmm_Z2_WITCH_SHOPTex_0060C0;
+
+#define dmm_Z2_WITCH_SHOPTex_003400 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_003400"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_003400[] = dmm_Z2_WITCH_SHOPTex_003400;
+
+#define dmm_Z2_WITCH_SHOPTex_002A00 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_002A00"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_002A00[] = dmm_Z2_WITCH_SHOPTex_002A00;
+
+#define dmm_Z2_WITCH_SHOPTex_004E80 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_004E80"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_004E80[] = dmm_Z2_WITCH_SHOPTex_004E80;
+
+#define dmm_Z2_WITCH_SHOPTex_004400 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_004400"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_004400[] = dmm_Z2_WITCH_SHOPTex_004400;
+
+#define dmm_Z2_WITCH_SHOPTex_004000 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_004000"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_004000[] = dmm_Z2_WITCH_SHOPTex_004000;
+
+#define dmm_Z2_WITCH_SHOPTex_002900 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_002900"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_002900[] = dmm_Z2_WITCH_SHOPTex_002900;
+
+#define dmm_Z2_WITCH_SHOPTex_00A7C0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_00A7C0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_00A7C0[] = dmm_Z2_WITCH_SHOPTex_00A7C0;
+
+#define dmm_Z2_WITCH_SHOPTex_003800 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_003800"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_003800[] = dmm_Z2_WITCH_SHOPTex_003800;
+
+#define dmm_Z2_WITCH_SHOPTex_006AC0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_006AC0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_006AC0[] = dmm_Z2_WITCH_SHOPTex_006AC0;
+
+#define dmm_Z2_WITCH_SHOPTex_006EC0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_006EC0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_006EC0[] = dmm_Z2_WITCH_SHOPTex_006EC0;
+
+#define dmm_Z2_WITCH_SHOPTex_008BC0 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_008BC0"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_008BC0[] = dmm_Z2_WITCH_SHOPTex_008BC0;
+
+#define dmm_Z2_WITCH_SHOPTex_001900 "__OTR__mm/scenes/nonmq/Z2_WITCH_SHOP/Z2_WITCH_SHOPTex_001900"
+static const ALIGN_ASSET(2) char mm_Z2_WITCH_SHOPTex_001900[] = dmm_Z2_WITCH_SHOPTex_001900;
+#endif // MM_Z2_WITCH_SHOP_Z2_WITCH_SHOP_H

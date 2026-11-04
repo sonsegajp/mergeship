@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_fu_kaiten/object_fu_kaiten.h"
+
+#define object_fu_kaiten_Colheader_002D30 mm_object_fu_kaiten_Colheader_002D30
+#define object_fu_kaiten_Colheader_0037F8 mm_object_fu_kaiten_Colheader_0037F8
+#define object_fu_kaiten_DL_0005D0 mm_object_fu_kaiten_DL_0005D0
+#define object_fu_kaiten_DL_002EB0 mm_object_fu_kaiten_DL_002EB0
+#define object_fu_kaiten_DL_002FB0 mm_object_fu_kaiten_DL_002FB0
+#define object_fu_kaiten_DL_002FC0 mm_object_fu_kaiten_DL_002FC0
+#define object_fu_kaiten_Matanimheader_0037D8 mm_object_fu_kaiten_Matanimheader_0037D8
+#define object_fu_kaiten_TLUT_000858 mm_object_fu_kaiten_TLUT_000858
+#define object_fu_kaiten_Tex_000878 mm_object_fu_kaiten_Tex_000878
+#define object_fu_kaiten_Tex_001078 mm_object_fu_kaiten_Tex_001078
+#define object_fu_kaiten_Tex_001878 mm_object_fu_kaiten_Tex_001878
+#define object_fu_kaiten_Tex_002078 mm_object_fu_kaiten_Tex_002078
+#define object_fu_kaiten_Tex_002FD0 mm_object_fu_kaiten_Tex_002FD0

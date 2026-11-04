@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_SINKAI/Z2_SINKAI/Z2_SINKAI.h"
+
+#define Z2_SINKAICollisionHeader_003E54 mm_Z2_SINKAICollisionHeader_003E54
+#define Z2_SINKAITLUT_008E80 mm_Z2_SINKAITLUT_008E80
+#define Z2_SINKAITex_003E80 mm_Z2_SINKAITex_003E80
+#define Z2_SINKAITex_004680 mm_Z2_SINKAITex_004680
+#define Z2_SINKAITex_004E80 mm_Z2_SINKAITex_004E80
+#define Z2_SINKAITex_005680 mm_Z2_SINKAITex_005680
+#define Z2_SINKAITex_005E80 mm_Z2_SINKAITex_005E80
+#define Z2_SINKAITex_006680 mm_Z2_SINKAITex_006680
+#define Z2_SINKAITex_006E80 mm_Z2_SINKAITex_006E80
+#define Z2_SINKAITex_007680 mm_Z2_SINKAITex_007680
+#define Z2_SINKAITex_007E80 mm_Z2_SINKAITex_007E80
+#define Z2_SINKAITex_008680 mm_Z2_SINKAITex_008680
+#define Z2_SINKAITex_008EA0 mm_Z2_SINKAITex_008EA0

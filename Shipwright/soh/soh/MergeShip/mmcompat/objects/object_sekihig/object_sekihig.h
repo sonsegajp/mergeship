@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_sekihig/object_sekihig.h"
+
+#define gSunsSongGraveGoronCol mm_gSunsSongGraveGoronCol
+#define gSunsSongGraveGoronDL mm_gSunsSongGraveGoronDL
+#define gSunsSongGraveGoronGraniteTex mm_gSunsSongGraveGoronGraniteTex
+#define gSunsSongGraveGoronKokiriTLUT mm_gSunsSongGraveGoronKokiriTLUT
+#define gSunsSongGraveGoronMarbleTex mm_gSunsSongGraveGoronMarbleTex
+#define gSunsSongGraveGoronStaffNotesTex mm_gSunsSongGraveGoronStaffNotesTex
+#define gSunsSongGraveGoronStoneDL mm_gSunsSongGraveGoronStoneDL
+#define gSunsSongGraveGoronStoneInscriptionTex mm_gSunsSongGraveGoronStoneInscriptionTex
+#define gSunsSongGraveGoronSymbolTex mm_gSunsSongGraveGoronSymbolTex
+#define gSunsSongGraveGoronSymbolsBaseDL mm_gSunsSongGraveGoronSymbolsBaseDL
+#define gSunsSongGraveGoronSymbolsDL mm_gSunsSongGraveGoronSymbolsDL
+#define gSunsSongGraveGoronTLUT mm_gSunsSongGraveGoronTLUT
+#define gSunsSongGraveGoronTriforceTLUT mm_gSunsSongGraveGoronTriforceTLUT
+#define gSunsSongGraveGoronUnknownTLUT mm_gSunsSongGraveGoronUnknownTLUT

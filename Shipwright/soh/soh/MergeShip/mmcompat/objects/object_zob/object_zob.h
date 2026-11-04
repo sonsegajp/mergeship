@@ -1,0 +1,50 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_zob/object_zob.h"
+
+#define object_zob_Anim_001FD4 mm_object_zob_Anim_001FD4
+#define object_zob_Anim_0027D0 mm_object_zob_Anim_0027D0
+#define object_zob_Anim_002B38 mm_object_zob_Anim_002B38
+#define object_zob_Anim_0037A0 mm_object_zob_Anim_0037A0
+#define object_zob_Anim_0043C4 mm_object_zob_Anim_0043C4
+#define object_zob_Anim_005224 mm_object_zob_Anim_005224
+#define object_zob_Anim_005E90 mm_object_zob_Anim_005E90
+#define object_zob_Anim_006998 mm_object_zob_Anim_006998
+#define object_zob_Anim_011144 mm_object_zob_Anim_011144
+#define object_zob_DL_00A700 mm_object_zob_DL_00A700
+#define object_zob_DL_00A880 mm_object_zob_DL_00A880
+#define object_zob_DL_00AA58 mm_object_zob_DL_00AA58
+#define object_zob_DL_00AB80 mm_object_zob_DL_00AB80
+#define object_zob_DL_00AE08 mm_object_zob_DL_00AE08
+#define object_zob_DL_00AF90 mm_object_zob_DL_00AF90
+#define object_zob_DL_00B150 mm_object_zob_DL_00B150
+#define object_zob_DL_00B3B8 mm_object_zob_DL_00B3B8
+#define object_zob_DL_00B4E0 mm_object_zob_DL_00B4E0
+#define object_zob_DL_00B768 mm_object_zob_DL_00B768
+#define object_zob_DL_00B8F0 mm_object_zob_DL_00B8F0
+#define object_zob_DL_00BC48 mm_object_zob_DL_00BC48
+#define object_zob_DL_00BD10 mm_object_zob_DL_00BD10
+#define object_zob_DL_00BDC8 mm_object_zob_DL_00BDC8
+#define object_zob_DL_00BE90 mm_object_zob_DL_00BE90
+#define object_zob_DL_00BF48 mm_object_zob_DL_00BF48
+#define object_zob_DL_00C140 mm_object_zob_DL_00C140
+#define object_zob_DL_00C370 mm_object_zob_DL_00C370
+#define object_zob_DL_00C528 mm_object_zob_DL_00C528
+#define object_zob_DL_00C7B0 mm_object_zob_DL_00C7B0
+#define object_zob_DL_00C9E0 mm_object_zob_DL_00C9E0
+#define object_zob_DL_00CB98 mm_object_zob_DL_00CB98
+#define object_zob_Skel_010810 mm_object_zob_Skel_010810
+#define object_zob_TLUT_00CE20 mm_object_zob_TLUT_00CE20
+#define object_zob_TLUT_00D020 mm_object_zob_TLUT_00D020
+#define object_zob_Tex_00D220 mm_object_zob_Tex_00D220
+#define object_zob_Tex_00D260 mm_object_zob_Tex_00D260
+#define object_zob_Tex_00D660 mm_object_zob_Tex_00D660
+#define object_zob_Tex_00D860 mm_object_zob_Tex_00D860
+#define object_zob_Tex_00DA60 mm_object_zob_Tex_00DA60
+#define object_zob_Tex_00E260 mm_object_zob_Tex_00E260
+#define object_zob_Tex_00E2A0 mm_object_zob_Tex_00E2A0
+#define object_zob_Tex_00EAA0 mm_object_zob_Tex_00EAA0
+#define object_zob_Tex_00F2A0 mm_object_zob_Tex_00F2A0
+#define object_zob_Tex_00FAA0 mm_object_zob_Tex_00FAA0
+#define object_zob_Tex_00FCA0 mm_object_zob_Tex_00FCA0
+#define object_zob_Tex_00FEA0 mm_object_zob_Tex_00FEA0

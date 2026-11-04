@@ -1,0 +1,23 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_po_fusen/object_po_fusen.h"
+
+#define gPoeBalloonBodyDL mm_gPoeBalloonBodyDL
+#define gPoeBalloonChainAndLanternDL mm_gPoeBalloonChainAndLanternDL
+#define gPoeBalloonChainLinkTex mm_gPoeBalloonChainLinkTex
+#define gPoeBalloonEmptyAnim mm_gPoeBalloonEmptyAnim
+#define gPoeBalloonFaceTex mm_gPoeBalloonFaceTex
+#define gPoeBalloonHandTex mm_gPoeBalloonHandTex
+#define gPoeBalloonLanternGlassTex mm_gPoeBalloonLanternGlassTex
+#define gPoeBalloonLanternStandTex mm_gPoeBalloonLanternStandTex
+#define gPoeBalloonLanternTopTex mm_gPoeBalloonLanternTopTex
+#define gPoeBalloonLeftForearmDL mm_gPoeBalloonLeftForearmDL
+#define gPoeBalloonLeftHandDL mm_gPoeBalloonLeftHandDL
+#define gPoeBalloonLeftUpperArmDL mm_gPoeBalloonLeftUpperArmDL
+#define gPoeBalloonOrangeSkinTex mm_gPoeBalloonOrangeSkinTex
+#define gPoeBalloonRightForearmDL mm_gPoeBalloonRightForearmDL
+#define gPoeBalloonRightHandDL mm_gPoeBalloonRightHandDL
+#define gPoeBalloonRightUpperArmDL mm_gPoeBalloonRightUpperArmDL
+#define gPoeBalloonSkel mm_gPoeBalloonSkel
+#define gPoeBalloonTLUT mm_gPoeBalloonTLUT
+#define gPoeBalloonTatteredChinTex mm_gPoeBalloonTatteredChinTex

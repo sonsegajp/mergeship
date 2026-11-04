@@ -1,0 +1,49 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tk/object_tk.h"
+
+#define object_tk_Anim_001144 mm_object_tk_Anim_001144
+#define object_tk_Anim_001FA8 mm_object_tk_Anim_001FA8
+#define object_tk_Anim_0020C8 mm_object_tk_Anim_0020C8
+#define object_tk_Anim_0030A4 mm_object_tk_Anim_0030A4
+#define object_tk_Anim_003724 mm_object_tk_Anim_003724
+#define object_tk_Anim_003B10 mm_object_tk_Anim_003B10
+#define object_tk_Anim_003FB8 mm_object_tk_Anim_003FB8
+#define object_tk_DL_008870 mm_object_tk_DL_008870
+#define object_tk_DL_0089B0 mm_object_tk_DL_0089B0
+#define object_tk_DL_008B40 mm_object_tk_DL_008B40
+#define object_tk_DL_008C60 mm_object_tk_DL_008C60
+#define object_tk_DL_0091A8 mm_object_tk_DL_0091A8
+#define object_tk_DL_0094F0 mm_object_tk_DL_0094F0
+#define object_tk_DL_009620 mm_object_tk_DL_009620
+#define object_tk_DL_009750 mm_object_tk_DL_009750
+#define object_tk_DL_009960 mm_object_tk_DL_009960
+#define object_tk_DL_009A90 mm_object_tk_DL_009A90
+#define object_tk_DL_009BC0 mm_object_tk_DL_009BC0
+#define object_tk_DL_009DD0 mm_object_tk_DL_009DD0
+#define object_tk_DL_009F88 mm_object_tk_DL_009F88
+#define object_tk_DL_00A068 mm_object_tk_DL_00A068
+#define object_tk_DL_00A220 mm_object_tk_DL_00A220
+#define object_tk_DL_00B260 mm_object_tk_DL_00B260
+#define object_tk_DL_00B3C8 mm_object_tk_DL_00B3C8
+#define object_tk_DL_00B530 mm_object_tk_DL_00B530
+#define object_tk_Skel_00B9E8 mm_object_tk_Skel_00B9E8
+#define object_tk_TLUT_003FD0 mm_object_tk_TLUT_003FD0
+#define object_tk_TLUT_00A300 mm_object_tk_TLUT_00A300
+#define object_tk_Tex_0041D0 mm_object_tk_Tex_0041D0
+#define object_tk_Tex_004210 mm_object_tk_Tex_004210
+#define object_tk_Tex_004250 mm_object_tk_Tex_004250
+#define object_tk_Tex_004290 mm_object_tk_Tex_004290
+#define object_tk_Tex_004390 mm_object_tk_Tex_004390
+#define object_tk_Tex_004B90 mm_object_tk_Tex_004B90
+#define object_tk_Tex_005390 mm_object_tk_Tex_005390
+#define object_tk_Tex_005B90 mm_object_tk_Tex_005B90
+#define object_tk_Tex_005C90 mm_object_tk_Tex_005C90
+#define object_tk_Tex_005D90 mm_object_tk_Tex_005D90
+#define object_tk_Tex_005E90 mm_object_tk_Tex_005E90
+#define object_tk_Tex_005F10 mm_object_tk_Tex_005F10
+#define object_tk_Tex_00A350 mm_object_tk_Tex_00A350
+#define object_tk_Tex_00A450 mm_object_tk_Tex_00A450
+#define object_tk_Tex_00A4D0 mm_object_tk_Tex_00A4D0
+#define object_tk_Tex_00A510 mm_object_tk_Tex_00A510
+#define object_tk_Tex_00A590 mm_object_tk_Tex_00A590

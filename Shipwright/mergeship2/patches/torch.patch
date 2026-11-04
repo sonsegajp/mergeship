@@ -1,0 +1,130 @@
+diff --git a/src/Companion.cpp b/src/Companion.cpp
+index d73b616..438c7e9 100644
+--- a/src/Companion.cpp
++++ b/src/Companion.cpp
+@@ -591,7 +591,7 @@ void Companion::ParseCurrentFileConfig(YAML::Node node, std::atomic<size_t>& ass
+     }
+ 
+     if (node["directory"]) {
+-        this->gCurrentDirectory = node["directory"].as<std::string>();
++        this->gCurrentDirectory = NamespacePath(node["directory"].as<std::string>());
+     }
+ 
+     if (node["manual_segments"]) {
+@@ -733,6 +733,8 @@ std::string ExportTypeToString(ExportType type) {
+ }
+ 
+ bool Companion::NodeHasChanges(const std::string& path) {
++    // Foreign exports are complete and cannot reuse the stock extraction cache.
++    if (!gResourceNamespace.empty()) return true;
+ 
+     if (this->gConfig.modding) {
+         return true;
+@@ -1197,6 +1199,7 @@ void Companion::ProcessFile(YAML::Node root, std::atomic<size_t>& assetCount) {
+     if (auto directory = root[":config"]["directory"]) {
+         this->gCurrentDirectory = directory.as<std::string>();
+     }
++    this->gCurrentDirectory = NamespacePath(this->gCurrentDirectory.generic_string());
+     // Set compressed file offsets and compression type
+     if (auto segments = root[":config"]["segments"]) {
+         if (segments.IsSequence() && segments.size() > 0) {
+@@ -1442,7 +1445,11 @@ void Companion::Process(std::atomic<size_t>& assetCount) {
+                     default:
+                         throw std::runtime_error("Invalid archive type for export type Binary");
+                 }
+-                output_path /= opath && opath["binary"] ? opath["binary"].as<std::string>() : ("generic" + extension);
++                auto archiveName = opath && opath["binary"] ? opath["binary"].as<std::string>() : ("generic" + extension);
++                if (!gResourceNamespace.empty()) {
++                    archiveName = fs::path(archiveName).stem().string() + "-assets" + extension;
++                }
++                output_path /= archiveName;
+                 break;
+             }
+             case ExportType::Header: {
+@@ -2404,10 +2411,24 @@ void Companion::RegisterCompanionFile(const std::string path, std::vector<char>
+ }
+ 
+ void Companion::RegisterArchiveFile(const std::string& name, std::vector<char> data) {
+-    this->gArchiveFiles.emplace_back(name, std::move(data));
++    this->gArchiveFiles.emplace_back(NamespacePath(name), std::move(data));
+     SPDLOG_TRACE("Registered archive root file {}", name);
+ }
+ 
++void Companion::SetResourceNamespace(const std::string& prefix) {
++    if (!prefix.empty() && prefix.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789_") != std::string::npos) {
++        throw std::invalid_argument("Resource namespace must contain only lowercase letters, digits, or underscores");
++    }
++    gResourceNamespace = prefix;
++}
++
++std::string Companion::NamespacePath(const std::string& path) const {
++    if (gResourceNamespace.empty() || path.empty() || path.starts_with(gResourceNamespace + "/")) {
++        return path;
++    }
++    return gResourceNamespace + "/" + path;
++}
++
+ std::string Companion::NormalizeAsset(const std::string& name) const {
+     auto path = fs::path(this->gCurrentFile).stem().string() + "_" + name;
+     return path;
+diff --git a/src/Companion.h b/src/Companion.h
+index b9466ec..28aa960 100644
+--- a/src/Companion.h
++++ b/src/Companion.h
+@@ -185,6 +185,8 @@ public:
+     const std::string& GetGameTitle() const { return this->gGameTitle; }
+     std::vector<uint8_t>& GetRomData() { return this->gRomData; }
+     std::string GetOutputPath() { return this->gConfig.outputPath; }
++    void SetResourceNamespace(const std::string& prefix);
++    std::string NamespacePath(const std::string& path) const;
+     const std::string& GetAssetPath() const { return this->gAssetPath; }
+     std::string GetDestRelativeOutputPath() { return RelativePathToDestDir(GetOutputPath()); }
+ 
+@@ -264,6 +266,7 @@ private:
+     YAML::Node gModdingConfig;
+     fs::path gSourceDirectory;
+     fs::path gDestinationDirectory;
++    std::string gResourceNamespace;
+     fs::path gCurrentDirectory;
+     std::string gCurrentHash;
+     std::string gAssetPath;
+diff --git a/src/factories/oot/OoTAudioFontWriter.cpp b/src/factories/oot/OoTAudioFontWriter.cpp
+index 9afb0e9..6faa65d 100644
+--- a/src/factories/oot/OoTAudioFontWriter.cpp
++++ b/src/factories/oot/OoTAudioFontWriter.cpp
+@@ -15,7 +15,7 @@ std::string AudioFontWriter::GetSampleRef(int bankIndex, uint32_t sampleAddr, ui
+     uint32_t dataRelPtr = ctx.audioBank.ReadU32(samplePtr + 4);
+     uint32_t absOffset = dataRelPtr + ctx.sampleBankTable[bankIndex].ptr;
+     if (ctx.sampleMap.count(absOffset)) {
+-        return "audio/samples/" + ctx.sampleMap[absOffset].name + "_META";
++        return Companion::Instance->NamespacePath("audio/samples/" + ctx.sampleMap[absOffset].name + "_META");
+     }
+     return "";
+ }
+@@ -59,7 +59,7 @@ void AudioFontWriter::WriteSFE(LUS::BinaryWriter& w, uint32_t sfeOffset, uint32_
+         uint32_t dataRelPtr = ctx.audioBank.ReadU32(samplePtr + 4);
+         uint32_t absOffset = dataRelPtr + ctx.sampleBankTable[bankIndex].ptr;
+         if (ctx.sampleMap.count(absOffset)) {
+-            w.Write(std::string("audio/samples/" + ctx.sampleMap[absOffset].name + "_META"));
++            w.Write(Companion::Instance->NamespacePath("audio/samples/" + ctx.sampleMap[absOffset].name + "_META"));
+         } else {
+             w.Write(std::string(""));
+         }
+@@ -143,7 +143,7 @@ std::vector<SFXEntry> AudioFontWriter::ParseSFX(int numSfx, uint32_t ptr, int sa
+                 uint32_t relPtr = ctx.audioBank.ReadU32(sp + 4);
+                 uint32_t absOff = relPtr + ctx.sampleBankTable[sampleBankId].ptr;
+                 if (ctx.sampleMap.count(absOff))
+-                    ref = "audio/samples/" + ctx.sampleMap[absOff].name + "_META";
++                    ref = Companion::Instance->NamespacePath("audio/samples/" + ctx.sampleMap[absOff].name + "_META");
+             }
+             sfxEntries.push_back({true, ref, ctx.audioBank.ReadFloat(sfeAddr + 4)});
+         } else {
+@@ -177,7 +177,7 @@ std::vector<DrumEntry> AudioFontWriter::ParseDrums(int numDrums, uint32_t ptr, i
+                     uint32_t dataRelPtr = ctx.audioBank.ReadU32(sampleEntryPtr + 4);
+                     uint32_t absOffset = dataRelPtr + ctx.sampleBankTable[sampleBankId].ptr;
+                     if (ctx.sampleMap.count(absOffset)) {
+-                        d.sampleRef = "audio/samples/" + ctx.sampleMap[absOffset].name + "_META";
++                        d.sampleRef = Companion::Instance->NamespacePath("audio/samples/" + ctx.sampleMap[absOffset].name + "_META");
+                     }
+                 }
+                 drums.push_back(d);

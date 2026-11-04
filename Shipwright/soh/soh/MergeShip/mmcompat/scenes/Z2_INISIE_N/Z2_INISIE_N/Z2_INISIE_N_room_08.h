@@ -1,0 +1,19 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_INISIE_N/Z2_INISIE_N/Z2_INISIE_N_room_08.h"
+
+#define Z2_INISIE_N_room_08DL_000390 mm_Z2_INISIE_N_room_08DL_000390
+#define Z2_INISIE_N_room_08DL_0007A0 mm_Z2_INISIE_N_room_08DL_0007A0
+#define Z2_INISIE_N_room_08DL_000AB8 mm_Z2_INISIE_N_room_08DL_000AB8
+#define Z2_INISIE_N_room_08DL_001748 mm_Z2_INISIE_N_room_08DL_001748
+#define Z2_INISIE_N_room_08DL_0021D0 mm_Z2_INISIE_N_room_08DL_0021D0
+#define Z2_INISIE_N_room_08DL_002DE8 mm_Z2_INISIE_N_room_08DL_002DE8
+#define Z2_INISIE_N_room_08DL_003148 mm_Z2_INISIE_N_room_08DL_003148
+#define Z2_INISIE_N_room_08DL_003610 mm_Z2_INISIE_N_room_08DL_003610
+#define Z2_INISIE_N_room_08DL_0039D0 mm_Z2_INISIE_N_room_08DL_0039D0
+#define Z2_INISIE_N_room_08DL_003AD8 mm_Z2_INISIE_N_room_08DL_003AD8
+#define Z2_INISIE_N_room_08DL_004C30 mm_Z2_INISIE_N_room_08DL_004C30
+#define Z2_INISIE_N_room_08DL_004C38 mm_Z2_INISIE_N_room_08DL_004C38
+#define Z2_INISIE_N_room_08Tex_003B28 mm_Z2_INISIE_N_room_08Tex_003B28
+#define Z2_INISIE_N_room_08Tex_003C28 mm_Z2_INISIE_N_room_08Tex_003C28
+#define Z2_INISIE_N_room_08Tex_004428 mm_Z2_INISIE_N_room_08Tex_004428

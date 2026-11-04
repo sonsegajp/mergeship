@@ -1,0 +1,35 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ssh/object_ssh.h"
+
+#define object_ssh_Anim_001494 mm_object_ssh_Anim_001494
+#define object_ssh_Anim_006788 mm_object_ssh_Anim_006788
+#define object_ssh_Anim_006D78 mm_object_ssh_Anim_006D78
+#define object_ssh_DL_0000D0 mm_object_ssh_DL_0000D0
+#define object_ssh_DL_0000D8 mm_object_ssh_DL_0000D8
+#define object_ssh_DL_004E60 mm_object_ssh_DL_004E60
+#define object_ssh_DL_005210 mm_object_ssh_DL_005210
+#define object_ssh_DL_0056A0 mm_object_ssh_DL_0056A0
+#define object_ssh_DL_005850 mm_object_ssh_DL_005850
+#define object_ssh_DL_005A08 mm_object_ssh_DL_005A08
+#define object_ssh_DL_005AD0 mm_object_ssh_DL_005AD0
+#define object_ssh_DL_005B98 mm_object_ssh_DL_005B98
+#define object_ssh_DL_005C60 mm_object_ssh_DL_005C60
+#define object_ssh_DL_005D28 mm_object_ssh_DL_005D28
+#define object_ssh_DL_005DF0 mm_object_ssh_DL_005DF0
+#define object_ssh_DL_005EB8 mm_object_ssh_DL_005EB8
+#define object_ssh_DL_005F78 mm_object_ssh_DL_005F78
+#define object_ssh_DL_0061D8 mm_object_ssh_DL_0061D8
+#define object_ssh_Skel_006470 mm_object_ssh_Skel_006470
+#define object_ssh_TLUT_0014B0 mm_object_ssh_TLUT_0014B0
+#define object_ssh_Tex_000190 mm_object_ssh_Tex_000190
+#define object_ssh_Tex_0016B0 mm_object_ssh_Tex_0016B0
+#define object_ssh_Tex_0016F0 mm_object_ssh_Tex_0016F0
+#define object_ssh_Tex_001770 mm_object_ssh_Tex_001770
+#define object_ssh_Tex_0017B0 mm_object_ssh_Tex_0017B0
+#define object_ssh_Tex_0018B0 mm_object_ssh_Tex_0018B0
+#define object_ssh_Tex_001930 mm_object_ssh_Tex_001930
+#define object_ssh_Tex_001970 mm_object_ssh_Tex_001970
+#define object_ssh_Tex_001D70 mm_object_ssh_Tex_001D70
+#define object_ssh_Tex_001DF0 mm_object_ssh_Tex_001DF0
+#define object_ssh_Tex_0021F0 mm_object_ssh_Tex_0021F0

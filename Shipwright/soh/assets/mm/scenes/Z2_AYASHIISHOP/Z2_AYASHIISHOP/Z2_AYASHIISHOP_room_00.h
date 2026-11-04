@@ -1,0 +1,159 @@
+#ifndef MM_Z2_AYASHIISHOP_Z2_AYASHIISHOP_ROOM_00_H
+#define MM_Z2_AYASHIISHOP_Z2_AYASHIISHOP_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_008D20 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_008D20"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_008D20[] = dmm_Z2_AYASHIISHOP_room_00DL_008D20;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00EB90 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00EB90"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00EB90[] = dmm_Z2_AYASHIISHOP_room_00Tex_00EB90;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_0109D0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_0109D0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_0109D0[] = dmm_Z2_AYASHIISHOP_room_00Tex_0109D0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_011028 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_011028"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_011028[] = dmm_Z2_AYASHIISHOP_room_00DL_011028;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_011718 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_011718"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_011718[] = dmm_Z2_AYASHIISHOP_room_00DL_011718;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_011878 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_011878"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_011878[] = dmm_Z2_AYASHIISHOP_room_00Tex_011878;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00A8A8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00A8A8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00A8A8[] = dmm_Z2_AYASHIISHOP_room_00DL_00A8A8;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00D010 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00D010"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00D010[] = dmm_Z2_AYASHIISHOP_room_00Tex_00D010;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00A3E8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00A3E8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00A3E8[] = dmm_Z2_AYASHIISHOP_room_00DL_00A3E8;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00B128 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00B128"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00B128[] = dmm_Z2_AYASHIISHOP_room_00DL_00B128;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00CCD0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00CCD0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00CCD0[] = dmm_Z2_AYASHIISHOP_room_00DL_00CCD0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00D890 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00D890"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00D890[] = dmm_Z2_AYASHIISHOP_room_00Tex_00D890;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00E090 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00E090"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00E090[] = dmm_Z2_AYASHIISHOP_room_00Tex_00E090;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00BC78 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00BC78"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00BC78[] = dmm_Z2_AYASHIISHOP_room_00DL_00BC78;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00E890 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00E890"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00E890[] = dmm_Z2_AYASHIISHOP_room_00Tex_00E890;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00AC00 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00AC00"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00AC00[] = dmm_Z2_AYASHIISHOP_room_00DL_00AC00;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00CEA8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00CEA8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00CEA8[] = dmm_Z2_AYASHIISHOP_room_00DL_00CEA8;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_0072E0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_0072E0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_0072E0[] = dmm_Z2_AYASHIISHOP_room_00DL_0072E0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00E990 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00E990"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00E990[] = dmm_Z2_AYASHIISHOP_room_00Tex_00E990;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00EF90 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00EF90"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00EF90[] = dmm_Z2_AYASHIISHOP_room_00Tex_00EF90;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00F8D0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00F8D0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00F8D0[] = dmm_Z2_AYASHIISHOP_room_00Tex_00F8D0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00FFD0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00FFD0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00FFD0[] = dmm_Z2_AYASHIISHOP_room_00Tex_00FFD0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00F190 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00F190"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00F190[] = dmm_Z2_AYASHIISHOP_room_00Tex_00F190;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00D810 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00D810"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00D810[] = dmm_Z2_AYASHIISHOP_room_00Tex_00D810;
+
+#define dmm_Z2_AYASHIISHOP_room_00TLUT_010DD0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00TLUT_010DD0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00TLUT_010DD0[] = dmm_Z2_AYASHIISHOP_room_00TLUT_010DD0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00D850 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00D850"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00D850[] = dmm_Z2_AYASHIISHOP_room_00Tex_00D850;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00FAD0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00FAD0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00FAD0[] = dmm_Z2_AYASHIISHOP_room_00Tex_00FAD0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00F1D0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00F1D0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00F1D0[] = dmm_Z2_AYASHIISHOP_room_00Tex_00F1D0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00F3D0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00F3D0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00F3D0[] = dmm_Z2_AYASHIISHOP_room_00Tex_00F3D0;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00FED0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00FED0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00FED0[] = dmm_Z2_AYASHIISHOP_room_00Tex_00FED0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_010FD8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_010FD8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_010FD8[] = dmm_Z2_AYASHIISHOP_room_00DL_010FD8;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00C8D8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00C8D8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00C8D8[] = dmm_Z2_AYASHIISHOP_room_00DL_00C8D8;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_010FE8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_010FE8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_010FE8[] = dmm_Z2_AYASHIISHOP_room_00DL_010FE8;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_000AC0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_000AC0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_000AC0[] = dmm_Z2_AYASHIISHOP_room_00DL_000AC0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_009C30 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_009C30"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_009C30[] = dmm_Z2_AYASHIISHOP_room_00DL_009C30;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_0098B0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_0098B0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_0098B0[] = dmm_Z2_AYASHIISHOP_room_00DL_0098B0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_008138 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_008138"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_008138[] = dmm_Z2_AYASHIISHOP_room_00DL_008138;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_00F4D0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_00F4D0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_00F4D0[] = dmm_Z2_AYASHIISHOP_room_00Tex_00F4D0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_011008 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_011008"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_011008[] = dmm_Z2_AYASHIISHOP_room_00DL_011008;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00C5A0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00C5A0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00C5A0[] = dmm_Z2_AYASHIISHOP_room_00DL_00C5A0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_010FF0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_010FF0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_010FF0[] = dmm_Z2_AYASHIISHOP_room_00DL_010FF0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00C2A0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00C2A0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00C2A0[] = dmm_Z2_AYASHIISHOP_room_00DL_00C2A0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_010FF8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_010FF8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_010FF8[] = dmm_Z2_AYASHIISHOP_room_00DL_010FF8;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_0112D0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_0112D0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_0112D0[] = dmm_Z2_AYASHIISHOP_room_00DL_0112D0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_0093F8 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_0093F8"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_0093F8[] = dmm_Z2_AYASHIISHOP_room_00DL_0093F8;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_011040 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_011040"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_011040[] = dmm_Z2_AYASHIISHOP_room_00DL_011040;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00C060 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00C060"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00C060[] = dmm_Z2_AYASHIISHOP_room_00DL_00C060;
+
+#define dmm_Z2_AYASHIISHOP_room_00Tex_0101D0 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00Tex_0101D0"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00Tex_0101D0[] = dmm_Z2_AYASHIISHOP_room_00Tex_0101D0;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_011018 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_011018"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_011018[] = dmm_Z2_AYASHIISHOP_room_00DL_011018;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_00CF78 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_00CF78"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_00CF78[] = dmm_Z2_AYASHIISHOP_room_00DL_00CF78;
+
+#define dmm_Z2_AYASHIISHOP_room_00DL_011820 "__OTR__mm/scenes/nonmq/Z2_AYASHIISHOP_scene/Z2_AYASHIISHOP_room_00DL_011820"
+static const ALIGN_ASSET(2) char mm_Z2_AYASHIISHOP_room_00DL_011820[] = dmm_Z2_AYASHIISHOP_room_00DL_011820;
+
+#endif // MM_Z2_AYASHIISHOP_Z2_AYASHIISHOP_ROOM_00_H

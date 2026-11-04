@@ -1,0 +1,9 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_gi_sword_4/object_gi_sword_4.h"
+
+#define gGiGreatFairysSwordBladeDL mm_gGiGreatFairysSwordBladeDL
+#define gGiGreatFairysSwordBladeTex mm_gGiGreatFairysSwordBladeTex
+#define gGiGreatFairysSwordEmblemBackgroundTex mm_gGiGreatFairysSwordEmblemBackgroundTex
+#define gGiGreatFairysSwordHiltEmblemDL mm_gGiGreatFairysSwordHiltEmblemDL
+#define gGiGreatFairysSwordLeafPatternTex mm_gGiGreatFairysSwordLeafPatternTex

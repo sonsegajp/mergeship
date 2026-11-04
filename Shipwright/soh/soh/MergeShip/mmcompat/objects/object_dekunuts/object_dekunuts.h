@@ -1,0 +1,33 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_dekunuts/object_dekunuts.h"
+
+#define gDekuScrubBodyDL mm_gDekuScrubBodyDL
+#define gDekuScrubBurrowAnim mm_gDekuScrubBurrowAnim
+#define gDekuScrubCrestDL mm_gDekuScrubCrestDL
+#define gDekuScrubDamageAnim mm_gDekuScrubDamageAnim
+#define gDekuScrubDieAnim mm_gDekuScrubDieAnim
+#define gDekuScrubEyeTex mm_gDekuScrubEyeTex
+#define gDekuScrubFlowerDL mm_gDekuScrubFlowerDL
+#define gDekuScrubFlowerFragmentDL mm_gDekuScrubFlowerFragmentDL
+#define gDekuScrubFlowerFragmentTex mm_gDekuScrubFlowerFragmentTex
+#define gDekuScrubHeadDL mm_gDekuScrubHeadDL
+#define gDekuScrubHeaddressDL mm_gDekuScrubHeaddressDL
+#define gDekuScrubIdleAnim mm_gDekuScrubIdleAnim
+#define gDekuScrubLeafTex mm_gDekuScrubLeafTex
+#define gDekuScrubLeftFootDL mm_gDekuScrubLeftFootDL
+#define gDekuScrubLeftLegDL mm_gDekuScrubLeftLegDL
+#define gDekuScrubLookAroundAnim mm_gDekuScrubLookAroundAnim
+#define gDekuScrubMouthTex mm_gDekuScrubMouthTex
+#define gDekuScrubPantingAnim mm_gDekuScrubPantingAnim
+#define gDekuScrubRightFootDL mm_gDekuScrubRightFootDL
+#define gDekuScrubRightLegDL mm_gDekuScrubRightLegDL
+#define gDekuScrubRunAnim mm_gDekuScrubRunAnim
+#define gDekuScrubSkel mm_gDekuScrubSkel
+#define gDekuScrubSkinTex mm_gDekuScrubSkinTex
+#define gDekuScrubSnoutDL mm_gDekuScrubSnoutDL
+#define gDekuScrubSnoutTex mm_gDekuScrubSnoutTex
+#define gDekuScrubSpitAnim mm_gDekuScrubSpitAnim
+#define gDekuScrubStandingIdleAnim mm_gDekuScrubStandingIdleAnim
+#define gDekuScrubUnburrowAnim mm_gDekuScrubUnburrowAnim
+#define gDekuScrubUpAnim mm_gDekuScrubUpAnim

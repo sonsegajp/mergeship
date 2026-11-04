@@ -1,0 +1,36 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_snowman/object_snowman.h"
+
+#define gEenoBodyBottomDL mm_gEenoBodyBottomDL
+#define gEenoBodyTex mm_gEenoBodyTex
+#define gEenoBodyTopDL mm_gEenoBodyTopDL
+#define gEenoDamageAnim mm_gEenoDamageAnim
+#define gEenoEmergeAnim mm_gEenoEmergeAnim
+#define gEenoEyeTex mm_gEenoEyeTex
+#define gEenoFaceTex mm_gEenoFaceTex
+#define gEenoIdleAnim mm_gEenoIdleAnim
+#define gEenoLargeSnowballCreateAnim mm_gEenoLargeSnowballCreateAnim
+#define gEenoLargeSnowballDL mm_gEenoLargeSnowballDL
+#define gEenoLargeSnowballThrowAnim mm_gEenoLargeSnowballThrowAnim
+#define gEenoLeftEyeDL mm_gEenoLeftEyeDL
+#define gEenoLeftForearmDL mm_gEenoLeftForearmDL
+#define gEenoLeftHandDL mm_gEenoLeftHandDL
+#define gEenoLeftUpperArmDL mm_gEenoLeftUpperArmDL
+#define gEenoRightEyeDL mm_gEenoRightEyeDL
+#define gEenoRightForearmDL mm_gEenoRightForearmDL
+#define gEenoRightHandDL mm_gEenoRightHandDL
+#define gEenoRightUpperArmDL mm_gEenoRightUpperArmDL
+#define gEenoSkel mm_gEenoSkel
+#define gEenoSmallSnowballCreateAnim mm_gEenoSmallSnowballCreateAnim
+#define gEenoSmallSnowballDL mm_gEenoSmallSnowballDL
+#define gEenoSmallSnowballThrowAnim mm_gEenoSmallSnowballThrowAnim
+#define gEenoSnowPileBottomDL mm_gEenoSnowPileBottomDL
+#define gEenoSnowPileMoveAnim mm_gEenoSnowPileMoveAnim
+#define gEenoSnowPileSkel mm_gEenoSnowPileSkel
+#define gEenoSnowPileTopDL mm_gEenoSnowPileTopDL
+#define gEenoSnowballFragment1DL mm_gEenoSnowballFragment1DL
+#define gEenoSnowballFragment2DL mm_gEenoSnowballFragment2DL
+#define gEenoSnowballFragment3DL mm_gEenoSnowballFragment3DL
+#define gEenoSnowballFragmentTex mm_gEenoSnowballFragmentTex
+#define gEenoUpperCheekTex mm_gEenoUpperCheekTex

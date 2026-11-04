@@ -1,0 +1,162 @@
+#ifndef MM_Z2_MILK_BAR_Z2_MILK_BAR_ROOM_00_H
+#define MM_Z2_MILK_BAR_Z2_MILK_BAR_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_MILK_BAR_room_00DL_00A8D0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_00A8D0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_00A8D0[] = dmm_Z2_MILK_BAR_room_00DL_00A8D0;
+
+#define dmm_Z2_MILK_BAR_room_00DL_00AB58 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_00AB58"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_00AB58[] = dmm_Z2_MILK_BAR_room_00DL_00AB58;
+
+#define dmm_Z2_MILK_BAR_room_00DL_00AE60 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_00AE60"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_00AE60[] = dmm_Z2_MILK_BAR_room_00DL_00AE60;
+
+#define dmm_Z2_MILK_BAR_room_00DL_0031F0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_0031F0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_0031F0[] = dmm_Z2_MILK_BAR_room_00DL_0031F0;
+
+#define dmm_Z2_MILK_BAR_room_00DL_008A80 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_008A80"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_008A80[] = dmm_Z2_MILK_BAR_room_00DL_008A80;
+
+#define dmm_Z2_MILK_BAR_room_00DL_004BA8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_004BA8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_004BA8[] = dmm_Z2_MILK_BAR_room_00DL_004BA8;
+
+#define dmm_Z2_MILK_BAR_room_00DL_009AE0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_009AE0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_009AE0[] = dmm_Z2_MILK_BAR_room_00DL_009AE0;
+
+#define dmm_Z2_MILK_BAR_room_00DL_0090E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_0090E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_0090E8[] = dmm_Z2_MILK_BAR_room_00DL_0090E8;
+
+#define dmm_Z2_MILK_BAR_room_00DL_009AF0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_009AF0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_009AF0[] = dmm_Z2_MILK_BAR_room_00DL_009AF0;
+
+#define dmm_Z2_MILK_BAR_room_00DL_00A0E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_00A0E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_00A0E8[] = dmm_Z2_MILK_BAR_room_00DL_00A0E8;
+
+#define dmm_Z2_MILK_BAR_room_00DL_0093C0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_0093C0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_0093C0[] = dmm_Z2_MILK_BAR_room_00DL_0093C0;
+
+#define dmm_Z2_MILK_BAR_room_00DL_00AF48 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00DL_00AF48"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00DL_00AF48[] = dmm_Z2_MILK_BAR_room_00DL_00AF48;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_00A8D0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_00A8D0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_00A8D0[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_00A8D0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_00AB58 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_00AB58"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_00AB58[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_00AB58;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_00AE60 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_00AE60"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_00AE60[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_00AE60;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_0031F0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_0031F0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_0031F0[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_0031F0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_008A80 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_008A80"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_008A80[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_008A80;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_004BA8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_004BA8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_004BA8[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_004BA8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_009AE0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_009AE0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_009AE0[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_009AE0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_0090E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_0090E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_0090E8[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_0090E8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_009AF0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_009AF0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_009AF0[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_009AF0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_000230DL_00A0E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_000230DL_00A0E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_000230DL_00A0E8[] = dmm_Z2_MILK_BAR_room_00Set_000230DL_00A0E8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00A8D0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_00A8D0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_00A8D0[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00A8D0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00AB58 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_00AB58"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_00AB58[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00AB58;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00AE60 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_00AE60"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_00AE60[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00AE60;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_0031F0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_0031F0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_0031F0[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_0031F0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_008A80 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_008A80"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_008A80[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_008A80;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_004BA8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_004BA8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_004BA8[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_004BA8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_009AE0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_009AE0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_009AE0[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_009AE0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_0090E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_0090E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_0090E8[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_0090E8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_009AF0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_009AF0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_009AF0[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_009AF0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00A0E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0002C0DL_00A0E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0002C0DL_00A0E8[] = dmm_Z2_MILK_BAR_room_00Set_0002C0DL_00A0E8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00A8D0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_00A8D0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_00A8D0[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00A8D0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00AB58 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_00AB58"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_00AB58[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00AB58;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00AE60 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_00AE60"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_00AE60[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00AE60;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_0031F0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_0031F0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_0031F0[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_0031F0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_008A80 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_008A80"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_008A80[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_008A80;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_004BA8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_004BA8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_004BA8[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_004BA8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_009AE0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_009AE0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_009AE0[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_009AE0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_0090E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_0090E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_0090E8[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_0090E8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_009AF0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_009AF0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_009AF0[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_009AF0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00A0E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0003F0DL_00A0E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0003F0DL_00A0E8[] = dmm_Z2_MILK_BAR_room_00Set_0003F0DL_00A0E8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00A8D0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_00A8D0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_00A8D0[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00A8D0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00AB58 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_00AB58"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_00AB58[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00AB58;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00AE60 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_00AE60"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_00AE60[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00AE60;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_0031F0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_0031F0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_0031F0[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_0031F0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_008A80 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_008A80"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_008A80[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_008A80;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_004BA8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_004BA8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_004BA8[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_004BA8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_009AE0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_009AE0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_009AE0[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_009AE0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_0090E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_0090E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_0090E8[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_0090E8;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_009AF0 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_009AF0"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_009AF0[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_009AF0;
+
+#define dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00A0E8 "__OTR__mm/scenes/nonmq/Z2_MILK_BAR_scene/Z2_MILK_BAR_room_00Set_0004E0DL_00A0E8"
+static const ALIGN_ASSET(2) char mm_Z2_MILK_BAR_room_00Set_0004E0DL_00A0E8[] = dmm_Z2_MILK_BAR_room_00Set_0004E0DL_00A0E8;
+
+#endif // MM_Z2_MILK_BAR_Z2_MILK_BAR_ROOM_00_H

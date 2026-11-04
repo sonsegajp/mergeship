@@ -1,0 +1,22 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bb/object_bb.h"
+
+#define gBubbleAttackAnim mm_gBubbleAttackAnim
+#define gBubbleCraniumDL mm_gBubbleCraniumDL
+#define gBubbleCraniumSidesAndBackTex mm_gBubbleCraniumSidesAndBackTex
+#define gBubbleCraniumTopTex mm_gBubbleCraniumTopTex
+#define gBubbleEyeGlowTex mm_gBubbleEyeGlowTex
+#define gBubbleEyeSocketBottomTex mm_gBubbleEyeSocketBottomTex
+#define gBubbleEyeSocketTopAndJawTex mm_gBubbleEyeSocketTopAndJawTex
+#define gBubbleFlyingAnim mm_gBubbleFlyingAnim
+#define gBubbleJawDL mm_gBubbleJawDL
+#define gBubbleLeftWingBoneDL mm_gBubbleLeftWingBoneDL
+#define gBubbleLeftWingWebbingDL mm_gBubbleLeftWingWebbingDL
+#define gBubbleNostrilTex mm_gBubbleNostrilTex
+#define gBubblePainAnim mm_gBubblePainAnim
+#define gBubbleRightWingBoneDL mm_gBubbleRightWingBoneDL
+#define gBubbleRightWingWebbingDL mm_gBubbleRightWingWebbingDL
+#define gBubbleSkel mm_gBubbleSkel
+#define gBubbleWingBoneTex mm_gBubbleWingBoneTex
+#define gBubbleWingWebbingTex mm_gBubbleWingWebbingTex

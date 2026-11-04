@@ -1,0 +1,21 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_fwall/object_fwall.h"
+
+#define gFireTempleBigVerticalFlame0Tex mm_gFireTempleBigVerticalFlame0Tex
+#define gFireTempleBigVerticalFlame1Tex mm_gFireTempleBigVerticalFlame1Tex
+#define gFireTempleBigVerticalFlame2Tex mm_gFireTempleBigVerticalFlame2Tex
+#define gFireTempleBigVerticalFlame3Tex mm_gFireTempleBigVerticalFlame3Tex
+#define gFireTempleBigVerticalFlame4Tex mm_gFireTempleBigVerticalFlame4Tex
+#define gFireTempleBigVerticalFlame5Tex mm_gFireTempleBigVerticalFlame5Tex
+#define gFireTempleBigVerticalFlame6Tex mm_gFireTempleBigVerticalFlame6Tex
+#define gFireTempleBigVerticalFlame7Tex mm_gFireTempleBigVerticalFlame7Tex
+#define gFwallFireball0Tex mm_gFwallFireball0Tex
+#define gFwallFireball1Tex mm_gFwallFireball1Tex
+#define gFwallFireball2Tex mm_gFwallFireball2Tex
+#define gFwallFireball3Tex mm_gFwallFireball3Tex
+#define gFwallFireball4Tex mm_gFwallFireball4Tex
+#define gFwallFireball5Tex mm_gFwallFireball5Tex
+#define gFwallFireball6Tex mm_gFwallFireball6Tex
+#define gFwallFireball7Tex mm_gFwallFireball7Tex
+#define object_fwall_DL_000040 mm_object_fwall_DL_000040

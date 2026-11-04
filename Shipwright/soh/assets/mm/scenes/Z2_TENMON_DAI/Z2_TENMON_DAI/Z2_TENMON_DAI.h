@@ -1,0 +1,23 @@
+#ifndef MM_Z2_TENMON_DAI_Z2_TENMON_DAI_H
+#define MM_Z2_TENMON_DAI_Z2_TENMON_DAI_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_TENMON_DAICollisionHeader_007514 "__OTR__mm/scenes/nonmq/Z2_TENMON_DAI/Z2_TENMON_DAICollisionHeader_007514"
+static const ALIGN_ASSET(2) char mm_Z2_TENMON_DAICollisionHeader_007514[] = dmm_Z2_TENMON_DAICollisionHeader_007514;
+
+#define dmm_Z2_TENMON_DAITLUT_008580 "__OTR__mm/scenes/nonmq/Z2_TENMON_DAI/Z2_TENMON_DAITLUT_008580"
+static const ALIGN_ASSET(2) char mm_Z2_TENMON_DAITLUT_008580[] = dmm_Z2_TENMON_DAITLUT_008580;
+
+#define dmm_Z2_TENMON_DAITLUT_008540 "__OTR__mm/scenes/nonmq/Z2_TENMON_DAI/Z2_TENMON_DAITLUT_008540"
+static const ALIGN_ASSET(2) char mm_Z2_TENMON_DAITLUT_008540[] = dmm_Z2_TENMON_DAITLUT_008540;
+
+#define dmm_Z2_TENMON_DAITex_007540 "__OTR__mm/scenes/nonmq/Z2_TENMON_DAI/Z2_TENMON_DAITex_007540"
+static const ALIGN_ASSET(2) char mm_Z2_TENMON_DAITex_007540[] = dmm_Z2_TENMON_DAITex_007540;
+
+#define dmm_Z2_TENMON_DAITLUT_008560 "__OTR__mm/scenes/nonmq/Z2_TENMON_DAI/Z2_TENMON_DAITLUT_008560"
+static const ALIGN_ASSET(2) char mm_Z2_TENMON_DAITLUT_008560[] = dmm_Z2_TENMON_DAITLUT_008560;
+
+#define dmm_Z2_TENMON_DAITex_007D40 "__OTR__mm/scenes/nonmq/Z2_TENMON_DAI/Z2_TENMON_DAITex_007D40"
+static const ALIGN_ASSET(2) char mm_Z2_TENMON_DAITex_007D40[] = dmm_Z2_TENMON_DAITex_007D40;
+#endif // MM_Z2_TENMON_DAI_Z2_TENMON_DAI_H

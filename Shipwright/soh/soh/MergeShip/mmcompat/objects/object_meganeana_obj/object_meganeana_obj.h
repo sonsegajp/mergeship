@@ -1,0 +1,9 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_meganeana_obj/object_meganeana_obj.h"
+
+#define object_meganeana_obj_DL_000080 mm_object_meganeana_obj_DL_000080
+#define object_meganeana_obj_DL_000110 mm_object_meganeana_obj_DL_000110
+#define object_meganeana_obj_Tex_0001D0 mm_object_meganeana_obj_Tex_0001D0
+#define object_meganeana_obj_Tex_0005D0 mm_object_meganeana_obj_Tex_0005D0
+#define object_meganeana_obj_Tex_000DD0 mm_object_meganeana_obj_Tex_000DD0

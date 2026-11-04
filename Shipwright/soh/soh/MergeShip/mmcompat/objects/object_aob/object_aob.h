@@ -1,0 +1,38 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_aob/object_aob.h"
+
+#define gMamamuYanDressDL mm_gMamamuYanDressDL
+#define gMamamuYanDressTex mm_gMamamuYanDressTex
+#define gMamamuYanEarTex mm_gMamamuYanEarTex
+#define gMamamuYanEyeClosedTex mm_gMamamuYanEyeClosedTex
+#define gMamamuYanEyeHalfTex mm_gMamamuYanEyeHalfTex
+#define gMamamuYanEyeOpenTex mm_gMamamuYanEyeOpenTex
+#define gMamamuYanFingersTex mm_gMamamuYanFingersTex
+#define gMamamuYanHairTex mm_gMamamuYanHairTex
+#define gMamamuYanHeadDL mm_gMamamuYanHeadDL
+#define gMamamuYanIdleAnim mm_gMamamuYanIdleAnim
+#define gMamamuYanLaughLoopAnim mm_gMamamuYanLaughLoopAnim
+#define gMamamuYanLaughStartAnim mm_gMamamuYanLaughStartAnim
+#define gMamamuYanLeftFootDL mm_gMamamuYanLeftFootDL
+#define gMamamuYanLeftForearmDL mm_gMamamuYanLeftForearmDL
+#define gMamamuYanLeftHandDL mm_gMamamuYanLeftHandDL
+#define gMamamuYanLeftShinDL mm_gMamamuYanLeftShinDL
+#define gMamamuYanLeftThighDL mm_gMamamuYanLeftThighDL
+#define gMamamuYanLeftUpperArmDL mm_gMamamuYanLeftUpperArmDL
+#define gMamamuYanLipsTex mm_gMamamuYanLipsTex
+#define gMamamuYanNostrilTex mm_gMamamuYanNostrilTex
+#define gMamamuYanRightFootDL mm_gMamamuYanRightFootDL
+#define gMamamuYanRightForearmDL mm_gMamamuYanRightForearmDL
+#define gMamamuYanRightHandDL mm_gMamamuYanRightHandDL
+#define gMamamuYanRightShinDL mm_gMamamuYanRightShinDL
+#define gMamamuYanRightThighDL mm_gMamamuYanRightThighDL
+#define gMamamuYanRightUpperArmDL mm_gMamamuYanRightUpperArmDL
+#define gMamamuYanSkel mm_gMamamuYanSkel
+#define gMamamuYanSkinTex mm_gMamamuYanSkinTex
+#define gMamamuYanSleevesTex mm_gMamamuYanSleevesTex
+#define gMamamuYanSurpriseLoopAnim mm_gMamamuYanSurpriseLoopAnim
+#define gMamamuYanSurpriseStartAnim mm_gMamamuYanSurpriseStartAnim
+#define gMamamuYanTLUT mm_gMamamuYanTLUT
+#define gMamamuYanTorsoDL mm_gMamamuYanTorsoDL
+#define gMamamuYanUnusedIdleAnim mm_gMamamuYanUnusedIdleAnim

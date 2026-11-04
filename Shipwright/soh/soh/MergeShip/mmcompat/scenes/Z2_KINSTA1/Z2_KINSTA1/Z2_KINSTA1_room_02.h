@@ -1,0 +1,19 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_KINSTA1/Z2_KINSTA1/Z2_KINSTA1_room_02.h"
+
+#define Z2_KINSTA1_room_02DL_000790 mm_Z2_KINSTA1_room_02DL_000790
+#define Z2_KINSTA1_room_02DL_001590 mm_Z2_KINSTA1_room_02DL_001590
+#define Z2_KINSTA1_room_02DL_001D88 mm_Z2_KINSTA1_room_02DL_001D88
+#define Z2_KINSTA1_room_02DL_002608 mm_Z2_KINSTA1_room_02DL_002608
+#define Z2_KINSTA1_room_02DL_002A58 mm_Z2_KINSTA1_room_02DL_002A58
+#define Z2_KINSTA1_room_02DL_003180 mm_Z2_KINSTA1_room_02DL_003180
+#define Z2_KINSTA1_room_02DL_0034C0 mm_Z2_KINSTA1_room_02DL_0034C0
+#define Z2_KINSTA1_room_02DL_0035B0 mm_Z2_KINSTA1_room_02DL_0035B0
+#define Z2_KINSTA1_room_02DL_005610 mm_Z2_KINSTA1_room_02DL_005610
+#define Z2_KINSTA1_room_02TLUT_0055F0 mm_Z2_KINSTA1_room_02TLUT_0055F0
+#define Z2_KINSTA1_room_02Tex_0035F0 mm_Z2_KINSTA1_room_02Tex_0035F0
+#define Z2_KINSTA1_room_02Tex_003DF0 mm_Z2_KINSTA1_room_02Tex_003DF0
+#define Z2_KINSTA1_room_02Tex_0045F0 mm_Z2_KINSTA1_room_02Tex_0045F0
+#define Z2_KINSTA1_room_02Tex_0049F0 mm_Z2_KINSTA1_room_02Tex_0049F0
+#define Z2_KINSTA1_room_02Tex_0051F0 mm_Z2_KINSTA1_room_02Tex_0051F0

@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_HAKUGIN/Z2_HAKUGIN/Z2_HAKUGIN_room_11.h"
+
+#define Z2_HAKUGIN_room_11DL_0003F0 mm_Z2_HAKUGIN_room_11DL_0003F0
+#define Z2_HAKUGIN_room_11DL_000940 mm_Z2_HAKUGIN_room_11DL_000940
+#define Z2_HAKUGIN_room_11DL_001108 mm_Z2_HAKUGIN_room_11DL_001108
+#define Z2_HAKUGIN_room_11DL_001578 mm_Z2_HAKUGIN_room_11DL_001578
+#define Z2_HAKUGIN_room_11DL_001700 mm_Z2_HAKUGIN_room_11DL_001700
+#define Z2_HAKUGIN_room_11Tex_001728 mm_Z2_HAKUGIN_room_11Tex_001728
+#define Z2_HAKUGIN_room_11Tex_001F28 mm_Z2_HAKUGIN_room_11Tex_001F28
+#define Z2_HAKUGIN_room_11Tex_002728 mm_Z2_HAKUGIN_room_11Tex_002728

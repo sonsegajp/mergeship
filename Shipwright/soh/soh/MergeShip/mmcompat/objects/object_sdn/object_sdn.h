@@ -1,0 +1,50 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_sdn/object_sdn.h"
+
+#define gSoldierArmorCoatOfArmsTex mm_gSoldierArmorCoatOfArmsTex
+#define gSoldierArmorEmblemTex mm_gSoldierArmorEmblemTex
+#define gSoldierArmorPlate1Tex mm_gSoldierArmorPlate1Tex
+#define gSoldierArmorPlate2Tex mm_gSoldierArmorPlate2Tex
+#define gSoldierArmorStrapTex mm_gSoldierArmorStrapTex
+#define gSoldierArmorTex mm_gSoldierArmorTex
+#define gSoldierBottleContentsDL mm_gSoldierBottleContentsDL
+#define gSoldierBottleDL mm_gSoldierBottleDL
+#define gSoldierBottleEmptyContentsDL mm_gSoldierBottleEmptyContentsDL
+#define gSoldierBottleTex mm_gSoldierBottleTex
+#define gSoldierCheerWithSpearAnim mm_gSoldierCheerWithSpearAnim
+#define gSoldierComeUpHereAnim mm_gSoldierComeUpHereAnim
+#define gSoldierDrinkAnim mm_gSoldierDrinkAnim
+#define gSoldierFingersTex mm_gSoldierFingersTex
+#define gSoldierGeneralTLUT mm_gSoldierGeneralTLUT
+#define gSoldierHeadDL mm_gSoldierHeadDL
+#define gSoldierLeftFootDL mm_gSoldierLeftFootDL
+#define gSoldierLeftForearmDL mm_gSoldierLeftForearmDL
+#define gSoldierLeftHandDL mm_gSoldierLeftHandDL
+#define gSoldierLeftShinDL mm_gSoldierLeftShinDL
+#define gSoldierLeftShoulderDL mm_gSoldierLeftShoulderDL
+#define gSoldierLeftThighDL mm_gSoldierLeftThighDL
+#define gSoldierLipsTex mm_gSoldierLipsTex
+#define gSoldierLookDownAnim mm_gSoldierLookDownAnim
+#define gSoldierPelvisDL mm_gSoldierPelvisDL
+#define gSoldierRightFootDL mm_gSoldierRightFootDL
+#define gSoldierRightForearmDL mm_gSoldierRightForearmDL
+#define gSoldierRightHandWithSpearDL mm_gSoldierRightHandWithSpearDL
+#define gSoldierRightShinDL mm_gSoldierRightShinDL
+#define gSoldierRightShoulderDL mm_gSoldierRightShoulderDL
+#define gSoldierRightThighDL mm_gSoldierRightThighDL
+#define gSoldierShortsToLegTex mm_gSoldierShortsToLegTex
+#define gSoldierSitAndReachAnim mm_gSoldierSitAndReachAnim
+#define gSoldierSkel mm_gSoldierSkel
+#define gSoldierSkinShadowGradient1Tex mm_gSoldierSkinShadowGradient1Tex
+#define gSoldierSkinShadowGradient2Tex mm_gSoldierSkinShadowGradient2Tex
+#define gSoldierSkinTLUT mm_gSoldierSkinTLUT
+#define gSoldierStandAndLookDownAnim mm_gSoldierStandAndLookDownAnim
+#define gSoldierStandHandOnHipAnim mm_gSoldierStandHandOnHipAnim
+#define gSoldierStandUpAnim mm_gSoldierStandUpAnim
+#define gSoldierStandWithHandOnChestAnim mm_gSoldierStandWithHandOnChestAnim
+#define gSoldierTorsoDL mm_gSoldierTorsoDL
+#define gSoldierWaveAnim mm_gSoldierWaveAnim
+#define object_sdn_Anim_0057BC mm_object_sdn_Anim_0057BC
+#define object_sdn_Anim_005D28 mm_object_sdn_Anim_005D28
+#define object_sdn_Anim_0064C0 mm_object_sdn_Anim_0064C0

@@ -1,0 +1,39 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bigokuta/object_bigokuta.h"
+
+#define gBigOctoArmBottomTex mm_gBigOctoArmBottomTex
+#define gBigOctoArmTopTex mm_gBigOctoArmTopTex
+#define gBigOctoBackLeftArmBaseDL mm_gBigOctoBackLeftArmBaseDL
+#define gBigOctoBackLeftArmEndDL mm_gBigOctoBackLeftArmEndDL
+#define gBigOctoBackRightArmBaseDL mm_gBigOctoBackRightArmBaseDL
+#define gBigOctoBackRightArmEndDL mm_gBigOctoBackRightArmEndDL
+#define gBigOctoBetweenEyesTex mm_gBigOctoBetweenEyesTex
+#define gBigOctoBodyDL mm_gBigOctoBodyDL
+#define gBigOctoCenterSnoutDL mm_gBigOctoCenterSnoutDL
+#define gBigOctoDeathAnim mm_gBigOctoDeathAnim
+#define gBigOctoEyeShellTex mm_gBigOctoEyeShellTex
+#define gBigOctoEyeTex mm_gBigOctoEyeTex
+#define gBigOctoFrontLeftArmBaseDL mm_gBigOctoFrontLeftArmBaseDL
+#define gBigOctoFrontLeftArmEndDL mm_gBigOctoFrontLeftArmEndDL
+#define gBigOctoFrontRightArmBaseDL mm_gBigOctoFrontRightArmBaseDL
+#define gBigOctoFrontRightArmEndDL mm_gBigOctoFrontRightArmEndDL
+#define gBigOctoHeadBaseTex mm_gBigOctoHeadBaseTex
+#define gBigOctoHeadShellDL mm_gBigOctoHeadShellDL
+#define gBigOctoHeadUndersideTex mm_gBigOctoHeadUndersideTex
+#define gBigOctoHitAnim mm_gBigOctoHitAnim
+#define gBigOctoIdleAnim mm_gBigOctoIdleAnim
+#define gBigOctoLeftSnoutDL mm_gBigOctoLeftSnoutDL
+#define gBigOctoLeftTentacleBaseDL mm_gBigOctoLeftTentacleBaseDL
+#define gBigOctoLeftTentacleTipDL mm_gBigOctoLeftTentacleTipDL
+#define gBigOctoLeftWeakPointDL mm_gBigOctoLeftWeakPointDL
+#define gBigOctoRightSnoutDL mm_gBigOctoRightSnoutDL
+#define gBigOctoRightTentacleBaseDL mm_gBigOctoRightTentacleBaseDL
+#define gBigOctoRightTentacleTipDL mm_gBigOctoRightTentacleTipDL
+#define gBigOctoRightWeakPointDL mm_gBigOctoRightWeakPointDL
+#define gBigOctoRiseOutOfWaterAnim mm_gBigOctoRiseOutOfWaterAnim
+#define gBigOctoShellTex mm_gBigOctoShellTex
+#define gBigOctoSkel mm_gBigOctoSkel
+#define gBigOctoSnoutEdgeTex mm_gBigOctoSnoutEdgeTex
+#define gBigOctoWalkAnim mm_gBigOctoWalkAnim
+#define gBigOctoWeakPointCoverTex mm_gBigOctoWeakPointCoverTex

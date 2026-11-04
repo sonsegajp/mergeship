@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_RANDOM/Z2_RANDOM/Z2_RANDOM_room_05.h"
+
+#define Z2_RANDOM_room_05DL_000660 mm_Z2_RANDOM_room_05DL_000660
+#define Z2_RANDOM_room_05DL_000AF0 mm_Z2_RANDOM_room_05DL_000AF0
+#define Z2_RANDOM_room_05DL_000D98 mm_Z2_RANDOM_room_05DL_000D98
+#define Z2_RANDOM_room_05DL_001108 mm_Z2_RANDOM_room_05DL_001108
+#define Z2_RANDOM_room_05DL_001788 mm_Z2_RANDOM_room_05DL_001788
+#define Z2_RANDOM_room_05DL_0020C8 mm_Z2_RANDOM_room_05DL_0020C8
+#define Z2_RANDOM_room_05DL_002630 mm_Z2_RANDOM_room_05DL_002630
+#define Z2_RANDOM_room_05DL_0028C8 mm_Z2_RANDOM_room_05DL_0028C8
+#define Z2_RANDOM_room_05DL_002988 mm_Z2_RANDOM_room_05DL_002988
+#define Z2_RANDOM_room_05DL_003AE0 mm_Z2_RANDOM_room_05DL_003AE0
+#define Z2_RANDOM_room_05DL_003BD8 mm_Z2_RANDOM_room_05DL_003BD8
+#define Z2_RANDOM_room_05DL_003BE0 mm_Z2_RANDOM_room_05DL_003BE0
+#define Z2_RANDOM_room_05Tex_0029D0 mm_Z2_RANDOM_room_05Tex_0029D0
+#define Z2_RANDOM_room_05Tex_0031D0 mm_Z2_RANDOM_room_05Tex_0031D0

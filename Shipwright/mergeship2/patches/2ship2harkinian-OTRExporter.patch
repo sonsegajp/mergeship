@@ -1,0 +1,53 @@
+diff --git a/OTRExporter/AnimationExporter.cpp b/OTRExporter/AnimationExporter.cpp
+index 6a5bf7b..1464039 100644
+--- a/OTRExporter/AnimationExporter.cpp
++++ b/OTRExporter/AnimationExporter.cpp
+@@ -7,6 +7,7 @@
+ 
+ #include <Globals.h>
+ #include "DisplayListExporter.h"
++#include "MergeShipNamespace.h"
+ #undef FindResource
+ 
+ 
+@@ -30,7 +31,9 @@ void OTRExporter_Animation::Save(ZResource* res, const fs::path& outPath, Binary
+ 			if (name.at(0) == '&')
+ 				name.erase(0, 1);
+ 
+-			writer->Write(StringHelper::Sprintf("__OTR__misc/link_animetion/%s", name.c_str()));
++			// MergeShip2: keep this reference inside the MM namespace so it resolves to the MM
++			// link_animetion blob rather than Ocarina of Time's identically named one.
++			writer->Write(StringHelper::Sprintf("__OTR__" MERGESHIP_MM_PREFIX "misc/link_animetion/%s", name.c_str()));
+ 		}
+ 		else
+ 		{
+diff --git a/OTRExporter/DisplayListExporter.cpp b/OTRExporter/DisplayListExporter.cpp
+index f7bcf41..0247e3f 100644
+--- a/OTRExporter/DisplayListExporter.cpp
++++ b/OTRExporter/DisplayListExporter.cpp
+@@ -1,6 +1,7 @@
+ #define F3DEX_GBI_2
+ #include "DisplayListExporter.h"
+ #include "Main.h"
++#include "MergeShipNamespace.h"
+ #include "../ZAPD/ZFile.h"
+ #include <Utils/MemoryStream.h>
+ #include <Utils/BitConverter.h>
+@@ -1048,7 +1049,16 @@ std::string OTRExporter_DisplayList::GetPrefix(ZResource* res)
+ 	else if (StringHelper::Contains(xmlPath, "code/"))
+ 		prefix = "code";
+ 
+-	return prefix;
++	// MergeShip2: every MM resource lives under the "mm/" namespace so that mm.o2r can be
++	// mounted alongside oot.o2r without shadowing it. Ocarina of Time and Majora's Mask share
++	// 2562 identical resource paths (object_link_child, object_link_boy, gameplay_keep, the
++	// audio tables, ...), so an unprefixed MM archive silently replaces Hyrule's assets.
++	// This is the single point that names both the archive entry and every reference embedded
++	// inside the exported data, so prefixing here keeps the two consistent by construction.
++	if (prefix.empty()) {
++		return MERGESHIP_MM_NAMESPACE;
++	}
++	return MERGESHIP_MM_NAMESPACE "/" + prefix;
+ }
+ #elif GAME_OOT
+ std::string OTRExporter_DisplayList::GetPrefix(ZResource* res)

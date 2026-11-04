@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_MITURIN_BS/Z2_MITURIN_BS/Z2_MITURIN_BS_room_00.h"
+
+#define Z2_MITURIN_BS_room_00DL_000660 mm_Z2_MITURIN_BS_room_00DL_000660
+#define Z2_MITURIN_BS_room_00DL_000D58 mm_Z2_MITURIN_BS_room_00DL_000D58
+#define Z2_MITURIN_BS_room_00DL_0011A0 mm_Z2_MITURIN_BS_room_00DL_0011A0
+#define Z2_MITURIN_BS_room_00DL_0014F0 mm_Z2_MITURIN_BS_room_00DL_0014F0
+#define Z2_MITURIN_BS_room_00DL_001830 mm_Z2_MITURIN_BS_room_00DL_001830
+#define Z2_MITURIN_BS_room_00DL_0019F0 mm_Z2_MITURIN_BS_room_00DL_0019F0
+#define Z2_MITURIN_BS_room_00DL_001B90 mm_Z2_MITURIN_BS_room_00DL_001B90
+#define Z2_MITURIN_BS_room_00DL_001C68 mm_Z2_MITURIN_BS_room_00DL_001C68

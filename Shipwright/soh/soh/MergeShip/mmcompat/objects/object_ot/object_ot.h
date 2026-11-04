@@ -1,0 +1,36 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ot/object_ot.h"
+
+#define object_ot_Anim_000420 mm_object_ot_Anim_000420
+#define object_ot_Anim_0008D8 mm_object_ot_Anim_0008D8
+#define object_ot_Anim_004B30 mm_object_ot_Anim_004B30
+#define object_ot_DL_000040 mm_object_ot_DL_000040
+#define object_ot_DL_000078 mm_object_ot_DL_000078
+#define object_ot_DL_0004A0 mm_object_ot_DL_0004A0
+#define object_ot_DL_001800 mm_object_ot_DL_001800
+#define object_ot_DL_0018D0 mm_object_ot_DL_0018D0
+#define object_ot_DL_001988 mm_object_ot_DL_001988
+#define object_ot_DL_001AA0 mm_object_ot_DL_001AA0
+#define object_ot_DL_001B80 mm_object_ot_DL_001B80
+#define object_ot_DL_001C38 mm_object_ot_DL_001C38
+#define object_ot_DL_001CF0 mm_object_ot_DL_001CF0
+#define object_ot_DL_001FD8 mm_object_ot_DL_001FD8
+#define object_ot_DL_002090 mm_object_ot_DL_002090
+#define object_ot_DL_002220 mm_object_ot_DL_002220
+#define object_ot_DL_002318 mm_object_ot_DL_002318
+#define object_ot_DL_002410 mm_object_ot_DL_002410
+#define object_ot_DL_002508 mm_object_ot_DL_002508
+#define object_ot_DL_002600 mm_object_ot_DL_002600
+#define object_ot_DL_0026F8 mm_object_ot_DL_0026F8
+#define object_ot_DL_0027F0 mm_object_ot_DL_0027F0
+#define object_ot_Matanimheader_0005F8 mm_object_ot_Matanimheader_0005F8
+#define object_ot_Skel_004800 mm_object_ot_Skel_004800
+#define object_ot_TLUT_0028E0 mm_object_ot_TLUT_0028E0
+#define object_ot_Tex_000550 mm_object_ot_Tex_000550
+#define object_ot_Tex_002AE0 mm_object_ot_Tex_002AE0
+#define object_ot_Tex_002EE0 mm_object_ot_Tex_002EE0
+#define object_ot_Tex_0036E0 mm_object_ot_Tex_0036E0
+#define object_ot_Tex_003AE0 mm_object_ot_Tex_003AE0
+#define object_ot_Tex_003EE0 mm_object_ot_Tex_003EE0
+#define object_ot_Tex_0042E0 mm_object_ot_Tex_0042E0

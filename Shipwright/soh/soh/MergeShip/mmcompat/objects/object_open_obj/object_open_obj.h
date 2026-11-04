@@ -1,0 +1,26 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_open_obj/object_open_obj.h"
+
+#define gSpotlightFloorTex mm_gSpotlightFloorTex
+#define gSpotlightLeftDL mm_gSpotlightLeftDL
+#define gSpotlightRightDL mm_gSpotlightRightDL
+#define gSpotlightShapesTex mm_gSpotlightShapesTex
+#define gSpotlightTexAnim mm_gSpotlightTexAnim
+#define object_open_obj_Colheader_001640 mm_object_open_obj_Colheader_001640
+#define object_open_obj_DL_0003E0 mm_object_open_obj_DL_0003E0
+#define object_open_obj_DL_0003E8 mm_object_open_obj_DL_0003E8
+#define object_open_obj_DL_002D30 mm_object_open_obj_DL_002D30
+#define object_open_obj_DL_002DC0 mm_object_open_obj_DL_002DC0
+#define object_open_obj_Matanimheader_011458 mm_object_open_obj_Matanimheader_011458
+#define object_open_obj_Tex_000558 mm_object_open_obj_Tex_000558
+#define object_open_obj_Tex_00DDC8 mm_object_open_obj_Tex_00DDC8
+#define object_open_obj_Tex_00DFC8 mm_object_open_obj_Tex_00DFC8
+#define object_open_obj_Tex_00E1C8 mm_object_open_obj_Tex_00E1C8
+#define object_open_obj_Tex_00E3C8 mm_object_open_obj_Tex_00E3C8
+#define object_open_obj_Tex_00E5C8 mm_object_open_obj_Tex_00E5C8
+#define object_open_obj_Tex_00E7C8 mm_object_open_obj_Tex_00E7C8
+#define object_open_obj_Tex_00E9C8 mm_object_open_obj_Tex_00E9C8
+#define object_open_obj_Tex_00EBC8 mm_object_open_obj_Tex_00EBC8
+#define object_open_obj_Tex_00EDC8 mm_object_open_obj_Tex_00EDC8
+#define object_open_obj_Tex_00EFC8 mm_object_open_obj_Tex_00EFC8

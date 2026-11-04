@@ -1,0 +1,14 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_BANDROOM/Z2_BANDROOM/Z2_BANDROOM.h"
+
+#define Z2_BANDROOMCollisionHeader_009880 mm_Z2_BANDROOMCollisionHeader_009880
+#define Z2_BANDROOMCutsceneData_00023C mm_Z2_BANDROOMCutsceneData_00023C
+#define Z2_BANDROOMCutsceneData_0003FC mm_Z2_BANDROOMCutsceneData_0003FC
+#define Z2_BANDROOMCutsceneData_0005FC mm_Z2_BANDROOMCutsceneData_0005FC
+#define Z2_BANDROOMCutsceneData_00089C mm_Z2_BANDROOMCutsceneData_00089C
+#define Z2_BANDROOMTLUT_00B6B0 mm_Z2_BANDROOMTLUT_00B6B0
+#define Z2_BANDROOMTex_0098B0 mm_Z2_BANDROOMTex_0098B0
+#define Z2_BANDROOMTex_00A0B0 mm_Z2_BANDROOMTex_00A0B0
+#define Z2_BANDROOMTex_00B0B0 mm_Z2_BANDROOMTex_00B0B0
+#define Z2_BANDROOMTex_00B2B0 mm_Z2_BANDROOMTex_00B2B0

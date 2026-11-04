@@ -1,0 +1,42 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ah/object_ah.h"
+
+#define object_ah_Anim_000968 mm_object_ah_Anim_000968
+#define object_ah_Anim_000DDC mm_object_ah_Anim_000DDC
+#define object_ah_Anim_001860 mm_object_ah_Anim_001860
+#define object_ah_Anim_002280 mm_object_ah_Anim_002280
+#define object_ah_DL_004A60 mm_object_ah_DL_004A60
+#define object_ah_DL_004B70 mm_object_ah_DL_004B70
+#define object_ah_DL_004C80 mm_object_ah_DL_004C80
+#define object_ah_DL_004E78 mm_object_ah_DL_004E78
+#define object_ah_DL_005010 mm_object_ah_DL_005010
+#define object_ah_DL_0050E8 mm_object_ah_DL_0050E8
+#define object_ah_DL_005268 mm_object_ah_DL_005268
+#define object_ah_DL_005400 mm_object_ah_DL_005400
+#define object_ah_DL_0054D8 mm_object_ah_DL_0054D8
+#define object_ah_DL_0055F0 mm_object_ah_DL_0055F0
+#define object_ah_DL_005BA8 mm_object_ah_DL_005BA8
+#define object_ah_DL_005D88 mm_object_ah_DL_005D88
+#define object_ah_DL_005EB0 mm_object_ah_DL_005EB0
+#define object_ah_DL_006090 mm_object_ah_DL_006090
+#define object_ah_DL_0061B8 mm_object_ah_DL_0061B8
+#define object_ah_Skel_009E70 mm_object_ah_Skel_009E70
+#define object_ah_TLUT_0064B0 mm_object_ah_TLUT_0064B0
+#define object_ah_Tex_0066B0 mm_object_ah_Tex_0066B0
+#define object_ah_Tex_0067B0 mm_object_ah_Tex_0067B0
+#define object_ah_Tex_0068B0 mm_object_ah_Tex_0068B0
+#define object_ah_Tex_0068F0 mm_object_ah_Tex_0068F0
+#define object_ah_Tex_006930 mm_object_ah_Tex_006930
+#define object_ah_Tex_006970 mm_object_ah_Tex_006970
+#define object_ah_Tex_006A70 mm_object_ah_Tex_006A70
+#define object_ah_Tex_006AB0 mm_object_ah_Tex_006AB0
+#define object_ah_Tex_006BB0 mm_object_ah_Tex_006BB0
+#define object_ah_Tex_006C30 mm_object_ah_Tex_006C30
+#define object_ah_Tex_006C70 mm_object_ah_Tex_006C70
+#define object_ah_Tex_006D70 mm_object_ah_Tex_006D70
+#define object_ah_Tex_007570 mm_object_ah_Tex_007570
+#define object_ah_Tex_007D70 mm_object_ah_Tex_007D70
+#define object_ah_Tex_008570 mm_object_ah_Tex_008570
+#define object_ah_Tex_008D70 mm_object_ah_Tex_008D70
+#define object_ah_Tex_009570 mm_object_ah_Tex_009570

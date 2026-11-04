@@ -1,0 +1,37 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tsn/object_tsn.h"
+
+#define object_tsn_Anim_000964 mm_object_tsn_Anim_000964
+#define object_tsn_Anim_001198 mm_object_tsn_Anim_001198
+#define object_tsn_Anim_0092FC mm_object_tsn_Anim_0092FC
+#define object_tsn_DL_0043A0 mm_object_tsn_DL_0043A0
+#define object_tsn_DL_0044F0 mm_object_tsn_DL_0044F0
+#define object_tsn_DL_0047C0 mm_object_tsn_DL_0047C0
+#define object_tsn_DL_004B48 mm_object_tsn_DL_004B48
+#define object_tsn_DL_004F00 mm_object_tsn_DL_004F00
+#define object_tsn_DL_0050B8 mm_object_tsn_DL_0050B8
+#define object_tsn_DL_005270 mm_object_tsn_DL_005270
+#define object_tsn_DL_0053B8 mm_object_tsn_DL_0053B8
+#define object_tsn_DL_0055E8 mm_object_tsn_DL_0055E8
+#define object_tsn_DL_005818 mm_object_tsn_DL_005818
+#define object_tsn_DL_005960 mm_object_tsn_DL_005960
+#define object_tsn_DL_005B00 mm_object_tsn_DL_005B00
+#define object_tsn_DL_005CF8 mm_object_tsn_DL_005CF8
+#define object_tsn_DL_005DE8 mm_object_tsn_DL_005DE8
+#define object_tsn_DL_005F88 mm_object_tsn_DL_005F88
+#define object_tsn_DL_006108 mm_object_tsn_DL_006108
+#define object_tsn_Skel_008AB8 mm_object_tsn_Skel_008AB8
+#define object_tsn_TLUT_0061F8 mm_object_tsn_TLUT_0061F8
+#define object_tsn_Tex_0063F8 mm_object_tsn_Tex_0063F8
+#define object_tsn_Tex_006BF8 mm_object_tsn_Tex_006BF8
+#define object_tsn_Tex_006C38 mm_object_tsn_Tex_006C38
+#define object_tsn_Tex_006C78 mm_object_tsn_Tex_006C78
+#define object_tsn_Tex_006CB8 mm_object_tsn_Tex_006CB8
+#define object_tsn_Tex_0070B8 mm_object_tsn_Tex_0070B8
+#define object_tsn_Tex_0072B8 mm_object_tsn_Tex_0072B8
+#define object_tsn_Tex_0073B8 mm_object_tsn_Tex_0073B8
+#define object_tsn_Tex_0077B8 mm_object_tsn_Tex_0077B8
+#define object_tsn_Tex_007BB8 mm_object_tsn_Tex_007BB8
+#define object_tsn_Tex_007DB8 mm_object_tsn_Tex_007DB8
+#define object_tsn_Tex_0085B8 mm_object_tsn_Tex_0085B8

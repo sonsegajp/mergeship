@@ -1,0 +1,53 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_dt/object_dt.h"
+
+#define gDotourDistressAnim mm_gDotourDistressAnim
+#define gDotourEyeClosedTex mm_gDotourEyeClosedTex
+#define gDotourEyeLookDownTex mm_gDotourEyeLookDownTex
+#define gDotourEyeOpenTex mm_gDotourEyeOpenTex
+#define gDotourEyeShockTex mm_gDotourEyeShockTex
+#define gDotourEyeSquintTex mm_gDotourEyeSquintTex
+#define gDotourEyebrowHighTex mm_gDotourEyebrowHighTex
+#define gDotourEyebrowLowTex mm_gDotourEyebrowLowTex
+#define gDotourEyebrowMidTex mm_gDotourEyebrowMidTex
+#define gDotourShockAnim mm_gDotourShockAnim
+#define gDotourSitUpAnim mm_gDotourSitUpAnim
+#define gDotourTapDeskAnim mm_gDotourTapDeskAnim
+#define gDotourUprightAnim mm_gDotourUprightAnim
+#define gDotourWaitAnim mm_gDotourWaitAnim
+#define object_dt_DL_004DB0 mm_object_dt_DL_004DB0
+#define object_dt_DL_005130 mm_object_dt_DL_005130
+#define object_dt_DL_0054C8 mm_object_dt_DL_0054C8
+#define object_dt_DL_005AF8 mm_object_dt_DL_005AF8
+#define object_dt_DL_005DB0 mm_object_dt_DL_005DB0
+#define object_dt_DL_005E70 mm_object_dt_DL_005E70
+#define object_dt_DL_006018 mm_object_dt_DL_006018
+#define object_dt_DL_006140 mm_object_dt_DL_006140
+#define object_dt_DL_006258 mm_object_dt_DL_006258
+#define object_dt_DL_0063B8 mm_object_dt_DL_0063B8
+#define object_dt_DL_0064E0 mm_object_dt_DL_0064E0
+#define object_dt_DL_0065F8 mm_object_dt_DL_0065F8
+#define object_dt_DL_006800 mm_object_dt_DL_006800
+#define object_dt_DL_006928 mm_object_dt_DL_006928
+#define object_dt_Matanimheader_00AFDC mm_object_dt_Matanimheader_00AFDC
+#define object_dt_Skel_00B0CC mm_object_dt_Skel_00B0CC
+#define object_dt_TLUT_006A50 mm_object_dt_TLUT_006A50
+#define object_dt_TLUT_006C50 mm_object_dt_TLUT_006C50
+#define object_dt_TLUT_006E50 mm_object_dt_TLUT_006E50
+#define object_dt_Tex_007050 mm_object_dt_Tex_007050
+#define object_dt_Tex_007090 mm_object_dt_Tex_007090
+#define object_dt_Tex_007190 mm_object_dt_Tex_007190
+#define object_dt_Tex_0071D0 mm_object_dt_Tex_0071D0
+#define object_dt_Tex_007210 mm_object_dt_Tex_007210
+#define object_dt_Tex_007310 mm_object_dt_Tex_007310
+#define object_dt_Tex_007850 mm_object_dt_Tex_007850
+#define object_dt_Tex_007C50 mm_object_dt_Tex_007C50
+#define object_dt_Tex_007D50 mm_object_dt_Tex_007D50
+#define object_dt_Tex_008150 mm_object_dt_Tex_008150
+#define object_dt_Tex_008190 mm_object_dt_Tex_008190
+#define object_dt_Tex_008390 mm_object_dt_Tex_008390
+#define object_dt_Tex_009390 mm_object_dt_Tex_009390
+#define object_dt_Tex_009990 mm_object_dt_Tex_009990
+#define object_dt_Tex_009D90 mm_object_dt_Tex_009D90
+#define object_dt_Tex_00A590 mm_object_dt_Tex_00A590

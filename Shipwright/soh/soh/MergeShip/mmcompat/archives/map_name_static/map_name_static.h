@@ -1,0 +1,20 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/archives/map_name_static/map_name_static.h"
+
+#define gMapPointClockTownENGTex mm_gMapPointClockTownENGTex
+#define gMapPointDekuPalaceENGTex mm_gMapPointDekuPalaceENGTex
+#define gMapPointGoronVillageENGTex mm_gMapPointGoronVillageENGTex
+#define gMapPointGreatBayCoastENGTex mm_gMapPointGreatBayCoastENGTex
+#define gMapPointGreatBayENGTex mm_gMapPointGreatBayENGTex
+#define gMapPointIkanaCanyonENGTex mm_gMapPointIkanaCanyonENGTex
+#define gMapPointIkanaGraveyardENGTex mm_gMapPointIkanaGraveyardENGTex
+#define gMapPointMilkRoadENGTex mm_gMapPointMilkRoadENGTex
+#define gMapPointMountainVillageENGTex mm_gMapPointMountainVillageENGTex
+#define gMapPointRomaniRanchENGTex mm_gMapPointRomaniRanchENGTex
+#define gMapPointSnowheadENGTex mm_gMapPointSnowheadENGTex
+#define gMapPointSouthernSwampENGTex mm_gMapPointSouthernSwampENGTex
+#define gMapPointStoneTowerENGTex mm_gMapPointStoneTowerENGTex
+#define gMapPointWoodfallENGTex mm_gMapPointWoodfallENGTex
+#define gMapPointZoraCapeENGTex mm_gMapPointZoraCapeENGTex
+#define gMapPointZoraHallENGTex mm_gMapPointZoraHallENGTex

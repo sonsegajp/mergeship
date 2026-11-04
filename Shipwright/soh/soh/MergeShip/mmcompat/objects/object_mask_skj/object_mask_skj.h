@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mask_skj/object_mask_skj.h"
+
+#define object_mask_skj_DL_0009F0 mm_object_mask_skj_DL_0009F0
+#define object_mask_skj_TLUT_000FA0 mm_object_mask_skj_TLUT_000FA0
+#define object_mask_skj_Tex_0011A0 mm_object_mask_skj_Tex_0011A0
+#define object_mask_skj_Tex_0012A0 mm_object_mask_skj_Tex_0012A0
+#define object_mask_skj_Tex_001320 mm_object_mask_skj_Tex_001320
+#define object_mask_skj_Tex_001360 mm_object_mask_skj_Tex_001360
+#define object_mask_skj_Tex_001460 mm_object_mask_skj_Tex_001460
+#define object_mask_skj_Tex_001560 mm_object_mask_skj_Tex_001560
+#define object_mask_skj_Tex_001660 mm_object_mask_skj_Tex_001660

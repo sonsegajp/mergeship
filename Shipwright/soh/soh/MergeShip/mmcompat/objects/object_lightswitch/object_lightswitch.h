@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_lightswitch/object_lightswitch.h"
+
+#define object_lightswitch_DL_000260 mm_object_lightswitch_DL_000260
+#define object_lightswitch_DL_000398 mm_object_lightswitch_DL_000398
+#define object_lightswitch_DL_000408 mm_object_lightswitch_DL_000408
+#define object_lightswitch_Tex_000420 mm_object_lightswitch_Tex_000420
+#define object_lightswitch_Tex_000C20 mm_object_lightswitch_Tex_000C20
+#define object_lightswitch_Tex_001420 mm_object_lightswitch_Tex_001420
+#define object_lightswitch_Tex_001C20 mm_object_lightswitch_Tex_001C20

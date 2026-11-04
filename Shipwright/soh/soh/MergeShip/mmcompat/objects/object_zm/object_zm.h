@@ -1,0 +1,47 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_zm/object_zm.h"
+
+#define gTotoEyesClosedTex mm_gTotoEyesClosedTex
+#define gTotoEyesHalfTex mm_gTotoEyesHalfTex
+#define gTotoEyesOpenTex mm_gTotoEyesOpenTex
+#define object_zm_Anim_000C80 mm_object_zm_Anim_000C80
+#define object_zm_Anim_001324 mm_object_zm_Anim_001324
+#define object_zm_Anim_0016A4 mm_object_zm_Anim_0016A4
+#define object_zm_Anim_001DF0 mm_object_zm_Anim_001DF0
+#define object_zm_Anim_0022C8 mm_object_zm_Anim_0022C8
+#define object_zm_Anim_0028B8 mm_object_zm_Anim_0028B8
+#define object_zm_Anim_002F20 mm_object_zm_Anim_002F20
+#define object_zm_Anim_003AA8 mm_object_zm_Anim_003AA8
+#define object_zm_Anim_00B3E0 mm_object_zm_Anim_00B3E0
+#define object_zm_Anim_00B894 mm_object_zm_Anim_00B894
+#define object_zm_Anim_00BC08 mm_object_zm_Anim_00BC08
+#define object_zm_Anim_00C880 mm_object_zm_Anim_00C880
+#define object_zm_DL_0063A0 mm_object_zm_DL_0063A0
+#define object_zm_DL_0066D0 mm_object_zm_DL_0066D0
+#define object_zm_DL_006898 mm_object_zm_DL_006898
+#define object_zm_DL_0069D8 mm_object_zm_DL_0069D8
+#define object_zm_DL_006C38 mm_object_zm_DL_006C38
+#define object_zm_DL_006E00 mm_object_zm_DL_006E00
+#define object_zm_DL_006F40 mm_object_zm_DL_006F40
+#define object_zm_DL_007178 mm_object_zm_DL_007178
+#define object_zm_DL_0076F8 mm_object_zm_DL_0076F8
+#define object_zm_DL_0078A0 mm_object_zm_DL_0078A0
+#define object_zm_DL_007A18 mm_object_zm_DL_007A18
+#define object_zm_DL_007B18 mm_object_zm_DL_007B18
+#define object_zm_DL_007C38 mm_object_zm_DL_007C38
+#define object_zm_DL_007D60 mm_object_zm_DL_007D60
+#define object_zm_DL_007E60 mm_object_zm_DL_007E60
+#define object_zm_DL_007F80 mm_object_zm_DL_007F80
+#define object_zm_Skel_00A978 mm_object_zm_Skel_00A978
+#define object_zm_TLUT_0080A8 mm_object_zm_TLUT_0080A8
+#define object_zm_Tex_0082A8 mm_object_zm_Tex_0082A8
+#define object_zm_Tex_0082E8 mm_object_zm_Tex_0082E8
+#define object_zm_Tex_0086E8 mm_object_zm_Tex_0086E8
+#define object_zm_Tex_008EE8 mm_object_zm_Tex_008EE8
+#define object_zm_Tex_008FE8 mm_object_zm_Tex_008FE8
+#define object_zm_Tex_0097E8 mm_object_zm_Tex_0097E8
+#define object_zm_Tex_009868 mm_object_zm_Tex_009868
+#define object_zm_Tex_009968 mm_object_zm_Tex_009968
+#define object_zm_Tex_009A68 mm_object_zm_Tex_009A68
+#define object_zm_Tex_009C68 mm_object_zm_Tex_009C68

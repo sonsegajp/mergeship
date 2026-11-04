@@ -1,0 +1,15 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_BOWLING/Z2_BOWLING/Z2_BOWLING_room_00.h"
+
+#define Z2_BOWLING_room_00DL_000210 mm_Z2_BOWLING_room_00DL_000210
+#define Z2_BOWLING_room_00DL_000528 mm_Z2_BOWLING_room_00DL_000528
+#define Z2_BOWLING_room_00DL_000B50 mm_Z2_BOWLING_room_00DL_000B50
+#define Z2_BOWLING_room_00DL_000EF8 mm_Z2_BOWLING_room_00DL_000EF8
+#define Z2_BOWLING_room_00DL_001218 mm_Z2_BOWLING_room_00DL_001218
+#define Z2_BOWLING_room_00DL_001728 mm_Z2_BOWLING_room_00DL_001728
+#define Z2_BOWLING_room_00DL_001E40 mm_Z2_BOWLING_room_00DL_001E40
+#define Z2_BOWLING_room_00DL_002378 mm_Z2_BOWLING_room_00DL_002378
+#define Z2_BOWLING_room_00DL_002610 mm_Z2_BOWLING_room_00DL_002610
+#define Z2_BOWLING_room_00DL_004900 mm_Z2_BOWLING_room_00DL_004900
+#define Z2_BOWLING_room_00DL_004CF0 mm_Z2_BOWLING_room_00DL_004CF0

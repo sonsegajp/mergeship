@@ -1,0 +1,27 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ps/object_ps.h"
+
+#define object_ps_Anim_00049C mm_object_ps_Anim_00049C
+#define object_ps_Anim_0078FC mm_object_ps_Anim_0078FC
+#define object_ps_Colheader_0072E0 mm_object_ps_Colheader_0072E0
+#define object_ps_DL_001B30 mm_object_ps_DL_001B30
+#define object_ps_DL_001B38 mm_object_ps_DL_001B38
+#define object_ps_DL_001F38 mm_object_ps_DL_001F38
+#define object_ps_DL_002438 mm_object_ps_DL_002438
+#define object_ps_DL_002560 mm_object_ps_DL_002560
+#define object_ps_DL_002638 mm_object_ps_DL_002638
+#define object_ps_DL_002840 mm_object_ps_DL_002840
+#define object_ps_DL_002948 mm_object_ps_DL_002948
+#define object_ps_DL_002A60 mm_object_ps_DL_002A60
+#define object_ps_DL_002B68 mm_object_ps_DL_002B68
+#define object_ps_Skel_007230 mm_object_ps_Skel_007230
+#define object_ps_TLUT_002C80 mm_object_ps_TLUT_002C80
+#define object_ps_Tex_003F00 mm_object_ps_Tex_003F00
+#define object_ps_Tex_0062C0 mm_object_ps_Tex_0062C0
+#define object_ps_Tex_006300 mm_object_ps_Tex_006300
+#define object_ps_Tex_006700 mm_object_ps_Tex_006700
+#define object_ps_Tex_006740 mm_object_ps_Tex_006740
+#define object_ps_Tex_006780 mm_object_ps_Tex_006780
+#define object_ps_Tex_006B80 mm_object_ps_Tex_006B80
+#define object_ps_Tex_006D80 mm_object_ps_Tex_006D80

@@ -1,0 +1,242 @@
+BUG-0057
+Status: open
+Reported: 2026-10-10 20:06 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558571387608895717
+
+putting on adult/child mask in anchor shows the FD mask texture to other players
+
+
+BUG-0058
+Status: open
+Reported: 2026-10-10 20:16 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558574069287223367
+
+a player using proton experimental on linux warped to me in the lost woods on anchor, saw no world geometry, and crashed upon taking a warp to termina
+
+
+BUG-0059
+Status: open
+Reported: 2026-10-10 20:23 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558575629262127105
+
+hero's bow held by adult link in mm renders as fairy bow (possibly also in oot)
+
+
+BUG-0060
+Status: open
+Reported: 2026-10-10 20:25 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558576314812727369
+
+despite setting mm boss remains to vanilla, i found odolwa's remains in grass
+
+
+BUG-0061
+Status: open
+Reported: 2026-10-10 20:26 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558576356789325857
+
+cannot see other players' minimap arrows in mm like in oot with anchor
+
+
+BUG-0062
+Status: open
+Reported: 2026-10-10 20:27 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558576635207487619
+
+when drawn, the biggoron's / giant's knife swords still show on link's back in mm
+
+
+BUG-0063
+Status: open
+Reported: 2026-10-10 20:27 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558576818276016210
+
+giant's knife obtained in mm did not sync to other player over anchor, player was also in mm
+
+
+BUG-0064
+Status: open
+Reported: 2026-10-10 20:28 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558577074288070858
+
+when both players are in mm, anchor does not sync items
+
+
+BUG-0065
+Status: open
+Reported: 2026-10-10 20:29 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558577129048903784
+
+the door indicators on mm minimaps disconnect and go to top-left of minimap
+
+
+BUG-0066
+Status: open
+Reported: 2026-10-10 20:29 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558577315204694101
+
+if oot child trade quest masks are obtained/started with, not all sync to MM eg bunny hood / mask of truth, only the non-mm ones like gerudo mask, spooky and skull
+
+
+BUG-0067
+Status: open
+Reported: 2026-10-10 20:35 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558578698574364785
+
+player on proton experimental linux has all empty slots in oot read as 'Bombchu' but blank
+
+
+BUG-0068
+Status: open
+Reported: 2026-10-10 20:35 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558578786323267775
+
+ownership of deku beans without magic bean doesnt default to those in the inventory slot, but blank and requires holding A to scroll to it
+
+
+BUG-0069
+Status: open
+Reported: 2026-10-10 20:45 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558581358010306693
+
+using d-pad left or right in mm moves menu when trying to assign an item to it with d-pad for items enabled
+
+
+BUG-0070
+Status: open
+Reported: 2026-10-10 20:47 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558581777587507294
+
+iron boots in mm have no walking sound, presumably hover boots too
+
+
+BUG-0071
+Status: open
+Reported: 2026-10-10 20:51 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558582786627997747
+
+player on proton experimental in mm is seeing corrupted Tatl c-up text on hud
+
+
+BUG-0072
+Status: open
+Reported: 2026-10-10 20:52 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558583083312357387
+
+correction to earlier mm minimap bug: The white dot is another player, not the doors, but it can break the doors sometimes on the minimap. Change that position indicator to be a colored arrow cursor just like oot anchor
+
+
+BUG-0073
+Status: open
+Reported: 2026-10-10 20:56 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558584053735755818
+
+having great fairy sword on B button prevents masks from overriding b-button context eg Kamario dance, or blast mask explode
+
+
+BUG-0074
+Status: open
+Reported: 2026-10-10 21:18 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558589650069753887
+
+greg the green rupee message icon in mm uses mm mirror shield icon instead of goron mask
+
+
+BUG-0075
+Status: open
+Reported: 2026-10-10 21:22 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558590569704464436
+
+Not necessarily a bug but can we please change the lost woods to termina thing to only be one particular exit that would otherwise in oot lead to kokiri forest instead of all of them that are not the lost woods path
+
+
+BUG-0076
+Status: open
+Reported: 2026-10-10 21:40 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558595040551505995
+
+text to speech setting does not read cross-game items
+
+
+BUG-0074  [alphablaster]  greg the green rupee message icon in mm uses mm mirror shield icon instead of goron mask
+BUG-0075  [alphablaster]  Not necessarily a bug but can we please change the lost woods to termina thing to only be one particular exit that would otherwise in oot lead to kokiri forest 
+BUG-0076  [alphablaster]  text to speech setting does not read cross-game items
+BUG-0077  [alphablaster]  anchor players dont see cross-game equipment on other players eg other player in oot wearing mm mirror shield
+BUG-0077
+Status: open
+Reported: 2026-10-10 21:46 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558596590434779178
+
+anchor players dont see cross-game equipment on other players eg other player in oot wearing mm mirror shield
+
+BUG-0078
+Status: open
+Reported: 2026-10-10 21:50 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558597529396977785
+
+game states are not being sent to players over anchor, eg opening door triggers etc
+
+BUG-0076  [alphablaster]  text to speech setting does not read cross-game items
+BUG-0077  [alphablaster]  anchor players dont see cross-game equipment on other players eg other player in oot wearing mm mirror shield
+BUG-0078  [alphablaster]  game states are not being sent to players over anchor, eg opening door triggers etc
+BUG-0079  [alphablaster]  roc's feather in mm does not show on assigned c-button and doesnt work the exact same way as in soh
+BUG-0080  [alphablaster]  mm swords do no damage to the weak spot of big octo miniboss (oot)
+BUG-0081  [alphablaster]  not a bug but a suggestion: add a volume slider for the text to speech feature
+BUG-0079
+Status: open
+Reported: 2026-10-10 21:55 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558598760303431825
+
+roc's feather in mm does not show on assigned c-button and doesnt work the exact same way as in soh
+
+BUG-0080
+Status: open
+Reported: 2026-10-10 22:11 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558602973981048883
+
+mm swords do no damage to the weak spot of big octo miniboss (oot)
+
+BUG-0081
+Status: open
+Reported: 2026-10-10 22:39 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558609882188484653
+
+not a bug but a suggestion: add a volume slider for the text to speech feature
+
+Posted.
+BUG-0080  [alphablaster]  mm swords do no damage to the weak spot of big octo miniboss (oot)
+BUG-0081  [alphablaster]  not a bug but a suggestion: add a volume slider for the text to speech feature
+BUG-0082  [alphablaster]  the mm mirror shield on adult link's back in oot is huge
+BUG-0082
+Status: open
+Reported: 2026-10-10 23:40 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1558625383656595467
+
+the mm mirror shield on adult link's back in oot is huge
+

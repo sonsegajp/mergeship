@@ -1,0 +1,29 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_nwc/object_nwc.h"
+
+#define gNwcBeakTex mm_gNwcBeakTex
+#define gNwcBodyDL mm_gNwcBodyDL
+#define gNwcBodyTex mm_gNwcBodyTex
+#define gNwcEndDL mm_gNwcEndDL
+#define gNwcEyeClosedTex mm_gNwcEyeClosedTex
+#define gNwcEyeOpenTex mm_gNwcEyeOpenTex
+#define gNwcEyeTexAnim mm_gNwcEyeTexAnim
+#define gNwcWingTex mm_gNwcWingTex
+#define object_nwc_DL_001440 mm_object_nwc_DL_001440
+#define object_nwc_DL_0014B8 mm_object_nwc_DL_0014B8
+#define object_nwc_DL_001520 mm_object_nwc_DL_001520
+#define object_nwc_DL_001860 mm_object_nwc_DL_001860
+#define object_nwc_DL_0018D0 mm_object_nwc_DL_0018D0
+#define object_nwc_DL_001940 mm_object_nwc_DL_001940
+#define object_nwc_DL_001960 mm_object_nwc_DL_001960
+#define object_nwc_DL_0019B8 mm_object_nwc_DL_0019B8
+#define object_nwc_DL_001A10 mm_object_nwc_DL_001A10
+#define object_nwc_DL_001B80 mm_object_nwc_DL_001B80
+#define object_nwc_DL_001BE8 mm_object_nwc_DL_001BE8
+#define object_nwc_DL_001C10 mm_object_nwc_DL_001C10
+#define object_nwc_DL_001C58 mm_object_nwc_DL_001C58
+#define object_nwc_Tex_000C00 mm_object_nwc_Tex_000C00
+#define object_nwc_Tex_001550 mm_object_nwc_Tex_001550
+#define object_nwc_Tex_001750 mm_object_nwc_Tex_001750
+#define object_nwc_Tex_001A40 mm_object_nwc_Tex_001A40

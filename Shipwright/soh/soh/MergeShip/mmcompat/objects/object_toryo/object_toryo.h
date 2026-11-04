@@ -1,0 +1,37 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_toryo/object_toryo.h"
+
+#define object_toryo_Anim_000E50 mm_object_toryo_Anim_000E50
+#define object_toryo_DL_004B20 mm_object_toryo_DL_004B20
+#define object_toryo_DL_004F20 mm_object_toryo_DL_004F20
+#define object_toryo_DL_005438 mm_object_toryo_DL_005438
+#define object_toryo_DL_005720 mm_object_toryo_DL_005720
+#define object_toryo_DL_005958 mm_object_toryo_DL_005958
+#define object_toryo_DL_005BA0 mm_object_toryo_DL_005BA0
+#define object_toryo_DL_005D10 mm_object_toryo_DL_005D10
+#define object_toryo_DL_005EC8 mm_object_toryo_DL_005EC8
+#define object_toryo_DL_006110 mm_object_toryo_DL_006110
+#define object_toryo_DL_006280 mm_object_toryo_DL_006280
+#define object_toryo_DL_0064B8 mm_object_toryo_DL_0064B8
+#define object_toryo_DL_0067E0 mm_object_toryo_DL_0067E0
+#define object_toryo_DL_0068E8 mm_object_toryo_DL_0068E8
+#define object_toryo_DL_006A88 mm_object_toryo_DL_006A88
+#define object_toryo_DL_006DA8 mm_object_toryo_DL_006DA8
+#define object_toryo_DL_006EB0 mm_object_toryo_DL_006EB0
+#define object_toryo_Skel_007150 mm_object_toryo_Skel_007150
+#define object_toryo_TLUT_000E60 mm_object_toryo_TLUT_000E60
+#define object_toryo_Tex_001060 mm_object_toryo_Tex_001060
+#define object_toryo_Tex_001160 mm_object_toryo_Tex_001160
+#define object_toryo_Tex_001180 mm_object_toryo_Tex_001180
+#define object_toryo_Tex_0011C0 mm_object_toryo_Tex_0011C0
+#define object_toryo_Tex_001200 mm_object_toryo_Tex_001200
+#define object_toryo_Tex_001240 mm_object_toryo_Tex_001240
+#define object_toryo_Tex_0012C0 mm_object_toryo_Tex_0012C0
+#define object_toryo_Tex_0016C0 mm_object_toryo_Tex_0016C0
+#define object_toryo_Tex_0017C0 mm_object_toryo_Tex_0017C0
+#define object_toryo_Tex_0018C0 mm_object_toryo_Tex_0018C0
+#define object_toryo_Tex_0019C0 mm_object_toryo_Tex_0019C0
+#define object_toryo_Tex_001A00 mm_object_toryo_Tex_001A00
+#define object_toryo_Tex_001A80 mm_object_toryo_Tex_001A80
+#define object_toryo_Tex_001B80 mm_object_toryo_Tex_001B80

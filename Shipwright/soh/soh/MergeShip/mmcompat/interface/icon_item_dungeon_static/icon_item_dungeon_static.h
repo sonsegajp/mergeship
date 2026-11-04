@@ -1,0 +1,26 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/interface/icon_item_dungeon_static/icon_item_dungeon_static.h"
+
+#define gDungeonMap1FButtonTex mm_gDungeonMap1FButtonTex
+#define gDungeonMap2FButtonTex mm_gDungeonMap2FButtonTex
+#define gDungeonMap3FButtonTex mm_gDungeonMap3FButtonTex
+#define gDungeonMap4FButtonTex mm_gDungeonMap4FButtonTex
+#define gDungeonMap5FButtonTex mm_gDungeonMap5FButtonTex
+#define gDungeonMap6FButtonTex mm_gDungeonMap6FButtonTex
+#define gDungeonMap7FButtonTex mm_gDungeonMap7FButtonTex
+#define gDungeonMap8FButtonTex mm_gDungeonMap8FButtonTex
+#define gDungeonMapB1ButtonTex mm_gDungeonMapB1ButtonTex
+#define gDungeonMapB2ButtonTex mm_gDungeonMapB2ButtonTex
+#define gDungeonMapB3ButtonTex mm_gDungeonMapB3ButtonTex
+#define gDungeonMapB4ButtonTex mm_gDungeonMapB4ButtonTex
+#define gDungeonMapB5ButtonTex mm_gDungeonMapB5ButtonTex
+#define gDungeonMapB6ButtonTex mm_gDungeonMapB6ButtonTex
+#define gDungeonMapB7ButtonTex mm_gDungeonMapB7ButtonTex
+#define gDungeonMapB8ButtonTex mm_gDungeonMapB8ButtonTex
+#define gDungeonMapBlankFloorButtonTex mm_gDungeonMapBlankFloorButtonTex
+#define gDungeonMapSkullTex mm_gDungeonMapSkullTex
+#define gDungeonStrayFairyGreatBayIconTex mm_gDungeonStrayFairyGreatBayIconTex
+#define gDungeonStrayFairySnowheadIconTex mm_gDungeonStrayFairySnowheadIconTex
+#define gDungeonStrayFairyStoneTowerIconTex mm_gDungeonStrayFairyStoneTowerIconTex
+#define gDungeonStrayFairyWoodfallIconTex mm_gDungeonStrayFairyWoodfallIconTex

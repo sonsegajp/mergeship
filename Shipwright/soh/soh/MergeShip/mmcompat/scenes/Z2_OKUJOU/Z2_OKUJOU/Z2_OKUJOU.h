@@ -1,0 +1,35 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_OKUJOU/Z2_OKUJOU/Z2_OKUJOU.h"
+
+#define Z2_OKUJOUCollisionHeader_00AC00 mm_Z2_OKUJOUCollisionHeader_00AC00
+#define Z2_OKUJOUCutsceneData_000380 mm_Z2_OKUJOUCutsceneData_000380
+#define Z2_OKUJOUCutsceneData_001BF0 mm_Z2_OKUJOUCutsceneData_001BF0
+#define Z2_OKUJOUCutsceneData_002280 mm_Z2_OKUJOUCutsceneData_002280
+#define Z2_OKUJOUCutsceneData_0034B0 mm_Z2_OKUJOUCutsceneData_0034B0
+#define Z2_OKUJOUCutsceneData_003FE0 mm_Z2_OKUJOUCutsceneData_003FE0
+#define Z2_OKUJOUCutsceneData_007420 mm_Z2_OKUJOUCutsceneData_007420
+#define Z2_OKUJOUCutsceneData_0095B0 mm_Z2_OKUJOUCutsceneData_0095B0
+#define Z2_OKUJOUCutsceneData_009C20 mm_Z2_OKUJOUCutsceneData_009C20
+#define Z2_OKUJOUCutsceneData_00AF70 mm_Z2_OKUJOUCutsceneData_00AF70
+#define Z2_OKUJOUCutsceneData_00B904 mm_Z2_OKUJOUCutsceneData_00B904
+#define Z2_OKUJOUCutsceneData_00ED44 mm_Z2_OKUJOUCutsceneData_00ED44
+#define Z2_OKUJOUCutsceneData_010F04 mm_Z2_OKUJOUCutsceneData_010F04
+#define Z2_OKUJOUTLUT_01ADA0 mm_Z2_OKUJOUTLUT_01ADA0
+#define Z2_OKUJOUTex_0130A0 mm_Z2_OKUJOUTex_0130A0
+#define Z2_OKUJOUTex_0138A0 mm_Z2_OKUJOUTex_0138A0
+#define Z2_OKUJOUTex_0140A0 mm_Z2_OKUJOUTex_0140A0
+#define Z2_OKUJOUTex_0148A0 mm_Z2_OKUJOUTex_0148A0
+#define Z2_OKUJOUTex_0150A0 mm_Z2_OKUJOUTex_0150A0
+#define Z2_OKUJOUTex_0158A0 mm_Z2_OKUJOUTex_0158A0
+#define Z2_OKUJOUTex_0160A0 mm_Z2_OKUJOUTex_0160A0
+#define Z2_OKUJOUTex_0168A0 mm_Z2_OKUJOUTex_0168A0
+#define Z2_OKUJOUTex_0170A0 mm_Z2_OKUJOUTex_0170A0
+#define Z2_OKUJOUTex_0178A0 mm_Z2_OKUJOUTex_0178A0
+#define Z2_OKUJOUTex_0188A0 mm_Z2_OKUJOUTex_0188A0
+#define Z2_OKUJOUTex_018CA0 mm_Z2_OKUJOUTex_018CA0
+#define Z2_OKUJOUTex_0194A0 mm_Z2_OKUJOUTex_0194A0
+#define Z2_OKUJOUTex_019CA0 mm_Z2_OKUJOUTex_019CA0
+#define Z2_OKUJOUTex_01A4A0 mm_Z2_OKUJOUTex_01A4A0
+#define Z2_OKUJOUTex_01A5A0 mm_Z2_OKUJOUTex_01A5A0
+#define Z2_OKUJOUTex_01A9A0 mm_Z2_OKUJOUTex_01A9A0

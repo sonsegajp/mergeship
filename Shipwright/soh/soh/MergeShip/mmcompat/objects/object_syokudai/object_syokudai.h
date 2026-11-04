@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_syokudai/object_syokudai.h"
+
+#define gObjectSyokudaiTypeFlameCausesSwitchDL mm_gObjectSyokudaiTypeFlameCausesSwitchDL
+#define gObjectSyokudaiTypeNoSwitchDL mm_gObjectSyokudaiTypeNoSwitchDL
+#define gObjectSyokudaiTypeSwitchCausesFlameDL mm_gObjectSyokudaiTypeSwitchCausesFlameDL
+#define object_syokudai_Tex_000C90 mm_object_syokudai_Tex_000C90
+#define object_syokudai_Tex_001490 mm_object_syokudai_Tex_001490
+#define object_syokudai_Tex_002490 mm_object_syokudai_Tex_002490
+#define object_syokudai_Tex_002C90 mm_object_syokudai_Tex_002C90
+#define object_syokudai_Tex_003490 mm_object_syokudai_Tex_003490

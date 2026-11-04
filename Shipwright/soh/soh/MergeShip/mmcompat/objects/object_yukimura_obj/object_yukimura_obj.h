@@ -1,0 +1,16 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_yukimura_obj/object_yukimura_obj.h"
+
+#define object_yukimura_obj_DL_000640 mm_object_yukimura_obj_DL_000640
+#define object_yukimura_obj_DL_000758 mm_object_yukimura_obj_DL_000758
+#define object_yukimura_obj_DL_000870 mm_object_yukimura_obj_DL_000870
+#define object_yukimura_obj_DL_000890 mm_object_yukimura_obj_DL_000890
+#define object_yukimura_obj_DL_0008C0 mm_object_yukimura_obj_DL_0008C0
+#define object_yukimura_obj_DL_000EB0 mm_object_yukimura_obj_DL_000EB0
+#define object_yukimura_obj_DL_000F98 mm_object_yukimura_obj_DL_000F98
+#define object_yukimura_obj_Matanimheader_002090 mm_object_yukimura_obj_Matanimheader_002090
+#define object_yukimura_obj_Tex_0008D8 mm_object_yukimura_obj_Tex_0008D8
+#define object_yukimura_obj_Tex_0009D8 mm_object_yukimura_obj_Tex_0009D8
+#define object_yukimura_obj_Tex_001078 mm_object_yukimura_obj_Tex_001078
+#define object_yukimura_obj_Tex_001878 mm_object_yukimura_obj_Tex_001878

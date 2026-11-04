@@ -1,0 +1,43 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tab/object_tab.h"
+
+#define gBartenArmTex mm_gBartenArmTex
+#define gBartenBeardTex mm_gBartenBeardTex
+#define gBartenBowtieTex mm_gBartenBowtieTex
+#define gBartenBroomHeadTex mm_gBartenBroomHeadTex
+#define gBartenBroomTex mm_gBartenBroomTex
+#define gBartenChestDL mm_gBartenChestDL
+#define gBartenCollarTex mm_gBartenCollarTex
+#define gBartenEarTex mm_gBartenEarTex
+#define gBartenEyeClosedTex mm_gBartenEyeClosedTex
+#define gBartenEyeHalfOpenTex mm_gBartenEyeHalfOpenTex
+#define gBartenEyeOpenTex mm_gBartenEyeOpenTex
+#define gBartenEyeTLUT mm_gBartenEyeTLUT
+#define gBartenFootTex mm_gBartenFootTex
+#define gBartenHairTex mm_gBartenHairTex
+#define gBartenHandTex mm_gBartenHandTex
+#define gBartenHeadDL mm_gBartenHeadDL
+#define gBartenIdleAnim mm_gBartenIdleAnim
+#define gBartenIdleBarCounterAnim mm_gBartenIdleBarCounterAnim
+#define gBartenJacketTex mm_gBartenJacketTex
+#define gBartenLeftBroomDL mm_gBartenLeftBroomDL
+#define gBartenLeftFootDL mm_gBartenLeftFootDL
+#define gBartenLeftForearmDL mm_gBartenLeftForearmDL
+#define gBartenLeftHandDL mm_gBartenLeftHandDL
+#define gBartenLeftLegDL mm_gBartenLeftLegDL
+#define gBartenLeftThighDL mm_gBartenLeftThighDL
+#define gBartenLeftUpperArmDL mm_gBartenLeftUpperArmDL
+#define gBartenMouthTex mm_gBartenMouthTex
+#define gBartenPantsTex mm_gBartenPantsTex
+#define gBartenPelvisDL mm_gBartenPelvisDL
+#define gBartenRightFootDL mm_gBartenRightFootDL
+#define gBartenRightForearmDL mm_gBartenRightForearmDL
+#define gBartenRightHandDL mm_gBartenRightHandDL
+#define gBartenRightLegDL mm_gBartenRightLegDL
+#define gBartenRightThighDL mm_gBartenRightThighDL
+#define gBartenRightUpperArmDL mm_gBartenRightUpperArmDL
+#define gBartenSkel mm_gBartenSkel
+#define gBartenSkinTex mm_gBartenSkinTex
+#define gBartenSleeveTex mm_gBartenSleeveTex
+#define gBartenTLUT mm_gBartenTLUT

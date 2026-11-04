@@ -1,0 +1,35 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_SEA/Z2_SEA/Z2_SEA.h"
+
+#define Z2_SEACollisionHeader_017710 mm_Z2_SEACollisionHeader_017710
+#define Z2_SEACutsceneData_000648 mm_Z2_SEACutsceneData_000648
+#define Z2_SEACutsceneData_000938 mm_Z2_SEACutsceneData_000938
+#define Z2_SEACutsceneData_000E58 mm_Z2_SEACutsceneData_000E58
+#define Z2_SEATLUT_01C4C0 mm_Z2_SEATLUT_01C4C0
+#define Z2_SEATLUT_01C4E0 mm_Z2_SEATLUT_01C4E0
+#define Z2_SEATLUT_01C500 mm_Z2_SEATLUT_01C500
+#define Z2_SEATLUT_01C520 mm_Z2_SEATLUT_01C520
+#define Z2_SEATLUT_01C540 mm_Z2_SEATLUT_01C540
+#define Z2_SEATex_017740 mm_Z2_SEATex_017740
+#define Z2_SEATex_017F40 mm_Z2_SEATex_017F40
+#define Z2_SEATex_018040 mm_Z2_SEATex_018040
+#define Z2_SEATex_0180C0 mm_Z2_SEATex_0180C0
+#define Z2_SEATex_0181C0 mm_Z2_SEATex_0181C0
+#define Z2_SEATex_0189C0 mm_Z2_SEATex_0189C0
+#define Z2_SEATex_018BC0 mm_Z2_SEATex_018BC0
+#define Z2_SEATex_018FC0 mm_Z2_SEATex_018FC0
+#define Z2_SEATex_0190C0 mm_Z2_SEATex_0190C0
+#define Z2_SEATex_0198C0 mm_Z2_SEATex_0198C0
+#define Z2_SEATex_019CC0 mm_Z2_SEATex_019CC0
+#define Z2_SEATex_019EC0 mm_Z2_SEATex_019EC0
+#define Z2_SEATex_01A0C0 mm_Z2_SEATex_01A0C0
+#define Z2_SEATex_01A1C0 mm_Z2_SEATex_01A1C0
+#define Z2_SEATex_01A9C0 mm_Z2_SEATex_01A9C0
+#define Z2_SEATex_01ADC0 mm_Z2_SEATex_01ADC0
+#define Z2_SEATex_01B1C0 mm_Z2_SEATex_01B1C0
+#define Z2_SEATex_01B2C0 mm_Z2_SEATex_01B2C0
+#define Z2_SEATex_01B6C0 mm_Z2_SEATex_01B6C0
+#define Z2_SEATex_01B8C0 mm_Z2_SEATex_01B8C0
+#define Z2_SEATex_01C0C0 mm_Z2_SEATex_01C0C0
+#define Z2_SEATex_01C2C0 mm_Z2_SEATex_01C2C0

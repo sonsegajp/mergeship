@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_gi_rupy/object_gi_rupy.h"
+
+#define gGiBlueRupeeInnerColorDL mm_gGiBlueRupeeInnerColorDL
+#define gGiBlueRupeeOuterColorDL mm_gGiBlueRupeeOuterColorDL
+#define gGiGoldRupeeInnerColorDL mm_gGiGoldRupeeInnerColorDL
+#define gGiGoldRupeeOuterColorDL mm_gGiGoldRupeeOuterColorDL
+#define gGiGreenRupeeInnerColorDL mm_gGiGreenRupeeInnerColorDL
+#define gGiGreenRupeeOuterColorDL mm_gGiGreenRupeeOuterColorDL
+#define gGiPurpleRupeeInnerColorDL mm_gGiPurpleRupeeInnerColorDL
+#define gGiPurpleRupeeOuterColorDL mm_gGiPurpleRupeeOuterColorDL
+#define gGiRedRupeeInnerColorDL mm_gGiRedRupeeInnerColorDL
+#define gGiRedRupeeOuterColorDL mm_gGiRedRupeeOuterColorDL
+#define gGiRupeeInnerDL mm_gGiRupeeInnerDL
+#define gGiRupeeOuterDL mm_gGiRupeeOuterDL
+#define gGiSilverRupeeInnerColorDL mm_gGiSilverRupeeInnerColorDL
+#define gGiSilverRupeeOuterColorDL mm_gGiSilverRupeeOuterColorDL

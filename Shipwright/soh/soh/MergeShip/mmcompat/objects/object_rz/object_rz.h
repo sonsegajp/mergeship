@@ -1,0 +1,50 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_rz/object_rz.h"
+
+#define gRosaSistersApplaudingAnim mm_gRosaSistersApplaudingAnim
+#define gRosaSistersDancingAnim mm_gRosaSistersDancingAnim
+#define gRosaSistersOnKneesAnim mm_gRosaSistersOnKneesAnim
+#define gRosaSistersSittingAnim mm_gRosaSistersSittingAnim
+#define gRosaSistersStandingAnim mm_gRosaSistersStandingAnim
+#define gRosaSistersThinkingAnim mm_gRosaSistersThinkingAnim
+#define gRosaSistersWalkingAnim mm_gRosaSistersWalkingAnim
+#define gRosaSistersWalkingWhileThinkingAnim mm_gRosaSistersWalkingWhileThinkingAnim
+#define object_rz_DL_0092B0 mm_object_rz_DL_0092B0
+#define object_rz_DL_0094C8 mm_object_rz_DL_0094C8
+#define object_rz_DL_009620 mm_object_rz_DL_009620
+#define object_rz_DL_009850 mm_object_rz_DL_009850
+#define object_rz_DL_009A68 mm_object_rz_DL_009A68
+#define object_rz_DL_009BC0 mm_object_rz_DL_009BC0
+#define object_rz_DL_009DF0 mm_object_rz_DL_009DF0
+#define object_rz_DL_009FD0 mm_object_rz_DL_009FD0
+#define object_rz_DL_00A088 mm_object_rz_DL_00A088
+#define object_rz_DL_00A378 mm_object_rz_DL_00A378
+#define object_rz_DL_00A9F8 mm_object_rz_DL_00A9F8
+#define object_rz_DL_00AB98 mm_object_rz_DL_00AB98
+#define object_rz_DL_00AC50 mm_object_rz_DL_00AC50
+#define object_rz_DL_00AD70 mm_object_rz_DL_00AD70
+#define object_rz_DL_00AE88 mm_object_rz_DL_00AE88
+#define object_rz_DL_00B050 mm_object_rz_DL_00B050
+#define object_rz_DL_00B170 mm_object_rz_DL_00B170
+#define object_rz_DL_00B288 mm_object_rz_DL_00B288
+#define object_rz_Matanimheader_00D768 mm_object_rz_Matanimheader_00D768
+#define object_rz_Skel_00D8D8 mm_object_rz_Skel_00D8D8
+#define object_rz_TLUT_00B450 mm_object_rz_TLUT_00B450
+#define object_rz_Tex_00B650 mm_object_rz_Tex_00B650
+#define object_rz_Tex_00B850 mm_object_rz_Tex_00B850
+#define object_rz_Tex_00B890 mm_object_rz_Tex_00B890
+#define object_rz_Tex_00B8D0 mm_object_rz_Tex_00B8D0
+#define object_rz_Tex_00B9D0 mm_object_rz_Tex_00B9D0
+#define object_rz_Tex_00BAD0 mm_object_rz_Tex_00BAD0
+#define object_rz_Tex_00BBD0 mm_object_rz_Tex_00BBD0
+#define object_rz_Tex_00BC50 mm_object_rz_Tex_00BC50
+#define object_rz_Tex_00C050 mm_object_rz_Tex_00C050
+#define object_rz_Tex_00C150 mm_object_rz_Tex_00C150
+#define object_rz_Tex_00C190 mm_object_rz_Tex_00C190
+#define object_rz_Tex_00C590 mm_object_rz_Tex_00C590
+#define object_rz_Tex_00C990 mm_object_rz_Tex_00C990
+#define object_rz_Tex_00CD90 mm_object_rz_Tex_00CD90
+#define object_rz_Tex_00D190 mm_object_rz_Tex_00D190
+#define object_rz_Tex_00D1D0 mm_object_rz_Tex_00D1D0
+#define object_rz_Tex_00D2D0 mm_object_rz_Tex_00D2D0

@@ -1,0 +1,8 @@
+#ifndef MM_OVERLAYS_OVL_EN_HORSE_GAME_CHECK_H
+#define MM_OVERLAYS_OVL_EN_HORSE_GAME_CHECK_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_ovl_En_Horse_Game_Check_Colheader_0010C8 "__OTR__mm/overlays/ovl_En_Horse_Game_Check/ovl_En_Horse_Game_Check_Colheader_0010C8"
+static const ALIGN_ASSET(2) char mm_ovl_En_Horse_Game_Check_Colheader_0010C8[] = dmm_ovl_En_Horse_Game_Check_Colheader_0010C8;
+#endif // MM_OVERLAYS_OVL_EN_HORSE_GAME_CHECK_H

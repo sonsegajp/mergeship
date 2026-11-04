@@ -1,0 +1,30 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tite/object_tite.h"
+
+#define object_tite_Anim_0001D4 mm_object_tite_Anim_0001D4
+#define object_tite_Anim_0004F8 mm_object_tite_Anim_0004F8
+#define object_tite_Anim_00069C mm_object_tite_Anim_00069C
+#define object_tite_Anim_00083C mm_object_tite_Anim_00083C
+#define object_tite_Anim_000A14 mm_object_tite_Anim_000A14
+#define object_tite_Anim_000C70 mm_object_tite_Anim_000C70
+#define object_tite_Anim_000F50 mm_object_tite_Anim_000F50
+#define object_tite_Anim_0012E4 mm_object_tite_Anim_0012E4
+#define object_tite_DL_002FF0 mm_object_tite_DL_002FF0
+#define object_tite_DL_003160 mm_object_tite_DL_003160
+#define object_tite_DL_003290 mm_object_tite_DL_003290
+#define object_tite_DL_003330 mm_object_tite_DL_003330
+#define object_tite_DL_003460 mm_object_tite_DL_003460
+#define object_tite_DL_003500 mm_object_tite_DL_003500
+#define object_tite_DL_003630 mm_object_tite_DL_003630
+#define object_tite_DL_0036D0 mm_object_tite_DL_0036D0
+#define object_tite_DL_003800 mm_object_tite_DL_003800
+#define object_tite_Skel_003A20 mm_object_tite_Skel_003A20
+#define object_tite_Tex_001300 mm_object_tite_Tex_001300
+#define object_tite_Tex_001700 mm_object_tite_Tex_001700
+#define object_tite_Tex_001900 mm_object_tite_Tex_001900
+#define object_tite_Tex_001A00 mm_object_tite_Tex_001A00
+#define object_tite_Tex_001A80 mm_object_tite_Tex_001A80
+#define object_tite_Tex_001B00 mm_object_tite_Tex_001B00
+#define object_tite_Tex_001F00 mm_object_tite_Tex_001F00
+#define object_tite_Tex_002100 mm_object_tite_Tex_002100

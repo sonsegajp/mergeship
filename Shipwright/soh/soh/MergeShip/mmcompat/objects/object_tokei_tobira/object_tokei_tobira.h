@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tokei_tobira/object_tokei_tobira.h"
+
+#define object_tokei_tobira_Colheader_0012B0 mm_object_tokei_tobira_Colheader_0012B0
+#define object_tokei_tobira_Colheader_001590 mm_object_tokei_tobira_Colheader_001590
+#define object_tokei_tobira_DL_001100 mm_object_tokei_tobira_DL_001100
+#define object_tokei_tobira_DL_001108 mm_object_tokei_tobira_DL_001108
+#define object_tokei_tobira_DL_0013E0 mm_object_tokei_tobira_DL_0013E0
+#define object_tokei_tobira_DL_0013E8 mm_object_tokei_tobira_DL_0013E8
+#define object_tokei_tobira_Tex_000000 mm_object_tokei_tobira_Tex_000000
+#define object_tokei_tobira_Tex_000800 mm_object_tokei_tobira_Tex_000800

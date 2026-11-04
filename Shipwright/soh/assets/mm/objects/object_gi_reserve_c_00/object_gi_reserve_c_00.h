@@ -1,0 +1,20 @@
+#ifndef MM_OBJECTS_OBJECT_GI_RESERVE_C_00_H
+#define MM_OBJECTS_OBJECT_GI_RESERVE_C_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_gGiLetterToKafeiInscriptionsDL "__OTR__mm/objects/object_gi_reserve_c_00/gGiLetterToKafeiInscriptionsDL"
+static const ALIGN_ASSET(2) char mm_gGiLetterToKafeiInscriptionsDL[] = dmm_gGiLetterToKafeiInscriptionsDL;
+
+#define dmm_gGiLetterToKafeiEnvelopeLetterDL "__OTR__mm/objects/object_gi_reserve_c_00/gGiLetterToKafeiEnvelopeLetterDL"
+static const ALIGN_ASSET(2) char mm_gGiLetterToKafeiEnvelopeLetterDL[] = dmm_gGiLetterToKafeiEnvelopeLetterDL;
+
+#define dmm_gGiLetterToKafeiLetterBackgroundTex "__OTR__mm/objects/object_gi_reserve_c_00/gGiLetterToKafeiLetterBackgroundTex"
+static const ALIGN_ASSET(2) char mm_gGiLetterToKafeiLetterBackgroundTex[] = dmm_gGiLetterToKafeiLetterBackgroundTex;
+
+#define dmm_gGiLetterToKafeiLetterInscriptionsTex "__OTR__mm/objects/object_gi_reserve_c_00/gGiLetterToKafeiLetterInscriptionsTex"
+static const ALIGN_ASSET(2) char mm_gGiLetterToKafeiLetterInscriptionsTex[] = dmm_gGiLetterToKafeiLetterInscriptionsTex;
+
+#define dmm_gGiLetterToKafeiEnvelopeInscriptionsTex "__OTR__mm/objects/object_gi_reserve_c_00/gGiLetterToKafeiEnvelopeInscriptionsTex"
+static const ALIGN_ASSET(2) char mm_gGiLetterToKafeiEnvelopeInscriptionsTex[] = dmm_gGiLetterToKafeiEnvelopeInscriptionsTex;
+#endif // MM_OBJECTS_OBJECT_GI_RESERVE_C_00_H

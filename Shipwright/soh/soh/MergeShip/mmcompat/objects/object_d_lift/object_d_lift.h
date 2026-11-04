@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_d_lift/object_d_lift.h"
+
+#define gDampeGraveBrownElevatorCol mm_gDampeGraveBrownElevatorCol
+#define gDampeGraveBrownElevatorDL mm_gDampeGraveBrownElevatorDL
+#define gDampeGraveBrownElevatorSideTex mm_gDampeGraveBrownElevatorSideTex
+#define gDampeGraveBrownElevatorTopBottomTex mm_gDampeGraveBrownElevatorTopBottomTex
+#define object_d_lift_Colheader_000BA0 mm_object_d_lift_Colheader_000BA0
+#define object_d_lift_DL_000180 mm_object_d_lift_DL_000180
+#define object_d_lift_Tex_000298 mm_object_d_lift_Tex_000298

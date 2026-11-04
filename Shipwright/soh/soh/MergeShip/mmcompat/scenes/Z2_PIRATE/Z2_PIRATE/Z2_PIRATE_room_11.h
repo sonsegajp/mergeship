@@ -1,0 +1,22 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_PIRATE/Z2_PIRATE/Z2_PIRATE_room_11.h"
+
+#define Z2_PIRATE_room_11DL_001828 mm_Z2_PIRATE_room_11DL_001828
+#define Z2_PIRATE_room_11DL_001FB0 mm_Z2_PIRATE_room_11DL_001FB0
+#define Z2_PIRATE_room_11DL_004B38 mm_Z2_PIRATE_room_11DL_004B38
+#define Z2_PIRATE_room_11DL_005C80 mm_Z2_PIRATE_room_11DL_005C80
+#define Z2_PIRATE_room_11DL_006500 mm_Z2_PIRATE_room_11DL_006500
+#define Z2_PIRATE_room_11DL_006A00 mm_Z2_PIRATE_room_11DL_006A00
+#define Z2_PIRATE_room_11DL_006E10 mm_Z2_PIRATE_room_11DL_006E10
+#define Z2_PIRATE_room_11DL_006F30 mm_Z2_PIRATE_room_11DL_006F30
+#define Z2_PIRATE_room_11DL_009B40 mm_Z2_PIRATE_room_11DL_009B40
+#define Z2_PIRATE_room_11DL_009C60 mm_Z2_PIRATE_room_11DL_009C60
+#define Z2_PIRATE_room_11Tex_006F70 mm_Z2_PIRATE_room_11Tex_006F70
+#define Z2_PIRATE_room_11Tex_007770 mm_Z2_PIRATE_room_11Tex_007770
+#define Z2_PIRATE_room_11Tex_007B70 mm_Z2_PIRATE_room_11Tex_007B70
+#define Z2_PIRATE_room_11Tex_007F70 mm_Z2_PIRATE_room_11Tex_007F70
+#define Z2_PIRATE_room_11Tex_008370 mm_Z2_PIRATE_room_11Tex_008370
+#define Z2_PIRATE_room_11Tex_008570 mm_Z2_PIRATE_room_11Tex_008570
+#define Z2_PIRATE_room_11Tex_008D70 mm_Z2_PIRATE_room_11Tex_008D70
+#define Z2_PIRATE_room_11Tex_009170 mm_Z2_PIRATE_room_11Tex_009170

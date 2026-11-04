@@ -1,0 +1,292 @@
+/*
+ * MergeShip2 -- the settings Ship of Harkinian (SoH) shares with 2 Ship 2 Harkinian (2Ship) in mergeship.exe.
+ * X-macro table, maintained by hand; read by include/mergeship/SettingsSync.h and checked by
+ * tools/check_settings_map.py (both names exist in their codebase, the defaults match the code's).
+ *
+ *   MS_SETTING(sohName, shipName, sohType, shipType, sohDefault, shipDefault, xform, flags)
+ *
+ * One row per 2Ship CVar that means the same as a SoH CVar (by meaning, not by name). SoH is the source of truth: on
+ * every resume of 2Ship (every trip through the door, every Ctrl+F12, and at 2Ship's start) each row's SoH value, or
+ * sohDefault when SoH has none, goes through `xform` into 2Ship's CVar. A value changed in 2Ship's own menu goes back
+ * to SoH when 2Ship is suspended (last writer wins), except for MS_F_TO_2SHIP rows.
+ *
+ *   types   MS_T_INT, MS_T_FLOAT, MS_T_COLOR (a colour: copied as it is, RGBA or RGB; defaults unused)
+ *   xform   MS_X_SAME        the same value
+ *           MS_X_NOT         a checkbox with the opposite sense
+ *           MS_X_BOOL        SoH's number -> on/off (one-way rows)
+ *           MS_X_PCT         SoH's 0-100 slider <-> 2Ship's 0.0-1.0 slider
+ *           MS_X_DAMAGE      SoH's damage multiplier list (1x..128x, OHKO) <-> 2Ship's (1x..16x, 1 Hit KO)
+ *           MS_X_MIRROR      SoH's mirrored world modes <-> 2Ship's (MQ-only dungeons: Termina has none)
+ *           MS_X_CROUCHSTAB  SoH "Remove Power Crouch Stab" <-> 2Ship "Power Crouch Stab" (Patched / Unpatched OoT)
+ *           MS_X_SPEEDMODE   SoH "Toggle modifier instead of holding" -> 2Ship's speed modifier mode (hold/toggle)
+ *           MS_X_FORM_TUNIC  the same value, only while SoH's "Form Tunic Colours" (Mergeship menu) is on: the Deku,
+ *                            Goron and Zora wear the Kokiri Tunic's colour in Hyrule, so they do in Termina too
+ *           MS_X_FD_TUNIC    the same value while SoH's "Form Tunic Colours" colours every form; otherwise (off, or
+ *                            "Deku, Goron, Zora") the Fierce Deity keeps Majora's Mask's colours in Hyrule, so 2Ship's
+ *                            tunic options read unchanged (BUG-0123)
+ *   flags   MS_F_NONE
+ *           MS_F_TO_2SHIP    one-way (the 2Ship option has no exact SoH counterpart to write back)
+ *           MS_F_IF_SET      only once SoH has the CVar set: SoH's untouched default must not change 2Ship's
+ *           MS_F_UNSET       same name, same code default in both (libultraship, the menus): SoH unset -> 2Ship unset
+ *
+ * Not shared (no counterpart, or not safely): see the list at the end of this file.
+ */
+
+/* ---- Graphics and window (libultraship: the same names in both games; the window itself is shared) ------------------ */
+MS_SETTING("gSettings.InterpolationFPS", "gInterpolationFPS", MS_T_INT, MS_T_INT, 20, 20, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.MatchRefreshRate", "gMatchRefreshRate", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.VsyncEnabled", "gSettings.VsyncEnabled", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.MSAAValue", "gSettings.MSAAValue", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.InternalResolution", "gSettings.InternalResolution", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.TextureFilter", "gSettings.TextureFilter", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.SdlWindowedFullscreen", "gSettings.SdlWindowedFullscreen", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.EnableMultiViewports", "gSettings.EnableMultiViewports", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.LowResMode", "gSettings.LowResMode", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.SimulatedInputLag", "gSettings.SimulatedInputLag", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+/* Advanced resolution (aspect ratio / widescreen, vertical pixel count, integer scaling). */
+MS_SETTING("gSettings.AdvancedResolution.Enabled", "gSettings.AdvancedResolution.Enabled", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.AspectRatioX", "gSettings.AdvancedResolution.AspectRatioX", MS_T_FLOAT, MS_T_FLOAT, 16, 16, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.AspectRatioY", "gSettings.AdvancedResolution.AspectRatioY", MS_T_FLOAT, MS_T_FLOAT, 9, 9, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.VerticalPixelCount", "gSettings.AdvancedResolution.VerticalPixelCount", MS_T_INT, MS_T_INT, 480, 480, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.VerticalResolutionToggle", "gSettings.AdvancedResolution.VerticalResolutionToggle", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.PixelPerfectMode", "gSettings.AdvancedResolution.PixelPerfectMode", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.IgnoreAspectCorrection", "gSettings.AdvancedResolution.IgnoreAspectCorrection", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.IntegerScale.Factor", "gSettings.AdvancedResolution.IntegerScale.Factor", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.IntegerScale.FitAutomatically", "gSettings.AdvancedResolution.IntegerScale.FitAutomatically", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.IntegerScale.NeverExceedBounds", "gSettings.AdvancedResolution.IntegerScale.NeverExceedBounds", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.IntegerScale.ExceedBoundsBy", "gSettings.AdvancedResolution.IntegerScale.ExceedBoundsBy", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.UIComboItem.AspectRatio", "gSettings.AdvancedResolution.UIComboItem.AspectRatio", MS_T_INT, MS_T_INT, 3, 3, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.AdvancedResolution.UIComboItem.PixelCount", "gSettings.AdvancedResolution.UIComboItem.PixelCount", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+
+/* ---- Menu and general ------------------------------------------------------------------------------------------------ */
+MS_SETTING("gSettings.Menu.Theme", "gSettings.Menu.Theme", MS_T_INT, MS_T_INT, 5, 5, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.Menu.BackgroundOpacity", "gSettings.Menu.BackgroundOpacity", MS_T_FLOAT, MS_T_FLOAT, 0.85, 0.85, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.Menu.SearchAutofocus", "gSettings.Menu.SearchAutofocus", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.ControlNav", "gSettings.ControlNav", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gAllowBackgroundInputs", "gAllowBackgroundInputs", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.CursorVisibility", "gSettings.CursorVisibility", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.ResetBtn", "gSettings.ResetBtn", MS_T_INT, MS_T_INT, 128, 128, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gSettings.Notifications.Position", "gNotifications.Position", MS_T_INT, MS_T_INT, 3, 3, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.Notifications.Duration", "gNotifications.Duration", MS_T_FLOAT, MS_T_FLOAT, 10, 10, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.Notifications.BgOpacity", "gNotifications.BgOpacity", MS_T_FLOAT, MS_T_FLOAT, 0.5, 0.5, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.Notifications.Size", "gNotifications.Size", MS_T_FLOAT, MS_T_FLOAT, 1.8, 1.8, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.A11yNoScreenFlashForFinishingBlow", "gEnhancements.A11y.NoScreenFlashForEnemyKill", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+
+/* ---- Audio (SoH: 0-100 %, 2Ship: 0.0-1.0). SoH's master volume defaults to 40 % and 2Ship's to 100 % for their own
+ * mixes: it is shared only once it has been set in SoH. --------------------------------------------------------------- */
+MS_SETTING("gSettings.Volume.Master", "gSettings.Audio.MasterVolume", MS_T_INT, MS_T_FLOAT, 40, 1, MS_X_PCT, MS_F_IF_SET)
+MS_SETTING("gSettings.Volume.MainMusic", "gSettings.Audio.MainMusicVolume", MS_T_INT, MS_T_FLOAT, 100, 1, MS_X_PCT, MS_F_NONE)
+MS_SETTING("gSettings.Volume.SubMusic", "gSettings.Audio.SubMusicVolume", MS_T_INT, MS_T_FLOAT, 100, 1, MS_X_PCT, MS_F_NONE)
+MS_SETTING("gSettings.Volume.Fanfare", "gSettings.Audio.FanfareVolume", MS_T_INT, MS_T_FLOAT, 100, 1, MS_X_PCT, MS_F_NONE)
+MS_SETTING("gSettings.Volume.SFX", "gSettings.Audio.SoundEffectsVolume", MS_T_INT, MS_T_FLOAT, 100, 1, MS_X_PCT, MS_F_NONE)
+
+/* ---- Controls: D-pad, ocarina, aiming and cameras -------------------------------------------------------------------- */
+MS_SETTING("gEnhancements.DpadEquips", "gEnhancements.Dpad.DpadEquips", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.ItemUnequip", "gEnhancements.Equipment.ItemUnequip", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+/* "Assignable Shields, Tunics and Boots" -> 2Ship's D-pad Boots (MergeShipDpadBoots.cpp): the Iron and Hover Boots on the
+ * D-pad's free left and right. */
+MS_SETTING("gEnhancements.AssignableTunicsAndBoots", "gEnhancements.MergeShip.DpadBoots", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.CustomOcarina.Dpad", "gEnhancements.Playback.DpadOcarina", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.CustomOcarina.RightStick", "gEnhancements.Playback.RightStickOcarina", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.CustomOcarina.Enabled", "gEnhancements.Playback.CustomizeOcarinaControls", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.DpadNoDropOcarinaInput", "gEnhancements.Playback.NoDropOcarinaInput", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.Controls.RightStickAim", "gEnhancements.Camera.FirstPerson.RightStickEnabled", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.MoveInFirstPerson", "gEnhancements.Camera.FirstPerson.MoveInFirstPerson", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.DisableFirstPersonAutoCenterView", "gEnhancements.Camera.FirstPerson.DisableFirstPersonAutoCenterView", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+/* SoH's aiming inversion covers the stick and the right stick; 2Ship has one pair for each (1 on Y = the N64's). */
+MS_SETTING("gSettings.Controls.InvertAimingXAxis", "gEnhancements.Camera.FirstPerson.InvertX", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.Controls.InvertAimingYAxis", "gEnhancements.Camera.FirstPerson.InvertY", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.Controls.InvertAimingXAxis", "gEnhancements.Camera.FirstPerson.RightStickInvertX", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.Controls.InvertAimingYAxis", "gEnhancements.Camera.FirstPerson.RightStickInvertY", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FirstPersonCameraSensitivity.X", "gEnhancements.Camera.FirstPerson.SensitivityX", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FirstPersonCameraSensitivity.Y", "gEnhancements.Camera.FirstPerson.SensitivityY", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FirstPersonCameraSensitivity.X", "gEnhancements.Camera.FirstPerson.RightStickSensitivityX", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FirstPersonCameraSensitivity.Y", "gEnhancements.Camera.FirstPerson.RightStickSensitivityY", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_NONE)
+/* SoH: 1 = the shield follows the stick as on the N64; 2Ship: 1 = inverted. */
+MS_SETTING("gSettings.Controls.InvertShieldAimingYAxis", "gEnhancements.Equipment.InvertShieldY", MS_T_INT, MS_T_INT, 1, 0, MS_X_NOT, MS_F_NONE)
+MS_SETTING("gSettings.FreeLook.Enabled", "gEnhancements.Camera.FreeLook.Enable", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FreeLook.InvertXAxis", "gEnhancements.Camera.RightStick.InvertXAxis", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FreeLook.InvertYAxis", "gEnhancements.Camera.RightStick.InvertYAxis", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FreeLook.CameraSensitivity.X", "gEnhancements.Camera.RightStick.CameraSensitivity.X", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gSettings.FreeLook.CameraSensitivity.Y", "gEnhancements.Camera.RightStick.CameraSensitivity.Y", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_NONE)
+/* The camera's own distance is the default in both; only a distance set in SoH is shared. */
+MS_SETTING("gSettings.FreeLook.MaxCameraDistance", "gEnhancements.Camera.FreeLook.MaxCameraDistance", MS_T_INT, MS_T_INT, 185, 185, MS_X_SAME, MS_F_IF_SET)
+MS_SETTING("gSettings.FreeLook.TransitionSpeed", "gEnhancements.Camera.FreeLook.TransitionSpeed", MS_T_INT, MS_T_INT, 25, 25, MS_X_SAME, MS_F_NONE)
+
+/* ---- Gameplay: time savers, items, restorations ---------------------------------------------------------------------- */
+MS_SETTING("gEnhancements.SkipText", "gEnhancements.Dialogue.FastText", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.TimeSavers.SkipCutscene.Entrances", "gEnhancements.Cutscenes.SkipEntranceCutscenes", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.TimeSavers.SkipCutscene.Story", "gEnhancements.Cutscenes.SkipStoryCutscenes", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.TimeSavers.SkipCutscene.OnePoint", "gEnhancements.Cutscenes.SkipOnePointCutscenes", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.TimeSavers.SkipCutscene.BossIntro", "gEnhancements.Cutscenes.SkipEnemyCutscenes", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.TimeSavers.SkipMiscInteractions", "gEnhancements.Cutscenes.SkipMiscInteractions", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.TimeSavers.DisableTitleCard", "gEnhancements.Cutscenes.HideTitleCards", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.FastBottles", "gEnhancements.Dialogue.SkipBottlePickupMessages", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.FastChests", "gEnhancements.Timesavers.FastChests", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.FasterRupeeAccumulator", "gEnhancements.Timesavers.FasterRupeeAccumulator", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.FasterBottleEmpty", "gEnhancements.Timesavers.FasterBottles", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.FastOcarinaPlayback", "gEnhancements.Songs.FasterSongPlayback", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.InstantScarecrow", "gEnhancements.Playback.SkipScarecrowSong", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+/* SoH's block pushing speed is +0..+5; 2Ship's Faster Push/Pull is on or off. */
+MS_SETTING("gEnhancements.FasterBlockPush", "gEnhancements.Player.FasterPushAndPull", MS_T_INT, MS_T_INT, 0, 0, MS_X_BOOL, MS_F_TO_2SHIP)
+MS_SETTING("gEnhancements.InstantPutaway", "gEnhancements.Player.InstantPutaway", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.UnsheatheWithoutSlashing", "gEnhancements.Player.UnsheatheWithoutSlashing", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.Autosave", "gEnhancements.Saving.Autosave", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.RememberSaveLocation", "gEnhancements.Saving.RememberSaveLocation", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.PauseBufferWindow", "gEnhancements.Restorations.PauseBufferWindow", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+/* Only a choice made in SoH: an untouched SoH (Ocarina of Time's power crouch stab) leaves Majora's Mask's patch. */
+MS_SETTING("gEnhancements.CrouchStabFix", "gEnhancements.Restorations.PowerCrouchStab", MS_T_INT, MS_T_INT, 0, 0, MS_X_CROUCHSTAB, MS_F_IF_SET)
+MS_SETTING("gEnhancements.BowReticle", "gEnhancements.Graphics.BowReticle", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.BowArrowCycle", "gEnhancements.PlayerActions.ArrowCycle", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.SkipArrowAnimation", "gEnhancements.Equipment.MagicArrowEquipSpeed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.FastBoomerang", "gEnhancements.PlayerActions.InstantRecall", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.RemoteBombchu", "gEnhancements.PlayerActions.RemoteBombchu", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.RemoveExplosiveLimit", "gEnhancements.Items.RemoveExplosiveLimit", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.EnableBombchuDrops", "gEnhancements.Equipment.ChuDrops", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+
+/* ---- Graphics enhancements ------------------------------------------------------------------------------------------- */
+MS_SETTING("gEnhancements.DisableBombBillboarding", "gEnhancements.Mods.DisableBombBillboarding", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.DisableGrottoRotation", "gEnhancements.Mods.DisableGrottoRotation", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.DisableBlackBars", "gEnhancements.Graphics.DisableBlackBars", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.EnemyHealthBar", "gEnhancements.Graphics.EnemyHealthBars", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.NewDrops", "gEnhancements.Graphics.3DItemDrops", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.DisableDrawDistance", "gEnhancements.Graphics.IncreaseActorDrawDistance", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.WidescreenActorCulling", "gEnhancements.Graphics.ActorCullingAccountsForWidescreen", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.FixTexturesOOB", "gEnhancements.Fixes.FixTexturesOOB", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+
+/* ---- Difficulty and modes -------------------------------------------------------------------------------------------- */
+MS_SETTING("gEnhancements.DamageMult", "gEnhancements.DifficultyOptions.DamageMultiplier", MS_T_INT, MS_T_INT, 0, 0, MS_X_DAMAGE, MS_F_NONE)
+MS_SETTING("gEnhancements.PermanentHeartLoss", "gEnhancements.DifficultyOptions.PermanentHeartLoss", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.DeleteFileOnDeath", "gEnhancements.DifficultyOptions.DeleteFileOnDeath", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.NoHeartDrops", "gEnhancements.DifficultyOptions.NoHeartDrops", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.NoRandomDrops", "gEnhancements.DifficultyOptions.NoRandomDrops", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.HyperEnemies", "gEnhancements.DifficultyOptions.HyperEnemies", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.MirroredWorldMode", "gModes.MirroredWorld.Mode", MS_T_INT, MS_T_INT, 0, 0, MS_X_MIRROR, MS_F_NONE)
+
+/* ---- Randomizer display ---------------------------------------------------------------------------------------------- */
+/* Containers Match Contents (SoH, Enhancements) = Container Style Matches Contents (2Ship, Rando: Live Options): both
+ * checkboxes, off by default, only a look. SoH's "Containers of Agony" (Stone of Agony required) has no 2Ship
+ * counterpart; SoH's Mergeship mask and stray fairy styles are always on in 2Ship. */
+MS_SETTING("gEnhancements.ChestSizeAndTextureMatchContents", "gRando.CSMC", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+
+/* ---- Cheats ---------------------------------------------------------------------------------------------------------- */
+MS_SETTING("gCheats.InfiniteHealth", "gCheats.InfiniteHealth", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.InfiniteMagic", "gCheats.InfiniteMagic", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.InfiniteMoney", "gCheats.InfiniteRupees", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.InfiniteAmmo", "gCheats.InfiniteConsumables", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.InfiniteEponaBoost", "gCheats.InfiniteEponaCarrots", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.NoRestrictItems", "gCheats.UnrestrictedItems", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.NoClip", "gCheats.NoClip", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.ClimbEverything", "gCheats.ClimbAnywhere", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.MoonJumpOnL", "gCheats.MoonJumpOnL", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.HookshotEverything", "gCheats.HookshotAnywhere", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gCheats.EasyFrameAdvance", "gCheats.EasyFrameAdvance", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+/* SoH's speed modifier is always armed (hold or toggle its buttons); 2Ship's starts "Off". Shared once set in SoH. */
+MS_SETTING("gCheats.SpeedModifier.SpeedToggle", "gCheats.SpeedModifier.Mode", MS_T_INT, MS_T_INT, 0, 0, MS_X_SPEEDMODE, MS_F_TO_2SHIP | MS_F_IF_SET)
+MS_SETTING("gCheats.SpeedModifier.Value", "gCheats.SpeedModifier.Value", MS_T_FLOAT, MS_T_FLOAT, 1, 1, MS_X_SAME, MS_F_IF_SET)
+MS_SETTING("gCheats.SpeedModifier.Btn", "gCheats.SpeedModifier.Btn", MS_T_INT, MS_T_INT, 64, 64, MS_X_SAME, MS_F_NONE)
+
+/* ---- Majora's Mask options both Mergeship menus have ----------------------------------------------------------------- */
+MS_SETTING("gGeneral.MergeShipFierceDeityAnywhere", "gEnhancements.Masks.FierceDeitysAnywhere", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.MergeShip.UnbreakableRazorSword", "gCheats.UnbreakableRazorSword", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+/* BUG-0131: the item trackers' two columns (SoH randomizer_item_tracker.cpp, 2Ship ItemTracker.cpp) */
+MS_SETTING("gEnhancements.MergeShip.ItemTrackerBothWorlds", "gEnhancements.MergeShip.ItemTrackerBothWorlds", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+/* BUG-0144: the Elegy's shells anywhere -- Hyrule's option (MergeShipSongs.c) and 2Ship's cheat (ElegyAnywhere.cpp) */
+MS_SETTING("gEnhancements.MergeShip.ElegyAnywhere", "gCheats.ElegyAnywhere", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+/* MergeShip's own shared options (EngineApi.h, AnchorNet.h): one door, one Anchor room. */
+MS_SETTING("gEnhancements.MergeShip.TerminaDoor", "gEnhancements.MergeShip.TerminaDoor", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.MergeShip.ShareFirstCycle", "gEnhancements.MergeShip.ShareFirstCycle", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.MergeShip.AnchorSharedConnection", "gEnhancements.MergeShip.AnchorSharedConnection", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+/* BUG-0031: the Deku pipes, Goron drums and Zora guitar as the ocarina's icon, in Termina too. */
+MS_SETTING("gEnhancements.MergeShip.FormInstrumentIcons", "gEnhancements.MergeShip.FormInstrumentIcons", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.MergeShip.AnchorCrossWorldItems", "gEnhancements.MergeShip.AnchorCrossWorldItems", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.MergeShip.AdultTransformScream", "gEnhancements.MergeShip.AdultTransformScream", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_TO_2SHIP)
+/* Ganondorf mode (SoH's file select password): the player is Ganondorf in Termina too (2Ship MergeShipGanondorf.h). */
+MS_SETTING("gMergeShip.GanondorfMode", "gMergeShip.GanondorfMode", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_TO_2SHIP)
+/* His colours (SoH's Anchor menu, Ganondorf mode only): the armour's brown and the cape's red. */
+MS_SETTING("gMergeShip.GanondorfArmor.Value", "gMergeShip.GanondorfArmor.Value", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_TO_2SHIP)
+MS_SETTING("gMergeShip.GanondorfCape.Value", "gMergeShip.GanondorfCape.Value", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_TO_2SHIP)
+
+/* ---- Cosmetics (Cosmetics Editor): colour, "changed" and rainbow of each ---------------------------------------------- */
+/* Young Link: SoH's Kokiri Tunic and hair are the human's (Majora's Mask young Link) in both games. */
+MS_SETTING("gCosmetics.Link.KokiriTunic.Value", "gCosmetic.Player.HumanTunic.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.KokiriTunic.Changed", "gCosmetic.Player.HumanTunic.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.KokiriTunic.Rainbow", "gCosmetic.Player.HumanTunic.Rainbow", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.Hair.Value", "gCosmetic.Player.HumanHair.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.Hair.Changed", "gCosmetic.Player.HumanHair.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.Hair.Rainbow", "gCosmetic.Player.HumanHair.Rainbow", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.FierceDeityTunic.Value", "gCosmetic.Player.FierceDeityTunic.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_FD_TUNIC, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.FierceDeityTunic.Changed", "gCosmetic.Player.FierceDeityTunic.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_FD_TUNIC, MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.FierceDeityTunic.Rainbow", "gCosmetic.Player.FierceDeityTunic.Rainbow", MS_T_INT, MS_T_INT, 0, 0, MS_X_FD_TUNIC, MS_F_UNSET)
+/* The forms' greens follow the Kokiri Tunic (SoH's Mergeship "Form Tunic Colours"): one-way, the forms' own colours in
+ * 2Ship's editor stay 2Ship's while that option is off. */
+MS_SETTING("gCosmetics.Link.KokiriTunic.Value", "gCosmetic.Player.DekuTunic.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_FORM_TUNIC, MS_F_TO_2SHIP | MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.KokiriTunic.Changed", "gCosmetic.Player.DekuTunic.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_FORM_TUNIC, MS_F_TO_2SHIP | MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.KokiriTunic.Value", "gCosmetic.Player.GoronTunic.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_FORM_TUNIC, MS_F_TO_2SHIP | MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.KokiriTunic.Changed", "gCosmetic.Player.GoronTunic.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_FORM_TUNIC, MS_F_TO_2SHIP | MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.KokiriTunic.Value", "gCosmetic.Player.ZoraTunic.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_FORM_TUNIC, MS_F_TO_2SHIP | MS_F_UNSET)
+MS_SETTING("gCosmetics.Link.KokiriTunic.Changed", "gCosmetic.Player.ZoraTunic.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_FORM_TUNIC, MS_F_TO_2SHIP | MS_F_UNSET)
+/* HUD buttons, hearts, magic, minimap. */
+MS_SETTING("gCosmetics.HUD.AButton.Value", "gCosmetic.Buttons.A.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.AButton.Changed", "gCosmetic.Buttons.A.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.BButton.Value", "gCosmetic.Buttons.B.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.BButton.Changed", "gCosmetic.Buttons.B.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.CLeftButton.Value", "gCosmetic.Buttons.CLeft.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.CLeftButton.Changed", "gCosmetic.Buttons.CLeft.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.CDownButton.Value", "gCosmetic.Buttons.CDown.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.CDownButton.Changed", "gCosmetic.Buttons.CDown.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.CRightButton.Value", "gCosmetic.Buttons.CRight.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.CRightButton.Changed", "gCosmetic.Buttons.CRight.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.StartButton.Value", "gCosmetic.Buttons.Start.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.StartButton.Changed", "gCosmetic.Buttons.Start.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.Dpad.Value", "gCosmetic.Buttons.DPad.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.Dpad.Changed", "gCosmetic.Buttons.DPad.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Consumable.Hearts.Value", "gCosmetic.HUD.Hearts.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Consumable.Hearts.Changed", "gCosmetic.HUD.Hearts.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Consumable.DDHearts.Value", "gCosmetic.HUD.HeartsDoubleDefense.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Consumable.DDHearts.Changed", "gCosmetic.HUD.HeartsDoubleDefense.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Consumable.Magic.Value", "gCosmetic.HUD.Magic.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Consumable.Magic.Changed", "gCosmetic.HUD.Magic.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.Minimap.Value", "gCosmetic.HUD.Minimap.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.HUD.Minimap.Changed", "gCosmetic.HUD.Minimap.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+/* BUG-0121: SoH's colour scheme (N64 / GameCube): Termina's A, B and Start buttons without a colour of their own follow
+ * it (2Ship CosmeticEditor_GetChangedColorEx). */
+MS_SETTING("gCosmetics.DefaultColorScheme", "gEnhancements.MergeShip.GameCubeColors", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_TO_2SHIP)
+/* Sprinting (include/mergeship/Sprint.h): one option and one speed for both worlds. */
+MS_SETTING("gEnhancements.MergeShip.Sprint", "gEnhancements.MergeShip.Sprint", MS_T_INT, MS_T_INT, 1, 1, MS_X_SAME, MS_F_NONE)
+MS_SETTING("gEnhancements.MergeShip.SprintSpeed", "gEnhancements.MergeShip.SprintSpeed", MS_T_FLOAT, MS_T_FLOAT, 1.5, 1.5, MS_X_SAME, MS_F_NONE)
+/* Sword trail, magic arrows, Gold Skulltulas. */
+MS_SETTING("gCosmetics.Trails.KokiriSword.Value", "gCosmetic.Trails.KokiriSwordTrail.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Trails.KokiriSword.Changed", "gCosmetic.Trails.KokiriSwordTrail.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.FirePrimary.Value", "gCosmetic.Effects.FireArrowPrim.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.FirePrimary.Changed", "gCosmetic.Effects.FireArrowPrim.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.FireSecondary.Value", "gCosmetic.Effects.FireArrowSec.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.FireSecondary.Changed", "gCosmetic.Effects.FireArrowSec.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.IcePrimary.Value", "gCosmetic.Effects.IceArrowPrim.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.IcePrimary.Changed", "gCosmetic.Effects.IceArrowPrim.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.IceSecondary.Value", "gCosmetic.Effects.IceArrowSec.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.IceSecondary.Changed", "gCosmetic.Effects.IceArrowSec.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.LightPrimary.Value", "gCosmetic.Effects.LightArrowPrim.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.LightPrimary.Changed", "gCosmetic.Effects.LightArrowPrim.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.LightSecondary.Value", "gCosmetic.Effects.LightArrowSec.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.Arrows.LightSecondary.Changed", "gCosmetic.Effects.LightArrowSec.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.NPC.GoldenSkulltula.Value", "gCosmetic.World.GoldSkulltula.Color", MS_T_COLOR, MS_T_COLOR, 0, 0, MS_X_SAME, MS_F_UNSET)
+MS_SETTING("gCosmetics.NPC.GoldenSkulltula.Changed", "gCosmetic.World.GoldSkulltula.Changed", MS_T_INT, MS_T_INT, 0, 0, MS_X_SAME, MS_F_UNSET)
+
+/*
+ * Not shared:
+ *   - Text Speed (1x-5x, instant): Majora's Mask has no text speed; its Fast Text is SoH's Skip Text (hold B), above.
+ *   - Skip Intro / Skip to File Select / Boot Sequence: SoH's skip Ocarina of Time's own intro; 2Ship's Skip Intro
+ *     Sequence skips Majora's Mask's whole opening, which the door plays on a file's first visit (MergeShipHost.h).
+ *   - Vine/Ladder Climb Speed (+0..+12) vs Climb Speed (1x..5x), Crawl Speed, King Zora Speed: different scales or no
+ *     counterpart.
+ *   - ImGui Menu Scaling: the one ImGui context is shared and each game scales it relative to its own last scale;
+ *     syncing the index without that state would scale twice.
+ *   - Search In Sidebar: the menus insert/remove their search entry only from their own widget callback.
+ *   - Renderer / audio API, window size and position: one window and one audio device, owned by the first engine.
+ *   - Controller bindings, rumble, LEDs, gyro: one ControlDeck, already shared by both engines.
+ *   - HUD layout (SoH's per-element position/scale vs 2Ship's HUD Editor), Mirror Shield, gauntlet and boot colours:
+ *     different elements or models (2Ship's Ocarina of Time gauntlets and boots have no colour option).
+ *   - Persistent Masks (SoH) vs Persistent Bunny Hood (2Ship), Bunny Hood effect: different features.
+ *   - Language, Text to Speech, Disable Idle Camera, heat haze / Jabu wobble: no 2Ship counterpart.
+ */

@@ -1,0 +1,8 @@
+[submodule "libultraship"]
+	path = libultraship
+	url = https://github.com/sonsegajp/Mergeship2.git
+	branch = libultraship-mergeship2
+[submodule "torch"]
+	path = torch
+	url = https://github.com/HarbourMasters/Torch.git
+	branch = main

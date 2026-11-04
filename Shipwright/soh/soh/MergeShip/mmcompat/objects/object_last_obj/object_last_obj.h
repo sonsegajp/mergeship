@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_last_obj/object_last_obj.h"
+
+#define object_last_obj_Colheader_000288 mm_object_last_obj_Colheader_000288
+#define object_last_obj_Colheader_001450 mm_object_last_obj_Colheader_001450
+#define object_last_obj_DL_000090 mm_object_last_obj_DL_000090
+#define object_last_obj_DL_000098 mm_object_last_obj_DL_000098
+#define object_last_obj_DL_0001A0 mm_object_last_obj_DL_0001A0
+#define object_last_obj_DL_0001A8 mm_object_last_obj_DL_0001A8
+#define object_last_obj_DL_001310 mm_object_last_obj_DL_001310
+#define object_last_obj_DL_001318 mm_object_last_obj_DL_001318
+#define object_last_obj_DL_0039C0 mm_object_last_obj_DL_0039C0
+#define object_last_obj_TLUT_001700 mm_object_last_obj_TLUT_001700
+#define object_last_obj_Tex_0002C0 mm_object_last_obj_Tex_0002C0
+#define object_last_obj_Tex_0018A0 mm_object_last_obj_Tex_0018A0
+#define object_last_obj_Tex_0030A0 mm_object_last_obj_Tex_0030A0
+#define object_last_obj_Tex_003B20 mm_object_last_obj_Tex_003B20

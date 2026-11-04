@@ -1,0 +1,74 @@
+#ifndef MM_Z2_GORONRACE_Z2_GORONRACE_H
+#define MM_Z2_GORONRACE_Z2_GORONRACE_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_GORONRACECollisionHeader_0062B4 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACECollisionHeader_0062B4"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACECollisionHeader_0062B4[] = dmm_Z2_GORONRACECollisionHeader_0062B4;
+
+#define dmm_Z2_GORONRACECutsceneData_00089C "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACECutsceneData_00089C"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACECutsceneData_00089C[] = dmm_Z2_GORONRACECutsceneData_00089C;
+
+#define dmm_Z2_GORONRACETex_007590 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_007590"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_007590[] = dmm_Z2_GORONRACETex_007590;
+
+#define dmm_Z2_GORONRACETex_006D90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_006D90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_006D90[] = dmm_Z2_GORONRACETex_006D90;
+
+#define dmm_Z2_GORONRACETex_008590 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_008590"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_008590[] = dmm_Z2_GORONRACETex_008590;
+
+#define dmm_Z2_GORONRACETex_009790 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_009790"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_009790[] = dmm_Z2_GORONRACETex_009790;
+
+#define dmm_Z2_GORONRACETex_007D90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_007D90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_007D90[] = dmm_Z2_GORONRACETex_007D90;
+
+#define dmm_Z2_GORONRACETex_009F90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_009F90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_009F90[] = dmm_Z2_GORONRACETex_009F90;
+
+#define dmm_Z2_GORONRACETex_00CC90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00CC90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00CC90[] = dmm_Z2_GORONRACETex_00CC90;
+
+#define dmm_Z2_GORONRACETex_00AB90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00AB90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00AB90[] = dmm_Z2_GORONRACETex_00AB90;
+
+#define dmm_Z2_GORONRACETex_00BB90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00BB90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00BB90[] = dmm_Z2_GORONRACETex_00BB90;
+
+#define dmm_Z2_GORONRACETex_00DE90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00DE90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00DE90[] = dmm_Z2_GORONRACETex_00DE90;
+
+#define dmm_Z2_GORONRACETex_00D490 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00D490"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00D490[] = dmm_Z2_GORONRACETex_00D490;
+
+#define dmm_Z2_GORONRACETex_00D690 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00D690"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00D690[] = dmm_Z2_GORONRACETex_00D690;
+
+#define dmm_Z2_GORONRACETex_00A790 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00A790"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00A790[] = dmm_Z2_GORONRACETex_00A790;
+
+#define dmm_Z2_GORONRACETex_00CB90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00CB90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00CB90[] = dmm_Z2_GORONRACETex_00CB90;
+
+#define dmm_Z2_GORONRACETex_00DA90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00DA90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00DA90[] = dmm_Z2_GORONRACETex_00DA90;
+
+#define dmm_Z2_GORONRACETex_00DC90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00DC90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00DC90[] = dmm_Z2_GORONRACETex_00DC90;
+
+#define dmm_Z2_GORONRACETex_00E690 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_00E690"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_00E690[] = dmm_Z2_GORONRACETex_00E690;
+
+#define dmm_Z2_GORONRACETex_008F90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_008F90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_008F90[] = dmm_Z2_GORONRACETex_008F90;
+
+#define dmm_Z2_GORONRACETex_008D90 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACETex_008D90"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACETex_008D90[] = dmm_Z2_GORONRACETex_008D90;
+
+#define dmm_Z2_GORONRACECollisionHeader_0062B4 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACECollisionHeader_0062B4"
+
+#define dmm_Z2_GORONRACECutsceneData_006B70 "__OTR__mm/scenes/nonmq/Z2_GORONRACE/Z2_GORONRACECutsceneData_006B70"
+static const ALIGN_ASSET(2) char mm_Z2_GORONRACECutsceneData_006B70[] = dmm_Z2_GORONRACECutsceneData_006B70;
+
+#endif // MM_Z2_GORONRACE_Z2_GORONRACE_H

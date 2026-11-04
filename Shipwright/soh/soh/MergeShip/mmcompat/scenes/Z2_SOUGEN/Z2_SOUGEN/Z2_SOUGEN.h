@@ -1,0 +1,21 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_SOUGEN/Z2_SOUGEN/Z2_SOUGEN.h"
+
+#define Z2_SOUGENCollisionHeader_001F9C mm_Z2_SOUGENCollisionHeader_001F9C
+#define Z2_SOUGENCutsceneData_000320 mm_Z2_SOUGENCutsceneData_000320
+#define Z2_SOUGENTex_001FD0 mm_Z2_SOUGENTex_001FD0
+#define Z2_SOUGENTex_0027D0 mm_Z2_SOUGENTex_0027D0
+#define Z2_SOUGENTex_0037D0 mm_Z2_SOUGENTex_0037D0
+#define Z2_SOUGENTex_003FD0 mm_Z2_SOUGENTex_003FD0
+#define Z2_SOUGENTex_0047D0 mm_Z2_SOUGENTex_0047D0
+#define Z2_SOUGENTex_004BD0 mm_Z2_SOUGENTex_004BD0
+#define Z2_SOUGENTex_005BD0 mm_Z2_SOUGENTex_005BD0
+#define Z2_SOUGENTex_0063D0 mm_Z2_SOUGENTex_0063D0
+#define Z2_SOUGENTex_006BD0 mm_Z2_SOUGENTex_006BD0
+#define Z2_SOUGENTex_0073D0 mm_Z2_SOUGENTex_0073D0
+#define Z2_SOUGENTex_0075D0 mm_Z2_SOUGENTex_0075D0
+#define Z2_SOUGENTex_0077D0 mm_Z2_SOUGENTex_0077D0
+#define Z2_SOUGENTex_007FD0 mm_Z2_SOUGENTex_007FD0
+#define Z2_SOUGENTex_008FD0 mm_Z2_SOUGENTex_008FD0
+#define Z2_SOUGENTex_009FD0 mm_Z2_SOUGENTex_009FD0

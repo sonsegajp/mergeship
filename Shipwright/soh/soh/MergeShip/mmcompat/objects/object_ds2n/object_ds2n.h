@@ -1,0 +1,53 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ds2n/object_ds2n.h"
+
+#define gDs2nBeltTieTex mm_gDs2nBeltTieTex
+#define gDs2nEyeClosedTex mm_gDs2nEyeClosedTex
+#define gDs2nEyeHalfTex mm_gDs2nEyeHalfTex
+#define gDs2nEyeOpen2Tex mm_gDs2nEyeOpen2Tex
+#define gDs2nEyeOpenTex mm_gDs2nEyeOpenTex
+#define gDs2nEyeTexAnim mm_gDs2nEyeTexAnim
+#define gDs2nEyes2TLUT mm_gDs2nEyes2TLUT
+#define gDs2nEyesTLUT mm_gDs2nEyesTLUT
+#define gDs2nFingers2TLUT mm_gDs2nFingers2TLUT
+#define gDs2nFingers2Tex mm_gDs2nFingers2Tex
+#define gDs2nFingersTLUT mm_gDs2nFingersTLUT
+#define gDs2nFingersTex mm_gDs2nFingersTex
+#define gDs2nHair2Tex mm_gDs2nHair2Tex
+#define gDs2nHairTex mm_gDs2nHairTex
+#define gDs2nHairline2Tex mm_gDs2nHairline2Tex
+#define gDs2nHairlineTex mm_gDs2nHairlineTex
+#define gDs2nHeadDL mm_gDs2nHeadDL
+#define gDs2nHipsDL mm_gDs2nHipsDL
+#define gDs2nIdleAnim mm_gDs2nIdleAnim
+#define gDs2nLeftFootDL mm_gDs2nLeftFootDL
+#define gDs2nLeftForearmDL mm_gDs2nLeftForearmDL
+#define gDs2nLeftHandDL mm_gDs2nLeftHandDL
+#define gDs2nLeftShinDL mm_gDs2nLeftShinDL
+#define gDs2nLeftThighDL mm_gDs2nLeftThighDL
+#define gDs2nLeftUpperArmDL mm_gDs2nLeftUpperArmDL
+#define gDs2nMain2TLUT mm_gDs2nMain2TLUT
+#define gDs2nMainTLUT mm_gDs2nMainTLUT
+#define gDs2nMouthOpen2Tex mm_gDs2nMouthOpen2Tex
+#define gDs2nMouthOpenTex mm_gDs2nMouthOpenTex
+#define gDs2nPantsAndShirtBottom2Tex mm_gDs2nPantsAndShirtBottom2Tex
+#define gDs2nPantsAndShirtBottomTex mm_gDs2nPantsAndShirtBottomTex
+#define gDs2nRightFootDL mm_gDs2nRightFootDL
+#define gDs2nRightForearmDL mm_gDs2nRightForearmDL
+#define gDs2nRightHandDL mm_gDs2nRightHandDL
+#define gDs2nRightShinDL mm_gDs2nRightShinDL
+#define gDs2nRightThighDL mm_gDs2nRightThighDL
+#define gDs2nRightUpperArmDL mm_gDs2nRightUpperArmDL
+#define gDs2nShirt2Tex mm_gDs2nShirt2Tex
+#define gDs2nShirtButtons2Tex mm_gDs2nShirtButtons2Tex
+#define gDs2nShirtButtonsTex mm_gDs2nShirtButtonsTex
+#define gDs2nShirtTex mm_gDs2nShirtTex
+#define gDs2nShoes2Tex mm_gDs2nShoes2Tex
+#define gDs2nShoesTex mm_gDs2nShoesTex
+#define gDs2nSkel mm_gDs2nSkel
+#define gDs2nSkinGradient2Tex mm_gDs2nSkinGradient2Tex
+#define gDs2nSkinGradientTex mm_gDs2nSkinGradientTex
+#define gDs2nTorsoDL mm_gDs2nTorsoDL
+#define gDs2nVest2Tex mm_gDs2nVest2Tex
+#define gDs2nVestTex mm_gDs2nVestTex

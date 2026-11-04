@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mask_bigelf/object_mask_bigelf.h"
+
+#define object_mask_bigelf_DL_0016F0 mm_object_mask_bigelf_DL_0016F0
+#define object_mask_bigelf_TLUT_002130 mm_object_mask_bigelf_TLUT_002130
+#define object_mask_bigelf_Tex_002330 mm_object_mask_bigelf_Tex_002330
+#define object_mask_bigelf_Tex_002370 mm_object_mask_bigelf_Tex_002370
+#define object_mask_bigelf_Tex_002770 mm_object_mask_bigelf_Tex_002770
+#define object_mask_bigelf_Tex_002F70 mm_object_mask_bigelf_Tex_002F70
+#define object_mask_bigelf_Tex_003070 mm_object_mask_bigelf_Tex_003070
+#define object_mask_bigelf_Tex_0030B0 mm_object_mask_bigelf_Tex_0030B0

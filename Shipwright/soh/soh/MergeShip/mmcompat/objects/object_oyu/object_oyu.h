@@ -1,0 +1,9 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_oyu/object_oyu.h"
+
+#define gGoronGraveyardHotSpringWaterCol mm_gGoronGraveyardHotSpringWaterCol
+#define gGoronGraveyardHotSpringWaterDL mm_gGoronGraveyardHotSpringWaterDL
+#define gGoronGraveyardHotSpringWaterEmptyDL mm_gGoronGraveyardHotSpringWaterEmptyDL
+#define gGoronGraveyardHotSpringWaterTex mm_gGoronGraveyardHotSpringWaterTex
+#define gGoronGraveyardHotSpringWaterTexAnim mm_gGoronGraveyardHotSpringWaterTexAnim

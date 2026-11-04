@@ -1,0 +1,210 @@
+#ifndef MM_Z2_DEKU_KING_Z2_DEKU_KING_ROOM_00_H
+#define MM_Z2_DEKU_KING_Z2_DEKU_KING_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_DEKU_KING_room_00DL_003FD0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_003FD0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_003FD0[] = dmm_Z2_DEKU_KING_room_00DL_003FD0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_006138 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_006138"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_006138[] = dmm_Z2_DEKU_KING_room_00DL_006138;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0043B8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0043B8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0043B8[] = dmm_Z2_DEKU_KING_room_00DL_0043B8;
+
+#define dmm_Z2_DEKU_KING_room_00DL_004668 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_004668"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_004668[] = dmm_Z2_DEKU_KING_room_00DL_004668;
+
+#define dmm_Z2_DEKU_KING_room_00DL_004DE8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_004DE8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_004DE8[] = dmm_Z2_DEKU_KING_room_00DL_004DE8;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0056E0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0056E0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0056E0[] = dmm_Z2_DEKU_KING_room_00DL_0056E0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_005D60 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_005D60"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_005D60[] = dmm_Z2_DEKU_KING_room_00DL_005D60;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0064A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0064A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0064A0[] = dmm_Z2_DEKU_KING_room_00DL_0064A0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_006830 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_006830"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_006830[] = dmm_Z2_DEKU_KING_room_00DL_006830;
+
+#define dmm_Z2_DEKU_KING_room_00DL_006B50 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_006B50"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_006B50[] = dmm_Z2_DEKU_KING_room_00DL_006B50;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0034A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0034A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0034A0[] = dmm_Z2_DEKU_KING_room_00DL_0034A0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0084F8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0084F8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0084F8[] = dmm_Z2_DEKU_KING_room_00DL_0084F8;
+
+#define dmm_Z2_DEKU_KING_room_00DL_009498 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_009498"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_009498[] = dmm_Z2_DEKU_KING_room_00DL_009498;
+
+#define dmm_Z2_DEKU_KING_room_00DL_007D10 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_007D10"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_007D10[] = dmm_Z2_DEKU_KING_room_00DL_007D10;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0094A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0094A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0094A0[] = dmm_Z2_DEKU_KING_room_00DL_0094A0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_007888 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_007888"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_007888[] = dmm_Z2_DEKU_KING_room_00DL_007888;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0094A8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0094A8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0094A8[] = dmm_Z2_DEKU_KING_room_00DL_0094A8;
+
+#define dmm_Z2_DEKU_KING_room_00DL_002C98 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_002C98"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_002C98[] = dmm_Z2_DEKU_KING_room_00DL_002C98;
+
+#define dmm_Z2_DEKU_KING_room_00DL_002F88 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_002F88"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_002F88[] = dmm_Z2_DEKU_KING_room_00DL_002F88;
+
+#define dmm_Z2_DEKU_KING_room_00DL_008A30 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_008A30"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_008A30[] = dmm_Z2_DEKU_KING_room_00DL_008A30;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0013A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0013A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0013A0[] = dmm_Z2_DEKU_KING_room_00DL_0013A0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0021C0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0021C0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0021C0[] = dmm_Z2_DEKU_KING_room_00DL_0021C0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_002510 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_002510"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_002510[] = dmm_Z2_DEKU_KING_room_00DL_002510;
+
+#define dmm_Z2_DEKU_KING_room_00DL_003900 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_003900"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_003900[] = dmm_Z2_DEKU_KING_room_00DL_003900;
+
+#define dmm_Z2_DEKU_KING_room_00DL_007400 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_007400"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_007400[] = dmm_Z2_DEKU_KING_room_00DL_007400;
+
+#define dmm_Z2_DEKU_KING_room_00DL_008880 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_008880"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_008880[] = dmm_Z2_DEKU_KING_room_00DL_008880;
+
+#define dmm_Z2_DEKU_KING_room_00DL_009490 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_009490"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_009490[] = dmm_Z2_DEKU_KING_room_00DL_009490;
+
+#define dmm_Z2_DEKU_KING_room_00DL_006F30 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_006F30"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_006F30[] = dmm_Z2_DEKU_KING_room_00DL_006F30;
+
+#define dmm_Z2_DEKU_KING_room_00DL_008C58 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_008C58"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_008C58[] = dmm_Z2_DEKU_KING_room_00DL_008C58;
+
+#define dmm_Z2_DEKU_KING_room_00DL_008E90 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_008E90"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_008E90[] = dmm_Z2_DEKU_KING_room_00DL_008E90;
+
+#define dmm_Z2_DEKU_KING_room_00DL_009068 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_009068"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_009068[] = dmm_Z2_DEKU_KING_room_00DL_009068;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0092B0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0092B0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0092B0[] = dmm_Z2_DEKU_KING_room_00DL_0092B0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_003BD8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_003BD8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_003BD8[] = dmm_Z2_DEKU_KING_room_00DL_003BD8;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0093A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0093A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0093A0[] = dmm_Z2_DEKU_KING_room_00DL_0093A0;
+
+#define dmm_Z2_DEKU_KING_room_00DL_0094B0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00DL_0094B0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00DL_0094B0[] = dmm_Z2_DEKU_KING_room_00DL_0094B0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_003FD0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_003FD0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_003FD0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_003FD0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006138 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_006138"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_006138[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006138;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0043B8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0043B8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0043B8[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0043B8;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_004668 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_004668"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_004668[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_004668;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_004DE8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_004DE8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_004DE8[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_004DE8;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0056E0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0056E0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0056E0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0056E0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_005D60 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_005D60"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_005D60[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_005D60;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0064A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0064A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0064A0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0064A0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006830 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_006830"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_006830[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006830;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006B50 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_006B50"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_006B50[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006B50;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0034A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0034A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0034A0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0034A0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0084F8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0084F8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0084F8[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0084F8;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_009498 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_009498"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_009498[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_009498;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_007D10 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_007D10"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_007D10[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_007D10;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0094A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0094A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0094A0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0094A0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_007888 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_007888"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_007888[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_007888;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0094A8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0094A8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0094A8[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0094A8;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_002C98 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_002C98"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_002C98[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_002C98;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_002F88 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_002F88"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_002F88[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_002F88;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008A30 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_008A30"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_008A30[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008A30;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0013A0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0013A0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0013A0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0013A0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0021C0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0021C0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0021C0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0021C0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_002510 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_002510"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_002510[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_002510;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_003900 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_003900"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_003900[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_003900;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_007400 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_007400"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_007400[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_007400;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008880 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_008880"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_008880[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008880;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_009490 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_009490"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_009490[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_009490;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006F30 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_006F30"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_006F30[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_006F30;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008C58 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_008C58"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_008C58[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008C58;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008E90 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_008E90"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_008E90[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_008E90;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_009068 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_009068"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_009068[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_009068;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0092B0 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_0092B0"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_0092B0[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_0092B0;
+
+#define dmm_Z2_DEKU_KING_room_00Set_0003D0DL_003BD8 "__OTR__mm/scenes/nonmq/Z2_DEKU_KING_scene/Z2_DEKU_KING_room_00Set_0003D0DL_003BD8"
+static const ALIGN_ASSET(2) char mm_Z2_DEKU_KING_room_00Set_0003D0DL_003BD8[] = dmm_Z2_DEKU_KING_room_00Set_0003D0DL_003BD8;
+
+#endif // MM_Z2_DEKU_KING_Z2_DEKU_KING_ROOM_00_H

@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/KAKUSIANA/KAKUSIANA/KAKUSIANA_room_07.h"
+
+#define KAKUSIANA_room_07DL_0005B0 mm_KAKUSIANA_room_07DL_0005B0
+#define KAKUSIANA_room_07DL_000940 mm_KAKUSIANA_room_07DL_000940
+#define KAKUSIANA_room_07DL_000D80 mm_KAKUSIANA_room_07DL_000D80
+#define KAKUSIANA_room_07DL_000F78 mm_KAKUSIANA_room_07DL_000F78
+#define KAKUSIANA_room_07DL_001018 mm_KAKUSIANA_room_07DL_001018
+#define KAKUSIANA_room_07DL_002980 mm_KAKUSIANA_room_07DL_002980
+#define KAKUSIANA_room_07DL_002A68 mm_KAKUSIANA_room_07DL_002A68
+#define KAKUSIANA_room_07Tex_001040 mm_KAKUSIANA_room_07Tex_001040
+#define KAKUSIANA_room_07Tex_001840 mm_KAKUSIANA_room_07Tex_001840

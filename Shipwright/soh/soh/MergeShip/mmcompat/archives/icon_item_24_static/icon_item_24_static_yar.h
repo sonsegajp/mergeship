@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/archives/icon_item_24_static/icon_item_24_static_yar.h"
+
+#define gQuestIconBigMagicJarTex mm_gQuestIconBigMagicJarTex
+#define gQuestIconBossKeyTex mm_gQuestIconBossKeyTex
+#define gQuestIconCompassTex mm_gQuestIconCompassTex
+#define gQuestIconDungeonMapTex mm_gQuestIconDungeonMapTex
+#define gQuestIconGoldSkulltula2Tex mm_gQuestIconGoldSkulltula2Tex
+#define gQuestIconGoldSkulltulaTex mm_gQuestIconGoldSkulltulaTex
+#define gQuestIconHeartContainer2Tex mm_gQuestIconHeartContainer2Tex
+#define gQuestIconHeartContainer3Tex mm_gQuestIconHeartContainer3Tex
+#define gQuestIconHeartContainerTex mm_gQuestIconHeartContainerTex
+#define gQuestIconLinkHumanFaceTex mm_gQuestIconLinkHumanFaceTex
+#define gQuestIconPieceOfHeart2Tex mm_gQuestIconPieceOfHeart2Tex
+#define gQuestIconPieceOfHeartTex mm_gQuestIconPieceOfHeartTex
+#define gQuestIconSmallKeyTex mm_gQuestIconSmallKeyTex
+#define gQuestIconSmallMagicJarTex mm_gQuestIconSmallMagicJarTex

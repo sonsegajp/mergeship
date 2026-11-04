@@ -1,0 +1,75 @@
+#ifndef MM_Z2_SYATEKI_MIZU_Z2_SYATEKI_MIZU_ROOM_00_H
+#define MM_Z2_SYATEKI_MIZU_Z2_SYATEKI_MIZU_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_001870 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_001870"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_001870[] = dmm_Z2_SYATEKI_MIZU_room_00DL_001870;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_0015A8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_0015A8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_0015A8[] = dmm_Z2_SYATEKI_MIZU_room_00DL_0015A8;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_002ED0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_002ED0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_002ED0[] = dmm_Z2_SYATEKI_MIZU_room_00DL_002ED0;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_001320 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_001320"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_001320[] = dmm_Z2_SYATEKI_MIZU_room_00DL_001320;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_0010C0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_0010C0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_0010C0[] = dmm_Z2_SYATEKI_MIZU_room_00DL_0010C0;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_003868 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_003868"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_003868[] = dmm_Z2_SYATEKI_MIZU_room_00DL_003868;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_003C40 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_003C40"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_003C40[] = dmm_Z2_SYATEKI_MIZU_room_00DL_003C40;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_0045D0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_0045D0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_0045D0[] = dmm_Z2_SYATEKI_MIZU_room_00DL_0045D0;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_004A00 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_004A00"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_004A00[] = dmm_Z2_SYATEKI_MIZU_room_00DL_004A00;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_004D10 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_004D10"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_004D10[] = dmm_Z2_SYATEKI_MIZU_room_00DL_004D10;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_002B50 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_002B50"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_002B50[] = dmm_Z2_SYATEKI_MIZU_room_00DL_002B50;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_001CF8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_001CF8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_001CF8[] = dmm_Z2_SYATEKI_MIZU_room_00DL_001CF8;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_000740 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_000740"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_000740[] = dmm_Z2_SYATEKI_MIZU_room_00DL_000740;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_005120 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_005120"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_005120[] = dmm_Z2_SYATEKI_MIZU_room_00DL_005120;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_006110 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_006110"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_006110[] = dmm_Z2_SYATEKI_MIZU_room_00DL_006110;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_003160 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_003160"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_003160[] = dmm_Z2_SYATEKI_MIZU_room_00DL_003160;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_005BE0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_005BE0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_005BE0[] = dmm_Z2_SYATEKI_MIZU_room_00DL_005BE0;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_0009E0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_0009E0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_0009E0[] = dmm_Z2_SYATEKI_MIZU_room_00DL_0009E0;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_003288 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_003288"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_003288[] = dmm_Z2_SYATEKI_MIZU_room_00DL_003288;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_0052E0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_0052E0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_0052E0[] = dmm_Z2_SYATEKI_MIZU_room_00DL_0052E0;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_000E08 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_000E08"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_000E08[] = dmm_Z2_SYATEKI_MIZU_room_00DL_000E08;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_005130 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_005130"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_005130[] = dmm_Z2_SYATEKI_MIZU_room_00DL_005130;
+
+#define dmm_Z2_SYATEKI_MIZU_room_00DL_006128 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MIZU_scene/Z2_SYATEKI_MIZU_room_00DL_006128"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MIZU_room_00DL_006128[] = dmm_Z2_SYATEKI_MIZU_room_00DL_006128;
+
+#endif // MM_Z2_SYATEKI_MIZU_Z2_SYATEKI_MIZU_ROOM_00_H

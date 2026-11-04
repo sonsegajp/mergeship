@@ -1,0 +1,45 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_skb/object_skb.h"
+
+#define gStalchildAttackAnim mm_gStalchildAttackAnim
+#define gStalchildBoneTex mm_gStalchildBoneTex
+#define gStalchildCollapseAnim mm_gStalchildCollapseAnim
+#define gStalchildEmpty1Blob mm_gStalchildEmpty1Blob
+#define gStalchildEmpty2Blob mm_gStalchildEmpty2Blob
+#define gStalchildEmpty3Blob mm_gStalchildEmpty3Blob
+#define gStalchildEmpty4Blob mm_gStalchildEmpty4Blob
+#define gStalchildEyeSocketTex mm_gStalchildEyeSocketTex
+#define gStalchildEyeTex mm_gStalchildEyeTex
+#define gStalchildHandAndFeetTex mm_gStalchildHandAndFeetTex
+#define gStalchildHeadDL mm_gStalchildHeadDL
+#define gStalchildIdleAnim mm_gStalchildIdleAnim
+#define gStalchildLeftFootDL mm_gStalchildLeftFootDL
+#define gStalchildLeftHandDL mm_gStalchildLeftHandDL
+#define gStalchildLeftLowerArmDL mm_gStalchildLeftLowerArmDL
+#define gStalchildLeftShinDL mm_gStalchildLeftShinDL
+#define gStalchildLeftThighDL mm_gStalchildLeftThighDL
+#define gStalchildLeftUpperArmDL mm_gStalchildLeftUpperArmDL
+#define gStalchildLowerJawDL mm_gStalchildLowerJawDL
+#define gStalchildNoseTex mm_gStalchildNoseTex
+#define gStalchildPelvisDL mm_gStalchildPelvisDL
+#define gStalchildPelvisTex mm_gStalchildPelvisTex
+#define gStalchildRibcageDL mm_gStalchildRibcageDL
+#define gStalchildRibcageTex mm_gStalchildRibcageTex
+#define gStalchildRightFootDL mm_gStalchildRightFootDL
+#define gStalchildRightHandDL mm_gStalchildRightHandDL
+#define gStalchildRightLowerArmDL mm_gStalchildRightLowerArmDL
+#define gStalchildRightShinDL mm_gStalchildRightShinDL
+#define gStalchildRightThighDL mm_gStalchildRightThighDL
+#define gStalchildRightUpperArmDL mm_gStalchildRightUpperArmDL
+#define gStalchildSaluteAnim mm_gStalchildSaluteAnim
+#define gStalchildSitLaughAnim mm_gStalchildSitLaughAnim
+#define gStalchildSitTapToesAnim mm_gStalchildSitTapToesAnim
+#define gStalchildSkel mm_gStalchildSkel
+#define gStalchildSkullTex mm_gStalchildSkullTex
+#define gStalchildSpineDL mm_gStalchildSpineDL
+#define gStalchildStaggerAnim mm_gStalchildStaggerAnim
+#define gStalchildStandUpAnim mm_gStalchildStandUpAnim
+#define gStalchildSwingOnBranchAnim mm_gStalchildSwingOnBranchAnim
+#define gStalchildTeethTex mm_gStalchildTeethTex
+#define gStalchildWalkAnim mm_gStalchildWalkAnim

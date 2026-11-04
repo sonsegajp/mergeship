@@ -1,0 +1,49 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_pr/object_pr.h"
+
+#define object_pr_Anim_000268 mm_object_pr_Anim_000268
+#define object_pr_Anim_000740 mm_object_pr_Anim_000740
+#define object_pr_Anim_001E10 mm_object_pr_Anim_001E10
+#define object_pr_Anim_0021E8 mm_object_pr_Anim_0021E8
+#define object_pr_Anim_003904 mm_object_pr_Anim_003904
+#define object_pr_Anim_004274 mm_object_pr_Anim_004274
+#define object_pr_Anim_004340 mm_object_pr_Anim_004340
+#define object_pr_DL_000F30 mm_object_pr_DL_000F30
+#define object_pr_DL_001130 mm_object_pr_DL_001130
+#define object_pr_DL_0011C8 mm_object_pr_DL_0011C8
+#define object_pr_DL_001260 mm_object_pr_DL_001260
+#define object_pr_DL_0012F8 mm_object_pr_DL_0012F8
+#define object_pr_DL_0013E8 mm_object_pr_DL_0013E8
+#define object_pr_DL_001480 mm_object_pr_DL_001480
+#define object_pr_DL_001550 mm_object_pr_DL_001550
+#define object_pr_DL_0029E0 mm_object_pr_DL_0029E0
+#define object_pr_DL_002BD0 mm_object_pr_DL_002BD0
+#define object_pr_DL_002C68 mm_object_pr_DL_002C68
+#define object_pr_DL_002D00 mm_object_pr_DL_002D00
+#define object_pr_DL_002D98 mm_object_pr_DL_002D98
+#define object_pr_DL_002E88 mm_object_pr_DL_002E88
+#define object_pr_DL_002F20 mm_object_pr_DL_002F20
+#define object_pr_DL_002FF0 mm_object_pr_DL_002FF0
+#define object_pr_DL_003AB0 mm_object_pr_DL_003AB0
+#define object_pr_DL_003B50 mm_object_pr_DL_003B50
+#define object_pr_DL_003C08 mm_object_pr_DL_003C08
+#define object_pr_DL_003D10 mm_object_pr_DL_003D10
+#define object_pr_Matanimheader_001DB0 mm_object_pr_Matanimheader_001DB0
+#define object_pr_Skel_0038B8 mm_object_pr_Skel_0038B8
+#define object_pr_Skel_004188 mm_object_pr_Skel_004188
+#define object_pr_Tex_001608 mm_object_pr_Tex_001608
+#define object_pr_Tex_001708 mm_object_pr_Tex_001708
+#define object_pr_Tex_001908 mm_object_pr_Tex_001908
+#define object_pr_Tex_001B08 mm_object_pr_Tex_001B08
+#define object_pr_Tex_001D08 mm_object_pr_Tex_001D08
+#define object_pr_Tex_0030A8 mm_object_pr_Tex_0030A8
+#define object_pr_Tex_0031A8 mm_object_pr_Tex_0031A8
+#define object_pr_Tex_0033A8 mm_object_pr_Tex_0033A8
+#define object_pr_Tex_0035A8 mm_object_pr_Tex_0035A8
+#define object_pr_Tex_0037A8 mm_object_pr_Tex_0037A8
+#define object_pr_Tex_003DA8 mm_object_pr_Tex_003DA8
+#define object_pr_Tex_003EA8 mm_object_pr_Tex_003EA8
+#define object_pr_Tex_003FA8 mm_object_pr_Tex_003FA8
+#define object_pr_Tex_004028 mm_object_pr_Tex_004028
+#define object_pr_Tex_004128 mm_object_pr_Tex_004128

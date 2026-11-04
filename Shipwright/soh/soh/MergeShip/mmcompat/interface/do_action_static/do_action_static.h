@@ -1,0 +1,46 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/interface/do_action_static/do_action_static.h"
+
+#define gDoActionAttackENGTex mm_gDoActionAttackENGTex
+#define gDoActionCheckENGTex mm_gDoActionCheckENGTex
+#define gDoActionClimbENGTex mm_gDoActionClimbENGTex
+#define gDoActionCurlENGTex mm_gDoActionCurlENGTex
+#define gDoActionDanceENGTex mm_gDoActionDanceENGTex
+#define gDoActionDecideENGTex mm_gDoActionDecideENGTex
+#define gDoActionDiveENGTex mm_gDoActionDiveENGTex
+#define gDoActionDownENGTex mm_gDoActionDownENGTex
+#define gDoActionDropENGTex mm_gDoActionDropENGTex
+#define gDoActionEnterENGTex mm_gDoActionEnterENGTex
+#define gDoActionExplodeENGTex mm_gDoActionExplodeENGTex
+#define gDoActionFasterENGTex mm_gDoActionFasterENGTex
+#define gDoActionGrabENGTex mm_gDoActionGrabENGTex
+#define gDoActionHookENGTex mm_gDoActionHookENGTex
+#define gDoActionInfoENGTex mm_gDoActionInfoENGTex
+#define gDoActionJumpENGTex mm_gDoActionJumpENGTex
+#define gDoActionMarchENGTex mm_gDoActionMarchENGTex
+#define gDoActionNaviENGTex mm_gDoActionNaviENGTex
+#define gDoActionNextENGTex mm_gDoActionNextENGTex
+#define gDoActionNum1ENGTex mm_gDoActionNum1ENGTex
+#define gDoActionNum2ENGTex mm_gDoActionNum2ENGTex
+#define gDoActionNum3ENGTex mm_gDoActionNum3ENGTex
+#define gDoActionNum4ENGTex mm_gDoActionNum4ENGTex
+#define gDoActionNum5ENGTex mm_gDoActionNum5ENGTex
+#define gDoActionNum6ENGTex mm_gDoActionNum6ENGTex
+#define gDoActionNum7ENGTex mm_gDoActionNum7ENGTex
+#define gDoActionNum8ENGTex mm_gDoActionNum8ENGTex
+#define gDoActionOpenENGTex mm_gDoActionOpenENGTex
+#define gDoActionPoundENGTex mm_gDoActionPoundENGTex
+#define gDoActionPunchENGTex mm_gDoActionPunchENGTex
+#define gDoActionPutAwayENGTex mm_gDoActionPutAwayENGTex
+#define gDoActionQuitENGTex mm_gDoActionQuitENGTex
+#define gDoActionReelENGTex mm_gDoActionReelENGTex
+#define gDoActionReturnENGTex mm_gDoActionReturnENGTex
+#define gDoActionShootENGTex mm_gDoActionShootENGTex
+#define gDoActionSnapENGTex mm_gDoActionSnapENGTex
+#define gDoActionSpeakENGTex mm_gDoActionSpeakENGTex
+#define gDoActionStopENGTex mm_gDoActionStopENGTex
+#define gDoActionSurfaceENGTex mm_gDoActionSurfaceENGTex
+#define gDoActionSwimENGTex mm_gDoActionSwimENGTex
+#define gDoActionThrowENGTex mm_gDoActionThrowENGTex
+#define gDoActionWarpENGTex mm_gDoActionWarpENGTex

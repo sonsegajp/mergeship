@@ -1,0 +1,51 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_zos/object_zos.h"
+
+#define gEvanArmbandTex mm_gEvanArmbandTex
+#define gEvanEyeClosedTex mm_gEvanEyeClosedTex
+#define gEvanEyeHalfTex mm_gEvanEyeHalfTex
+#define gEvanEyeOpenTex mm_gEvanEyeOpenTex
+#define gEvanFingersTLUT mm_gEvanFingersTLUT
+#define gEvanFingersTex mm_gEvanFingersTex
+#define gEvanHandsOnHipsAnim mm_gEvanHandsOnHipsAnim
+#define gEvanHeadDL mm_gEvanHeadDL
+#define gEvanHeadphoneBoneTex mm_gEvanHeadphoneBoneTex
+#define gEvanHeadphoneClamTex mm_gEvanHeadphoneClamTex
+#define gEvanInspiredAnim mm_gEvanInspiredAnim
+#define gEvanKeyboardBoneTex mm_gEvanKeyboardBoneTex
+#define gEvanKeyboardDL mm_gEvanKeyboardDL
+#define gEvanKeyboardOtherKeysTex mm_gEvanKeyboardOtherKeysTex
+#define gEvanKeyboardRibKeysTex mm_gEvanKeyboardRibKeysTex
+#define gEvanKeyboardSkullTex mm_gEvanKeyboardSkullTex
+#define gEvanLeanOnKeyboardAndSighAnim mm_gEvanLeanOnKeyboardAndSighAnim
+#define gEvanLeanOnKeyboardAnim mm_gEvanLeanOnKeyboardAnim
+#define gEvanLeftFootDL mm_gEvanLeftFootDL
+#define gEvanLeftForearmDL mm_gEvanLeftForearmDL
+#define gEvanLeftHandDL mm_gEvanLeftHandDL
+#define gEvanLeftShinDL mm_gEvanLeftShinDL
+#define gEvanLeftThighDL mm_gEvanLeftThighDL
+#define gEvanLeftUpperArmDL mm_gEvanLeftUpperArmDL
+#define gEvanLowerHeadFinDL mm_gEvanLowerHeadFinDL
+#define gEvanMouthAndFinsTex mm_gEvanMouthAndFinsTex
+#define gEvanMouthEdgeTex mm_gEvanMouthEdgeTex
+#define gEvanPelvisDL mm_gEvanPelvisDL
+#define gEvanPlayLeftAnim mm_gEvanPlayLeftAnim
+#define gEvanPlayRightAnim mm_gEvanPlayRightAnim
+#define gEvanRightFootDL mm_gEvanRightFootDL
+#define gEvanRightForearmDL mm_gEvanRightForearmDL
+#define gEvanRightHandDL mm_gEvanRightHandDL
+#define gEvanRightShinDL mm_gEvanRightShinDL
+#define gEvanRightThighDL mm_gEvanRightThighDL
+#define gEvanRightUpperArmDL mm_gEvanRightUpperArmDL
+#define gEvanSkel mm_gEvanSkel
+#define gEvanSkinTex mm_gEvanSkinTex
+#define gEvanSlowPlayAnim mm_gEvanSlowPlayAnim
+#define gEvanSpottedSkinTex mm_gEvanSpottedSkinTex
+#define gEvanTalkArmsOutAnim mm_gEvanTalkArmsOutAnim
+#define gEvanTalkFootTapAnim mm_gEvanTalkFootTapAnim
+#define gEvanTalkHandsOnHipsAnim mm_gEvanTalkHandsOnHipsAnim
+#define gEvanTalkLookDownAnim mm_gEvanTalkLookDownAnim
+#define gEvanTorsoDL mm_gEvanTorsoDL
+#define gEvanUnknownWhiteTriangleDL mm_gEvanUnknownWhiteTriangleDL
+#define gEvanUpperHeadFinDL mm_gEvanUpperHeadFinDL

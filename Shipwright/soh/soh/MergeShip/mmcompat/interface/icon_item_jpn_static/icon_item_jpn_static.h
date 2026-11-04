@@ -1,0 +1,24 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/interface/icon_item_jpn_static/icon_item_jpn_static.h"
+
+#define gPauseGreatBayTitleENGTex mm_gPauseGreatBayTitleENGTex
+#define gPauseMap10ENGTex mm_gPauseMap10ENGTex
+#define gPauseMasks10ENGTex mm_gPauseMasks10ENGTex
+#define gPauseQuestStatus00ENGTex mm_gPauseQuestStatus00ENGTex
+#define gPauseQuestStatus10ENGTex mm_gPauseQuestStatus10ENGTex
+#define gPauseQuestStatus20ENGTex mm_gPauseQuestStatus20ENGTex
+#define gPauseSelectItem00ENGTex mm_gPauseSelectItem00ENGTex
+#define gPauseSelectItem10ENGTex mm_gPauseSelectItem10ENGTex
+#define gPauseSelectItem20ENGTex mm_gPauseSelectItem20ENGTex
+#define gPauseSnowheadTitleENGTex mm_gPauseSnowheadTitleENGTex
+#define gPauseStoneTowerTitleENGTex mm_gPauseStoneTowerTitleENGTex
+#define gPauseToDecideENGTex mm_gPauseToDecideENGTex
+#define gPauseToEquipENGTex mm_gPauseToEquipENGTex
+#define gPauseToMapENGTex mm_gPauseToMapENGTex
+#define gPauseToMasksENGTex mm_gPauseToMasksENGTex
+#define gPauseToPlayMelodyENGTex mm_gPauseToPlayMelodyENGTex
+#define gPauseToQuestStatusENGTex mm_gPauseToQuestStatusENGTex
+#define gPauseToSelectItemENGTex mm_gPauseToSelectItemENGTex
+#define gPauseToViewNotebookENGTex mm_gPauseToViewNotebookENGTex
+#define gPauseWoodfallTitleENGTex mm_gPauseWoodfallTitleENGTex

@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tokei_turret/object_tokei_turret.h"
+
+#define gClockTownFlagsDL mm_gClockTownFlagsDL
+#define gClockTownFlagsTex mm_gClockTownFlagsTex
+#define gClockTownTurretBaseCol mm_gClockTownTurretBaseCol
+#define gClockTownTurretEmpty0DL mm_gClockTownTurretEmpty0DL
+#define gClockTownTurretEmpty1DL mm_gClockTownTurretEmpty1DL
+#define gClockTownTurretEmpty2DL mm_gClockTownTurretEmpty2DL
+#define gClockTownTurretFabricTex mm_gClockTownTurretFabricTex
+#define gClockTownTurretPlatformBaseDL mm_gClockTownTurretPlatformBaseDL
+#define gClockTownTurretPlatformCol mm_gClockTownTurretPlatformCol
+#define gClockTownTurretPlatformTopDL mm_gClockTownTurretPlatformTopDL
+#define gClockTownTurretTLUT mm_gClockTownTurretTLUT
+#define gClockTownTurretTextTex mm_gClockTownTurretTextTex
+#define gClockTownTurretWoodTex mm_gClockTownTurretWoodTex

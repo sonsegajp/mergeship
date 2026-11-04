@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mask_romerny/object_mask_romerny.h"
+
+#define object_mask_romerny_DL_0007A0 mm_object_mask_romerny_DL_0007A0
+#define object_mask_romerny_TLUT_000B88 mm_object_mask_romerny_TLUT_000B88
+#define object_mask_romerny_Tex_000D88 mm_object_mask_romerny_Tex_000D88
+#define object_mask_romerny_Tex_001588 mm_object_mask_romerny_Tex_001588
+#define object_mask_romerny_Tex_001688 mm_object_mask_romerny_Tex_001688
+#define object_mask_romerny_Tex_001788 mm_object_mask_romerny_Tex_001788
+#define object_mask_romerny_Tex_001988 mm_object_mask_romerny_Tex_001988

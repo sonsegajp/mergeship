@@ -1,0 +1,22 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_CASTLE/Z2_CASTLE/Z2_CASTLE_room_04.h"
+
+#define Z2_CASTLE_room_04DL_0001E0 mm_Z2_CASTLE_room_04DL_0001E0
+#define Z2_CASTLE_room_04DL_0014B8 mm_Z2_CASTLE_room_04DL_0014B8
+#define Z2_CASTLE_room_04DL_001DF0 mm_Z2_CASTLE_room_04DL_001DF0
+#define Z2_CASTLE_room_04DL_002370 mm_Z2_CASTLE_room_04DL_002370
+#define Z2_CASTLE_room_04DL_002D00 mm_Z2_CASTLE_room_04DL_002D00
+#define Z2_CASTLE_room_04DL_0032C8 mm_Z2_CASTLE_room_04DL_0032C8
+#define Z2_CASTLE_room_04DL_003518 mm_Z2_CASTLE_room_04DL_003518
+#define Z2_CASTLE_room_04DL_0038F8 mm_Z2_CASTLE_room_04DL_0038F8
+#define Z2_CASTLE_room_04DL_003A80 mm_Z2_CASTLE_room_04DL_003A80
+#define Z2_CASTLE_room_04DL_0086C0 mm_Z2_CASTLE_room_04DL_0086C0
+#define Z2_CASTLE_room_04DL_0086C8 mm_Z2_CASTLE_room_04DL_0086C8
+#define Z2_CASTLE_room_04DL_0086D0 mm_Z2_CASTLE_room_04DL_0086D0
+#define Z2_CASTLE_room_04Tex_003AC0 mm_Z2_CASTLE_room_04Tex_003AC0
+#define Z2_CASTLE_room_04Tex_004AC0 mm_Z2_CASTLE_room_04Tex_004AC0
+#define Z2_CASTLE_room_04Tex_006AC0 mm_Z2_CASTLE_room_04Tex_006AC0
+#define Z2_CASTLE_room_04Tex_006EC0 mm_Z2_CASTLE_room_04Tex_006EC0
+#define Z2_CASTLE_room_04Tex_007EC0 mm_Z2_CASTLE_room_04Tex_007EC0
+#define Z2_CASTLE_room_04Tex_0082C0 mm_Z2_CASTLE_room_04Tex_0082C0

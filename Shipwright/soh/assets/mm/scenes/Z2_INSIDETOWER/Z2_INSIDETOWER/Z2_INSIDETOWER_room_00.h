@@ -1,0 +1,123 @@
+#ifndef MM_Z2_INSIDETOWER_Z2_INSIDETOWER_ROOM_00_H
+#define MM_Z2_INSIDETOWER_Z2_INSIDETOWER_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_INSIDETOWER_room_00DL_000760 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_000760"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_000760[] = dmm_Z2_INSIDETOWER_room_00DL_000760;
+
+#define dmm_Z2_INSIDETOWER_room_00TLUT_00B978 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00TLUT_00B978"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00TLUT_00B978[] = dmm_Z2_INSIDETOWER_room_00TLUT_00B978;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_007F78 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_007F78"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_007F78[] = dmm_Z2_INSIDETOWER_room_00Tex_007F78;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_009B78 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_009B78"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_009B78[] = dmm_Z2_INSIDETOWER_room_00Tex_009B78;
+
+#define dmm_Z2_INSIDETOWER_room_00TLUT_00BB98 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00TLUT_00BB98"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00TLUT_00BB98[] = dmm_Z2_INSIDETOWER_room_00TLUT_00BB98;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00B178 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00B178"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00B178[] = dmm_Z2_INSIDETOWER_room_00Tex_00B178;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_004E50 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_004E50"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_004E50[] = dmm_Z2_INSIDETOWER_room_00DL_004E50;
+
+#define dmm_Z2_INSIDETOWER_room_00TLUT_00B998 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00TLUT_00B998"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00TLUT_00B998[] = dmm_Z2_INSIDETOWER_room_00TLUT_00B998;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_008778 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_008778"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_008778[] = dmm_Z2_INSIDETOWER_room_00Tex_008778;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_00C420 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_00C420"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_00C420[] = dmm_Z2_INSIDETOWER_room_00DL_00C420;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00DA10 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00DA10"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00DA10[] = dmm_Z2_INSIDETOWER_room_00Tex_00DA10;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_0051E0 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_0051E0"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_0051E0[] = dmm_Z2_INSIDETOWER_room_00DL_0051E0;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_00C770 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_00C770"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_00C770[] = dmm_Z2_INSIDETOWER_room_00DL_00C770;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00EA10 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00EA10"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00EA10[] = dmm_Z2_INSIDETOWER_room_00Tex_00EA10;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_002618 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_002618"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_002618[] = dmm_Z2_INSIDETOWER_room_00DL_002618;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_007778 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_007778"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_007778[] = dmm_Z2_INSIDETOWER_room_00Tex_007778;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00A978 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00A978"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00A978[] = dmm_Z2_INSIDETOWER_room_00Tex_00A978;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_006620 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_006620"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_006620[] = dmm_Z2_INSIDETOWER_room_00DL_006620;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00A578 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00A578"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00A578[] = dmm_Z2_INSIDETOWER_room_00Tex_00A578;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_003338 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_003338"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_003338[] = dmm_Z2_INSIDETOWER_room_00DL_003338;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_007378 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_007378"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_007378[] = dmm_Z2_INSIDETOWER_room_00Tex_007378;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_003AF8 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_003AF8"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_003AF8[] = dmm_Z2_INSIDETOWER_room_00DL_003AF8;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_00C5B8 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_00C5B8"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_00C5B8[] = dmm_Z2_INSIDETOWER_room_00DL_00C5B8;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00F210 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00F210"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00F210[] = dmm_Z2_INSIDETOWER_room_00Tex_00F210;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_001008 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_001008"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_001008[] = dmm_Z2_INSIDETOWER_room_00DL_001008;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_006B78 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_006B78"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_006B78[] = dmm_Z2_INSIDETOWER_room_00Tex_006B78;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_0063D0 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_0063D0"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_0063D0[] = dmm_Z2_INSIDETOWER_room_00DL_0063D0;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_006F78 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_006F78"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_006F78[] = dmm_Z2_INSIDETOWER_room_00Tex_006F78;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00A378 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00A378"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00A378[] = dmm_Z2_INSIDETOWER_room_00Tex_00A378;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_00C668 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_00C668"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_00C668[] = dmm_Z2_INSIDETOWER_room_00DL_00C668;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_006980 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_006980"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_006980[] = dmm_Z2_INSIDETOWER_room_00DL_006980;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_004770 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_004770"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_004770[] = dmm_Z2_INSIDETOWER_room_00DL_004770;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_008B78 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_008B78"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_008B78[] = dmm_Z2_INSIDETOWER_room_00Tex_008B78;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_009378 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_009378"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_009378[] = dmm_Z2_INSIDETOWER_room_00Tex_009378;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_005D78 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_005D78"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_005D78[] = dmm_Z2_INSIDETOWER_room_00DL_005D78;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_00C8F8 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_00C8F8"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_00C8F8[] = dmm_Z2_INSIDETOWER_room_00DL_00C8F8;
+
+#define dmm_Z2_INSIDETOWER_room_00Tex_00CA10 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00Tex_00CA10"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00Tex_00CA10[] = dmm_Z2_INSIDETOWER_room_00Tex_00CA10;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_006B10 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_006B10"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_006B10[] = dmm_Z2_INSIDETOWER_room_00DL_006B10;
+
+#define dmm_Z2_INSIDETOWER_room_00DL_00C9E0 "__OTR__mm/scenes/nonmq/Z2_INSIDETOWER_scene/Z2_INSIDETOWER_room_00DL_00C9E0"
+static const ALIGN_ASSET(2) char mm_Z2_INSIDETOWER_room_00DL_00C9E0[] = dmm_Z2_INSIDETOWER_room_00DL_00C9E0;
+
+#endif // MM_Z2_INSIDETOWER_Z2_INSIDETOWER_ROOM_00_H

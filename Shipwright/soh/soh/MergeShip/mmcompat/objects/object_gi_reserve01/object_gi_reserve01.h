@@ -1,0 +1,14 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_gi_reserve01/object_gi_reserve01.h"
+
+#define gGiTitleDeedEmptyDL mm_gGiTitleDeedEmptyDL
+#define gGiTitleDeedLandColorDL mm_gGiTitleDeedLandColorDL
+#define gGiTitleDeedLeftInscriptionsTex mm_gGiTitleDeedLeftInscriptionsTex
+#define gGiTitleDeedMountainColorDL mm_gGiTitleDeedMountainColorDL
+#define gGiTitleDeedOceanColorDL mm_gGiTitleDeedOceanColorDL
+#define gGiTitleDeedPaperDL mm_gGiTitleDeedPaperDL
+#define gGiTitleDeedRightInscriptionsTex mm_gGiTitleDeedRightInscriptionsTex
+#define gGiTitleDeedSealAndRibbonDL mm_gGiTitleDeedSealAndRibbonDL
+#define gGiTitleDeedSealAndRibbonTex mm_gGiTitleDeedSealAndRibbonTex
+#define gGiTitleDeedSwampColorDL mm_gGiTitleDeedSwampColorDL

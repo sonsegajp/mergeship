@@ -1,0 +1,35 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_box/object_box.h"
+
+#define gBoxBigChestOpenAdultAnim mm_gBoxBigChestOpenAdultAnim
+#define gBoxBigChestOpenChildAnim mm_gBoxBigChestOpenChildAnim
+#define gBoxBigChestOpenDekuAnim mm_gBoxBigChestOpenDekuAnim
+#define gBoxBigChestOpenGoronAnim mm_gBoxBigChestOpenGoronAnim
+#define gBoxChestBaseDL mm_gBoxChestBaseDL
+#define gBoxChestBaseGildedDL mm_gBoxChestBaseGildedDL
+#define gBoxChestBaseOrnateDL mm_gBoxChestBaseOrnateDL
+#define gBoxChestCol mm_gBoxChestCol
+#define gBoxChestCornerGildedTex mm_gBoxChestCornerGildedTex
+#define gBoxChestCornerOrnateTex mm_gBoxChestCornerOrnateTex
+#define gBoxChestCornerTex mm_gBoxChestCornerTex
+#define gBoxChestEmpty1Blob mm_gBoxChestEmpty1Blob
+#define gBoxChestEmpty2Blob mm_gBoxChestEmpty2Blob
+#define gBoxChestEmpty3Blob mm_gBoxChestEmpty3Blob
+#define gBoxChestLidDL mm_gBoxChestLidDL
+#define gBoxChestLidGildedDL mm_gBoxChestLidGildedDL
+#define gBoxChestLidOrnateDL mm_gBoxChestLidOrnateDL
+#define gBoxChestLockGildedTex mm_gBoxChestLockGildedTex
+#define gBoxChestLockOrnateTex mm_gBoxChestLockOrnateTex
+#define gBoxChestLockTex mm_gBoxChestLockTex
+#define gBoxChestOpenAnim mm_gBoxChestOpenAnim
+#define gBoxChestSkel mm_gBoxChestSkel
+#define gBoxLightAdultCurveAnim mm_gBoxLightAdultCurveAnim
+#define gBoxLightChildCurveAnim mm_gBoxLightChildCurveAnim
+#define gBoxLightCurveSkel mm_gBoxLightCurveSkel
+#define gBoxLightTex mm_gBoxLightTex
+#define object_box_DL_007890 mm_object_box_DL_007890
+#define object_box_DL_007978 mm_object_box_DL_007978
+#define object_box_DL_007A40 mm_object_box_DL_007A40
+#define object_box_DL_007B08 mm_object_box_DL_007B08
+#define object_box_DL_007BD0 mm_object_box_DL_007BD0

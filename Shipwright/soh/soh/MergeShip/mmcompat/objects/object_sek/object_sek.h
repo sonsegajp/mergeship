@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_sek/object_sek.h"
+
+#define gOwlStatueClosedDL mm_gOwlStatueClosedDL
+#define gOwlStatueOpenedDL mm_gOwlStatueOpenedDL
+#define object_sek_DL_001110 mm_object_sek_DL_001110
+#define object_sek_TLUT_001610 mm_object_sek_TLUT_001610
+#define object_sek_Tex_0003F0 mm_object_sek_Tex_0003F0
+#define object_sek_Tex_0007F0 mm_object_sek_Tex_0007F0
+#define object_sek_Tex_001810 mm_object_sek_Tex_001810
+#define object_sek_Tex_001C10 mm_object_sek_Tex_001C10
+#define object_sek_Tex_002010 mm_object_sek_Tex_002010
+#define object_sek_Tex_002410 mm_object_sek_Tex_002410
+#define object_sek_Tex_002810 mm_object_sek_Tex_002810
+#define object_sek_Tex_002C10 mm_object_sek_Tex_002C10
+#define object_sek_Tex_003A70 mm_object_sek_Tex_003A70
+#define object_sek_Tex_004270 mm_object_sek_Tex_004270

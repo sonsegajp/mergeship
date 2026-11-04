@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_obj_usiyane/object_obj_usiyane.h"
+
+#define object_obj_usiyane_Colheader_0022AC mm_object_obj_usiyane_Colheader_0022AC
+#define object_obj_usiyane_DL_000090 mm_object_obj_usiyane_DL_000090
+#define object_obj_usiyane_DL_000098 mm_object_obj_usiyane_DL_000098
+#define object_obj_usiyane_DL_000830 mm_object_obj_usiyane_DL_000830
+#define object_obj_usiyane_DL_000838 mm_object_obj_usiyane_DL_000838
+#define object_obj_usiyane_TLUT_0009C8 mm_object_obj_usiyane_TLUT_0009C8
+#define object_obj_usiyane_Tex_000130 mm_object_obj_usiyane_Tex_000130
+#define object_obj_usiyane_Tex_0009E8 mm_object_obj_usiyane_Tex_0009E8
+#define object_obj_usiyane_Tex_0011E8 mm_object_obj_usiyane_Tex_0011E8

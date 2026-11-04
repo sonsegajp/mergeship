@@ -1,0 +1,40 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_fb/object_fb.h"
+
+#define object_fb_Anim_0006D8 mm_object_fb_Anim_0006D8
+#define object_fb_Anim_0007D4 mm_object_fb_Anim_0007D4
+#define object_fb_Anim_000ACC mm_object_fb_Anim_000ACC
+#define object_fb_Anim_001174 mm_object_fb_Anim_001174
+#define object_fb_Anim_0013AC mm_object_fb_Anim_0013AC
+#define object_fb_DL_002000 mm_object_fb_DL_002000
+#define object_fb_DL_002088 mm_object_fb_DL_002088
+#define object_fb_DL_002110 mm_object_fb_DL_002110
+#define object_fb_DL_0021A8 mm_object_fb_DL_0021A8
+#define object_fb_DL_002230 mm_object_fb_DL_002230
+#define object_fb_DL_002388 mm_object_fb_DL_002388
+#define object_fb_DL_002418 mm_object_fb_DL_002418
+#define object_fb_DL_0024A8 mm_object_fb_DL_0024A8
+#define object_fb_DL_0025F8 mm_object_fb_DL_0025F8
+#define object_fb_DL_002690 mm_object_fb_DL_002690
+#define object_fb_DL_002730 mm_object_fb_DL_002730
+#define object_fb_DL_0027B8 mm_object_fb_DL_0027B8
+#define object_fb_DL_002870 mm_object_fb_DL_002870
+#define object_fb_DL_002930 mm_object_fb_DL_002930
+#define object_fb_DL_0029F0 mm_object_fb_DL_0029F0
+#define object_fb_DL_002AD8 mm_object_fb_DL_002AD8
+#define object_fb_DL_002B98 mm_object_fb_DL_002B98
+#define object_fb_DL_002C20 mm_object_fb_DL_002C20
+#define object_fb_DL_0061E0 mm_object_fb_DL_0061E0
+#define object_fb_Skel_006190 mm_object_fb_Skel_006190
+#define object_fb_Tex_002D20 mm_object_fb_Tex_002D20
+#define object_fb_Tex_003120 mm_object_fb_Tex_003120
+#define object_fb_Tex_003520 mm_object_fb_Tex_003520
+#define object_fb_Tex_003920 mm_object_fb_Tex_003920
+#define object_fb_Tex_004920 mm_object_fb_Tex_004920
+#define object_fb_Tex_004B20 mm_object_fb_Tex_004B20
+#define object_fb_Tex_004F20 mm_object_fb_Tex_004F20
+#define object_fb_Tex_005020 mm_object_fb_Tex_005020
+#define object_fb_Tex_005820 mm_object_fb_Tex_005820
+#define object_fb_Tex_0062A8 mm_object_fb_Tex_0062A8
+#define object_fb_Tex_0066A8 mm_object_fb_Tex_0066A8

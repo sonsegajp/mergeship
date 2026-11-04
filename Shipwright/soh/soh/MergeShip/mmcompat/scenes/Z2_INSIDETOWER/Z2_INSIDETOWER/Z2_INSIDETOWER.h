@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_INSIDETOWER/Z2_INSIDETOWER/Z2_INSIDETOWER.h"
+
+#define Z2_INSIDETOWERCollisionHeader_007F10 mm_Z2_INSIDETOWERCollisionHeader_007F10
+#define Z2_INSIDETOWERCutsceneData_000220 mm_Z2_INSIDETOWERCutsceneData_000220
+#define Z2_INSIDETOWERCutsceneData_0011D0 mm_Z2_INSIDETOWERCutsceneData_0011D0
+#define Z2_INSIDETOWERCutsceneData_001C10 mm_Z2_INSIDETOWERCutsceneData_001C10
+#define Z2_INSIDETOWERCutsceneData_003100 mm_Z2_INSIDETOWERCutsceneData_003100
+#define Z2_INSIDETOWERCutsceneData_0033C0 mm_Z2_INSIDETOWERCutsceneData_0033C0
+#define Z2_INSIDETOWERCutsceneData_003540 mm_Z2_INSIDETOWERCutsceneData_003540
+#define Z2_INSIDETOWERCutsceneData_003B30 mm_Z2_INSIDETOWERCutsceneData_003B30
+#define Z2_INSIDETOWERCutsceneData_0045D0 mm_Z2_INSIDETOWERCutsceneData_0045D0

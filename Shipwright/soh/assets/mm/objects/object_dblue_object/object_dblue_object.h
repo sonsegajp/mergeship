@@ -1,0 +1,339 @@
+#ifndef MM_OBJECTS_OBJECT_DBLUE_OBJECT_H
+#define MM_OBJECTS_OBJECT_DBLUE_OBJECT_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_gGreatBayTempleObjectElevatorEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectElevatorEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectElevatorEmptyDL[] = dmm_gGreatBayTempleObjectElevatorEmptyDL;
+
+#define dmm_gGreatBayTempleObjectElevatorDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectElevatorDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectElevatorDL[] = dmm_gGreatBayTempleObjectElevatorDL;
+
+#define dmm_gGreatBayTempleObjectElevatorCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectElevatorCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectElevatorCol[] = dmm_gGreatBayTempleObjectElevatorCol;
+
+#define dmm_gGreatBayTempleObjectWaterwheelWithPlatformsEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelWithPlatformsEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelWithPlatformsEmptyDL[] = dmm_gGreatBayTempleObjectWaterwheelWithPlatformsEmptyDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelWithPlatformsDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelWithPlatformsDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelWithPlatformsDL[] = dmm_gGreatBayTempleObjectWaterwheelWithPlatformsDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelWithPlatformsCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelWithPlatformsCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelWithPlatformsCol[] = dmm_gGreatBayTempleObjectWaterwheelWithPlatformsCol;
+
+#define dmm_gGreatBayTempleObjectIceStalactiteRimDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectIceStalactiteRimDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectIceStalactiteRimDL[] = dmm_gGreatBayTempleObjectIceStalactiteRimDL;
+
+#define dmm_gGreatBayTempleObjectIceStalactiteDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectIceStalactiteDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectIceStalactiteDL[] = dmm_gGreatBayTempleObjectIceStalactiteDL;
+
+#define dmm_gGreatBayTempleObjectIceStalactiteCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectIceStalactiteCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectIceStalactiteCol[] = dmm_gGreatBayTempleObjectIceStalactiteCol;
+
+#define dmm_gGreatBayTempleObjectFrozenWaterfallDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectFrozenWaterfallDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectFrozenWaterfallDL[] = dmm_gGreatBayTempleObjectFrozenWaterfallDL;
+
+#define dmm_gGreatBayTempleObjectFrozenWaterfallEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectFrozenWaterfallEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectFrozenWaterfallEmptyDL[] = dmm_gGreatBayTempleObjectFrozenWaterfallEmptyDL;
+
+#define dmm_gGreatBayTempleObjectGearShaftWithPlatformsEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectGearShaftWithPlatformsEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectGearShaftWithPlatformsEmptyDL[] = dmm_gGreatBayTempleObjectGearShaftWithPlatformsEmptyDL;
+
+#define dmm_gGreatBayTempleObjectGearShaftWithPlatformsDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectGearShaftWithPlatformsDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectGearShaftWithPlatformsDL[] = dmm_gGreatBayTempleObjectGearShaftWithPlatformsDL;
+
+#define dmm_gGreatBayTempleObjectGearShaftEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectGearShaftEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectGearShaftEmptyDL[] = dmm_gGreatBayTempleObjectGearShaftEmptyDL;
+
+#define dmm_gGreatBayTempleObjectGearShaftDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectGearShaftDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectGearShaftDL[] = dmm_gGreatBayTempleObjectGearShaftDL;
+
+#define dmm_gGreatBayTempleObjectGearShaftWithPlatformsCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectGearShaftWithPlatformsCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectGearShaftWithPlatformsCol[] = dmm_gGreatBayTempleObjectGearShaftWithPlatformsCol;
+
+#define dmm_gGreatBayTempleObjectOneWaySwitchEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectOneWaySwitchEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectOneWaySwitchEmptyDL[] = dmm_gGreatBayTempleObjectOneWaySwitchEmptyDL;
+
+#define dmm_gGreatBayTempleObjectOneWaySwitchDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectOneWaySwitchDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectOneWaySwitchDL[] = dmm_gGreatBayTempleObjectOneWaySwitchDL;
+
+#define dmm_gGreatBayTempleObjectTwoWaySwitchEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectTwoWaySwitchEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectTwoWaySwitchEmptyDL[] = dmm_gGreatBayTempleObjectTwoWaySwitchEmptyDL;
+
+#define dmm_gGreatBayTempleObjectTwoWaySwitchDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectTwoWaySwitchDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectTwoWaySwitchDL[] = dmm_gGreatBayTempleObjectTwoWaySwitchDL;
+
+#define dmm_gGreatBayTempleObjectTwoWaySwitchCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectTwoWaySwitchCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectTwoWaySwitchCol[] = dmm_gGreatBayTempleObjectTwoWaySwitchCol;
+
+#define dmm_gGreatBayTempleObjectOneWaySwitchCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectOneWaySwitchCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectOneWaySwitchCol[] = dmm_gGreatBayTempleObjectOneWaySwitchCol;
+
+#define dmm_gGreatBayTempleObjectWaterwheelEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelEmptyDL[] = dmm_gGreatBayTempleObjectWaterwheelEmptyDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelDL[] = dmm_gGreatBayTempleObjectWaterwheelDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelWithFakeGearEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelWithFakeGearEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelWithFakeGearEmptyDL[] = dmm_gGreatBayTempleObjectWaterwheelWithFakeGearEmptyDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelWithFakeGearDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelWithFakeGearDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelWithFakeGearDL[] = dmm_gGreatBayTempleObjectWaterwheelWithFakeGearDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelCol[] = dmm_gGreatBayTempleObjectWaterwheelCol;
+
+#define dmm_gGreatBayTempleObjectWaterfallDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterfallDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterfallDL[] = dmm_gGreatBayTempleObjectWaterfallDL;
+
+#define dmm_gGreatBayTempleObjectWaterfallEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterfallEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterfallEmptyDL[] = dmm_gGreatBayTempleObjectWaterfallEmptyDL;
+
+#define dmm_gGreatBayTempleObjectWaterfallTexAnim "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterfallTexAnim"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterfallTexAnim[] = dmm_gGreatBayTempleObjectWaterfallTexAnim;
+
+#define dmm_gGreatBayTempleObjectSeesawShaftEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSeesawShaftEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSeesawShaftEmptyDL[] = dmm_gGreatBayTempleObjectSeesawShaftEmptyDL;
+
+#define dmm_gGreatBayTempleObjectSeesawShaftDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSeesawShaftDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSeesawShaftDL[] = dmm_gGreatBayTempleObjectSeesawShaftDL;
+
+#define dmm_gGreatBayTempleObjectSeesawShaftCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSeesawShaftCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSeesawShaftCol[] = dmm_gGreatBayTempleObjectSeesawShaftCol;
+
+#define dmm_gGreatBayTempleObjectLargeSeesawPlatformEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectLargeSeesawPlatformEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectLargeSeesawPlatformEmptyDL[] = dmm_gGreatBayTempleObjectLargeSeesawPlatformEmptyDL;
+
+#define dmm_gGreatBayTempleObjectLargeSeesawPlatformDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectLargeSeesawPlatformDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectLargeSeesawPlatformDL[] = dmm_gGreatBayTempleObjectLargeSeesawPlatformDL;
+
+#define dmm_gGreatBayTempleObjectLargeSeesawPlatformCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectLargeSeesawPlatformCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectLargeSeesawPlatformCol[] = dmm_gGreatBayTempleObjectLargeSeesawPlatformCol;
+
+#define dmm_gGreatBayTempleObjectSmallSeesawPlatformEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSmallSeesawPlatformEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSmallSeesawPlatformEmptyDL[] = dmm_gGreatBayTempleObjectSmallSeesawPlatformEmptyDL;
+
+#define dmm_gGreatBayTempleObjectSmallSeesawPlatformDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSmallSeesawPlatformDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSmallSeesawPlatformDL[] = dmm_gGreatBayTempleObjectSmallSeesawPlatformDL;
+
+#define dmm_gGreatBayTempleObjectSmallSeesawPlatformCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSmallSeesawPlatformCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSmallSeesawPlatformCol[] = dmm_gGreatBayTempleObjectSmallSeesawPlatformCol;
+
+#define dmm_gGreatBayTempleObjectWhirlpoolDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWhirlpoolDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWhirlpoolDL[] = dmm_gGreatBayTempleObjectWhirlpoolDL;
+
+#define dmm_gGreatBayTempleObjectWhirlpoolEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWhirlpoolEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWhirlpoolEmptyDL[] = dmm_gGreatBayTempleObjectWhirlpoolEmptyDL;
+
+#define dmm_gGreatBayTempleObjectWhirlpoolTexAnim "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWhirlpoolTexAnim"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWhirlpoolTexAnim[] = dmm_gGreatBayTempleObjectWhirlpoolTexAnim;
+
+#define dmm_gGreatBayTempleObjectWaterwheelSplashDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelSplashDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelSplashDL[] = dmm_gGreatBayTempleObjectWaterwheelSplashDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelSplashEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelSplashEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelSplashEmptyDL[] = dmm_gGreatBayTempleObjectWaterwheelSplashEmptyDL;
+
+#define dmm_gGreatBayTempleObjectWaterwheelSplashTexAnim "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterwheelSplashTexAnim"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterwheelSplashTexAnim[] = dmm_gGreatBayTempleObjectWaterwheelSplashTexAnim;
+
+#define dmm_gGreatBayTempleObjectSeesawSplashDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSeesawSplashDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSeesawSplashDL[] = dmm_gGreatBayTempleObjectSeesawSplashDL;
+
+#define dmm_gGreatBayTempleObjectSeesawSplashEmptyDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSeesawSplashEmptyDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSeesawSplashEmptyDL[] = dmm_gGreatBayTempleObjectSeesawSplashEmptyDL;
+
+#define dmm_gGreatBayTempleObjectSeesawSplashTexAnim "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSeesawSplashTexAnim"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSeesawSplashTexAnim[] = dmm_gGreatBayTempleObjectSeesawSplashTexAnim;
+
+#define dmm_gGreatBayTempleObjectUnusedCol "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedCol"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedCol[] = dmm_gGreatBayTempleObjectUnusedCol;
+
+#define dmm_gGreatBayTempleObjectOneWaySwitchTLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectOneWaySwitchTLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectOneWaySwitchTLUT[] = dmm_gGreatBayTempleObjectOneWaySwitchTLUT;
+
+#define dmm_gGreatBayTempleObjectUnused1TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused1TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused1TLUT[] = dmm_gGreatBayTempleObjectUnused1TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused2TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused2TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused2TLUT[] = dmm_gGreatBayTempleObjectUnused2TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused3TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused3TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused3TLUT[] = dmm_gGreatBayTempleObjectUnused3TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused4TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused4TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused4TLUT[] = dmm_gGreatBayTempleObjectUnused4TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused5TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused5TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused5TLUT[] = dmm_gGreatBayTempleObjectUnused5TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused6TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused6TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused6TLUT[] = dmm_gGreatBayTempleObjectUnused6TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused7TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused7TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused7TLUT[] = dmm_gGreatBayTempleObjectUnused7TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused8TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused8TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused8TLUT[] = dmm_gGreatBayTempleObjectUnused8TLUT;
+
+#define dmm_gGreatBayTempleObjectUnusedGearTLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedGearTLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedGearTLUT[] = dmm_gGreatBayTempleObjectUnusedGearTLUT;
+
+#define dmm_gGreatBayTempleObjectUnused9TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused9TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused9TLUT[] = dmm_gGreatBayTempleObjectUnused9TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused10TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused10TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused10TLUT[] = dmm_gGreatBayTempleObjectUnused10TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused11TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused11TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused11TLUT[] = dmm_gGreatBayTempleObjectUnused11TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused12TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused12TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused12TLUT[] = dmm_gGreatBayTempleObjectUnused12TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused13TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused13TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused13TLUT[] = dmm_gGreatBayTempleObjectUnused13TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused14TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused14TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused14TLUT[] = dmm_gGreatBayTempleObjectUnused14TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused15TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused15TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused15TLUT[] = dmm_gGreatBayTempleObjectUnused15TLUT;
+
+#define dmm_gGreatBayTempleObjectUnusedDarkMetalTLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedDarkMetalTLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedDarkMetalTLUT[] = dmm_gGreatBayTempleObjectUnusedDarkMetalTLUT;
+
+#define dmm_gGreatBayTempleObjectUnused16TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused16TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused16TLUT[] = dmm_gGreatBayTempleObjectUnused16TLUT;
+
+#define dmm_gGreatBayTempleObjectUnusedPaddleTLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedPaddleTLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedPaddleTLUT[] = dmm_gGreatBayTempleObjectUnusedPaddleTLUT;
+
+#define dmm_gGreatBayTempleObjectUnused17TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused17TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused17TLUT[] = dmm_gGreatBayTempleObjectUnused17TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused18TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused18TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused18TLUT[] = dmm_gGreatBayTempleObjectUnused18TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused19TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused19TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused19TLUT[] = dmm_gGreatBayTempleObjectUnused19TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused20TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused20TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused20TLUT[] = dmm_gGreatBayTempleObjectUnused20TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused21TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused21TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused21TLUT[] = dmm_gGreatBayTempleObjectUnused21TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused22TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused22TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused22TLUT[] = dmm_gGreatBayTempleObjectUnused22TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused23TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused23TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused23TLUT[] = dmm_gGreatBayTempleObjectUnused23TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused24TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused24TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused24TLUT[] = dmm_gGreatBayTempleObjectUnused24TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused25TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused25TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused25TLUT[] = dmm_gGreatBayTempleObjectUnused25TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused26TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused26TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused26TLUT[] = dmm_gGreatBayTempleObjectUnused26TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused27TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused27TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused27TLUT[] = dmm_gGreatBayTempleObjectUnused27TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused28TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused28TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused28TLUT[] = dmm_gGreatBayTempleObjectUnused28TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused29TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused29TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused29TLUT[] = dmm_gGreatBayTempleObjectUnused29TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused30TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused30TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused30TLUT[] = dmm_gGreatBayTempleObjectUnused30TLUT;
+
+#define dmm_gGreatBayTempleObjectLargeSeesawPlatformTLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectLargeSeesawPlatformTLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectLargeSeesawPlatformTLUT[] = dmm_gGreatBayTempleObjectLargeSeesawPlatformTLUT;
+
+#define dmm_gGreatBayTempleObjectUnused31TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused31TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused31TLUT[] = dmm_gGreatBayTempleObjectUnused31TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused32TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused32TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused32TLUT[] = dmm_gGreatBayTempleObjectUnused32TLUT;
+
+#define dmm_gGreatBayTempleObjectUnused33TLUT "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnused33TLUT"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnused33TLUT[] = dmm_gGreatBayTempleObjectUnused33TLUT;
+
+#define dmm_gGreatBayTempleObjectPlatformSideAndSeesawShaftTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectPlatformSideAndSeesawShaftTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectPlatformSideAndSeesawShaftTex[] = dmm_gGreatBayTempleObjectPlatformSideAndSeesawShaftTex;
+
+#define dmm_gGreatBayTempleObjectElevatorRiserTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectElevatorRiserTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectElevatorRiserTex[] = dmm_gGreatBayTempleObjectElevatorRiserTex;
+
+#define dmm_gGreatBayTempleObjectPlatformAndWaterwheelBladeTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectPlatformAndWaterwheelBladeTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectPlatformAndWaterwheelBladeTex[] = dmm_gGreatBayTempleObjectPlatformAndWaterwheelBladeTex;
+
+#define dmm_gGreatBayTempleObjectDarkMetalTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectDarkMetalTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectDarkMetalTex[] = dmm_gGreatBayTempleObjectDarkMetalTex;
+
+#define dmm_gGreatBayTempleObjectShaftTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectShaftTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectShaftTex[] = dmm_gGreatBayTempleObjectShaftTex;
+
+#define dmm_gGreatBayTempleObjectGearTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectGearTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectGearTex[] = dmm_gGreatBayTempleObjectGearTex;
+
+#define dmm_gGreatBayTempleObjectPaddleTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectPaddleTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectPaddleTex[] = dmm_gGreatBayTempleObjectPaddleTex;
+
+#define dmm_gGreatBayTempleObjectSwitchKnobTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSwitchKnobTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSwitchKnobTex[] = dmm_gGreatBayTempleObjectSwitchKnobTex;
+
+#define dmm_gGreatBayTempleObjectOneWaySwitchTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectOneWaySwitchTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectOneWaySwitchTex[] = dmm_gGreatBayTempleObjectOneWaySwitchTex;
+
+#define dmm_gGreatBayTempleObjectSwitchSideTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSwitchSideTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSwitchSideTex[] = dmm_gGreatBayTempleObjectSwitchSideTex;
+
+#define dmm_gGreatBayTempleObjectUnusedGearTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedGearTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedGearTex[] = dmm_gGreatBayTempleObjectUnusedGearTex;
+
+#define dmm_gGreatBayTempleObjectUnusedDarkMetalTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedDarkMetalTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedDarkMetalTex[] = dmm_gGreatBayTempleObjectUnusedDarkMetalTex;
+
+#define dmm_gGreatBayTempleObjectUnusedShaftTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedShaftTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedShaftTex[] = dmm_gGreatBayTempleObjectUnusedShaftTex;
+
+#define dmm_gGreatBayTempleObjectUnusedPaddleTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectUnusedPaddleTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectUnusedPaddleTex[] = dmm_gGreatBayTempleObjectUnusedPaddleTex;
+
+#define dmm_gGreatBayTempleObjectLargeSeesawPlatformTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectLargeSeesawPlatformTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectLargeSeesawPlatformTex[] = dmm_gGreatBayTempleObjectLargeSeesawPlatformTex;
+
+#define dmm_gGreatBayTempleObjectHorizontalWaterFoamTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectHorizontalWaterFoamTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectHorizontalWaterFoamTex[] = dmm_gGreatBayTempleObjectHorizontalWaterFoamTex;
+
+#define dmm_gGreatBayTempleObjectIceTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectIceTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectIceTex[] = dmm_gGreatBayTempleObjectIceTex;
+
+#define dmm_gGreatBayTempleObjectIceStalactiteRimMaskTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectIceStalactiteRimMaskTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectIceStalactiteRimMaskTex[] = dmm_gGreatBayTempleObjectIceStalactiteRimMaskTex;
+
+#define dmm_gGreatBayTempleObjectWaterfallWaterTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWaterfallWaterTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWaterfallWaterTex[] = dmm_gGreatBayTempleObjectWaterfallWaterTex;
+
+#define dmm_gGreatBayTempleObjectVerticalWaterFoamTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectVerticalWaterFoamTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectVerticalWaterFoamTex[] = dmm_gGreatBayTempleObjectVerticalWaterFoamTex;
+
+#define dmm_gGreatBayTempleObjectWhirpoolWaterTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectWhirpoolWaterTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectWhirpoolWaterTex[] = dmm_gGreatBayTempleObjectWhirpoolWaterTex;
+
+#define dmm_gGreatBayTempleObjectSplashScrollTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectSplashScrollTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectSplashScrollTex[] = dmm_gGreatBayTempleObjectSplashScrollTex;
+
+#define dmm_gGreatBayTempleObjectDoorDL "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectDoorDL"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectDoorDL[] = dmm_gGreatBayTempleObjectDoorDL;
+
+#define dmm_gGreatBayTempleObjectDoorTex "__OTR__mm/objects/object_dblue_object/gGreatBayTempleObjectDoorTex"
+static const ALIGN_ASSET(2) char mm_gGreatBayTempleObjectDoorTex[] = dmm_gGreatBayTempleObjectDoorTex;
+
+#endif // MM_OBJECTS_OBJECT_DBLUE_OBJECT_H

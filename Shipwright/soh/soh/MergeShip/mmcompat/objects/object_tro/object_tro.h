@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tro/object_tro.h"
+
+#define gKoumeKioskDL mm_gKoumeKioskDL
+#define gKoumeKioskEyeClosedTex mm_gKoumeKioskEyeClosedTex
+#define gKoumeKioskEyeHalfTex mm_gKoumeKioskEyeHalfTex
+#define gKoumeKioskEyeOpenTex mm_gKoumeKioskEyeOpenTex
+#define gKoumeKioskHeadMovingAnim mm_gKoumeKioskHeadMovingAnim
+#define gKoumeKioskJewelHolderTex mm_gKoumeKioskJewelHolderTex
+#define gKoumeKioskJewelTex mm_gKoumeKioskJewelTex
+#define gKoumeKioskNoseTLUT mm_gKoumeKioskNoseTLUT
+#define gKoumeKioskNoseTex mm_gKoumeKioskNoseTex
+#define gKoumeKioskNostrilsTLUT mm_gKoumeKioskNostrilsTLUT
+#define gKoumeKioskNostrilsTex mm_gKoumeKioskNostrilsTex
+#define gKoumeKioskShadowedSkinTex mm_gKoumeKioskShadowedSkinTex
+#define gKoumeKioskSkel mm_gKoumeKioskSkel

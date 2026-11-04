@@ -1,0 +1,138 @@
+#ifndef MM_Z2_20SICHITAI2_Z2_20SICHITAI2_ROOM_00_H
+#define MM_Z2_20SICHITAI2_Z2_20SICHITAI2_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_20SICHITAI2_room_00DL_00FC60 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_00FC60"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_00FC60[] = dmm_Z2_20SICHITAI2_room_00DL_00FC60;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_012628 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_012628"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_012628[] = dmm_Z2_20SICHITAI2_room_00Tex_012628;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_016A28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_016A28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_016A28[] = dmm_Z2_20SICHITAI2_room_00Tex_016A28;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_016F28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_016F28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_016F28[] = dmm_Z2_20SICHITAI2_room_00Tex_016F28;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_018028 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_018028"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_018028[] = dmm_Z2_20SICHITAI2_room_00Tex_018028;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_011628 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_011628"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_011628[] = dmm_Z2_20SICHITAI2_room_00Tex_011628;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_011428 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_011428"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_011428[] = dmm_Z2_20SICHITAI2_room_00Tex_011428;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_011228 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_011228"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_011228[] = dmm_Z2_20SICHITAI2_room_00Tex_011228;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_016B28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_016B28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_016B28[] = dmm_Z2_20SICHITAI2_room_00Tex_016B28;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_017028 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_017028"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_017028[] = dmm_Z2_20SICHITAI2_room_00Tex_017028;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_014A28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_014A28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_014A28[] = dmm_Z2_20SICHITAI2_room_00Tex_014A28;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_014228 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_014228"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_014228[] = dmm_Z2_20SICHITAI2_room_00Tex_014228;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_016228 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_016228"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_016228[] = dmm_Z2_20SICHITAI2_room_00Tex_016228;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_015A28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_015A28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_015A28[] = dmm_Z2_20SICHITAI2_room_00Tex_015A28;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_013628 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_013628"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_013628[] = dmm_Z2_20SICHITAI2_room_00Tex_013628;
+
+#define dmm_Z2_20SICHITAI2_room_00TLUT_019428 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00TLUT_019428"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00TLUT_019428[] = dmm_Z2_20SICHITAI2_room_00TLUT_019428;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_015228 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_015228"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_015228[] = dmm_Z2_20SICHITAI2_room_00Tex_015228;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_01A598 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_01A598"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_01A598[] = dmm_Z2_20SICHITAI2_room_00DL_01A598;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_01AE38 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_01AE38"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_01AE38[] = dmm_Z2_20SICHITAI2_room_00Tex_01AE38;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_01A638 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_01A638"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_01A638[] = dmm_Z2_20SICHITAI2_room_00Tex_01A638;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_00FE48 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_00FE48"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_00FE48[] = dmm_Z2_20SICHITAI2_room_00DL_00FE48;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_011120 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_011120"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_011120[] = dmm_Z2_20SICHITAI2_room_00DL_011120;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_00FFD0 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_00FFD0"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_00FFD0[] = dmm_Z2_20SICHITAI2_room_00DL_00FFD0;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_017428 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_017428"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_017428[] = dmm_Z2_20SICHITAI2_room_00Tex_017428;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_019D20 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_019D20"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_019D20[] = dmm_Z2_20SICHITAI2_room_00DL_019D20;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_002048 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_002048"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_002048[] = dmm_Z2_20SICHITAI2_room_00DL_002048;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_0007E8 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_0007E8"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_0007E8[] = dmm_Z2_20SICHITAI2_room_00DL_0007E8;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_000DC8 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_000DC8"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_000DC8[] = dmm_Z2_20SICHITAI2_room_00DL_000DC8;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_012E28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_012E28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_012E28[] = dmm_Z2_20SICHITAI2_room_00Tex_012E28;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_001568 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_001568"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_001568[] = dmm_Z2_20SICHITAI2_room_00DL_001568;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_019AE8 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_019AE8"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_019AE8[] = dmm_Z2_20SICHITAI2_room_00DL_019AE8;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_0101E8 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_0101E8"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_0101E8[] = dmm_Z2_20SICHITAI2_room_00DL_0101E8;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_013A28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_013A28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_013A28[] = dmm_Z2_20SICHITAI2_room_00Tex_013A28;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_017828 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_017828"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_017828[] = dmm_Z2_20SICHITAI2_room_00Tex_017828;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_019D18 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_019D18"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_019D18[] = dmm_Z2_20SICHITAI2_room_00DL_019D18;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_001AD0 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_001AD0"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_001AD0[] = dmm_Z2_20SICHITAI2_room_00DL_001AD0;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_011E28 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_011E28"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_011E28[] = dmm_Z2_20SICHITAI2_room_00Tex_011E28;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_010A18 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_010A18"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_010A18[] = dmm_Z2_20SICHITAI2_room_00DL_010A18;
+
+#define dmm_Z2_20SICHITAI2_room_00Tex_018428 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00Tex_018428"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00Tex_018428[] = dmm_Z2_20SICHITAI2_room_00Tex_018428;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_019D10 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_019D10"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_019D10[] = dmm_Z2_20SICHITAI2_room_00DL_019D10;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_0003E0 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_0003E0"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_0003E0[] = dmm_Z2_20SICHITAI2_room_00DL_0003E0;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_0111C8 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_0111C8"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_0111C8[] = dmm_Z2_20SICHITAI2_room_00DL_0111C8;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_019490 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_019490"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_019490[] = dmm_Z2_20SICHITAI2_room_00DL_019490;
+
+#define dmm_Z2_20SICHITAI2_room_00DL_01A608 "__OTR__mm/scenes/nonmq/Z2_20SICHITAI2_scene/Z2_20SICHITAI2_room_00DL_01A608"
+static const ALIGN_ASSET(2) char mm_Z2_20SICHITAI2_room_00DL_01A608[] = dmm_Z2_20SICHITAI2_room_00DL_01A608;
+
+#endif // MM_Z2_20SICHITAI2_Z2_20SICHITAI2_ROOM_00_H

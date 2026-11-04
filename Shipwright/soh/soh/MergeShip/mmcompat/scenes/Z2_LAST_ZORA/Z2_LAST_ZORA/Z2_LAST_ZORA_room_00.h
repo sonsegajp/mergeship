@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_LAST_ZORA/Z2_LAST_ZORA/Z2_LAST_ZORA_room_00.h"
+
+#define Z2_LAST_ZORA_room_00DL_002A50 mm_Z2_LAST_ZORA_room_00DL_002A50
+#define Z2_LAST_ZORA_room_00DL_0045B8 mm_Z2_LAST_ZORA_room_00DL_0045B8
+#define Z2_LAST_ZORA_room_00DL_009998 mm_Z2_LAST_ZORA_room_00DL_009998
+#define Z2_LAST_ZORA_room_00DL_00C3D0 mm_Z2_LAST_ZORA_room_00DL_00C3D0
+#define Z2_LAST_ZORA_room_00DL_00D450 mm_Z2_LAST_ZORA_room_00DL_00D450
+#define Z2_LAST_ZORA_room_00DL_00DD58 mm_Z2_LAST_ZORA_room_00DL_00DD58
+#define Z2_LAST_ZORA_room_00DL_00DF40 mm_Z2_LAST_ZORA_room_00DL_00DF40
+#define Z2_LAST_ZORA_room_00DL_00E5B0 mm_Z2_LAST_ZORA_room_00DL_00E5B0
+#define Z2_LAST_ZORA_room_00DL_00E750 mm_Z2_LAST_ZORA_room_00DL_00E750

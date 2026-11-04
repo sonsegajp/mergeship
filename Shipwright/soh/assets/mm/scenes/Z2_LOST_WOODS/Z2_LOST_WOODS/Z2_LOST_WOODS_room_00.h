@@ -1,0 +1,153 @@
+#ifndef MM_Z2_LOST_WOODS_Z2_LOST_WOODS_ROOM_00_H
+#define MM_Z2_LOST_WOODS_Z2_LOST_WOODS_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_LOST_WOODS_room_00DL_0017A0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_0017A0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_0017A0[] = dmm_Z2_LOST_WOODS_room_00DL_0017A0;
+
+#define dmm_Z2_LOST_WOODS_room_00Tex_005A18 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Tex_005A18"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Tex_005A18[] = dmm_Z2_LOST_WOODS_room_00Tex_005A18;
+
+#define dmm_Z2_LOST_WOODS_room_00Tex_004A18 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Tex_004A18"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Tex_004A18[] = dmm_Z2_LOST_WOODS_room_00Tex_004A18;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_002548 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_002548"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_002548[] = dmm_Z2_LOST_WOODS_room_00DL_002548;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_004338 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_004338"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_004338[] = dmm_Z2_LOST_WOODS_room_00DL_004338;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_0029F0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_0029F0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_0029F0[] = dmm_Z2_LOST_WOODS_room_00DL_0029F0;
+
+#define dmm_Z2_LOST_WOODS_room_00Tex_007A18 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Tex_007A18"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Tex_007A18[] = dmm_Z2_LOST_WOODS_room_00Tex_007A18;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_000C40 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_000C40"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_000C40[] = dmm_Z2_LOST_WOODS_room_00DL_000C40;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_0039B0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_0039B0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_0039B0[] = dmm_Z2_LOST_WOODS_room_00DL_0039B0;
+
+#define dmm_Z2_LOST_WOODS_room_00Tex_005218 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Tex_005218"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Tex_005218[] = dmm_Z2_LOST_WOODS_room_00Tex_005218;
+
+#define dmm_Z2_LOST_WOODS_room_00Tex_006218 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Tex_006218"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Tex_006218[] = dmm_Z2_LOST_WOODS_room_00Tex_006218;
+
+#define dmm_Z2_LOST_WOODS_room_00Tex_007218 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Tex_007218"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Tex_007218[] = dmm_Z2_LOST_WOODS_room_00Tex_007218;
+
+#define dmm_Z2_LOST_WOODS_room_00Tex_006A18 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Tex_006A18"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Tex_006A18[] = dmm_Z2_LOST_WOODS_room_00Tex_006A18;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_0080C0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_0080C0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_0080C0[] = dmm_Z2_LOST_WOODS_room_00DL_0080C0;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_004898 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_004898"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_004898[] = dmm_Z2_LOST_WOODS_room_00DL_004898;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_0080D0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_0080D0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_0080D0[] = dmm_Z2_LOST_WOODS_room_00DL_0080D0;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_003F70 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_003F70"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_003F70[] = dmm_Z2_LOST_WOODS_room_00DL_003F70;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_0049D0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_0049D0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_0049D0[] = dmm_Z2_LOST_WOODS_room_00DL_0049D0;
+
+#define dmm_Z2_LOST_WOODS_room_00DL_0080D8 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00DL_0080D8"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00DL_0080D8[] = dmm_Z2_LOST_WOODS_room_00DL_0080D8;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_0017A0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_0017A0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_0017A0[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_0017A0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_002548 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_002548"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_002548[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_002548;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_004338 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_004338"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_004338[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_004338;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_0029F0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_0029F0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_0029F0[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_0029F0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_000C40 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_000C40"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_000C40[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_000C40;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_0039B0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_0039B0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_0039B0[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_0039B0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_0080C0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_0080C0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_0080C0[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_0080C0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_004898 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_004898"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_004898[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_004898;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_0080D0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_0080D0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_0080D0[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_0080D0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_000160DL_003F70 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_000160DL_003F70"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_000160DL_003F70[] = dmm_Z2_LOST_WOODS_room_00Set_000160DL_003F70;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0017A0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_0017A0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_0017A0[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0017A0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_002548 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_002548"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_002548[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_002548;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_004338 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_004338"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_004338[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_004338;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0029F0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_0029F0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_0029F0[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0029F0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_000C40 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_000C40"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_000C40[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_000C40;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0039B0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_0039B0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_0039B0[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0039B0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0080C0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_0080C0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_0080C0[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0080C0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_004898 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_004898"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_004898[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_004898;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0080D0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_0080D0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_0080D0[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_0080D0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_003F70 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001B0DL_003F70"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001B0DL_003F70[] = dmm_Z2_LOST_WOODS_room_00Set_0001B0DL_003F70;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0017A0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_0017A0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_0017A0[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0017A0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_002548 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_002548"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_002548[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_002548;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_004338 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_004338"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_004338[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_004338;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0029F0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_0029F0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_0029F0[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0029F0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_000C40 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_000C40"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_000C40[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_000C40;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0039B0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_0039B0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_0039B0[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0039B0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0080C0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_0080C0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_0080C0[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0080C0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_004898 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_004898"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_004898[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_004898;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0080D0 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_0080D0"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_0080D0[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_0080D0;
+
+#define dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_003F70 "__OTR__mm/scenes/nonmq/Z2_LOST_WOODS_scene/Z2_LOST_WOODS_room_00Set_0001E0DL_003F70"
+static const ALIGN_ASSET(2) char mm_Z2_LOST_WOODS_room_00Set_0001E0DL_003F70[] = dmm_Z2_LOST_WOODS_room_00Set_0001E0DL_003F70;
+
+#endif // MM_Z2_LOST_WOODS_Z2_LOST_WOODS_ROOM_00_H

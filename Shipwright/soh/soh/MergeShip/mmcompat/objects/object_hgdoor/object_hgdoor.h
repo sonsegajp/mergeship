@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_hgdoor/object_hgdoor.h"
+
+#define object_hgdoor_Colheader_0018C0 mm_object_hgdoor_Colheader_0018C0
+#define object_hgdoor_Colheader_001D10 mm_object_hgdoor_Colheader_001D10
+#define object_hgdoor_DL_001670 mm_object_hgdoor_DL_001670
+#define object_hgdoor_DL_001768 mm_object_hgdoor_DL_001768
+#define object_hgdoor_DL_001AB0 mm_object_hgdoor_DL_001AB0
+#define object_hgdoor_DL_001BA8 mm_object_hgdoor_DL_001BA8
+#define object_hgdoor_Tex_000000 mm_object_hgdoor_Tex_000000
+#define object_hgdoor_Tex_000400 mm_object_hgdoor_Tex_000400
+#define object_hgdoor_Tex_001400 mm_object_hgdoor_Tex_001400

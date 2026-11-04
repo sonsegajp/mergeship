@@ -1,0 +1,27 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_utubo/object_utubo.h"
+
+#define gDeepPythonBodySegment1DL mm_gDeepPythonBodySegment1DL
+#define gDeepPythonBodySegment1FrontTLUT mm_gDeepPythonBodySegment1FrontTLUT
+#define gDeepPythonBodySegment1FrontTex mm_gDeepPythonBodySegment1FrontTex
+#define gDeepPythonBodySegment2DL mm_gDeepPythonBodySegment2DL
+#define gDeepPythonBodySegment3DL mm_gDeepPythonBodySegment3DL
+#define gDeepPythonBodySegment4DL mm_gDeepPythonBodySegment4DL
+#define gDeepPythonBodySegment5DL mm_gDeepPythonBodySegment5DL
+#define gDeepPythonBodySegment6DL mm_gDeepPythonBodySegment6DL
+#define gDeepPythonBodySegment7DL mm_gDeepPythonBodySegment7DL
+#define gDeepPythonBodyTLUT mm_gDeepPythonBodyTLUT
+#define gDeepPythonBodyTex mm_gDeepPythonBodyTex
+#define gDeepPythonCollarDL mm_gDeepPythonCollarDL
+#define gDeepPythonEyeTex mm_gDeepPythonEyeTex
+#define gDeepPythonHeadAndCollarTLUT mm_gDeepPythonHeadAndCollarTLUT
+#define gDeepPythonHeadAndCollarTex mm_gDeepPythonHeadAndCollarTex
+#define gDeepPythonHeadDL mm_gDeepPythonHeadDL
+#define gDeepPythonJawDL mm_gDeepPythonJawDL
+#define gDeepPythonLargeSideSwayAnim mm_gDeepPythonLargeSideSwayAnim
+#define gDeepPythonMultiDirectionalSwayAnim mm_gDeepPythonMultiDirectionalSwayAnim
+#define gDeepPythonSkel mm_gDeepPythonSkel
+#define gDeepPythonSmallSideSwayAnim mm_gDeepPythonSmallSideSwayAnim
+#define gDeepPythonUnusedSideSwayAnim mm_gDeepPythonUnusedSideSwayAnim
+#define gDeepPythonVerticalSwayAnim mm_gDeepPythonVerticalSwayAnim

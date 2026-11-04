@@ -1,0 +1,39 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_dog/object_dog.h"
+
+#define gDogBackLeftLegDL mm_gDogBackLeftLegDL
+#define gDogBackRightLegDL mm_gDogBackRightLegDL
+#define gDogBarkAnim mm_gDogBarkAnim
+#define gDogBodyBackDL mm_gDogBodyBackDL
+#define gDogBodyFrontDL mm_gDogBodyFrontDL
+#define gDogFaceAndEyeTex mm_gDogFaceAndEyeTex
+#define gDogFaceAndNoseTex mm_gDogFaceAndNoseTex
+#define gDogFaceHairTex mm_gDogFaceHairTex
+#define gDogFrontLeftLegDL mm_gDogFrontLeftLegDL
+#define gDogFrontRightLegDL mm_gDogFrontRightLegDL
+#define gDogFur1Tex mm_gDogFur1Tex
+#define gDogFur2Tex mm_gDogFur2Tex
+#define gDogFur3Tex mm_gDogFur3Tex
+#define gDogFur4Tex mm_gDogFur4Tex
+#define gDogHeadDL mm_gDogHeadDL
+#define gDogJumpAnim mm_gDogJumpAnim
+#define gDogJumpAttackAnim mm_gDogJumpAttackAnim
+#define gDogLeftFaceHairDL mm_gDogLeftFaceHairDL
+#define gDogLongJumpAnim mm_gDogLongJumpAnim
+#define gDogLyingDownAnim mm_gDogLyingDownAnim
+#define gDogLyingDownLoopAnim mm_gDogLyingDownLoopAnim
+#define gDogPawTex mm_gDogPawTex
+#define gDogRightFaceHairDL mm_gDogRightFaceHairDL
+#define gDogRunAnim mm_gDogRunAnim
+#define gDogSelectionArrowAnimatedDL mm_gDogSelectionArrowAnimatedDL
+#define gDogSelectionArrowAnimatedEmptyDL mm_gDogSelectionArrowAnimatedEmptyDL
+#define gDogSelectionArrowAnimatedTex mm_gDogSelectionArrowAnimatedTex
+#define gDogSelectionArrowDL mm_gDogSelectionArrowDL
+#define gDogSelectionArrowEmptyDL mm_gDogSelectionArrowEmptyDL
+#define gDogSelectionArrowTex mm_gDogSelectionArrowTex
+#define gDogSelectionArrowTexAnim mm_gDogSelectionArrowTexAnim
+#define gDogSitAnim mm_gDogSitAnim
+#define gDogSkel mm_gDogSkel
+#define gDogTailDL mm_gDogTailDL
+#define gDogWalkAnim mm_gDogWalkAnim

@@ -1,0 +1,111 @@
+#ifndef MM_Z2_SYATEKI_MORI_Z2_SYATEKI_MORI_ROOM_00_H
+#define MM_Z2_SYATEKI_MORI_Z2_SYATEKI_MORI_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005440 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005440"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005440[] = dmm_Z2_SYATEKI_MORI_room_00DL_005440;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005AA8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005AA8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005AA8[] = dmm_Z2_SYATEKI_MORI_room_00DL_005AA8;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_000F20 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_000F20"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_000F20[] = dmm_Z2_SYATEKI_MORI_room_00DL_000F20;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_000CC0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_000CC0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_000CC0[] = dmm_Z2_SYATEKI_MORI_room_00DL_000CC0;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_004608 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_004608"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_004608[] = dmm_Z2_SYATEKI_MORI_room_00DL_004608;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005FD0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005FD0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005FD0[] = dmm_Z2_SYATEKI_MORI_room_00DL_005FD0;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_004A58 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_004A58"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_004A58[] = dmm_Z2_SYATEKI_MORI_room_00DL_004A58;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005C70 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005C70"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005C70[] = dmm_Z2_SYATEKI_MORI_room_00DL_005C70;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_004830 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_004830"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_004830[] = dmm_Z2_SYATEKI_MORI_room_00DL_004830;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005C78 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005C78"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005C78[] = dmm_Z2_SYATEKI_MORI_room_00DL_005C78;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_001878 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_001878"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_001878[] = dmm_Z2_SYATEKI_MORI_room_00DL_001878;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_001198 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_001198"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_001198[] = dmm_Z2_SYATEKI_MORI_room_00DL_001198;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_003388 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_003388"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_003388[] = dmm_Z2_SYATEKI_MORI_room_00DL_003388;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_000660 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_000660"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_000660[] = dmm_Z2_SYATEKI_MORI_room_00DL_000660;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_002570 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_002570"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_002570[] = dmm_Z2_SYATEKI_MORI_room_00DL_002570;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005AC0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005AC0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005AC0[] = dmm_Z2_SYATEKI_MORI_room_00DL_005AC0;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_001AC0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_001AC0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_001AC0[] = dmm_Z2_SYATEKI_MORI_room_00DL_001AC0;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005910 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005910"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005910[] = dmm_Z2_SYATEKI_MORI_room_00DL_005910;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_004C80 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_004C80"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_004C80[] = dmm_Z2_SYATEKI_MORI_room_00DL_004C80;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005C68 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005C68"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005C68[] = dmm_Z2_SYATEKI_MORI_room_00DL_005C68;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005EF0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005EF0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005EF0[] = dmm_Z2_SYATEKI_MORI_room_00DL_005EF0;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_003F18 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_003F18"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_003F18[] = dmm_Z2_SYATEKI_MORI_room_00DL_003F18;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_0030E8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_0030E8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_0030E8[] = dmm_Z2_SYATEKI_MORI_room_00DL_0030E8;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_0050C8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_0050C8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_0050C8[] = dmm_Z2_SYATEKI_MORI_room_00DL_0050C8;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005AD8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005AD8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005AD8[] = dmm_Z2_SYATEKI_MORI_room_00DL_005AD8;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_0042A8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_0042A8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_0042A8[] = dmm_Z2_SYATEKI_MORI_room_00DL_0042A8;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005FD8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005FD8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005FD8[] = dmm_Z2_SYATEKI_MORI_room_00DL_005FD8;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_002B38 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_002B38"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_002B38[] = dmm_Z2_SYATEKI_MORI_room_00DL_002B38;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005BC0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005BC0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005BC0[] = dmm_Z2_SYATEKI_MORI_room_00DL_005BC0;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_003B88 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_003B88"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_003B88[] = dmm_Z2_SYATEKI_MORI_room_00DL_003B88;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_004130 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_004130"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_004130[] = dmm_Z2_SYATEKI_MORI_room_00DL_004130;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005FE0 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005FE0"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005FE0[] = dmm_Z2_SYATEKI_MORI_room_00DL_005FE0;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_000A00 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_000A00"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_000A00[] = dmm_Z2_SYATEKI_MORI_room_00DL_000A00;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005560 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005560"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005560[] = dmm_Z2_SYATEKI_MORI_room_00DL_005560;
+
+#define dmm_Z2_SYATEKI_MORI_room_00DL_005FE8 "__OTR__mm/scenes/nonmq/Z2_SYATEKI_MORI_scene/Z2_SYATEKI_MORI_room_00DL_005FE8"
+static const ALIGN_ASSET(2) char mm_Z2_SYATEKI_MORI_room_00DL_005FE8[] = dmm_Z2_SYATEKI_MORI_room_00DL_005FE8;
+
+#endif // MM_Z2_SYATEKI_MORI_Z2_SYATEKI_MORI_ROOM_00_H

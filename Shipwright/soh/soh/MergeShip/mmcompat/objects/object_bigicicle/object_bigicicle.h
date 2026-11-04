@@ -1,0 +1,15 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bigicicle/object_bigicicle.h"
+
+#define object_bigicicle_DL_0009B0 mm_object_bigicicle_DL_0009B0
+#define object_bigicicle_DL_000B20 mm_object_bigicicle_DL_000B20
+#define object_bigicicle_DL_000D60 mm_object_bigicicle_DL_000D60
+#define object_bigicicle_DL_000F40 mm_object_bigicicle_DL_000F40
+#define object_bigicicle_DL_0014F0 mm_object_bigicicle_DL_0014F0
+#define object_bigicicle_DL_001D10 mm_object_bigicicle_DL_001D10
+#define object_bigicicle_DL_002530 mm_object_bigicicle_DL_002530
+#define object_bigicicle_DL_002C20 mm_object_bigicicle_DL_002C20
+#define object_bigicicle_Matanimheader_001678 mm_object_bigicicle_Matanimheader_001678
+#define object_bigicicle_Tex_000000 mm_object_bigicicle_Tex_000000
+#define object_bigicicle_Tex_000800 mm_object_bigicicle_Tex_000800

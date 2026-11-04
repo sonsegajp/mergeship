@@ -1,0 +1,34 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bai/object_bai.h"
+
+#define object_bai_Anim_0008B4 mm_object_bai_Anim_0008B4
+#define object_bai_Anim_0011C0 mm_object_bai_Anim_0011C0
+#define object_bai_Anim_008198 mm_object_bai_Anim_008198
+#define object_bai_DL_0049C0 mm_object_bai_DL_0049C0
+#define object_bai_DL_004BA8 mm_object_bai_DL_004BA8
+#define object_bai_DL_004EC0 mm_object_bai_DL_004EC0
+#define object_bai_DL_004FF0 mm_object_bai_DL_004FF0
+#define object_bai_DL_0050F8 mm_object_bai_DL_0050F8
+#define object_bai_DL_005410 mm_object_bai_DL_005410
+#define object_bai_DL_005540 mm_object_bai_DL_005540
+#define object_bai_DL_005648 mm_object_bai_DL_005648
+#define object_bai_DL_005A30 mm_object_bai_DL_005A30
+#define object_bai_DL_005EA8 mm_object_bai_DL_005EA8
+#define object_bai_DL_005FC8 mm_object_bai_DL_005FC8
+#define object_bai_DL_0060D0 mm_object_bai_DL_0060D0
+#define object_bai_DL_0062F8 mm_object_bai_DL_0062F8
+#define object_bai_DL_006410 mm_object_bai_DL_006410
+#define object_bai_DL_006518 mm_object_bai_DL_006518
+#define object_bai_DL_006740 mm_object_bai_DL_006740
+#define object_bai_Skel_007908 mm_object_bai_Skel_007908
+#define object_bai_TLUT_006858 mm_object_bai_TLUT_006858
+#define object_bai_Tex_006A58 mm_object_bai_Tex_006A58
+#define object_bai_Tex_007258 mm_object_bai_Tex_007258
+#define object_bai_Tex_007298 mm_object_bai_Tex_007298
+#define object_bai_Tex_0072D8 mm_object_bai_Tex_0072D8
+#define object_bai_Tex_007318 mm_object_bai_Tex_007318
+#define object_bai_Tex_007398 mm_object_bai_Tex_007398
+#define object_bai_Tex_0073D8 mm_object_bai_Tex_0073D8
+#define object_bai_Tex_0074D8 mm_object_bai_Tex_0074D8
+#define object_bai_Tex_0075D8 mm_object_bai_Tex_0075D8

@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_TAKARAKUJI/Z2_TAKARAKUJI/Z2_TAKARAKUJI_room_00.h"
+
+#define Z2_TAKARAKUJI_room_00DL_0008E0 mm_Z2_TAKARAKUJI_room_00DL_0008E0
+#define Z2_TAKARAKUJI_room_00DL_0018B0 mm_Z2_TAKARAKUJI_room_00DL_0018B0
+#define Z2_TAKARAKUJI_room_00DL_002178 mm_Z2_TAKARAKUJI_room_00DL_002178
+#define Z2_TAKARAKUJI_room_00DL_002C00 mm_Z2_TAKARAKUJI_room_00DL_002C00
+#define Z2_TAKARAKUJI_room_00DL_002E00 mm_Z2_TAKARAKUJI_room_00DL_002E00
+#define Z2_TAKARAKUJI_room_00DL_002E30 mm_Z2_TAKARAKUJI_room_00DL_002E30
+#define Z2_TAKARAKUJI_room_00DL_002E38 mm_Z2_TAKARAKUJI_room_00DL_002E38

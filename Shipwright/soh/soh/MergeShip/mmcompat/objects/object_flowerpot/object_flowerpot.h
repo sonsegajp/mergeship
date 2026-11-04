@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_flowerpot/object_flowerpot.h"
+
+#define object_flowerpot_DL_0012E0 mm_object_flowerpot_DL_0012E0
+#define object_flowerpot_DL_001408 mm_object_flowerpot_DL_001408
+#define object_flowerpot_DL_0014F0 mm_object_flowerpot_DL_0014F0
+#define object_flowerpot_DL_0015B0 mm_object_flowerpot_DL_0015B0
+#define object_flowerpot_Tex_000000 mm_object_flowerpot_Tex_000000
+#define object_flowerpot_Tex_000400 mm_object_flowerpot_Tex_000400
+#define object_flowerpot_Tex_000800 mm_object_flowerpot_Tex_000800

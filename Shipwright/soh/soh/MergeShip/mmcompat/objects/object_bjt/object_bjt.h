@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bjt/object_bjt.h"
+
+#define gToiletHandArmDL mm_gToiletHandArmDL
+#define gToiletHandArmSkinTex mm_gToiletHandArmSkinTex
+#define gToiletHandFingersTex mm_gToiletHandFingersTex
+#define gToiletHandFistAnim mm_gToiletHandFistAnim
+#define gToiletHandIndexFingerDL mm_gToiletHandIndexFingerDL
+#define gToiletHandOpenHandAnim mm_gToiletHandOpenHandAnim
+#define gToiletHandOtherFingersDL mm_gToiletHandOtherFingersDL
+#define gToiletHandPalmDL mm_gToiletHandPalmDL
+#define gToiletHandSkel mm_gToiletHandSkel
+#define gToiletHandThumbDL mm_gToiletHandThumbDL
+#define gToiletHandThumbsUpAnim mm_gToiletHandThumbsUpAnim
+#define gToiletHandWaggingFingerAnim mm_gToiletHandWaggingFingerAnim
+#define gToiletHandWaitingAnim mm_gToiletHandWaitingAnim

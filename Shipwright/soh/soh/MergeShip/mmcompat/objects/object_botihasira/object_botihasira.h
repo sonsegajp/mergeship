@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_botihasira/object_botihasira.h"
+
+#define object_botihasira_Colheader_001BD8 mm_object_botihasira_Colheader_001BD8
+#define object_botihasira_DL_0004A0 mm_object_botihasira_DL_0004A0
+#define object_botihasira_DL_000628 mm_object_botihasira_DL_000628
+#define object_botihasira_DL_000638 mm_object_botihasira_DL_000638
+#define object_botihasira_Matanimheader_001A48 mm_object_botihasira_Matanimheader_001A48
+#define object_botihasira_Tex_000648 mm_object_botihasira_Tex_000648
+#define object_botihasira_Tex_001648 mm_object_botihasira_Tex_001648

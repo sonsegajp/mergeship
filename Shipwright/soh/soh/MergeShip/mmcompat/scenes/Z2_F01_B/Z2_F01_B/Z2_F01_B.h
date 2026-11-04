@@ -1,0 +1,27 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_F01_B/Z2_F01_B/Z2_F01_B.h"
+
+#define Z2_F01_BCollisionHeader_002A8C mm_Z2_F01_BCollisionHeader_002A8C
+#define Z2_F01_BTLUT_00B700 mm_Z2_F01_BTLUT_00B700
+#define Z2_F01_BTLUT_00B720 mm_Z2_F01_BTLUT_00B720
+#define Z2_F01_BTex_002AC0 mm_Z2_F01_BTex_002AC0
+#define Z2_F01_BTex_0032C0 mm_Z2_F01_BTex_0032C0
+#define Z2_F01_BTex_003AC0 mm_Z2_F01_BTex_003AC0
+#define Z2_F01_BTex_0042C0 mm_Z2_F01_BTex_0042C0
+#define Z2_F01_BTex_004AC0 mm_Z2_F01_BTex_004AC0
+#define Z2_F01_BTex_0052C0 mm_Z2_F01_BTex_0052C0
+#define Z2_F01_BTex_005AC0 mm_Z2_F01_BTex_005AC0
+#define Z2_F01_BTex_005CC0 mm_Z2_F01_BTex_005CC0
+#define Z2_F01_BTex_0064C0 mm_Z2_F01_BTex_0064C0
+#define Z2_F01_BTex_0074C0 mm_Z2_F01_BTex_0074C0
+#define Z2_F01_BTex_007CC0 mm_Z2_F01_BTex_007CC0
+#define Z2_F01_BTex_0084C0 mm_Z2_F01_BTex_0084C0
+#define Z2_F01_BTex_008CC0 mm_Z2_F01_BTex_008CC0
+#define Z2_F01_BTex_009CC0 mm_Z2_F01_BTex_009CC0
+#define Z2_F01_BTex_009DC0 mm_Z2_F01_BTex_009DC0
+#define Z2_F01_BTex_009E00 mm_Z2_F01_BTex_009E00
+#define Z2_F01_BTex_00A200 mm_Z2_F01_BTex_00A200
+#define Z2_F01_BTex_00AA00 mm_Z2_F01_BTex_00AA00
+#define Z2_F01_BTex_00B200 mm_Z2_F01_BTex_00B200
+#define Z2_F01_BTex_00B300 mm_Z2_F01_BTex_00B300

@@ -1,0 +1,10 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mask_goron/object_mask_goron.h"
+
+#define object_mask_goron_DL_0014A0 mm_object_mask_goron_DL_0014A0
+#define object_mask_goron_TLUT_000000 mm_object_mask_goron_TLUT_000000
+#define object_mask_goron_Tex_000200 mm_object_mask_goron_Tex_000200
+#define object_mask_goron_Tex_000A00 mm_object_mask_goron_Tex_000A00
+#define object_mask_goron_Tex_000A40 mm_object_mask_goron_Tex_000A40
+#define object_mask_goron_Tex_000B40 mm_object_mask_goron_Tex_000B40

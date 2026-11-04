@@ -1,0 +1,20 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_dekubaba/object_dekubaba.h"
+
+#define gDekuBabaBaseLeavesDL mm_gDekuBabaBaseLeavesDL
+#define gDekuBabaBulbTex mm_gDekuBabaBulbTex
+#define gDekuBabaFastChompAnim mm_gDekuBabaFastChompAnim
+#define gDekuBabaJawInnerTex mm_gDekuBabaJawInnerTex
+#define gDekuBabaJawOuterTex mm_gDekuBabaJawOuterTex
+#define gDekuBabaLeafTex mm_gDekuBabaLeafTex
+#define gDekuBabaLowerJawDL mm_gDekuBabaLowerJawDL
+#define gDekuBabaPauseChompAnim mm_gDekuBabaPauseChompAnim
+#define gDekuBabaSkel mm_gDekuBabaSkel
+#define gDekuBabaStemBaseDL mm_gDekuBabaStemBaseDL
+#define gDekuBabaStemMiddleDL mm_gDekuBabaStemMiddleDL
+#define gDekuBabaStemTex mm_gDekuBabaStemTex
+#define gDekuBabaStemTopDL mm_gDekuBabaStemTopDL
+#define gDekuBabaStickDropDL mm_gDekuBabaStickDropDL
+#define gDekuBabaStickDropTex mm_gDekuBabaStickDropTex
+#define gDekuBabaUpperJawDL mm_gDekuBabaUpperJawDL

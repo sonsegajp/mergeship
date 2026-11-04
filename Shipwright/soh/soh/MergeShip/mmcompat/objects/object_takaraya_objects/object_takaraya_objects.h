@@ -1,0 +1,9 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_takaraya_objects/object_takaraya_objects.h"
+
+#define gTreasureChestShopWallBlackDL mm_gTreasureChestShopWallBlackDL
+#define gTreasureChestShopWallBlackTex mm_gTreasureChestShopWallBlackTex
+#define gTreasureChestShopWallWhiteDL mm_gTreasureChestShopWallWhiteDL
+#define gTreasureChestShopWallWhiteTLUT mm_gTreasureChestShopWallWhiteTLUT
+#define gTreasureChestShopWallWhiteTex mm_gTreasureChestShopWallWhiteTex

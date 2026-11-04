@@ -1,0 +1,141 @@
+#ifndef MM_OBJECTS_OBJECT_MTORIDE_H
+#define MM_OBJECTS_OBJECT_MTORIDE_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_gWoodfallSceneryUnusedTLUT "__OTR__mm/objects/object_mtoride/gWoodfallSceneryUnusedTLUT"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryUnusedTLUT[] = dmm_gWoodfallSceneryUnusedTLUT;
+
+#define dmm_gWoodfallSceneryBranchAndLeavesTLUT "__OTR__mm/objects/object_mtoride/gWoodfallSceneryBranchAndLeavesTLUT"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryBranchAndLeavesTLUT[] = dmm_gWoodfallSceneryBranchAndLeavesTLUT;
+
+#define dmm_gWoodfallSceneryTreeRingTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTreeRingTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTreeRingTex[] = dmm_gWoodfallSceneryTreeRingTex;
+
+#define dmm_gWoodfallSceneryBranchAndLeavesTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryBranchAndLeavesTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryBranchAndLeavesTex[] = dmm_gWoodfallSceneryBranchAndLeavesTex;
+
+#define dmm_gWoodfallSceneryEntranceGradientTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryEntranceGradientTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryEntranceGradientTex[] = dmm_gWoodfallSceneryEntranceGradientTex;
+
+#define dmm_gWoodfallSceneryTempleEdgeAndRampAndPlatformTopTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleEdgeAndRampAndPlatformTopTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleEdgeAndRampAndPlatformTopTex[] = dmm_gWoodfallSceneryTempleEdgeAndRampAndPlatformTopTex;
+
+#define dmm_gWoodfallSceneryTempleEntranceAndRampSidesTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleEntranceAndRampSidesTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleEntranceAndRampSidesTex[] = dmm_gWoodfallSceneryTempleEntranceAndRampSidesTex;
+
+#define dmm_gWoodfallSceneryTempleSidesTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleSidesTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleSidesTex[] = dmm_gWoodfallSceneryTempleSidesTex;
+
+#define dmm_gWoodfallSceneryTempleFloorAndTopTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleFloorAndTopTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleFloorAndTopTex[] = dmm_gWoodfallSceneryTempleFloorAndTopTex;
+
+#define dmm_gWoodfallSceneryTreeBarkTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTreeBarkTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTreeBarkTex[] = dmm_gWoodfallSceneryTreeBarkTex;
+
+#define dmm_gWoodfallSceneryFaceDesignTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryFaceDesignTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryFaceDesignTex[] = dmm_gWoodfallSceneryFaceDesignTex;
+
+#define dmm_gWoodfallSceneryPoisonWaterTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWaterTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWaterTex[] = dmm_gWoodfallSceneryPoisonWaterTex;
+
+#define dmm_gWoodfallSceneryPoisonWallsScrollTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWallsScrollTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWallsScrollTex[] = dmm_gWoodfallSceneryPoisonWallsScrollTex;
+
+#define dmm_gWoodfallSceneryPoisonWallsTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWallsTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWallsTex[] = dmm_gWoodfallSceneryPoisonWallsTex;
+
+#define dmm_gWoodfallSceneryPurifiedWalls1Tex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWalls1Tex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWalls1Tex[] = dmm_gWoodfallSceneryPurifiedWalls1Tex;
+
+#define dmm_gWoodfallSceneryPurifiedWalls2Tex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWalls2Tex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWalls2Tex[] = dmm_gWoodfallSceneryPurifiedWalls2Tex;
+
+#define dmm_gWoodfallSceneryFloorBackgroundTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryFloorBackgroundTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryFloorBackgroundTex[] = dmm_gWoodfallSceneryFloorBackgroundTex;
+
+#define dmm_gWoodfallSceneryFloorForegroundTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryFloorForegroundTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryFloorForegroundTex[] = dmm_gWoodfallSceneryFloorForegroundTex;
+
+#define dmm_gWoodfallSceneryPurifiedWaterTex "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWaterTex"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWaterTex[] = dmm_gWoodfallSceneryPurifiedWaterTex;
+
+#define dmm_gWoodfallSceneryDynamicPoisonWaterEmptyDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryDynamicPoisonWaterEmptyDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryDynamicPoisonWaterEmptyDL[] = dmm_gWoodfallSceneryDynamicPoisonWaterEmptyDL;
+
+#define dmm_gWoodfallSceneryDynamicPoisonWaterDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryDynamicPoisonWaterDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryDynamicPoisonWaterDL[] = dmm_gWoodfallSceneryDynamicPoisonWaterDL;
+
+#define dmm_gWoodfallSceneryDynamicPoisonWaterTexAnim "__OTR__mm/objects/object_mtoride/gWoodfallSceneryDynamicPoisonWaterTexAnim"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryDynamicPoisonWaterTexAnim[] = dmm_gWoodfallSceneryDynamicPoisonWaterTexAnim;
+
+#define dmm_gWoodfallSceneryPoisonWaterDamageCol "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWaterDamageCol"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWaterDamageCol[] = dmm_gWoodfallSceneryPoisonWaterDamageCol;
+
+#define dmm_gWoodfallSceneryPoisonWallsEmptyDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWallsEmptyDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWallsEmptyDL[] = dmm_gWoodfallSceneryPoisonWallsEmptyDL;
+
+#define dmm_gWoodfallSceneryPoisonWallsDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWallsDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWallsDL[] = dmm_gWoodfallSceneryPoisonWallsDL;
+
+#define dmm_gWoodfallSceneryPoisonWallsTexAnim "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWallsTexAnim"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWallsTexAnim[] = dmm_gWoodfallSceneryPoisonWallsTexAnim;
+
+#define dmm_gWoodfallSceneryPoisonWaterEmptyDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWaterEmptyDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWaterEmptyDL[] = dmm_gWoodfallSceneryPoisonWaterEmptyDL;
+
+#define dmm_gWoodfallSceneryPoisonWaterDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWaterDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWaterDL[] = dmm_gWoodfallSceneryPoisonWaterDL;
+
+#define dmm_gWoodfallSceneryPoisonWaterTexAnim "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPoisonWaterTexAnim"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPoisonWaterTexAnim[] = dmm_gWoodfallSceneryPoisonWaterTexAnim;
+
+#define dmm_gWoodfallSceneryPurifiedWallsEmptyDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWallsEmptyDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWallsEmptyDL[] = dmm_gWoodfallSceneryPurifiedWallsEmptyDL;
+
+#define dmm_gWoodfallSceneryPurifiedWallsDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWallsDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWallsDL[] = dmm_gWoodfallSceneryPurifiedWallsDL;
+
+#define dmm_gWoodfallSceneryPurifiedWallsTexAnim "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWallsTexAnim"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWallsTexAnim[] = dmm_gWoodfallSceneryPurifiedWallsTexAnim;
+
+#define dmm_gWoodfallSceneryTempleEntrancesDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleEntrancesDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleEntrancesDL[] = dmm_gWoodfallSceneryTempleEntrancesDL;
+
+#define dmm_gWoodfallSceneryTempleDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleDL[] = dmm_gWoodfallSceneryTempleDL;
+
+#define dmm_gWoodfallSceneryWaterFlowingOverTempleDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryWaterFlowingOverTempleDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryWaterFlowingOverTempleDL[] = dmm_gWoodfallSceneryWaterFlowingOverTempleDL;
+
+#define dmm_gWoodfallSceneryWaterFlowingOverTempleEmptyDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryWaterFlowingOverTempleEmptyDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryWaterFlowingOverTempleEmptyDL[] = dmm_gWoodfallSceneryWaterFlowingOverTempleEmptyDL;
+
+#define dmm_gWoodfallSceneryWaterFlowingOverTempleTexAnim "__OTR__mm/objects/object_mtoride/gWoodfallSceneryWaterFlowingOverTempleTexAnim"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryWaterFlowingOverTempleTexAnim[] = dmm_gWoodfallSceneryWaterFlowingOverTempleTexAnim;
+
+#define dmm_gWoodfallSceneryTempleRampAndPlatformEmptyDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleRampAndPlatformEmptyDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleRampAndPlatformEmptyDL[] = dmm_gWoodfallSceneryTempleRampAndPlatformEmptyDL;
+
+#define dmm_gWoodfallSceneryTempleRampAndPlatformDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleRampAndPlatformDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleRampAndPlatformDL[] = dmm_gWoodfallSceneryTempleRampAndPlatformDL;
+
+#define dmm_gWoodfallSceneryTempleRampAndPlatformCol "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleRampAndPlatformCol"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleRampAndPlatformCol[] = dmm_gWoodfallSceneryTempleRampAndPlatformCol;
+
+#define dmm_gWoodfallSceneryTempleTexAnim "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleTexAnim"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleTexAnim[] = dmm_gWoodfallSceneryTempleTexAnim;
+
+#define dmm_gWoodfallSceneryTempleCol "__OTR__mm/objects/object_mtoride/gWoodfallSceneryTempleCol"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryTempleCol[] = dmm_gWoodfallSceneryTempleCol;
+
+#define dmm_gWoodfallSceneryPurifiedWaterDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWaterDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWaterDL[] = dmm_gWoodfallSceneryPurifiedWaterDL;
+
+#define dmm_gWoodfallSceneryFloorDL "__OTR__mm/objects/object_mtoride/gWoodfallSceneryFloorDL"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryFloorDL[] = dmm_gWoodfallSceneryFloorDL;
+
+#define dmm_gWoodfallSceneryPurifiedWaterTexAnim "__OTR__mm/objects/object_mtoride/gWoodfallSceneryPurifiedWaterTexAnim"
+static const ALIGN_ASSET(2) char mm_gWoodfallSceneryPurifiedWaterTexAnim[] = dmm_gWoodfallSceneryPurifiedWaterTexAnim;
+
+#endif // MM_OBJECTS_OBJECT_MTORIDE_H

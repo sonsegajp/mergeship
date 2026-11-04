@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_taru/object_taru.h"
+
+#define gObjTaruBarrelDL mm_gObjTaruBarrelDL
+#define gObjTaruBarrelSideTex mm_gObjTaruBarrelSideTex
+#define gObjTaruBarrelTopTex mm_gObjTaruBarrelTopTex
+#define gObjTaruBreakablePiratePanelDL mm_gObjTaruBreakablePiratePanelDL
+#define gObjTaruBreakablePiratePanelSkullTex mm_gObjTaruBreakablePiratePanelSkullTex
+#define gObjTaruBreakablePiratePanelWoodTex mm_gObjTaruBreakablePiratePanelWoodTex
+#define object_taru_Colheader_000FC8 mm_object_taru_Colheader_000FC8
+#define object_taru_Colheader_001CB0 mm_object_taru_Colheader_001CB0

@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_gi_purse/object_gi_purse.h"
+
+#define gGiAdultWalletColorDL mm_gGiAdultWalletColorDL
+#define gGiAdultWalletRupeeInnerColorDL mm_gGiAdultWalletRupeeInnerColorDL
+#define gGiAdultWalletRupeeOuterColorDL mm_gGiAdultWalletRupeeOuterColorDL
+#define gGiAdultWalletStringColorDL mm_gGiAdultWalletStringColorDL
+#define gGiGiantsWalletColorDL mm_gGiGiantsWalletColorDL
+#define gGiGiantsWalletRupeeInnerColorDL mm_gGiGiantsWalletRupeeInnerColorDL
+#define gGiGiantsWalletRupeeOuterColorDL mm_gGiGiantsWalletRupeeOuterColorDL
+#define gGiGiantsWalletStringColorDL mm_gGiGiantsWalletStringColorDL
+#define gGiWalletDL mm_gGiWalletDL
+#define gGiWalletRupeeInnerDL mm_gGiWalletRupeeInnerDL
+#define gGiWalletRupeeOuterDL mm_gGiWalletRupeeOuterDL
+#define gGiWalletStringDL mm_gGiWalletStringDL
+#define gGiWalletTex mm_gGiWalletTex

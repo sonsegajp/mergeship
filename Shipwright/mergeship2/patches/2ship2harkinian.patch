@@ -1,0 +1,108 @@
+diff --git a/OTRExporter b/OTRExporter
+--- a/OTRExporter
++++ b/OTRExporter
+@@ -1 +1 @@
+-Subproject commit 32e088e28c8cdd055d4bb8f3f219d33ad37963f3
++Subproject commit 32e088e28c8cdd055d4bb8f3f219d33ad37963f3-dirty
+diff --git a/ZAPDTR b/ZAPDTR
+--- a/ZAPDTR
++++ b/ZAPDTR
+@@ -1 +1 @@
+-Subproject commit ee3397a365c5f350a60538c88f0643f155944836
++Subproject commit ee3397a365c5f350a60538c88f0643f155944836-dirty
+diff --git a/mm/2s2h/BenPort.cpp b/mm/2s2h/BenPort.cpp
+index 653de66ad..258ab0a44 100644
+--- a/mm/2s2h/BenPort.cpp
++++ b/mm/2s2h/BenPort.cpp
+@@ -1,4 +1,6 @@
+ #include "BenPort.h"
++#include <mergeship/AssetArchive.h>
++#include "MergeShip/MergeShipAssets.h"
+ #include <iostream>
+ #include <algorithm>
+ #include <filesystem>
+@@ -612,7 +614,9 @@ void OTRGlobals::RunExtract(int argc, char* argv[]) {
+ void OTRGlobals::Initialize() {
+     std::string mmPath = Ship::Context::LocateFileAcrossAppDirs("mm.o2r", appShortName);
+     if (std::filesystem::exists(mmPath)) {
+-        context->GetResourceManager()->GetArchiveManager()->AddArchive(mmPath);
++        auto archive = std::make_shared<MergeShip::AssetArchive>(mmPath, "mm", true);
++        archive->Load();
++        context->GetResourceManager()->GetArchiveManager()->AddArchive(archive);
+     }
+ 
+     std::unordered_set<uint32_t> validHashes = { MM_NTSC_US_10, MM_NTSC_US_GC };
+@@ -719,6 +723,9 @@ void OTRGlobals::Initialize() {
+     loader->RegisterResourceFactory(std::make_shared<SOH::ResourceFactoryBinaryKeyFrameSkel>(), RESOURCE_FORMAT_BINARY,
+                                     "KeyFrameSkel", static_cast<uint32_t>(SOH::ResourceType::TSH_CKeyFrameSkel), 0);
+ 
++    MergeShip_MountOcarinaAssets(context->GetResourceManager()->GetArchiveManager());
++    MergeShip_VerifyOcarinaAssets();
++
+     // gSaveStateMgr = std::make_shared<SaveStateMgr>();
+     // gRandomizer = std::make_shared<Randomizer>();
+ 
+diff --git a/mm/2s2h/resource/importer/AnimationFactory.cpp b/mm/2s2h/resource/importer/AnimationFactory.cpp
+index 7ae6a16a4..c1c1d27e7 100644
+--- a/mm/2s2h/resource/importer/AnimationFactory.cpp
++++ b/mm/2s2h/resource/importer/AnimationFactory.cpp
+@@ -1,5 +1,6 @@
+ #include "2s2h/resource/importer/AnimationFactory.h"
+ #include "2s2h/resource/type/Animation.h"
++#include "2s2h/resource/type/PlayerAnimation.h"
+ #include "2s2h/resource/importer/PlayerAnimationFactory.h"
+ #include <ship/Context.h>
+ #include <ship/resource/ResourceManager.h>
+@@ -88,7 +89,7 @@ ResourceFactoryBinaryAnimationV0::ReadResource(std::shared_ptr<Ship::File> file,
+ 
+         // Read the segment pointer (always 32 bit, doesn't adjust for system pointer size)
+         std::string path = reader->ReadString();
+-        auto animData = std::static_pointer_cast<Animation>(
++        auto animData = std::dynamic_pointer_cast<PlayerAnimation>(
+             Ship::Context::GetRawInstance()->GetResourceManager()->LoadResourceProcess(path.c_str()));
+ 
+         // If direct load failed and alt assets are enabled, try with alt/ prefix
+@@ -98,7 +99,7 @@ ResourceFactoryBinaryAnimationV0::ReadResource(std::shared_ptr<Ship::File> file,
+                 altPath = altPath.substr(7); // Strip __OTR__
+             }
+             altPath = "alt/" + altPath;
+-            animData = std::static_pointer_cast<Animation>(
++            animData = std::dynamic_pointer_cast<PlayerAnimation>(
+                 Ship::Context::GetRawInstance()->GetResourceManager()->LoadResourceProcess(altPath.c_str()));
+         }
+ 
+diff --git a/mm/2s2h/resource/importer/PathFactory.cpp b/mm/2s2h/resource/importer/PathFactory.cpp
+index 47b7d939d..b5828202c 100644
+--- a/mm/2s2h/resource/importer/PathFactory.cpp
++++ b/mm/2s2h/resource/importer/PathFactory.cpp
+@@ -12,14 +12,16 @@ ResourceFactoryBinaryPathMMV0::ReadResource(std::shared_ptr<Ship::File> file,
+     auto path = std::make_shared<PathMM>(initData);
+     auto reader = std::get<std::shared_ptr<Ship::BinaryReader>>(file->Reader);
+ 
++    const bool fromOot = initData->Path.starts_with("oot/");
+     path->numPaths = reader->ReadUInt32();
+     path->paths.reserve(path->numPaths);
+     for (uint32_t k = 0; k < path->numPaths; k++) {
+         std::vector<Vec3s> points;
+         uint32_t pointCount = reader->ReadUInt32();
+ 
+-        uint8_t additionalPathIndex = reader->ReadUByte();
+-        int16_t customValue = reader->ReadInt16();
++        // OoT paths omit MM's follow-on path and custom actor value.
++        uint8_t additionalPathIndex = fromOot ? 0xFF : reader->ReadUByte();
++        int16_t customValue = fromOot ? 0 : reader->ReadInt16();
+ 
+         for (uint32_t i = 0; i < pointCount; i++) {
+             Vec3s point;
+diff --git a/mm/CMakeLists.txt b/mm/CMakeLists.txt
+index d9f7f09c5..1c4112e6c 100644
+--- a/mm/CMakeLists.txt
++++ b/mm/CMakeLists.txt
+@@ -229,6 +229,7 @@ if (BUILD_CROWD_CONTROL)
+ endif()
+ 
+ target_include_directories(${PROJECT_NAME} PRIVATE assets
++    ${CMAKE_CURRENT_SOURCE_DIR}/../../include/
+ 	${CMAKE_CURRENT_SOURCE_DIR}/include/
+ 	${CMAKE_CURRENT_SOURCE_DIR}/include/PR
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/

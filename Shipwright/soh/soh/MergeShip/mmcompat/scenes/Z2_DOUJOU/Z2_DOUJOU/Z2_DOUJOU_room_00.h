@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_DOUJOU/Z2_DOUJOU/Z2_DOUJOU_room_00.h"
+
+#define Z2_DOUJOU_room_00DL_000D40 mm_Z2_DOUJOU_room_00DL_000D40
+#define Z2_DOUJOU_room_00DL_001A70 mm_Z2_DOUJOU_room_00DL_001A70
+#define Z2_DOUJOU_room_00DL_002888 mm_Z2_DOUJOU_room_00DL_002888
+#define Z2_DOUJOU_room_00DL_002E60 mm_Z2_DOUJOU_room_00DL_002E60
+#define Z2_DOUJOU_room_00DL_003638 mm_Z2_DOUJOU_room_00DL_003638
+#define Z2_DOUJOU_room_00DL_003EE0 mm_Z2_DOUJOU_room_00DL_003EE0
+#define Z2_DOUJOU_room_00DL_004450 mm_Z2_DOUJOU_room_00DL_004450
+#define Z2_DOUJOU_room_00DL_004F60 mm_Z2_DOUJOU_room_00DL_004F60
+#define Z2_DOUJOU_room_00DL_005C48 mm_Z2_DOUJOU_room_00DL_005C48
+#define Z2_DOUJOU_room_00DL_0061E0 mm_Z2_DOUJOU_room_00DL_0061E0
+#define Z2_DOUJOU_room_00DL_0062B0 mm_Z2_DOUJOU_room_00DL_0062B0
+#define Z2_DOUJOU_room_00DL_006310 mm_Z2_DOUJOU_room_00DL_006310
+#define Z2_DOUJOU_room_00DL_006418 mm_Z2_DOUJOU_room_00DL_006418
+#define Z2_DOUJOU_room_00DL_0064C0 mm_Z2_DOUJOU_room_00DL_0064C0

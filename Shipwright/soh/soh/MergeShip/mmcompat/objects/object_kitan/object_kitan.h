@@ -1,0 +1,34 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_kitan/object_kitan.h"
+
+#define gKeatonCelebrateAnim mm_gKeatonCelebrateAnim
+#define gKeatonChuckleAnim mm_gKeatonChuckleAnim
+#define gKeatonIdleAnim mm_gKeatonIdleAnim
+#define gKeatonSkel mm_gKeatonSkel
+#define object_kitan_DL_004C40 mm_object_kitan_DL_004C40
+#define object_kitan_DL_004DF0 mm_object_kitan_DL_004DF0
+#define object_kitan_DL_005160 mm_object_kitan_DL_005160
+#define object_kitan_DL_005628 mm_object_kitan_DL_005628
+#define object_kitan_DL_005928 mm_object_kitan_DL_005928
+#define object_kitan_DL_005B48 mm_object_kitan_DL_005B48
+#define object_kitan_DL_005E48 mm_object_kitan_DL_005E48
+#define object_kitan_DL_006068 mm_object_kitan_DL_006068
+#define object_kitan_DL_0063E8 mm_object_kitan_DL_0063E8
+#define object_kitan_DL_0065E0 mm_object_kitan_DL_0065E0
+#define object_kitan_DL_0066A8 mm_object_kitan_DL_0066A8
+#define object_kitan_DL_006810 mm_object_kitan_DL_006810
+#define object_kitan_DL_006990 mm_object_kitan_DL_006990
+#define object_kitan_DL_006A58 mm_object_kitan_DL_006A58
+#define object_kitan_DL_006BC0 mm_object_kitan_DL_006BC0
+#define object_kitan_DL_006D40 mm_object_kitan_DL_006D40
+#define object_kitan_DL_006E08 mm_object_kitan_DL_006E08
+#define object_kitan_DL_006F70 mm_object_kitan_DL_006F70
+#define object_kitan_DL_0070F0 mm_object_kitan_DL_0070F0
+#define object_kitan_DL_007470 mm_object_kitan_DL_007470
+#define object_kitan_TLUT_007668 mm_object_kitan_TLUT_007668
+#define object_kitan_Tex_007868 mm_object_kitan_Tex_007868
+#define object_kitan_Tex_007A68 mm_object_kitan_Tex_007A68
+#define object_kitan_Tex_007B68 mm_object_kitan_Tex_007B68
+#define object_kitan_Tex_007C68 mm_object_kitan_Tex_007C68
+#define object_kitan_Tex_007D68 mm_object_kitan_Tex_007D68

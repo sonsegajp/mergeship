@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_obj_dinner/object_obj_dinner.h"
+
+#define object_obj_dinner_DL_0011E0 mm_object_obj_dinner_DL_0011E0
+#define object_obj_dinner_DL_001AA0 mm_object_obj_dinner_DL_001AA0
+#define object_obj_dinner_Tex_001B38 mm_object_obj_dinner_Tex_001B38
+#define object_obj_dinner_Tex_001C38 mm_object_obj_dinner_Tex_001C38
+#define object_obj_dinner_Tex_001E38 mm_object_obj_dinner_Tex_001E38
+#define object_obj_dinner_Tex_002038 mm_object_obj_dinner_Tex_002038
+#define object_obj_dinner_Tex_002238 mm_object_obj_dinner_Tex_002238

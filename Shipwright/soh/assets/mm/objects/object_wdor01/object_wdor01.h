@@ -1,0 +1,14 @@
+#ifndef MM_OBJECTS_OBJECT_WDOR01_H
+#define MM_OBJECTS_OBJECT_WDOR01_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_gLotteryCuriosityShopMayorHouseDoorEmptyDL "__OTR__mm/objects/object_wdor01/gLotteryCuriosityShopMayorHouseDoorEmptyDL"
+static const ALIGN_ASSET(2) char mm_gLotteryCuriosityShopMayorHouseDoorEmptyDL[] = dmm_gLotteryCuriosityShopMayorHouseDoorEmptyDL;
+
+#define dmm_gLotteryCuriosityShopMayorHouseDoorDL "__OTR__mm/objects/object_wdor01/gLotteryCuriosityShopMayorHouseDoorDL"
+static const ALIGN_ASSET(2) char mm_gLotteryCuriosityShopMayorHouseDoorDL[] = dmm_gLotteryCuriosityShopMayorHouseDoorDL;
+
+#define dmm_gLotteryCuriosityShopMayorHouseDoorTex "__OTR__mm/objects/object_wdor01/gLotteryCuriosityShopMayorHouseDoorTex"
+static const ALIGN_ASSET(2) char mm_gLotteryCuriosityShopMayorHouseDoorTex[] = dmm_gLotteryCuriosityShopMayorHouseDoorTex;
+#endif // MM_OBJECTS_OBJECT_WDOR01_H

@@ -1,0 +1,22 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_fu_mato/object_fu_mato.h"
+
+#define object_fu_mato_Colheader_0015C0 mm_object_fu_mato_Colheader_0015C0
+#define object_fu_mato_Colheader_0023D4 mm_object_fu_mato_Colheader_0023D4
+#define object_fu_mato_DL_0006A0 mm_object_fu_mato_DL_0006A0
+#define object_fu_mato_DL_000740 mm_object_fu_mato_DL_000740
+#define object_fu_mato_DL_0007E0 mm_object_fu_mato_DL_0007E0
+#define object_fu_mato_DL_000880 mm_object_fu_mato_DL_000880
+#define object_fu_mato_DL_000920 mm_object_fu_mato_DL_000920
+#define object_fu_mato_DL_0009C0 mm_object_fu_mato_DL_0009C0
+#define object_fu_mato_DL_001C80 mm_object_fu_mato_DL_001C80
+#define object_fu_mato_DL_001D68 mm_object_fu_mato_DL_001D68
+#define object_fu_mato_DL_001E50 mm_object_fu_mato_DL_001E50
+#define object_fu_mato_DL_001F38 mm_object_fu_mato_DL_001F38
+#define object_fu_mato_DL_002020 mm_object_fu_mato_DL_002020
+#define object_fu_mato_DL_002108 mm_object_fu_mato_DL_002108
+#define object_fu_mato_DL_002720 mm_object_fu_mato_DL_002720
+#define object_fu_mato_Tex_000A60 mm_object_fu_mato_Tex_000A60
+#define object_fu_mato_Tex_002850 mm_object_fu_mato_Tex_002850
+#define object_fu_mato_Tex_002A50 mm_object_fu_mato_Tex_002A50

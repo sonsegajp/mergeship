@@ -1,0 +1,17 @@
+// MergeShip2 for Android: the app that packages the native libraries android/build_android.ps1 builds
+// (libSDL2.so, libc++_shared.so, libultraship.so, libmain.so, libsoh.so, lib2ship.so) with SDL's Java activity.
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = 'MergeShip2'
+include ':app'

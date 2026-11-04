@@ -1,0 +1,10 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_gi_reserve_b_01/object_gi_reserve_b_01.h"
+
+#define gGiLetterToMamaEnvelopeLetterDL mm_gGiLetterToMamaEnvelopeLetterDL
+#define gGiLetterToMamaInscriptionsDL mm_gGiLetterToMamaInscriptionsDL
+#define gGiLetterToMamaPattern1Tex mm_gGiLetterToMamaPattern1Tex
+#define gGiLetterToMamaPattern2Tex mm_gGiLetterToMamaPattern2Tex
+#define gGiLetterToMamaPostalAddressTex mm_gGiLetterToMamaPostalAddressTex
+#define gGiLetterToMamaStampTex mm_gGiLetterToMamaStampTex

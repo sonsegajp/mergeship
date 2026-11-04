@@ -1,0 +1,188 @@
+#ifndef MM_OBJECTS_OBJECT_MARKET_OBJ_H
+#define MM_OBJECTS_OBJECT_MARKET_OBJ_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_gWestClockTownMarketWhitePlasterTLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePlasterTLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePlasterTLUT[] = dmm_gWestClockTownMarketWhitePlasterTLUT;
+
+#define dmm_gWestClockTownMarketYellowPlasterTLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPlasterTLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPlasterTLUT[] = dmm_gWestClockTownMarketYellowPlasterTLUT;
+
+#define dmm_gWestClockTownMarketBrownPlasterTLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBrownPlasterTLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBrownPlasterTLUT[] = dmm_gWestClockTownMarketBrownPlasterTLUT;
+
+#define dmm_gWestClockTownMarketStrawTLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketStrawTLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketStrawTLUT[] = dmm_gWestClockTownMarketStrawTLUT;
+
+#define dmm_gWestClockTownMarketStrawFringeTLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketStrawFringeTLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketStrawFringeTLUT[] = dmm_gWestClockTownMarketStrawFringeTLUT;
+
+#define dmm_gWestClockTownMarketBrownPatternedPlasterTLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBrownPatternedPlasterTLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBrownPatternedPlasterTLUT[] = dmm_gWestClockTownMarketBrownPatternedPlasterTLUT;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster1TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster1TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster1TLUT[] = dmm_gWestClockTownMarketYellowPatternedPlaster1TLUT;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster2TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster2TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster2TLUT[] = dmm_gWestClockTownMarketYellowPatternedPlaster2TLUT;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster1TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster1TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster1TLUT[] = dmm_gWestClockTownMarketWhitePatternedPlaster1TLUT;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster2TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster2TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster2TLUT[] = dmm_gWestClockTownMarketWhitePatternedPlaster2TLUT;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster3TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster3TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster3TLUT[] = dmm_gWestClockTownMarketYellowPatternedPlaster3TLUT;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster4TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster4TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster4TLUT[] = dmm_gWestClockTownMarketYellowPatternedPlaster4TLUT;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster5TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster5TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster5TLUT[] = dmm_gWestClockTownMarketYellowPatternedPlaster5TLUT;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster3TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster3TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster3TLUT[] = dmm_gWestClockTownMarketWhitePatternedPlaster3TLUT;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster4TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster4TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster4TLUT[] = dmm_gWestClockTownMarketWhitePatternedPlaster4TLUT;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster5TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster5TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster5TLUT[] = dmm_gWestClockTownMarketWhitePatternedPlaster5TLUT;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster6TLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster6TLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster6TLUT[] = dmm_gWestClockTownMarketWhitePatternedPlaster6TLUT;
+
+#define dmm_gWestClockTownMarketCowFrontTLUT "__OTR__mm/objects/object_market_obj/gWestClockTownMarketCowFrontTLUT"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketCowFrontTLUT[] = dmm_gWestClockTownMarketCowFrontTLUT;
+
+#define dmm_gWestClockTownMarketCuriosityShopSignTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketCuriosityShopSignTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketCuriosityShopSignTex[] = dmm_gWestClockTownMarketCuriosityShopSignTex;
+
+#define dmm_gWestClockTownMarketBombShopSignTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBombShopSignTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBombShopSignTex[] = dmm_gWestClockTownMarketBombShopSignTex;
+
+#define dmm_gWestClockTownMarketWhitePlasterTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePlasterTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePlasterTex[] = dmm_gWestClockTownMarketWhitePlasterTex;
+
+#define dmm_gWestClockTownMarketClockTownBankSignTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketClockTownBankSignTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketClockTownBankSignTex[] = dmm_gWestClockTownMarketClockTownBankSignTex;
+
+#define dmm_gWestClockTownMarketTradingPostSignTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketTradingPostSignTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketTradingPostSignTex[] = dmm_gWestClockTownMarketTradingPostSignTex;
+
+#define dmm_gWestClockTownMarketYellowPlasterTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPlasterTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPlasterTex[] = dmm_gWestClockTownMarketYellowPlasterTex;
+
+#define dmm_gWestClockTownMarketBrownPlasterTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBrownPlasterTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBrownPlasterTex[] = dmm_gWestClockTownMarketBrownPlasterTex;
+
+#define dmm_gWestClockTownMarketBankAndDoorFrameTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBankAndDoorFrameTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBankAndDoorFrameTex[] = dmm_gWestClockTownMarketBankAndDoorFrameTex;
+
+#define dmm_gWestClockTownMarketGroundTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketGroundTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketGroundTex[] = dmm_gWestClockTownMarketGroundTex;
+
+#define dmm_gWestClockTownBrickBelowWhitePlasterTex "__OTR__mm/objects/object_market_obj/gWestClockTownBrickBelowWhitePlasterTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownBrickBelowWhitePlasterTex[] = dmm_gWestClockTownBrickBelowWhitePlasterTex;
+
+#define dmm_gWestClockTownMarketStrawTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketStrawTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketStrawTex[] = dmm_gWestClockTownMarketStrawTex;
+
+#define dmm_gWestClockTownBrickBelowYellowPlasterTex "__OTR__mm/objects/object_market_obj/gWestClockTownBrickBelowYellowPlasterTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownBrickBelowYellowPlasterTex[] = dmm_gWestClockTownBrickBelowYellowPlasterTex;
+
+#define dmm_gWestClockTownBrickBelowBrownPlasterTex "__OTR__mm/objects/object_market_obj/gWestClockTownBrickBelowBrownPlasterTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownBrickBelowBrownPlasterTex[] = dmm_gWestClockTownBrickBelowBrownPlasterTex;
+
+#define dmm_gWestClockTownMarketStrawFringeTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketStrawFringeTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketStrawFringeTex[] = dmm_gWestClockTownMarketStrawFringeTex;
+
+#define dmm_gWestClockTownMarketBankDoorTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBankDoorTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBankDoorTex[] = dmm_gWestClockTownMarketBankDoorTex;
+
+#define dmm_gWestClockTownMarketBrownPatternedPlasterTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBrownPatternedPlasterTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBrownPatternedPlasterTex[] = dmm_gWestClockTownMarketBrownPatternedPlasterTex;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster1Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster1Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster1Tex[] = dmm_gWestClockTownMarketYellowPatternedPlaster1Tex;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster2Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster2Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster2Tex[] = dmm_gWestClockTownMarketYellowPatternedPlaster2Tex;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster1Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster1Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster1Tex[] = dmm_gWestClockTownMarketWhitePatternedPlaster1Tex;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster2Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster2Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster2Tex[] = dmm_gWestClockTownMarketWhitePatternedPlaster2Tex;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster3Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster3Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster3Tex[] = dmm_gWestClockTownMarketYellowPatternedPlaster3Tex;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster4Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster4Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster4Tex[] = dmm_gWestClockTownMarketYellowPatternedPlaster4Tex;
+
+#define dmm_gWestClockTownMarketYellowPatternedPlaster5Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketYellowPatternedPlaster5Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketYellowPatternedPlaster5Tex[] = dmm_gWestClockTownMarketYellowPatternedPlaster5Tex;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster3Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster3Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster3Tex[] = dmm_gWestClockTownMarketWhitePatternedPlaster3Tex;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster4Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster4Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster4Tex[] = dmm_gWestClockTownMarketWhitePatternedPlaster4Tex;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster5Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster5Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster5Tex[] = dmm_gWestClockTownMarketWhitePatternedPlaster5Tex;
+
+#define dmm_gWestClockTownMarketWhitePatternedPlaster6Tex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketWhitePatternedPlaster6Tex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketWhitePatternedPlaster6Tex[] = dmm_gWestClockTownMarketWhitePatternedPlaster6Tex;
+
+#define dmm_gWestClockTownMarketPoleTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketPoleTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketPoleTex[] = dmm_gWestClockTownMarketPoleTex;
+
+#define dmm_gWestClockTownMarketBrickEdgedGroundTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBrickEdgedGroundTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBrickEdgedGroundTex[] = dmm_gWestClockTownMarketBrickEdgedGroundTex;
+
+#define dmm_gWestClockTownMarketStairRiserTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketStairRiserTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketStairRiserTex[] = dmm_gWestClockTownMarketStairRiserTex;
+
+#define dmm_gWestClockTownMarketFlowerBedTopTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketFlowerBedTopTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketFlowerBedTopTex[] = dmm_gWestClockTownMarketFlowerBedTopTex;
+
+#define dmm_gWestClockTownMarketFlowerBedSidesTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketFlowerBedSidesTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketFlowerBedSidesTex[] = dmm_gWestClockTownMarketFlowerBedSidesTex;
+
+#define dmm_gWestClockTownMarketSafeTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketSafeTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketSafeTex[] = dmm_gWestClockTownMarketSafeTex;
+
+#define dmm_gWestClockTownMarketRugTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketRugTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketRugTex[] = dmm_gWestClockTownMarketRugTex;
+
+#define dmm_gWestClockTownMarketBankCurtainTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBankCurtainTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBankCurtainTex[] = dmm_gWestClockTownMarketBankCurtainTex;
+
+#define dmm_gWestClockTownMarketCowFrontTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketCowFrontTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketCowFrontTex[] = dmm_gWestClockTownMarketCowFrontTex;
+
+#define dmm_gWestClockTownMarketCowBodyTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketCowBodyTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketCowBodyTex[] = dmm_gWestClockTownMarketCowBodyTex;
+
+#define dmm_gWestClockTownMarketBankAdvertisementsTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBankAdvertisementsTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBankAdvertisementsTex[] = dmm_gWestClockTownMarketBankAdvertisementsTex;
+
+#define dmm_gWestClockTownMarketSafeWheelAndHandleTex "__OTR__mm/objects/object_market_obj/gWestClockTownMarketSafeWheelAndHandleTex"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketSafeWheelAndHandleTex[] = dmm_gWestClockTownMarketSafeWheelAndHandleTex;
+
+#define dmm_gWestClockTownMarketBankAdvertisementsAndDoorNightDL "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBankAdvertisementsAndDoorNightDL"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBankAdvertisementsAndDoorNightDL[] = dmm_gWestClockTownMarketBankAdvertisementsAndDoorNightDL;
+
+#define dmm_gWestClockTownMarketNightDL "__OTR__mm/objects/object_market_obj/gWestClockTownMarketNightDL"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketNightDL[] = dmm_gWestClockTownMarketNightDL;
+
+#define dmm_gWestClockTownMarketBankAdvertisementsAndDoorDayDL "__OTR__mm/objects/object_market_obj/gWestClockTownMarketBankAdvertisementsAndDoorDayDL"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketBankAdvertisementsAndDoorDayDL[] = dmm_gWestClockTownMarketBankAdvertisementsAndDoorDayDL;
+
+#define dmm_gWestClockTownMarketDayDL "__OTR__mm/objects/object_market_obj/gWestClockTownMarketDayDL"
+static const ALIGN_ASSET(2) char mm_gWestClockTownMarketDayDL[] = dmm_gWestClockTownMarketDayDL;
+#endif // MM_OBJECTS_OBJECT_MARKET_OBJ_H

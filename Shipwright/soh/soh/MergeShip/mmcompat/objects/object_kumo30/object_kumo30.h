@@ -1,0 +1,14 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_kumo30/object_kumo30.h"
+
+#define object_kumo30_DL_000A50 mm_object_kumo30_DL_000A50
+#define object_kumo30_DL_000C98 mm_object_kumo30_DL_000C98
+#define object_kumo30_DL_002A40 mm_object_kumo30_DL_002A40
+#define object_kumo30_Matanimheader_002890 mm_object_kumo30_Matanimheader_002890
+#define object_kumo30_Matanimheader_003368 mm_object_kumo30_Matanimheader_003368
+#define object_kumo30_Tex_000E80 mm_object_kumo30_Tex_000E80
+#define object_kumo30_Tex_001E80 mm_object_kumo30_Tex_001E80
+#define object_kumo30_Tex_002080 mm_object_kumo30_Tex_002080
+#define object_kumo30_Tex_002B58 mm_object_kumo30_Tex_002B58
+#define object_kumo30_Tex_002F58 mm_object_kumo30_Tex_002F58

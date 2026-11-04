@@ -1,0 +1,11 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_IKANA/Z2_IKANA/Z2_IKANA_room_01.h"
+
+#define Z2_IKANA_room_01DL_000340 mm_Z2_IKANA_room_01DL_000340
+#define Z2_IKANA_room_01DL_000418 mm_Z2_IKANA_room_01DL_000418
+#define Z2_IKANA_room_01DL_000478 mm_Z2_IKANA_room_01DL_000478
+#define Z2_IKANA_room_01Set_000100DL_000418 mm_Z2_IKANA_room_01Set_000100DL_000418
+#define Z2_IKANA_room_01Set_0001C0DL_000418 mm_Z2_IKANA_room_01Set_0001C0DL_000418
+#define Z2_IKANA_room_01Set_000230DL_000418 mm_Z2_IKANA_room_01Set_000230DL_000418
+#define Z2_IKANA_room_01Set_0002D0DL_000418 mm_Z2_IKANA_room_01Set_0002D0DL_000418

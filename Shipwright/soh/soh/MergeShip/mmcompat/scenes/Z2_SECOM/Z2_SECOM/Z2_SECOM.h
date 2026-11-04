@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_SECOM/Z2_SECOM/Z2_SECOM.h"
+
+#define Z2_SECOMCollisionHeader_0047B8 mm_Z2_SECOMCollisionHeader_0047B8
+#define Z2_SECOMCutsceneData_000140 mm_Z2_SECOMCutsceneData_000140
+#define Z2_SECOMCutsceneData_0008A0 mm_Z2_SECOMCutsceneData_0008A0
+#define Z2_SECOMCutsceneData_000C70 mm_Z2_SECOMCutsceneData_000C70
+#define Z2_SECOMCutsceneData_0010C0 mm_Z2_SECOMCutsceneData_0010C0
+#define Z2_SECOMCutsceneData_001360 mm_Z2_SECOMCutsceneData_001360
+#define Z2_SECOMTLUT_0067F0 mm_Z2_SECOMTLUT_0067F0
+#define Z2_SECOMTLUT_0069F0 mm_Z2_SECOMTLUT_0069F0
+#define Z2_SECOMTex_004FF0 mm_Z2_SECOMTex_004FF0
+#define Z2_SECOMTex_0053F0 mm_Z2_SECOMTex_0053F0
+#define Z2_SECOMTex_0057F0 mm_Z2_SECOMTex_0057F0
+#define Z2_SECOMTex_005BF0 mm_Z2_SECOMTex_005BF0
+#define Z2_SECOMTex_005FF0 mm_Z2_SECOMTex_005FF0
+#define gSakonsHidoutConveyorBeltTex mm_gSakonsHidoutConveyorBeltTex

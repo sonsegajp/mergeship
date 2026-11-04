@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_taisou/object_taisou.h"
+
+#define gGoronAthleticsCheerAnim mm_gGoronAthleticsCheerAnim
+#define gGoronAthleticsDoubleArmSideBendAnim mm_gGoronAthleticsDoubleArmSideBendAnim
+#define gGoronAthleticsHamstringStretchSittingAnim mm_gGoronAthleticsHamstringStretchSittingAnim
+#define gGoronAthleticsHamstringStretchStandingAnim mm_gGoronAthleticsHamstringStretchStandingAnim
+#define gGoronAthleticsShakeLimbsAnim mm_gGoronAthleticsShakeLimbsAnim
+#define gGoronAthleticsShoutAnim mm_gGoronAthleticsShoutAnim
+#define gGoronAthleticsSingleArmSideBendAnim mm_gGoronAthleticsSingleArmSideBendAnim
+#define gGoronAthleticsSquatSideToSideAnim mm_gGoronAthleticsSquatSideToSideAnim

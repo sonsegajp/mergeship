@@ -1,0 +1,28 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_zoraegg/object_zoraegg.h"
+
+#define gZoraBabyEyeClosedTex mm_gZoraBabyEyeClosedTex
+#define gZoraBabyEyeHalfTex mm_gZoraBabyEyeHalfTex
+#define gZoraBabyEyeOpenTex mm_gZoraBabyEyeOpenTex
+#define gZoraBabyFormNoteAnim mm_gZoraBabyFormNoteAnim
+#define gZoraBabyHatchAnim mm_gZoraBabyHatchAnim
+#define gZoraBabyHeadDL mm_gZoraBabyHeadDL
+#define gZoraBabyLeftPectoralFinDL mm_gZoraBabyLeftPectoralFinDL
+#define gZoraBabyNoteAnim mm_gZoraBabyNoteAnim
+#define gZoraBabyPectoralFinTex mm_gZoraBabyPectoralFinTex
+#define gZoraBabyRightPectoralFinDL mm_gZoraBabyRightPectoralFinDL
+#define gZoraBabySkel mm_gZoraBabySkel
+#define gZoraBabySkinPatternTex mm_gZoraBabySkinPatternTex
+#define gZoraBabySkinTex mm_gZoraBabySkinTex
+#define gZoraBabySongLearnedAnim mm_gZoraBabySongLearnedAnim
+#define gZoraBabySwimAnim mm_gZoraBabySwimAnim
+#define gZoraBabySwimUpAnim mm_gZoraBabySwimUpAnim
+#define gZoraBabyTLUT mm_gZoraBabyTLUT
+#define gZoraBabyTail1DL mm_gZoraBabyTail1DL
+#define gZoraBabyTail2DL mm_gZoraBabyTail2DL
+#define gZoraBabyTailFinDL mm_gZoraBabyTailFinDL
+#define gZoraBabyTailFinTex mm_gZoraBabyTailFinTex
+#define gZoraEggDL mm_gZoraEggDL
+#define gZoraEggTLUT mm_gZoraEggTLUT
+#define gZoraEggTex mm_gZoraEggTex

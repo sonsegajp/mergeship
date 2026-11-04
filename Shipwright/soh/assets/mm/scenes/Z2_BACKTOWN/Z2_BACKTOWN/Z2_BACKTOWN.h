@@ -1,0 +1,128 @@
+#ifndef MM_Z2_BACKTOWN_Z2_BACKTOWN_H
+#define MM_Z2_BACKTOWN_Z2_BACKTOWN_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_BACKTOWNCollisionHeader_002238 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNCollisionHeader_002238"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNCollisionHeader_002238[] = dmm_Z2_BACKTOWNCollisionHeader_002238;
+
+#define dmm_Z2_BACKTOWNCutsceneData_0004D4 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNCutsceneData_0004D4"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNCutsceneData_0004D4[] = dmm_Z2_BACKTOWNCutsceneData_0004D4;
+
+#define dmm_Z2_BACKTOWNTex_00CDE0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00CDE0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00CDE0[] = dmm_Z2_BACKTOWNTex_00CDE0;
+
+#define dmm_Z2_BACKTOWNTex_007240 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_007240"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_007240[] = dmm_Z2_BACKTOWNTex_007240;
+
+#define dmm_Z2_BACKTOWNTex_009260 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_009260"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_009260[] = dmm_Z2_BACKTOWNTex_009260;
+
+#define dmm_Z2_BACKTOWNTex_009A60 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_009A60"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_009A60[] = dmm_Z2_BACKTOWNTex_009A60;
+
+#define dmm_Z2_BACKTOWNTex_00A260 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00A260"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00A260[] = dmm_Z2_BACKTOWNTex_00A260;
+
+#define dmm_Z2_BACKTOWNTex_00B260 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00B260"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00B260[] = dmm_Z2_BACKTOWNTex_00B260;
+
+#define dmm_Z2_BACKTOWNTLUT_010EC0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTLUT_010EC0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTLUT_010EC0[] = dmm_Z2_BACKTOWNTLUT_010EC0;
+
+#define dmm_Z2_BACKTOWNTex_00F660 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00F660"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00F660[] = dmm_Z2_BACKTOWNTex_00F660;
+
+#define dmm_Z2_BACKTOWNTex_008660 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_008660"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_008660[] = dmm_Z2_BACKTOWNTex_008660;
+
+#define dmm_Z2_BACKTOWNTex_003140 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_003140"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_003140[] = dmm_Z2_BACKTOWNTex_003140;
+
+#define dmm_Z2_BACKTOWNTex_004A40 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_004A40"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_004A40[] = dmm_Z2_BACKTOWNTex_004A40;
+
+#define dmm_Z2_BACKTOWNTex_00BFE0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00BFE0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00BFE0[] = dmm_Z2_BACKTOWNTex_00BFE0;
+
+#define dmm_Z2_BACKTOWNTex_008240 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_008240"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_008240[] = dmm_Z2_BACKTOWNTex_008240;
+
+#define dmm_Z2_BACKTOWNTLUT_008640 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTLUT_008640"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTLUT_008640[] = dmm_Z2_BACKTOWNTLUT_008640;
+
+#define dmm_Z2_BACKTOWNTex_007A40 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_007A40"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_007A40[] = dmm_Z2_BACKTOWNTex_007A40;
+
+#define dmm_Z2_BACKTOWNTex_006A40 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_006A40"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_006A40[] = dmm_Z2_BACKTOWNTex_006A40;
+
+#define dmm_Z2_BACKTOWNTex_004240 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_004240"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_004240[] = dmm_Z2_BACKTOWNTex_004240;
+
+#define dmm_Z2_BACKTOWNTex_003940 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_003940"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_003940[] = dmm_Z2_BACKTOWNTex_003940;
+
+#define dmm_Z2_BACKTOWNTex_008E60 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_008E60"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_008E60[] = dmm_Z2_BACKTOWNTex_008E60;
+
+#define dmm_Z2_BACKTOWNTex_00B360 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00B360"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00B360[] = dmm_Z2_BACKTOWNTex_00B360;
+
+#define dmm_Z2_BACKTOWNTLUT_010E60 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTLUT_010E60"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTLUT_010E60[] = dmm_Z2_BACKTOWNTLUT_010E60;
+
+#define dmm_Z2_BACKTOWNTex_00B3E0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00B3E0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00B3E0[] = dmm_Z2_BACKTOWNTex_00B3E0;
+
+#define dmm_Z2_BACKTOWNTex_00BBE0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00BBE0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00BBE0[] = dmm_Z2_BACKTOWNTex_00BBE0;
+
+#define dmm_Z2_BACKTOWNTex_002940 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_002940"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_002940[] = dmm_Z2_BACKTOWNTex_002940;
+
+#define dmm_Z2_BACKTOWNTex_003A40 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_003A40"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_003A40[] = dmm_Z2_BACKTOWNTex_003A40;
+
+#define dmm_Z2_BACKTOWNTex_005240 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_005240"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_005240[] = dmm_Z2_BACKTOWNTex_005240;
+
+#define dmm_Z2_BACKTOWNTex_00FE60 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00FE60"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00FE60[] = dmm_Z2_BACKTOWNTex_00FE60;
+
+#define dmm_Z2_BACKTOWNTex_00E1E0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00E1E0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00E1E0[] = dmm_Z2_BACKTOWNTex_00E1E0;
+
+#define dmm_Z2_BACKTOWNTex_00C1E0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00C1E0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00C1E0[] = dmm_Z2_BACKTOWNTex_00C1E0;
+
+#define dmm_Z2_BACKTOWNTex_00C5E0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00C5E0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00C5E0[] = dmm_Z2_BACKTOWNTex_00C5E0;
+
+#define dmm_Z2_BACKTOWNTex_005A40 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_005A40"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_005A40[] = dmm_Z2_BACKTOWNTex_005A40;
+
+#define dmm_Z2_BACKTOWNTex_006240 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_006240"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_006240[] = dmm_Z2_BACKTOWNTex_006240;
+
+#define dmm_Z2_BACKTOWNTex_00E5E0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00E5E0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00E5E0[] = dmm_Z2_BACKTOWNTex_00E5E0;
+
+#define dmm_Z2_BACKTOWNTLUT_010E80 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTLUT_010E80"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTLUT_010E80[] = dmm_Z2_BACKTOWNTLUT_010E80;
+
+#define dmm_Z2_BACKTOWNTex_00E660 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00E660"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00E660[] = dmm_Z2_BACKTOWNTex_00E660;
+
+#define dmm_Z2_BACKTOWNTex_00D1E0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00D1E0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00D1E0[] = dmm_Z2_BACKTOWNTex_00D1E0;
+
+#define dmm_Z2_BACKTOWNTLUT_010EA0 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTLUT_010EA0"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTLUT_010EA0[] = dmm_Z2_BACKTOWNTLUT_010EA0;
+
+#define dmm_Z2_BACKTOWNTex_00EE60 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNTex_00EE60"
+static const ALIGN_ASSET(2) char mm_Z2_BACKTOWNTex_00EE60[] = dmm_Z2_BACKTOWNTex_00EE60;
+
+#define dmm_Z2_BACKTOWNCollisionHeader_002238 "__OTR__mm/scenes/nonmq/Z2_BACKTOWN/Z2_BACKTOWNCollisionHeader_002238"
+
+#endif // MM_Z2_BACKTOWN_Z2_BACKTOWN_H

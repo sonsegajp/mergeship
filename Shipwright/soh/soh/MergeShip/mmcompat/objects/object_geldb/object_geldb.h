@@ -1,0 +1,55 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_geldb/object_geldb.h"
+
+#define gGerudoMail1Tex mm_gGerudoMail1Tex
+#define gGerudoRed1TLUT mm_gGerudoRed1TLUT
+#define gGerudoRed2TLUT mm_gGerudoRed2TLUT
+#define gGerudoRedBegAnim mm_gGerudoRedBegAnim
+#define gGerudoRedDarkRedFabricTex mm_gGerudoRedDarkRedFabricTex
+#define gGerudoRedDemandAnim mm_gGerudoRedDemandAnim
+#define gGerudoRedDismissAnim mm_gGerudoRedDismissAnim
+#define gGerudoRedEarTex mm_gGerudoRedEarTex
+#define gGerudoRedEyeClosedTex mm_gGerudoRedEyeClosedTex
+#define gGerudoRedEyeHalfTex mm_gGerudoRedEyeHalfTex
+#define gGerudoRedEyeOpenTex mm_gGerudoRedEyeOpenTex
+#define gGerudoRedFingersTex mm_gGerudoRedFingersTex
+#define gGerudoRedGerudoPatternFabricTex mm_gGerudoRedGerudoPatternFabricTex
+#define gGerudoRedHairTex mm_gGerudoRedHairTex
+#define gGerudoRedHandOnHipWaitAnim mm_gGerudoRedHandOnHipWaitAnim
+#define gGerudoRedHeadDL mm_gGerudoRedHeadDL
+#define gGerudoRedLeftFootDL mm_gGerudoRedLeftFootDL
+#define gGerudoRedLeftForearmDL mm_gGerudoRedLeftForearmDL
+#define gGerudoRedLeftHandDL mm_gGerudoRedLeftHandDL
+#define gGerudoRedLeftLowerLegDL mm_gGerudoRedLeftLowerLegDL
+#define gGerudoRedLeftSwordDL mm_gGerudoRedLeftSwordDL
+#define gGerudoRedLeftThighDL mm_gGerudoRedLeftThighDL
+#define gGerudoRedLeftUpperArmDL mm_gGerudoRedLeftUpperArmDL
+#define gGerudoRedMail2Tex mm_gGerudoRedMail2Tex
+#define gGerudoRedMidriffTex mm_gGerudoRedMidriffTex
+#define gGerudoRedNeutralAnim mm_gGerudoRedNeutralAnim
+#define gGerudoRedPelvisDL mm_gGerudoRedPelvisDL
+#define gGerudoRedPonytailDL mm_gGerudoRedPonytailDL
+#define gGerudoRedRightFootDL mm_gGerudoRedRightFootDL
+#define gGerudoRedRightForearmDL mm_gGerudoRedRightForearmDL
+#define gGerudoRedRightHandDL mm_gGerudoRedRightHandDL
+#define gGerudoRedRightLowerLegDL mm_gGerudoRedRightLowerLegDL
+#define gGerudoRedRightSwordDL mm_gGerudoRedRightSwordDL
+#define gGerudoRedRightThighDL mm_gGerudoRedRightThighDL
+#define gGerudoRedRightUpperArmDL mm_gGerudoRedRightUpperArmDL
+#define gGerudoRedRunAwayAnim mm_gGerudoRedRunAwayAnim
+#define gGerudoRedShoeSoleTex mm_gGerudoRedShoeSoleTex
+#define gGerudoRedShoeUpperTex mm_gGerudoRedShoeUpperTex
+#define gGerudoRedSkel mm_gGerudoRedSkel
+#define gGerudoRedSkinGradientTex mm_gGerudoRedSkinGradientTex
+#define gGerudoRedSkinShadowTex mm_gGerudoRedSkinShadowTex
+#define gGerudoRedStandAnim mm_gGerudoRedStandAnim
+#define gGerudoRedTorsoDL mm_gGerudoRedTorsoDL
+#define gGerudoRedTurnHeadAnim mm_gGerudoRedTurnHeadAnim
+#define gGerudoRedVeilDL mm_gGerudoRedVeilDL
+#define gGerudoRedVeilFabricTex mm_gGerudoRedVeilFabricTex
+#define gGerudoRedWaitAnim mm_gGerudoRedWaitAnim
+#define gGerudoRedWalkAnim mm_gGerudoRedWalkAnim
+#define gGerudoRedYellowJewel1Tex mm_gGerudoRedYellowJewel1Tex
+#define gGerudoRedYellowJewel2Tex mm_gGerudoRedYellowJewel2Tex
+#define gGerudoTrousersTex mm_gGerudoTrousersTex

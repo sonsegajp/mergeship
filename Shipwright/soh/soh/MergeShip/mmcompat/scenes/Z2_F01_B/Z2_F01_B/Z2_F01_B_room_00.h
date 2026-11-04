@@ -1,0 +1,19 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_F01_B/Z2_F01_B/Z2_F01_B_room_00.h"
+
+#define Z2_F01_B_room_00DL_000590 mm_Z2_F01_B_room_00DL_000590
+#define Z2_F01_B_room_00DL_000A88 mm_Z2_F01_B_room_00DL_000A88
+#define Z2_F01_B_room_00DL_000E38 mm_Z2_F01_B_room_00DL_000E38
+#define Z2_F01_B_room_00DL_002A20 mm_Z2_F01_B_room_00DL_002A20
+#define Z2_F01_B_room_00DL_003118 mm_Z2_F01_B_room_00DL_003118
+#define Z2_F01_B_room_00DL_006400 mm_Z2_F01_B_room_00DL_006400
+#define Z2_F01_B_room_00DL_006588 mm_Z2_F01_B_room_00DL_006588
+#define Z2_F01_B_room_00DL_006AC0 mm_Z2_F01_B_room_00DL_006AC0
+#define Z2_F01_B_room_00DL_006C20 mm_Z2_F01_B_room_00DL_006C20
+#define Z2_F01_B_room_00DL_006C70 mm_Z2_F01_B_room_00DL_006C70
+#define Z2_F01_B_room_00DL_007098 mm_Z2_F01_B_room_00DL_007098
+#define Z2_F01_B_room_00DL_0071F8 mm_Z2_F01_B_room_00DL_0071F8
+#define Z2_F01_B_room_00DL_007218 mm_Z2_F01_B_room_00DL_007218
+#define Z2_F01_B_room_00DL_007240 mm_Z2_F01_B_room_00DL_007240
+#define Z2_F01_B_room_00DL_007250 mm_Z2_F01_B_room_00DL_007250

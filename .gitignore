@@ -1,0 +1,11 @@
+# Build + extraction artifacts
+/build/
+/dist/
+*.o2r
+*.otr
+*.z64
+*.n64
+*.v64
+
+# Python tool caches
+__pycache__/

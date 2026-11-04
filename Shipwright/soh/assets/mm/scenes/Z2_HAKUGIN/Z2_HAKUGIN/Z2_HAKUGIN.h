@@ -1,0 +1,101 @@
+#ifndef MM_Z2_HAKUGIN_Z2_HAKUGIN_H
+#define MM_Z2_HAKUGIN_Z2_HAKUGIN_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_HAKUGINCollisionHeader_0169A0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINCollisionHeader_0169A0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINCollisionHeader_0169A0[] = dmm_Z2_HAKUGINCollisionHeader_0169A0;
+
+#define dmm_Z2_HAKUGINCutsceneData_000460 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINCutsceneData_000460"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINCutsceneData_000460[] = dmm_Z2_HAKUGINCutsceneData_000460;
+
+#define dmm_Z2_HAKUGINCutsceneData_000648 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINCutsceneData_000648"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINCutsceneData_000648[] = dmm_Z2_HAKUGINCutsceneData_000648;
+
+#define dmm_Z2_HAKUGINCutsceneData_0010E8 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINCutsceneData_0010E8"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINCutsceneData_0010E8[] = dmm_Z2_HAKUGINCutsceneData_0010E8;
+
+#define dmm_Z2_HAKUGINTLUT_01B410 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B410"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B410[] = dmm_Z2_HAKUGINTLUT_01B410;
+
+#define dmm_Z2_HAKUGINTex_0171D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_0171D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_0171D0[] = dmm_Z2_HAKUGINTex_0171D0;
+
+#define dmm_Z2_HAKUGINTex_0179D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_0179D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_0179D0[] = dmm_Z2_HAKUGINTex_0179D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B950 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B950"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B950[] = dmm_Z2_HAKUGINTLUT_01B950;
+
+#define dmm_Z2_HAKUGINTLUT_01B930 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B930"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B930[] = dmm_Z2_HAKUGINTLUT_01B930;
+
+#define dmm_Z2_HAKUGINTex_0191D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_0191D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_0191D0[] = dmm_Z2_HAKUGINTex_0191D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B650 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B650"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B650[] = dmm_Z2_HAKUGINTLUT_01B650;
+
+#define dmm_Z2_HAKUGINTLUT_01B3D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B3D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B3D0[] = dmm_Z2_HAKUGINTLUT_01B3D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B610 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B610"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B610[] = dmm_Z2_HAKUGINTLUT_01B610;
+
+#define dmm_Z2_HAKUGINTLUT_01B9B0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B9B0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B9B0[] = dmm_Z2_HAKUGINTLUT_01B9B0;
+
+#define dmm_Z2_HAKUGINTex_0199D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_0199D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_0199D0[] = dmm_Z2_HAKUGINTex_0199D0;
+
+#define dmm_Z2_HAKUGINTex_01A3D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_01A3D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_01A3D0[] = dmm_Z2_HAKUGINTex_01A3D0;
+
+#define dmm_Z2_HAKUGINTex_01ABD0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_01ABD0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_01ABD0[] = dmm_Z2_HAKUGINTex_01ABD0;
+
+#define dmm_Z2_HAKUGINTex_0169D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_0169D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_0169D0[] = dmm_Z2_HAKUGINTex_0169D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B670 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B670"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B670[] = dmm_Z2_HAKUGINTLUT_01B670;
+
+#define dmm_Z2_HAKUGINTLUT_01B6D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B6D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B6D0[] = dmm_Z2_HAKUGINTLUT_01B6D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B990 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B990"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B990[] = dmm_Z2_HAKUGINTLUT_01B990;
+
+#define dmm_Z2_HAKUGINTex_0181D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_0181D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_0181D0[] = dmm_Z2_HAKUGINTex_0181D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B690 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B690"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B690[] = dmm_Z2_HAKUGINTLUT_01B690;
+
+#define dmm_Z2_HAKUGINTLUT_01B910 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B910"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B910[] = dmm_Z2_HAKUGINTLUT_01B910;
+
+#define dmm_Z2_HAKUGINTLUT_01B8D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B8D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B8D0[] = dmm_Z2_HAKUGINTLUT_01B8D0;
+
+#define dmm_Z2_HAKUGINTex_01A1D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_01A1D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_01A1D0[] = dmm_Z2_HAKUGINTex_01A1D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B630 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B630"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B630[] = dmm_Z2_HAKUGINTLUT_01B630;
+
+#define dmm_Z2_HAKUGINTLUT_01B3F0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B3F0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B3F0[] = dmm_Z2_HAKUGINTLUT_01B3F0;
+
+#define dmm_Z2_HAKUGINTLUT_01B6B0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B6B0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B6B0[] = dmm_Z2_HAKUGINTLUT_01B6B0;
+
+#define dmm_Z2_HAKUGINTLUT_01B8F0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B8F0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B8F0[] = dmm_Z2_HAKUGINTLUT_01B8F0;
+
+#define dmm_Z2_HAKUGINTex_0189D0 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTex_0189D0"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTex_0189D0[] = dmm_Z2_HAKUGINTex_0189D0;
+
+#define dmm_Z2_HAKUGINTLUT_01B970 "__OTR__mm/scenes/nonmq/Z2_HAKUGIN/Z2_HAKUGINTLUT_01B970"
+static const ALIGN_ASSET(2) char mm_Z2_HAKUGINTLUT_01B970[] = dmm_Z2_HAKUGINTLUT_01B970;
+#endif // MM_Z2_HAKUGIN_Z2_HAKUGIN_H

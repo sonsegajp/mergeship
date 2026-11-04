@@ -1,0 +1,15 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/misc/ger_daytelop_static/ger_daytelop_static.h"
+
+#define gDaytelop24HoursGERTex mm_gDaytelop24HoursGERTex
+#define gDaytelop48HoursGERTex mm_gDaytelop48HoursGERTex
+#define gDaytelop72HoursGERTex mm_gDaytelop72HoursGERTex
+#define gDaytelopFinalDayLeftGERTex mm_gDaytelopFinalDayLeftGERTex
+#define gDaytelopFinalDayRightGERTex mm_gDaytelopFinalDayRightGERTex
+#define gDaytelopFirstDayLeftGERTex mm_gDaytelopFirstDayLeftGERTex
+#define gDaytelopFirstDayRightGERTex mm_gDaytelopFirstDayRightGERTex
+#define gDaytelopNewDayLeftGERTex mm_gDaytelopNewDayLeftGERTex
+#define gDaytelopNewDayRightGERTex mm_gDaytelopNewDayRightGERTex
+#define gDaytelopSecondDayLeftGERTex mm_gDaytelopSecondDayLeftGERTex
+#define gDaytelopSecondDayRightGERTex mm_gDaytelopSecondDayRightGERTex

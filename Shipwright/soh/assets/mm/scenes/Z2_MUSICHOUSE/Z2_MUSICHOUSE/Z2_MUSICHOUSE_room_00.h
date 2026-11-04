@@ -1,0 +1,45 @@
+#ifndef MM_Z2_MUSICHOUSE_Z2_MUSICHOUSE_ROOM_00_H
+#define MM_Z2_MUSICHOUSE_Z2_MUSICHOUSE_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00AFE0 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00AFE0"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00AFE0[] = dmm_Z2_MUSICHOUSE_room_00DL_00AFE0;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_0079A8 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_0079A8"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_0079A8[] = dmm_Z2_MUSICHOUSE_room_00DL_0079A8;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00C948 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00C948"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00C948[] = dmm_Z2_MUSICHOUSE_room_00DL_00C948;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00A6C0 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00A6C0"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00A6C0[] = dmm_Z2_MUSICHOUSE_room_00DL_00A6C0;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_003CD8 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_003CD8"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_003CD8[] = dmm_Z2_MUSICHOUSE_room_00DL_003CD8;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00A458 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00A458"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00A458[] = dmm_Z2_MUSICHOUSE_room_00DL_00A458;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_0040A8 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_0040A8"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_0040A8[] = dmm_Z2_MUSICHOUSE_room_00DL_0040A8;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00BAF0 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00BAF0"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00BAF0[] = dmm_Z2_MUSICHOUSE_room_00DL_00BAF0;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00C7C0 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00C7C0"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00C7C0[] = dmm_Z2_MUSICHOUSE_room_00DL_00C7C0;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00C4F8 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00C4F8"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00C4F8[] = dmm_Z2_MUSICHOUSE_room_00DL_00C4F8;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_0047E8 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_0047E8"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_0047E8[] = dmm_Z2_MUSICHOUSE_room_00DL_0047E8;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00C770 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00C770"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00C770[] = dmm_Z2_MUSICHOUSE_room_00DL_00C770;
+
+#define dmm_Z2_MUSICHOUSE_room_00DL_00CA48 "__OTR__mm/scenes/nonmq/Z2_MUSICHOUSE_scene/Z2_MUSICHOUSE_room_00DL_00CA48"
+static const ALIGN_ASSET(2) char mm_Z2_MUSICHOUSE_room_00DL_00CA48[] = dmm_Z2_MUSICHOUSE_room_00DL_00CA48;
+
+#endif // MM_Z2_MUSICHOUSE_Z2_MUSICHOUSE_ROOM_00_H

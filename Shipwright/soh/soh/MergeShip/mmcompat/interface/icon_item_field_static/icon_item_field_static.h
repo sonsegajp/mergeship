@@ -1,0 +1,32 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/interface/icon_item_field_static/icon_item_field_static.h"
+
+#define gWorldMapAreaBox1Tex mm_gWorldMapAreaBox1Tex
+#define gWorldMapAreaBox2Tex mm_gWorldMapAreaBox2Tex
+#define gWorldMapAreaBox3Tex mm_gWorldMapAreaBox3Tex
+#define gWorldMapAreaBox4Tex mm_gWorldMapAreaBox4Tex
+#define gWorldMapAreaBox5Tex mm_gWorldMapAreaBox5Tex
+#define gWorldMapAreaBox6Tex mm_gWorldMapAreaBox6Tex
+#define gWorldMapAreaBox7Tex mm_gWorldMapAreaBox7Tex
+#define gWorldMapAreaBox8Tex mm_gWorldMapAreaBox8Tex
+#define gWorldMapArrowTex mm_gWorldMapArrowTex
+#define gWorldMapClockTownCloud1Tex mm_gWorldMapClockTownCloud1Tex
+#define gWorldMapClockTownCloud2Tex mm_gWorldMapClockTownCloud2Tex
+#define gWorldMapDotTex mm_gWorldMapDotTex
+#define gWorldMapGreatBayCloud1Tex mm_gWorldMapGreatBayCloud1Tex
+#define gWorldMapGreatBayCloud2Tex mm_gWorldMapGreatBayCloud2Tex
+#define gWorldMapGreatBayCloud3Tex mm_gWorldMapGreatBayCloud3Tex
+#define gWorldMapGreatBayCloud4Tex mm_gWorldMapGreatBayCloud4Tex
+#define gWorldMapImageTLUT mm_gWorldMapImageTLUT
+#define gWorldMapImageTex mm_gWorldMapImageTex
+#define gWorldMapOwlFaceTex mm_gWorldMapOwlFaceTex
+#define gWorldMapRomaniRanchCloudTex mm_gWorldMapRomaniRanchCloudTex
+#define gWorldMapSnowheadCloud1Tex mm_gWorldMapSnowheadCloud1Tex
+#define gWorldMapSnowheadCloud2Tex mm_gWorldMapSnowheadCloud2Tex
+#define gWorldMapSnowheadCloud3Tex mm_gWorldMapSnowheadCloud3Tex
+#define gWorldMapStoneTowerCloud1Tex mm_gWorldMapStoneTowerCloud1Tex
+#define gWorldMapStoneTowerCloud2Tex mm_gWorldMapStoneTowerCloud2Tex
+#define gWorldMapWoodfallCloud1Tex mm_gWorldMapWoodfallCloud1Tex
+#define gWorldMapWoodfallCloud2Tex mm_gWorldMapWoodfallCloud2Tex
+#define gWorldMapWoodfallCloud3Tex mm_gWorldMapWoodfallCloud3Tex

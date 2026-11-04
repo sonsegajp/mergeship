@@ -1,0 +1,52 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_giant/object_giant.h"
+
+#define gGiantBeardDL mm_gGiantBeardDL
+#define gGiantBeardTex mm_gGiantBeardTex
+#define gGiantBeardVtx mm_gGiantBeardVtx
+#define gGiantBigCallEndAnim mm_gGiantBigCallEndAnim
+#define gGiantBigCallLoopAnim mm_gGiantBigCallLoopAnim
+#define gGiantBigCallStartAnim mm_gGiantBigCallStartAnim
+#define gGiantBodyVtx mm_gGiantBodyVtx
+#define gGiantFaceEyeClosedTex mm_gGiantFaceEyeClosedTex
+#define gGiantFaceEyeHalfTex mm_gGiantFaceEyeHalfTex
+#define gGiantFaceEyeOpenTex mm_gGiantFaceEyeOpenTex
+#define gGiantFallingOverAnim mm_gGiantFallingOverAnim
+#define gGiantFootTex mm_gGiantFootTex
+#define gGiantForearmAndKneeTex mm_gGiantForearmAndKneeTex
+#define gGiantGroinTex mm_gGiantGroinTex
+#define gGiantHairTex mm_gGiantHairTex
+#define gGiantHandTex mm_gGiantHandTex
+#define gGiantHeadDL mm_gGiantHeadDL
+#define gGiantIdleAnim mm_gGiantIdleAnim
+#define gGiantLargeStrideAnim mm_gGiantLargeStrideAnim
+#define gGiantLeftFootDL mm_gGiantLeftFootDL
+#define gGiantLeftForearmDL mm_gGiantLeftForearmDL
+#define gGiantLeftHandDL mm_gGiantLeftHandDL
+#define gGiantLeftShinDL mm_gGiantLeftShinDL
+#define gGiantLeftShoulderDL mm_gGiantLeftShoulderDL
+#define gGiantLeftThighDL mm_gGiantLeftThighDL
+#define gGiantLeftUpperArmDL mm_gGiantLeftUpperArmDL
+#define gGiantLookUpLoopAnim mm_gGiantLookUpLoopAnim
+#define gGiantLookUpStartAnim mm_gGiantLookUpStartAnim
+#define gGiantRaisedArmsLoopAnim mm_gGiantRaisedArmsLoopAnim
+#define gGiantRaisedArmsStartAnim mm_gGiantRaisedArmsStartAnim
+#define gGiantRightFootDL mm_gGiantRightFootDL
+#define gGiantRightForearmDL mm_gGiantRightForearmDL
+#define gGiantRightHandDL mm_gGiantRightHandDL
+#define gGiantRightShinDL mm_gGiantRightShinDL
+#define gGiantRightShoulderDL mm_gGiantRightShoulderDL
+#define gGiantRightThighDL mm_gGiantRightThighDL
+#define gGiantRightUpperArmDL mm_gGiantRightUpperArmDL
+#define gGiantShinTex mm_gGiantShinTex
+#define gGiantSkel mm_gGiantSkel
+#define gGiantSmallCallEndAnim mm_gGiantSmallCallEndAnim
+#define gGiantSmallCallLoopAnim mm_gGiantSmallCallLoopAnim
+#define gGiantSmallCallStartAnim mm_gGiantSmallCallStartAnim
+#define gGiantStruggleLoopAnim mm_gGiantStruggleLoopAnim
+#define gGiantStruggleStartAnim mm_gGiantStruggleStartAnim
+#define gGiantTLUT mm_gGiantTLUT
+#define gGiantUnusedBeardVtx mm_gGiantUnusedBeardVtx
+#define gGiantUpperArmAndThighTex mm_gGiantUpperArmAndThighTex
+#define gGiantWalkingAnim mm_gGiantWalkingAnim

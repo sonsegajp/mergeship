@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/misc/scene_texture_06/scene_texture_06.h"
+
+#define scene_texture_06_TLUT_000C00 mm_scene_texture_06_TLUT_000C00
+#define scene_texture_06_TLUT_001420 mm_scene_texture_06_TLUT_001420
+#define scene_texture_06_TLUT_001C40 mm_scene_texture_06_TLUT_001C40
+#define scene_texture_06_Tex_000000 mm_scene_texture_06_Tex_000000
+#define scene_texture_06_Tex_000400 mm_scene_texture_06_Tex_000400
+#define scene_texture_06_Tex_000C20 mm_scene_texture_06_Tex_000C20
+#define scene_texture_06_Tex_001440 mm_scene_texture_06_Tex_001440
+#define scene_texture_06_Tex_001C60 mm_scene_texture_06_Tex_001C60
+#define scene_texture_06_Tex_002460 mm_scene_texture_06_Tex_002460
+#define scene_texture_06_Tex_002C60 mm_scene_texture_06_Tex_002C60
+#define scene_texture_06_Tex_003460 mm_scene_texture_06_Tex_003460
+#define scene_texture_06_Tex_003C60 mm_scene_texture_06_Tex_003C60
+#define scene_texture_06_Tex_004460 mm_scene_texture_06_Tex_004460
+#define scene_texture_06_Tex_004C60 mm_scene_texture_06_Tex_004C60

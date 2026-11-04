@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_LAST_BS/Z2_LAST_BS/Z2_LAST_BS.h"
+
+#define Z2_LAST_BSCollisionHeader_002228 mm_Z2_LAST_BSCollisionHeader_002228
+#define Z2_LAST_BSTLUT_007860 mm_Z2_LAST_BSTLUT_007860
+#define Z2_LAST_BSTex_002260 mm_Z2_LAST_BSTex_002260
+#define Z2_LAST_BSTex_002A60 mm_Z2_LAST_BSTex_002A60
+#define Z2_LAST_BSTex_002E60 mm_Z2_LAST_BSTex_002E60
+#define Z2_LAST_BSTex_003060 mm_Z2_LAST_BSTex_003060
+#define Z2_LAST_BSTex_003860 mm_Z2_LAST_BSTex_003860
+#define Z2_LAST_BSTex_004060 mm_Z2_LAST_BSTex_004060
+#define Z2_LAST_BSTex_004260 mm_Z2_LAST_BSTex_004260
+#define Z2_LAST_BSTex_005260 mm_Z2_LAST_BSTex_005260
+#define Z2_LAST_BSTex_005460 mm_Z2_LAST_BSTex_005460
+#define Z2_LAST_BSTex_006460 mm_Z2_LAST_BSTex_006460
+#define Z2_LAST_BSTex_006860 mm_Z2_LAST_BSTex_006860

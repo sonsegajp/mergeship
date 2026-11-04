@@ -1,0 +1,27 @@
+#ifndef MM_Z2_TAKARAKUJI_Z2_TAKARAKUJI_ROOM_00_H
+#define MM_Z2_TAKARAKUJI_Z2_TAKARAKUJI_ROOM_00_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_TAKARAKUJI_room_00DL_002C00 "__OTR__mm/scenes/nonmq/Z2_TAKARAKUJI_scene/Z2_TAKARAKUJI_room_00DL_002C00"
+static const ALIGN_ASSET(2) char mm_Z2_TAKARAKUJI_room_00DL_002C00[] = dmm_Z2_TAKARAKUJI_room_00DL_002C00;
+
+#define dmm_Z2_TAKARAKUJI_room_00DL_002E30 "__OTR__mm/scenes/nonmq/Z2_TAKARAKUJI_scene/Z2_TAKARAKUJI_room_00DL_002E30"
+static const ALIGN_ASSET(2) char mm_Z2_TAKARAKUJI_room_00DL_002E30[] = dmm_Z2_TAKARAKUJI_room_00DL_002E30;
+
+#define dmm_Z2_TAKARAKUJI_room_00DL_0018B0 "__OTR__mm/scenes/nonmq/Z2_TAKARAKUJI_scene/Z2_TAKARAKUJI_room_00DL_0018B0"
+static const ALIGN_ASSET(2) char mm_Z2_TAKARAKUJI_room_00DL_0018B0[] = dmm_Z2_TAKARAKUJI_room_00DL_0018B0;
+
+#define dmm_Z2_TAKARAKUJI_room_00DL_0008E0 "__OTR__mm/scenes/nonmq/Z2_TAKARAKUJI_scene/Z2_TAKARAKUJI_room_00DL_0008E0"
+static const ALIGN_ASSET(2) char mm_Z2_TAKARAKUJI_room_00DL_0008E0[] = dmm_Z2_TAKARAKUJI_room_00DL_0008E0;
+
+#define dmm_Z2_TAKARAKUJI_room_00DL_002178 "__OTR__mm/scenes/nonmq/Z2_TAKARAKUJI_scene/Z2_TAKARAKUJI_room_00DL_002178"
+static const ALIGN_ASSET(2) char mm_Z2_TAKARAKUJI_room_00DL_002178[] = dmm_Z2_TAKARAKUJI_room_00DL_002178;
+
+#define dmm_Z2_TAKARAKUJI_room_00DL_002E00 "__OTR__mm/scenes/nonmq/Z2_TAKARAKUJI_scene/Z2_TAKARAKUJI_room_00DL_002E00"
+static const ALIGN_ASSET(2) char mm_Z2_TAKARAKUJI_room_00DL_002E00[] = dmm_Z2_TAKARAKUJI_room_00DL_002E00;
+
+#define dmm_Z2_TAKARAKUJI_room_00DL_002E38 "__OTR__mm/scenes/nonmq/Z2_TAKARAKUJI_scene/Z2_TAKARAKUJI_room_00DL_002E38"
+static const ALIGN_ASSET(2) char mm_Z2_TAKARAKUJI_room_00DL_002E38[] = dmm_Z2_TAKARAKUJI_room_00DL_002E38;
+
+#endif // MM_Z2_TAKARAKUJI_Z2_TAKARAKUJI_ROOM_00_H

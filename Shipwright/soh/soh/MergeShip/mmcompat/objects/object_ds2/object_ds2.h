@@ -1,0 +1,26 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ds2/object_ds2.h"
+
+#define object_ds2_Anim_0002E4 mm_object_ds2_Anim_0002E4
+#define object_ds2_DL_001990 mm_object_ds2_DL_001990
+#define object_ds2_DL_001C98 mm_object_ds2_DL_001C98
+#define object_ds2_DL_002188 mm_object_ds2_DL_002188
+#define object_ds2_DL_0022B0 mm_object_ds2_DL_0022B0
+#define object_ds2_DL_002480 mm_object_ds2_DL_002480
+#define object_ds2_DL_002610 mm_object_ds2_DL_002610
+#define object_ds2_DL_002738 mm_object_ds2_DL_002738
+#define object_ds2_DL_002908 mm_object_ds2_DL_002908
+#define object_ds2_Skel_004258 mm_object_ds2_Skel_004258
+#define object_ds2_TLUT_002A98 mm_object_ds2_TLUT_002A98
+#define object_ds2_Tex_002C98 mm_object_ds2_Tex_002C98
+#define object_ds2_Tex_002D98 mm_object_ds2_Tex_002D98
+#define object_ds2_Tex_002DD8 mm_object_ds2_Tex_002DD8
+#define object_ds2_Tex_002ED8 mm_object_ds2_Tex_002ED8
+#define object_ds2_Tex_0030D8 mm_object_ds2_Tex_0030D8
+#define object_ds2_Tex_0034D8 mm_object_ds2_Tex_0034D8
+#define object_ds2_Tex_0038D8 mm_object_ds2_Tex_0038D8
+#define object_ds2_Tex_003CD8 mm_object_ds2_Tex_003CD8
+#define object_ds2_Tex_003DD8 mm_object_ds2_Tex_003DD8
+#define object_ds2_Tex_003ED8 mm_object_ds2_Tex_003ED8
+#define object_ds2_Tex_003FD8 mm_object_ds2_Tex_003FD8

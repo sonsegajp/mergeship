@@ -1,0 +1,37 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_fu/object_fu.h"
+
+#define gGuruGuruBlueTriangleDL mm_gGuruGuruBlueTriangleDL
+#define gGuruGuruChestAndMusicBoxPipeDL mm_gGuruGuruChestAndMusicBoxPipeDL
+#define gGuruGuruClothesTLUT mm_gGuruGuruClothesTLUT
+#define gGuruGuruEarTex mm_gGuruGuruEarTex
+#define gGuruGuruEyeAngryTex mm_gGuruGuruEyeAngryTex
+#define gGuruGuruEyeClosedTex mm_gGuruGuruEyeClosedTex
+#define gGuruGuruFingersAndToesTex mm_gGuruGuruFingersAndToesTex
+#define gGuruGuruHairTex mm_gGuruGuruHairTex
+#define gGuruGuruHeadDL mm_gGuruGuruHeadDL
+#define gGuruGuruHeadSkinTex mm_gGuruGuruHeadSkinTex
+#define gGuruGuruHornAndPipeTex mm_gGuruGuruHornAndPipeTex
+#define gGuruGuruHornDL mm_gGuruGuruHornDL
+#define gGuruGuruLeftArmAndMusicBoxDL mm_gGuruGuruLeftArmAndMusicBoxDL
+#define gGuruGuruLeftFootDL mm_gGuruGuruLeftFootDL
+#define gGuruGuruLeftLegDL mm_gGuruGuruLeftLegDL
+#define gGuruGuruLeftThighDL mm_gGuruGuruLeftThighDL
+#define gGuruGuruMouthAngryTex mm_gGuruGuruMouthAngryTex
+#define gGuruGuruMouthOpenTex mm_gGuruGuruMouthOpenTex
+#define gGuruGuruMusicBoxTex mm_gGuruGuruMusicBoxTex
+#define gGuruGuruPantsTex mm_gGuruGuruPantsTex
+#define gGuruGuruPlayAndMoveHeadAnim mm_gGuruGuruPlayAndMoveHeadAnim
+#define gGuruGuruPlayStillAnim mm_gGuruGuruPlayStillAnim
+#define gGuruGuruRightArmDL mm_gGuruGuruRightArmDL
+#define gGuruGuruRightFootDL mm_gGuruGuruRightFootDL
+#define gGuruGuruRightHandAndCrankDL mm_gGuruGuruRightHandAndCrankDL
+#define gGuruGuruRightLegDL mm_gGuruGuruRightLegDL
+#define gGuruGuruRightShoulderDL mm_gGuruGuruRightShoulderDL
+#define gGuruGuruRightThighDL mm_gGuruGuruRightThighDL
+#define gGuruGuruShirtTex mm_gGuruGuruShirtTex
+#define gGuruGuruSkel mm_gGuruGuruSkel
+#define gGuruGuruSkinTLUT mm_gGuruGuruSkinTLUT
+#define gGuruGuruTorsoDL mm_gGuruGuruTorsoDL
+#define gGuruGuruUpperHornAndCrankTex mm_gGuruGuruUpperHornAndCrankTex

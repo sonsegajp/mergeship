@@ -1,0 +1,71 @@
+#ifndef MM_Z2_IKNINSIDE_Z2_IKNINSIDE_H
+#define MM_Z2_IKNINSIDE_Z2_IKNINSIDE_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_IKNINSIDECollisionHeader_0045E8 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDECollisionHeader_0045E8"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDECollisionHeader_0045E8[] = dmm_Z2_IKNINSIDECollisionHeader_0045E8;
+
+#define dmm_Z2_IKNINSIDECutsceneData_0001E4 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDECutsceneData_0001E4"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDECutsceneData_0001E4[] = dmm_Z2_IKNINSIDECutsceneData_0001E4;
+
+#define dmm_Z2_IKNINSIDETLUT_00AE10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETLUT_00AE10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETLUT_00AE10[] = dmm_Z2_IKNINSIDETLUT_00AE10;
+
+#define dmm_Z2_IKNINSIDETex_00A610 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_00A610"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_00A610[] = dmm_Z2_IKNINSIDETex_00A610;
+
+#define dmm_Z2_IKNINSIDETLUT_00AC10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETLUT_00AC10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETLUT_00AC10[] = dmm_Z2_IKNINSIDETLUT_00AC10;
+
+#define dmm_Z2_IKNINSIDETex_006A10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_006A10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_006A10[] = dmm_Z2_IKNINSIDETex_006A10;
+
+#define dmm_Z2_IKNINSIDETex_007610 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_007610"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_007610[] = dmm_Z2_IKNINSIDETex_007610;
+
+#define dmm_Z2_IKNINSIDETex_006410 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_006410"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_006410[] = dmm_Z2_IKNINSIDETex_006410;
+
+#define dmm_Z2_IKNINSIDETex_006610 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_006610"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_006610[] = dmm_Z2_IKNINSIDETex_006610;
+
+#define dmm_Z2_IKNINSIDETLUT_00AA10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETLUT_00AA10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETLUT_00AA10[] = dmm_Z2_IKNINSIDETLUT_00AA10;
+
+#define dmm_Z2_IKNINSIDETex_006E10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_006E10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_006E10[] = dmm_Z2_IKNINSIDETex_006E10;
+
+#define dmm_Z2_IKNINSIDETex_007E10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_007E10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_007E10[] = dmm_Z2_IKNINSIDETex_007E10;
+
+#define dmm_Z2_IKNINSIDETex_008610 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_008610"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_008610[] = dmm_Z2_IKNINSIDETex_008610;
+
+#define dmm_Z2_IKNINSIDETex_008E10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_008E10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_008E10[] = dmm_Z2_IKNINSIDETex_008E10;
+
+#define dmm_Z2_IKNINSIDETex_009210 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_009210"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_009210[] = dmm_Z2_IKNINSIDETex_009210;
+
+#define dmm_Z2_IKNINSIDETex_009A10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_009A10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_009A10[] = dmm_Z2_IKNINSIDETex_009A10;
+
+#define dmm_Z2_IKNINSIDETex_009E10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_009E10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_009E10[] = dmm_Z2_IKNINSIDETex_009E10;
+
+#define dmm_Z2_IKNINSIDETex_005C10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_005C10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_005C10[] = dmm_Z2_IKNINSIDETex_005C10;
+
+#define dmm_Z2_IKNINSIDETex_005410 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_005410"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_005410[] = dmm_Z2_IKNINSIDETex_005410;
+
+#define dmm_Z2_IKNINSIDETex_004C10 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDETex_004C10"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDETex_004C10[] = dmm_Z2_IKNINSIDETex_004C10;
+
+#define dmm_Z2_IKNINSIDECollisionHeader_0045E8 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDECollisionHeader_0045E8"
+
+#define dmm_Z2_IKNINSIDECutsceneData_004730 "__OTR__mm/scenes/nonmq/Z2_IKNINSIDE/Z2_IKNINSIDECutsceneData_004730"
+static const ALIGN_ASSET(2) char mm_Z2_IKNINSIDECutsceneData_004730[] = dmm_Z2_IKNINSIDECutsceneData_004730;
+
+#endif // MM_Z2_IKNINSIDE_Z2_IKNINSIDE_H

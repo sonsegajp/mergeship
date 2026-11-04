@@ -1,0 +1,27 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_firefly/object_firefly.h"
+
+#define gFireKeeseBodyDL mm_gFireKeeseBodyDL
+#define gFireKeeseBodyTex mm_gFireKeeseBodyTex
+#define gFireKeeseEarTex mm_gFireKeeseEarTex
+#define gFireKeeseEyeTex mm_gFireKeeseEyeTex
+#define gFireKeeseFlyAnim mm_gFireKeeseFlyAnim
+#define gFireKeeseHeadDL mm_gFireKeeseHeadDL
+#define gFireKeeseLeftFootDL mm_gFireKeeseLeftFootDL
+#define gFireKeeseLeftWingEndDL mm_gFireKeeseLeftWingEndDL
+#define gFireKeeseLeftWingMidDL mm_gFireKeeseLeftWingMidDL
+#define gFireKeeseLeftWingStartDL mm_gFireKeeseLeftWingStartDL
+#define gFireKeeseRightFootDL mm_gFireKeeseRightFootDL
+#define gFireKeeseRightWingEndDL mm_gFireKeeseRightWingEndDL
+#define gFireKeeseRightWingMidDL mm_gFireKeeseRightWingMidDL
+#define gFireKeeseRightWingStartDL mm_gFireKeeseRightWingStartDL
+#define gFireKeeseSkel mm_gFireKeeseSkel
+#define gFireKeeseTalonTex mm_gFireKeeseTalonTex
+#define gFireKeeseWingTex mm_gFireKeeseWingTex
+#define gKeeseBodyTex mm_gKeeseBodyTex
+#define gKeeseEarTex mm_gKeeseEarTex
+#define gKeeseRedEyeTex mm_gKeeseRedEyeTex
+#define gKeeseRedEyesDL mm_gKeeseRedEyesDL
+#define gKeeseTalonTex mm_gKeeseTalonTex
+#define gKeeseWingTex mm_gKeeseWingTex

@@ -1,0 +1,44 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_okuta/object_okuta.h"
+
+#define gBackLeftArmBaseDL mm_gBackLeftArmBaseDL
+#define gBackLeftArmEndDL mm_gBackLeftArmEndDL
+#define gBackLeftArmMiddleDL mm_gBackLeftArmMiddleDL
+#define gBackRightArmBaseDL mm_gBackRightArmBaseDL
+#define gBackRightArmEndDL mm_gBackRightArmEndDL
+#define gBackRightArmMiddleDL mm_gBackRightArmMiddleDL
+#define gFrontLeftArmBaseDL mm_gFrontLeftArmBaseDL
+#define gFrontLeftArmEndDL mm_gFrontLeftArmEndDL
+#define gFrontLeftArmMiddleDL mm_gFrontLeftArmMiddleDL
+#define gFrontRightArmBaseDL mm_gFrontRightArmBaseDL
+#define gFrontRightArmEndDL mm_gFrontRightArmEndDL
+#define gFrontRightArmMiddleDL mm_gFrontRightArmMiddleDL
+#define gOctorokAppearAnim mm_gOctorokAppearAnim
+#define gOctorokArmTex mm_gOctorokArmTex
+#define gOctorokBodyDL mm_gOctorokBodyDL
+#define gOctorokDieAnim mm_gOctorokDieAnim
+#define gOctorokEyeTex mm_gOctorokEyeTex
+#define gOctorokEyesDL mm_gOctorokEyesDL
+#define gOctorokFinTex mm_gOctorokFinTex
+#define gOctorokFloatAnim mm_gOctorokFloatAnim
+#define gOctorokHeadBackDL mm_gOctorokHeadBackDL
+#define gOctorokHeadBottomDL mm_gOctorokHeadBottomDL
+#define gOctorokHeadBottomTex mm_gOctorokHeadBottomTex
+#define gOctorokHeadDL mm_gOctorokHeadDL
+#define gOctorokHeadFrontDL mm_gOctorokHeadFrontDL
+#define gOctorokHeadTopDL mm_gOctorokHeadTopDL
+#define gOctorokHideAnim mm_gOctorokHideAnim
+#define gOctorokHitAnim mm_gOctorokHitAnim
+#define gOctorokMouthTex mm_gOctorokMouthTex
+#define gOctorokProjectileDL mm_gOctorokProjectileDL
+#define gOctorokProjectileTex mm_gOctorokProjectileTex
+#define gOctorokRoughSkinTex mm_gOctorokRoughSkinTex
+#define gOctorokScalesOoTTex mm_gOctorokScalesOoTTex
+#define gOctorokScalesTex mm_gOctorokScalesTex
+#define gOctorokShadedSkinTex mm_gOctorokShadedSkinTex
+#define gOctorokShootAnim mm_gOctorokShootAnim
+#define gOctorokSkel mm_gOctorokSkel
+#define gOctorokSnoutDL mm_gOctorokSnoutDL
+#define gOctorokStripesTex mm_gOctorokStripesTex
+#define gOctorokUnderEyeTrianglesDL mm_gOctorokUnderEyeTrianglesDL

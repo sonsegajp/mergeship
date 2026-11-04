@@ -1,0 +1,15 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ice_block/object_ice_block.h"
+
+#define gIceBlockCol mm_gIceBlockCol
+#define gIceBlockCubeDL mm_gIceBlockCubeDL
+#define gIceBlockCubeEndDL mm_gIceBlockCubeEndDL
+#define gIceBlockCubeSublimatingAirTexAnim mm_gIceBlockCubeSublimatingAirTexAnim
+#define gIceBlockIce1Tex mm_gIceBlockIce1Tex
+#define gIceBlockIce2Tex mm_gIceBlockIce2Tex
+#define gIceBlockIceBergDL mm_gIceBlockIceBergDL
+#define gIceBlockIceBergEndDL mm_gIceBlockIceBergEndDL
+#define gIceBlockIceBergSublimatingAirTexAnim mm_gIceBlockIceBergSublimatingAirTexAnim
+#define gIceBlockShardEffectDL mm_gIceBlockShardEffectDL
+#define gIceBlockShardEffectEndDL mm_gIceBlockShardEffectEndDL

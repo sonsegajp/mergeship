@@ -1,0 +1,51 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_dinofos/object_dinofos.h"
+
+#define gDinolfosArmorTex mm_gDinolfosArmorTex
+#define gDinolfosAttackAnim mm_gDinolfosAttackAnim
+#define gDinolfosClawTex mm_gDinolfosClawTex
+#define gDinolfosCryAnim mm_gDinolfosCryAnim
+#define gDinolfosDieAnim mm_gDinolfosDieAnim
+#define gDinolfosEyeClosedTex mm_gDinolfosEyeClosedTex
+#define gDinolfosEyeHalfTex mm_gDinolfosEyeHalfTex
+#define gDinolfosEyeHoleTex mm_gDinolfosEyeHoleTex
+#define gDinolfosEyeOpenTex mm_gDinolfosEyeOpenTex
+#define gDinolfosFireEndAnim mm_gDinolfosFireEndAnim
+#define gDinolfosFireLoopAnim mm_gDinolfosFireLoopAnim
+#define gDinolfosFireStartAnim mm_gDinolfosFireStartAnim
+#define gDinolfosHeadDL mm_gDinolfosHeadDL
+#define gDinolfosHitAnim mm_gDinolfosHitAnim
+#define gDinolfosIdleAnim mm_gDinolfosIdleAnim
+#define gDinolfosInnerMouthTex mm_gDinolfosInnerMouthTex
+#define gDinolfosIntroAnim mm_gDinolfosIntroAnim
+#define gDinolfosJawDL mm_gDinolfosJawDL
+#define gDinolfosJawTex mm_gDinolfosJawTex
+#define gDinolfosJumpAnim mm_gDinolfosJumpAnim
+#define gDinolfosKnifeDL mm_gDinolfosKnifeDL
+#define gDinolfosKnifeHoleTex mm_gDinolfosKnifeHoleTex
+#define gDinolfosLandAnim mm_gDinolfosLandAnim
+#define gDinolfosLeftClawsDL mm_gDinolfosLeftClawsDL
+#define gDinolfosLeftForearmDL mm_gDinolfosLeftForearmDL
+#define gDinolfosLeftHandDL mm_gDinolfosLeftHandDL
+#define gDinolfosLeftLowerLegDL mm_gDinolfosLeftLowerLegDL
+#define gDinolfosLeftUpperArmDL mm_gDinolfosLeftUpperArmDL
+#define gDinolfosLeftUpperLegDL mm_gDinolfosLeftUpperLegDL
+#define gDinolfosLowerBodyDL mm_gDinolfosLowerBodyDL
+#define gDinolfosLowerTailDL mm_gDinolfosLowerTailDL
+#define gDinolfosNeckDL mm_gDinolfosNeckDL
+#define gDinolfosRightClawsDL mm_gDinolfosRightClawsDL
+#define gDinolfosRightForearmDL mm_gDinolfosRightForearmDL
+#define gDinolfosRightHandDL mm_gDinolfosRightHandDL
+#define gDinolfosRightLowerLegDL mm_gDinolfosRightLowerLegDL
+#define gDinolfosRightUpperArmDL mm_gDinolfosRightUpperArmDL
+#define gDinolfosRightUpperLegDL mm_gDinolfosRightUpperLegDL
+#define gDinolfosScaleTex mm_gDinolfosScaleTex
+#define gDinolfosSidestepAnim mm_gDinolfosSidestepAnim
+#define gDinolfosSkel mm_gDinolfosSkel
+#define gDinolfosSkinTex mm_gDinolfosSkinTex
+#define gDinolfosSpikeTex mm_gDinolfosSpikeTex
+#define gDinolfosTLUT mm_gDinolfosTLUT
+#define gDinolfosUpperBodyDL mm_gDinolfosUpperBodyDL
+#define gDinolfosUpperTailDL mm_gDinolfosUpperTailDL
+#define gDinolfosWalkAnim mm_gDinolfosWalkAnim

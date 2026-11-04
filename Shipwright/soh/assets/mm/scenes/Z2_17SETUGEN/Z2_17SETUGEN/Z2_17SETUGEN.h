@@ -1,0 +1,53 @@
+#ifndef MM_Z2_17SETUGEN_Z2_17SETUGEN_H
+#define MM_Z2_17SETUGEN_Z2_17SETUGEN_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_17SETUGENCollisionHeader_005678 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENCollisionHeader_005678"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENCollisionHeader_005678[] = dmm_Z2_17SETUGENCollisionHeader_005678;
+
+#define dmm_Z2_17SETUGENCutsceneData_000338 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENCutsceneData_000338"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENCutsceneData_000338[] = dmm_Z2_17SETUGENCutsceneData_000338;
+
+#define dmm_Z2_17SETUGENCutsceneData_0015B8 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENCutsceneData_0015B8"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENCutsceneData_0015B8[] = dmm_Z2_17SETUGENCutsceneData_0015B8;
+
+#define dmm_Z2_17SETUGENTex_0086B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_0086B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_0086B0[] = dmm_Z2_17SETUGENTex_0086B0;
+
+#define dmm_Z2_17SETUGENTLUT_0099B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTLUT_0099B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTLUT_0099B0[] = dmm_Z2_17SETUGENTLUT_0099B0;
+
+#define dmm_Z2_17SETUGENTex_0088B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_0088B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_0088B0[] = dmm_Z2_17SETUGENTex_0088B0;
+
+#define dmm_Z2_17SETUGENTex_008CB0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_008CB0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_008CB0[] = dmm_Z2_17SETUGENTex_008CB0;
+
+#define dmm_Z2_17SETUGENTex_008DB0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_008DB0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_008DB0[] = dmm_Z2_17SETUGENTex_008DB0;
+
+#define dmm_Z2_17SETUGENTex_006EB0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_006EB0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_006EB0[] = dmm_Z2_17SETUGENTex_006EB0;
+
+#define dmm_Z2_17SETUGENTex_0095B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_0095B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_0095B0[] = dmm_Z2_17SETUGENTex_0095B0;
+
+#define dmm_Z2_17SETUGENTex_005EB0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_005EB0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_005EB0[] = dmm_Z2_17SETUGENTex_005EB0;
+
+#define dmm_Z2_17SETUGENTex_0076B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_0076B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_0076B0[] = dmm_Z2_17SETUGENTex_0076B0;
+
+#define dmm_Z2_17SETUGENTex_0056B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_0056B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_0056B0[] = dmm_Z2_17SETUGENTex_0056B0;
+
+#define dmm_Z2_17SETUGENTex_007EB0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_007EB0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_007EB0[] = dmm_Z2_17SETUGENTex_007EB0;
+
+#define dmm_Z2_17SETUGENTex_0082B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_0082B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_0082B0[] = dmm_Z2_17SETUGENTex_0082B0;
+
+#define dmm_Z2_17SETUGENTex_0066B0 "__OTR__mm/scenes/nonmq/Z2_17SETUGEN/Z2_17SETUGENTex_0066B0"
+static const ALIGN_ASSET(2) char mm_Z2_17SETUGENTex_0066B0[] = dmm_Z2_17SETUGENTex_0066B0;
+#endif // MM_Z2_17SETUGEN_Z2_17SETUGEN_H

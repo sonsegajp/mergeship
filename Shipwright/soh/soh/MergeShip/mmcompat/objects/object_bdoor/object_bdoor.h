@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bdoor/object_bdoor.h"
+
+#define gBossDoorChainDL mm_gBossDoorChainDL
+#define gBossDoorDL mm_gBossDoorDL
+#define gBossDoorDefaultTex mm_gBossDoorDefaultTex
+#define gBossDoorGreatBayTex mm_gBossDoorGreatBayTex
+#define gBossDoorLockDL mm_gBossDoorLockDL
+#define gBossDoorSnowheadTex mm_gBossDoorSnowheadTex
+#define gBossDoorStoneTowerTex mm_gBossDoorStoneTowerTex
+#define gBossDoorUnusedDoor1LeftDL mm_gBossDoorUnusedDoor1LeftDL
+#define gBossDoorUnusedDoor1RightDL mm_gBossDoorUnusedDoor1RightDL
+#define gBossDoorUnusedDoor1Tex mm_gBossDoorUnusedDoor1Tex
+#define gBossDoorUnusedDoor2LeftDL mm_gBossDoorUnusedDoor2LeftDL
+#define gBossDoorUnusedDoor2RightDL mm_gBossDoorUnusedDoor2RightDL
+#define gBossDoorUnusedDoor2Tex mm_gBossDoorUnusedDoor2Tex
+#define gBossDoorWoodfallTex mm_gBossDoorWoodfallTex

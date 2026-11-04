@@ -1,0 +1,17 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_tanron5/object_tanron5.h"
+
+#define object_tanron5_DL_0004E0 mm_object_tanron5_DL_0004E0
+#define object_tanron5_DL_000710 mm_object_tanron5_DL_000710
+#define object_tanron5_DL_0007D8 mm_object_tanron5_DL_0007D8
+#define object_tanron5_DL_0008A8 mm_object_tanron5_DL_0008A8
+#define object_tanron5_DL_000960 mm_object_tanron5_DL_000960
+#define object_tanron5_TLUT_000A18 mm_object_tanron5_TLUT_000A18
+#define object_tanron5_TLUT_000A38 mm_object_tanron5_TLUT_000A38
+#define object_tanron5_TLUT_000A58 mm_object_tanron5_TLUT_000A58
+#define object_tanron5_TLUT_000A78 mm_object_tanron5_TLUT_000A78
+#define object_tanron5_Tex_000A98 mm_object_tanron5_Tex_000A98
+#define object_tanron5_Tex_000C98 mm_object_tanron5_Tex_000C98
+#define object_tanron5_Tex_000E98 mm_object_tanron5_Tex_000E98
+#define object_tanron5_Tex_001098 mm_object_tanron5_Tex_001098

@@ -1,0 +1,20 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_DANPEI/Z2_DANPEI/Z2_DANPEI_room_07.h"
+
+#define Z2_DANPEI_room_07DL_000AD8 mm_Z2_DANPEI_room_07DL_000AD8
+#define Z2_DANPEI_room_07DL_001828 mm_Z2_DANPEI_room_07DL_001828
+#define Z2_DANPEI_room_07DL_0028F8 mm_Z2_DANPEI_room_07DL_0028F8
+#define Z2_DANPEI_room_07DL_0033D0 mm_Z2_DANPEI_room_07DL_0033D0
+#define Z2_DANPEI_room_07DL_0047F0 mm_Z2_DANPEI_room_07DL_0047F0
+#define Z2_DANPEI_room_07DL_006DD8 mm_Z2_DANPEI_room_07DL_006DD8
+#define Z2_DANPEI_room_07DL_007498 mm_Z2_DANPEI_room_07DL_007498
+#define Z2_DANPEI_room_07DL_007D68 mm_Z2_DANPEI_room_07DL_007D68
+#define Z2_DANPEI_room_07DL_009380 mm_Z2_DANPEI_room_07DL_009380
+#define Z2_DANPEI_room_07DL_00B260 mm_Z2_DANPEI_room_07DL_00B260
+#define Z2_DANPEI_room_07DL_00B2B0 mm_Z2_DANPEI_room_07DL_00B2B0
+#define Z2_DANPEI_room_07Tex_00B308 mm_Z2_DANPEI_room_07Tex_00B308
+#define Z2_DANPEI_room_07Tex_00BB08 mm_Z2_DANPEI_room_07Tex_00BB08
+#define Z2_DANPEI_room_07Tex_00C308 mm_Z2_DANPEI_room_07Tex_00C308
+#define Z2_DANPEI_room_07Tex_00CB08 mm_Z2_DANPEI_room_07Tex_00CB08
+#define Z2_DANPEI_room_07Tex_00D308 mm_Z2_DANPEI_room_07Tex_00D308

@@ -1,0 +1,43 @@
+diff --git a/ZAPD/ZResource.cpp b/ZAPD/ZResource.cpp
+index 768a066..7129bfe 100644
+--- a/ZAPD/ZResource.cpp
++++ b/ZAPD/ZResource.cpp
+@@ -320,6 +320,16 @@ std::string ZResource::GetSourceOutputHeader([[maybe_unused]] const std::string&
+ 		std::string outName = parent->GetOutName();
+ 		std::string prefix = "";
+ 
++		// MergeShip2: ZAPD computes this prefix independently of
++		// OTRExporter_DisplayList::GetPrefix, which names the archive entries. If the two
++		// disagree nothing fails loudly -- a header pointing at "objects/..." just resolves
++		// to Ocarina of Time's identically named asset instead of Majora's Mask's.
++#ifdef GAME_MM
++		const std::string mergeShipNamespace = "mm/";
++#else
++		const std::string mergeShipNamespace = "";
++#endif
++
+ 		if (GetResourceType() == ZResourceType::DisplayList || GetResourceType() == ZResourceType::Texture)
+ 		{
+ 			//ZDisplayList* dList = (ZDisplayList*)this;
+@@ -359,10 +369,10 @@ std::string ZResource::GetSourceOutputHeader([[maybe_unused]] const std::string&
+ 			prefix = "text";
+ 
+ 		if (prefix != "") {
+-			str += StringHelper::Sprintf("#define d%s \"__OTR__%s/%s/%s\"", name.c_str(), prefix.c_str(), outName.c_str(), nameStr.c_str());
++			str += StringHelper::Sprintf("#define d%s \"__OTR__%s%s/%s/%s\"", name.c_str(), mergeShipNamespace.c_str(), prefix.c_str(), outName.c_str(), nameStr.c_str());
+ 		}
+ 		else
+-			str += StringHelper::Sprintf("#define d%s \"__OTR__%s/%s\"", name.c_str(), outName.c_str(), nameStr.c_str());
++			str += StringHelper::Sprintf("#define d%s \"__OTR__%s%s/%s\"", name.c_str(), mergeShipNamespace.c_str(), outName.c_str(), nameStr.c_str());
+ 
+ 		if (nameSet && nameSet->find(name) == nameSet->end()) {
+ 			str += StringHelper::Sprintf("\n");
+@@ -377,7 +387,7 @@ std::string ZResource::GetSourceOutputHeader([[maybe_unused]] const std::string&
+ 		{
+ 			std::string addName = "gTitleZeldaShieldLogoTex";
+ 			nameStr = StringHelper::Strip(StringHelper::Strip(addName, "\n"), "\r");
+-			str += StringHelper::Sprintf("\n\n#define d%s \"__OTR__%s/%s/%s\"", addName.c_str(), prefix.c_str(), outName.c_str(), nameStr.c_str());
++			str += StringHelper::Sprintf("\n\n#define d%s \"__OTR__%s%s/%s/%s\"", addName.c_str(), mergeShipNamespace.c_str(), prefix.c_str(), outName.c_str(), nameStr.c_str());
+ 			if (nameSet && nameSet->find(addName) == nameSet->end())
+ 			{
+ 				str += StringHelper::Sprintf("\n");

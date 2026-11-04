@@ -1,0 +1,40 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bigpo/object_bigpo.h"
+
+#define gBigPoeArmAndGrowthDL mm_gBigPoeArmAndGrowthDL
+#define gBigPoeArmSectionTex mm_gBigPoeArmSectionTex
+#define gBigPoeAwakenSpawnAnim mm_gBigPoeAwakenSpawnAnim
+#define gBigPoeAwakenStretchAnim mm_gBigPoeAwakenStretchAnim
+#define gBigPoeBackpedalAnim mm_gBigPoeBackpedalAnim
+#define gBigPoeBigArmDL mm_gBigPoeBigArmDL
+#define gBigPoeCrispyBodyDL mm_gBigPoeCrispyBodyDL
+#define gBigPoeCrispyEyesTex mm_gBigPoeCrispyEyesTex
+#define gBigPoeCrispyPiecesTex mm_gBigPoeCrispyPiecesTex
+#define gBigPoeFaceDL mm_gBigPoeFaceDL
+#define gBigPoeFloatAnim mm_gBigPoeFloatAnim
+#define gBigPoeGlowingEyeTex mm_gBigPoeGlowingEyeTex
+#define gBigPoeHandDL mm_gBigPoeHandDL
+#define gBigPoeHoodEdgeTex mm_gBigPoeHoodEdgeTex
+#define gBigPoeLanternFallingDL mm_gBigPoeLanternFallingDL
+#define gBigPoeLanternGlassTex mm_gBigPoeLanternGlassTex
+#define gBigPoeLanternMainDL mm_gBigPoeLanternMainDL
+#define gBigPoeLanternPurpleTopDL mm_gBigPoeLanternPurpleTopDL
+#define gBigPoeLowerRobeDL mm_gBigPoeLowerRobeDL
+#define gBigPoeMediumArmDL mm_gBigPoeMediumArmDL
+#define gBigPoeNecklaceBeadsTex mm_gBigPoeNecklaceBeadsTex
+#define gBigPoeNecklaceHoodShawlDL mm_gBigPoeNecklaceHoodShawlDL
+#define gBigPoeNecklaceSkullHalfTex mm_gBigPoeNecklaceSkullHalfTex
+#define gBigPoeShawlTex mm_gBigPoeShawlTex
+#define gBigPoeShockAnim mm_gBigPoeShockAnim
+#define gBigPoeSkel mm_gBigPoeSkel
+#define gBigPoeSmallArmDL mm_gBigPoeSmallArmDL
+#define gBigPoeSoulDL mm_gBigPoeSoulDL
+#define gBigPoeSoulFaceTex mm_gBigPoeSoulFaceTex
+#define gBigPoeSwingLampAttackAnim mm_gBigPoeSwingLampAttackAnim
+#define gBigPoeTornRobeTex mm_gBigPoeTornRobeTex
+#define gFieldPoeArmVtx mm_gFieldPoeArmVtx
+#define gFieldPoeBodyAndFaceVtx mm_gFieldPoeBodyAndFaceVtx
+#define gFieldPoeCloakVtx mm_gFieldPoeCloakVtx
+#define gFieldPoeFaceHoodRobeVtx mm_gFieldPoeFaceHoodRobeVtx
+#define gFieldPoeLanternVtx mm_gFieldPoeLanternVtx

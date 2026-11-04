@@ -1,0 +1,33 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_js/object_js.h"
+
+#define object_js_Anim_00016C mm_object_js_Anim_00016C
+#define object_js_Anim_0003DC mm_object_js_Anim_0003DC
+#define object_js_Anim_000AD4 mm_object_js_Anim_000AD4
+#define object_js_Anim_000C7C mm_object_js_Anim_000C7C
+#define object_js_Anim_000F4C mm_object_js_Anim_000F4C
+#define object_js_Colheader_0069E8 mm_object_js_Colheader_0069E8
+#define object_js_DL_003F30 mm_object_js_DL_003F30
+#define object_js_DL_004510 mm_object_js_DL_004510
+#define object_js_DL_004688 mm_object_js_DL_004688
+#define object_js_DL_004868 mm_object_js_DL_004868
+#define object_js_DL_004B60 mm_object_js_DL_004B60
+#define object_js_DL_004EA0 mm_object_js_DL_004EA0
+#define object_js_DL_004FD0 mm_object_js_DL_004FD0
+#define object_js_DL_005178 mm_object_js_DL_005178
+#define object_js_DL_0052D8 mm_object_js_DL_0052D8
+#define object_js_DL_005408 mm_object_js_DL_005408
+#define object_js_DL_0055B0 mm_object_js_DL_0055B0
+#define object_js_Skel_006990 mm_object_js_Skel_006990
+#define object_js_TLUT_005710 mm_object_js_TLUT_005710
+#define object_js_Tex_005910 mm_object_js_Tex_005910
+#define object_js_Tex_005990 mm_object_js_Tex_005990
+#define object_js_Tex_005A90 mm_object_js_Tex_005A90
+#define object_js_Tex_005C90 mm_object_js_Tex_005C90
+#define object_js_Tex_005CD0 mm_object_js_Tex_005CD0
+#define object_js_Tex_0060D0 mm_object_js_Tex_0060D0
+#define object_js_Tex_0061D0 mm_object_js_Tex_0061D0
+#define object_js_Tex_0063D0 mm_object_js_Tex_0063D0
+#define object_js_Tex_0065D0 mm_object_js_Tex_0065D0
+#define object_js_Tex_0067D0 mm_object_js_Tex_0067D0

@@ -1,0 +1,28 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bsmask/object_bsmask.h"
+
+#define gRemainsGohtDL mm_gRemainsGohtDL
+#define gRemainsGohtEyeTex mm_gRemainsGohtEyeTex
+#define gRemainsGohtSpikeTwinmoldMandibleTex mm_gRemainsGohtSpikeTwinmoldMandibleTex
+#define gRemainsGohtTopPatternTex mm_gRemainsGohtTopPatternTex
+#define gRemainsGohtTwinmoldPatternTex mm_gRemainsGohtTwinmoldPatternTex
+#define gRemainsGyorgDL mm_gRemainsGyorgDL
+#define gRemainsGyorgMouthTLUT mm_gRemainsGyorgMouthTLUT
+#define gRemainsGyorgMouthTex mm_gRemainsGyorgMouthTex
+#define gRemainsGyorgSkinTLUT mm_gRemainsGyorgSkinTLUT
+#define gRemainsGyorgSkinTex mm_gRemainsGyorgSkinTex
+#define gRemainsGyorgToothHornTLUT mm_gRemainsGyorgToothHornTLUT
+#define gRemainsGyorgToothHornTex mm_gRemainsGyorgToothHornTex
+#define gRemainsGyorgTwinmoldEyeTex mm_gRemainsGyorgTwinmoldEyeTex
+#define gRemainsOdolwaDL mm_gRemainsOdolwaDL
+#define gRemainsOdolwaEarTLUT mm_gRemainsOdolwaEarTLUT
+#define gRemainsOdolwaEarTex mm_gRemainsOdolwaEarTex
+#define gRemainsOdolwaFaceTLUT mm_gRemainsOdolwaFaceTLUT
+#define gRemainsOdolwaFaceTex mm_gRemainsOdolwaFaceTex
+#define gRemainsOdolwaPlumeTex mm_gRemainsOdolwaPlumeTex
+#define gRemainsTwinmoldDL mm_gRemainsTwinmoldDL
+#define gRemainsTwinmoldSkinTLUT mm_gRemainsTwinmoldSkinTLUT
+#define gRemainsTwinmoldSkinTex mm_gRemainsTwinmoldSkinTex
+#define gRemainsTwinmoldSnoutTLUT mm_gRemainsTwinmoldSnoutTLUT
+#define gRemainsTwinmoldSnoutTex mm_gRemainsTwinmoldSnoutTex

@@ -1,0 +1,41 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_st/object_st.h"
+
+#define gSkulltulaTokenDL mm_gSkulltulaTokenDL
+#define gSkulltulaTokenFlameDL mm_gSkulltulaTokenFlameDL
+#define object_st_Anim_000304 mm_object_st_Anim_000304
+#define object_st_Anim_0055A8 mm_object_st_Anim_0055A8
+#define object_st_Anim_005B98 mm_object_st_Anim_005B98
+#define object_st_DL_001A40 mm_object_st_DL_001A40
+#define object_st_DL_001C30 mm_object_st_DL_001C30
+#define object_st_DL_001FD0 mm_object_st_DL_001FD0
+#define object_st_DL_002068 mm_object_st_DL_002068
+#define object_st_DL_002100 mm_object_st_DL_002100
+#define object_st_DL_002198 mm_object_st_DL_002198
+#define object_st_DL_002230 mm_object_st_DL_002230
+#define object_st_DL_0022C8 mm_object_st_DL_0022C8
+#define object_st_DL_002360 mm_object_st_DL_002360
+#define object_st_DL_0023F8 mm_object_st_DL_0023F8
+#define object_st_DL_003FB0 mm_object_st_DL_003FB0
+#define object_st_DL_0043D8 mm_object_st_DL_0043D8
+#define object_st_DL_0045C0 mm_object_st_DL_0045C0
+#define object_st_DL_004658 mm_object_st_DL_004658
+#define object_st_DL_0046F0 mm_object_st_DL_0046F0
+#define object_st_DL_004788 mm_object_st_DL_004788
+#define object_st_DL_004820 mm_object_st_DL_004820
+#define object_st_DL_0048B8 mm_object_st_DL_0048B8
+#define object_st_DL_004950 mm_object_st_DL_004950
+#define object_st_DL_0049E8 mm_object_st_DL_0049E8
+#define object_st_Skel_005298 mm_object_st_Skel_005298
+#define object_st_Tex_000320 mm_object_st_Tex_000320
+#define object_st_Tex_000360 mm_object_st_Tex_000360
+#define object_st_Tex_000460 mm_object_st_Tex_000460
+#define object_st_Tex_0004E0 mm_object_st_Tex_0004E0
+#define object_st_Tex_000560 mm_object_st_Tex_000560
+#define object_st_Tex_000760 mm_object_st_Tex_000760
+#define object_st_Tex_0007E0 mm_object_st_Tex_0007E0
+#define object_st_Tex_002490 mm_object_st_Tex_002490
+#define object_st_Tex_0024D0 mm_object_st_Tex_0024D0
+#define object_st_Tex_0025D0 mm_object_st_Tex_0025D0
+#define object_st_Tex_002650 mm_object_st_Tex_002650

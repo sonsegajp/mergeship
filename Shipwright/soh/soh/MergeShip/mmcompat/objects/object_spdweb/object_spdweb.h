@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_spdweb/object_spdweb.h"
+
+#define object_spdweb_Colheader_0011C0 mm_object_spdweb_Colheader_0011C0
+#define object_spdweb_Colheader_002678 mm_object_spdweb_Colheader_002678
+#define object_spdweb_DL_000060 mm_object_spdweb_DL_000060
+#define object_spdweb_DL_000130 mm_object_spdweb_DL_000130
+#define object_spdweb_DL_0012F0 mm_object_spdweb_DL_0012F0
+#define object_spdweb_DL_001400 mm_object_spdweb_DL_001400
+#define object_spdweb_Tex_000138 mm_object_spdweb_Tex_000138
+#define object_spdweb_Tex_000938 mm_object_spdweb_Tex_000938
+#define object_spdweb_Tex_001408 mm_object_spdweb_Tex_001408

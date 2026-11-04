@@ -1,0 +1,19 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_HAKUGIN/Z2_HAKUGIN/Z2_HAKUGIN_room_12.h"
+
+#define Z2_HAKUGIN_room_12DL_000510 mm_Z2_HAKUGIN_room_12DL_000510
+#define Z2_HAKUGIN_room_12DL_000810 mm_Z2_HAKUGIN_room_12DL_000810
+#define Z2_HAKUGIN_room_12DL_000D10 mm_Z2_HAKUGIN_room_12DL_000D10
+#define Z2_HAKUGIN_room_12DL_0015C8 mm_Z2_HAKUGIN_room_12DL_0015C8
+#define Z2_HAKUGIN_room_12DL_001B88 mm_Z2_HAKUGIN_room_12DL_001B88
+#define Z2_HAKUGIN_room_12DL_001C98 mm_Z2_HAKUGIN_room_12DL_001C98
+#define Z2_HAKUGIN_room_12DL_004CF0 mm_Z2_HAKUGIN_room_12DL_004CF0
+#define Z2_HAKUGIN_room_12DL_004CF8 mm_Z2_HAKUGIN_room_12DL_004CF8
+#define Z2_HAKUGIN_room_12TLUT_004CC8 mm_Z2_HAKUGIN_room_12TLUT_004CC8
+#define Z2_HAKUGIN_room_12Tex_001CC8 mm_Z2_HAKUGIN_room_12Tex_001CC8
+#define Z2_HAKUGIN_room_12Tex_0024C8 mm_Z2_HAKUGIN_room_12Tex_0024C8
+#define Z2_HAKUGIN_room_12Tex_002CC8 mm_Z2_HAKUGIN_room_12Tex_002CC8
+#define Z2_HAKUGIN_room_12Tex_0034C8 mm_Z2_HAKUGIN_room_12Tex_0034C8
+#define Z2_HAKUGIN_room_12Tex_003CC8 mm_Z2_HAKUGIN_room_12Tex_003CC8
+#define Z2_HAKUGIN_room_12Tex_0044C8 mm_Z2_HAKUGIN_room_12Tex_0044C8

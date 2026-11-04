@@ -1,0 +1,33 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_uch/object_uch.h"
+
+#define gAlienDeathAnim mm_gAlienDeathAnim
+#define gAlienDeathFlashDL mm_gAlienDeathFlashDL
+#define gAlienDeathFlashMaskTex mm_gAlienDeathFlashMaskTex
+#define gAlienEmptyTexAnim mm_gAlienEmptyTexAnim
+#define gAlienEyeBeamDL mm_gAlienEyeBeamDL
+#define gAlienEyeBeamMaskTex mm_gAlienEyeBeamMaskTex
+#define gAlienEyeBeamTexAnim mm_gAlienEyeBeamTexAnim
+#define gAlienEyeTex mm_gAlienEyeTex
+#define gAlienFloatAnim mm_gAlienFloatAnim
+#define gAlienHandsAndTorsoUndersideTex mm_gAlienHandsAndTorsoUndersideTex
+#define gAlienHeadBackTex mm_gAlienHeadBackTex
+#define gAlienHeadDL mm_gAlienHeadDL
+#define gAlienHeadFrontAndArmsTex mm_gAlienHeadFrontAndArmsTex
+#define gAlienHoldingCowAnim mm_gAlienHoldingCowAnim
+#define gAlienJerkingAnim mm_gAlienJerkingAnim
+#define gAlienLeftEyeDL mm_gAlienLeftEyeDL
+#define gAlienLeftForearmDL mm_gAlienLeftForearmDL
+#define gAlienLeftHandDL mm_gAlienLeftHandDL
+#define gAlienLeftShoulderDL mm_gAlienLeftShoulderDL
+#define gAlienLeftUpperArmDL mm_gAlienLeftUpperArmDL
+#define gAlienRightEyeDL mm_gAlienRightEyeDL
+#define gAlienRightForearmDL mm_gAlienRightForearmDL
+#define gAlienRightHandDL mm_gAlienRightHandDL
+#define gAlienRightShoulderDL mm_gAlienRightShoulderDL
+#define gAlienRightUpperArmDL mm_gAlienRightUpperArmDL
+#define gAlienSkel mm_gAlienSkel
+#define gAlienTLUT mm_gAlienTLUT
+#define gAlienTorsoDL mm_gAlienTorsoDL
+#define gAlienTorsoTex mm_gAlienTorsoTex

@@ -1,0 +1,15 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_danpei_object/object_danpei_object.h"
+
+#define object_danpei_object_Colheader_000D60 mm_object_danpei_object_Colheader_000D60
+#define object_danpei_object_DL_000300 mm_object_danpei_object_DL_000300
+#define object_danpei_object_DL_0012C0 mm_object_danpei_object_DL_0012C0
+#define object_danpei_object_DL_002110 mm_object_danpei_object_DL_002110
+#define object_danpei_object_TLUT_000438 mm_object_danpei_object_TLUT_000438
+#define object_danpei_object_TLUT_002B10 mm_object_danpei_object_TLUT_002B10
+#define object_danpei_object_Tex_000458 mm_object_danpei_object_Tex_000458
+#define object_danpei_object_Tex_002D10 mm_object_danpei_object_Tex_002D10
+#define object_danpei_object_Tex_003510 mm_object_danpei_object_Tex_003510
+#define object_danpei_object_Tex_003910 mm_object_danpei_object_Tex_003910
+#define object_danpei_object_Tex_003D10 mm_object_danpei_object_Tex_003D10

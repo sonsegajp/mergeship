@@ -1,0 +1,9 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/overlays/ovl_En_Syateki_Okuta/ovl_En_Syateki_Okuta.h"
+
+#define gShootingGalleryOctorokBlueMaterialDL mm_gShootingGalleryOctorokBlueMaterialDL
+#define gShootingGalleryOctorokCircleDL mm_gShootingGalleryOctorokCircleDL
+#define gShootingGalleryOctorokCircleTex mm_gShootingGalleryOctorokCircleTex
+#define gShootingGalleryOctorokCrossDL mm_gShootingGalleryOctorokCrossDL
+#define gShootingGalleryOctorokCrossTex mm_gShootingGalleryOctorokCrossTex

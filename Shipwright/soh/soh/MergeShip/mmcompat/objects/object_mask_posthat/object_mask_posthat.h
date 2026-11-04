@@ -1,0 +1,9 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mask_posthat/object_mask_posthat.h"
+
+#define object_mask_posthat_DL_000290 mm_object_mask_posthat_DL_000290
+#define object_mask_posthat_TLUT_000488 mm_object_mask_posthat_TLUT_000488
+#define object_mask_posthat_Tex_000688 mm_object_mask_posthat_Tex_000688
+#define object_mask_posthat_Tex_000708 mm_object_mask_posthat_Tex_000708
+#define object_mask_posthat_Tex_000B08 mm_object_mask_posthat_Tex_000B08

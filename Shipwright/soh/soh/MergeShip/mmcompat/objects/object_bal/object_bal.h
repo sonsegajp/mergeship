@@ -1,0 +1,49 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bal/object_bal.h"
+
+#define gTingleBackpackTex mm_gTingleBackpackTex
+#define gTingleBalloonDL mm_gTingleBalloonDL
+#define gTingleBalloonTex mm_gTingleBalloonTex
+#define gTingleBodysuitTex mm_gTingleBodysuitTex
+#define gTingleBriefsTex mm_gTingleBriefsTex
+#define gTingleConfettiDL mm_gTingleConfettiDL
+#define gTingleEyeClosedTex mm_gTingleEyeClosedTex
+#define gTingleEyeOpenTex mm_gTingleEyeOpenTex
+#define gTingleFallAnim mm_gTingleFallAnim
+#define gTingleFloatHideFaceAnim mm_gTingleFloatHideFaceAnim
+#define gTingleFloatIdleAnim mm_gTingleFloatIdleAnim
+#define gTingleFloatThrowConfettiAnim mm_gTingleFloatThrowConfettiAnim
+#define gTingleHandTex mm_gTingleHandTex
+#define gTingleHappyDanceAnim mm_gTingleHappyDanceAnim
+#define gTingleHeadDL mm_gTingleHeadDL
+#define gTingleIdleAnim mm_gTingleIdleAnim
+#define gTingleLandAnim mm_gTingleLandAnim
+#define gTingleLeftFootDL mm_gTingleLeftFootDL
+#define gTingleLeftForearmDL mm_gTingleLeftForearmDL
+#define gTingleLeftHandDL mm_gTingleLeftHandDL
+#define gTingleLeftShinDL mm_gTingleLeftShinDL
+#define gTingleLeftThighDL mm_gTingleLeftThighDL
+#define gTingleLeftUpperArmDL mm_gTingleLeftUpperArmDL
+#define gTingleMapDL mm_gTingleMapDL
+#define gTingleMapTLUT mm_gTingleMapTLUT
+#define gTingleMapTex mm_gTingleMapTex
+#define gTingleMouthTex mm_gTingleMouthTex
+#define gTingleNoseSideTex mm_gTingleNoseSideTex
+#define gTingleNostrilTex mm_gTingleNostrilTex
+#define gTinglePelvisDL mm_gTinglePelvisDL
+#define gTinglePenDL mm_gTinglePenDL
+#define gTinglePenTopTex mm_gTinglePenTopTex
+#define gTingleRightFootDL mm_gTingleRightFootDL
+#define gTingleRightForearmDL mm_gTingleRightForearmDL
+#define gTingleRightHandDL mm_gTingleRightHandDL
+#define gTingleRightShinDL mm_gTingleRightShinDL
+#define gTingleRightThighDL mm_gTingleRightThighDL
+#define gTingleRightUpperArmDL mm_gTingleRightUpperArmDL
+#define gTingleSkel mm_gTingleSkel
+#define gTingleSpinAnim mm_gTingleSpinAnim
+#define gTingleTalkAnim mm_gTingleTalkAnim
+#define gTingleThrowConfettiAnim mm_gTingleThrowConfettiAnim
+#define gTingleTopFrontTex mm_gTingleTopFrontTex
+#define gTingleTorsoDL mm_gTingleTorsoDL
+#define gTingleTwistAnim mm_gTingleTwistAnim

@@ -1,0 +1,44 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_fr/object_fr.h"
+
+#define gFrogDanceAnim mm_gFrogDanceAnim
+#define gFrogDustMaterialDL mm_gFrogDustMaterialDL
+#define gFrogDustModelDL mm_gFrogDustModelDL
+#define gFrogEyeTex mm_gFrogEyeTex
+#define gFrogHandAndToeTex mm_gFrogHandAndToeTex
+#define gFrogHeadDL mm_gFrogHeadDL
+#define gFrogIdleAnim mm_gFrogIdleAnim
+#define gFrogIrisClosedTex mm_gFrogIrisClosedTex
+#define gFrogIrisOpenTex mm_gFrogIrisOpenTex
+#define gFrogJawDL mm_gFrogJawDL
+#define gFrogJumpAnim mm_gFrogJumpAnim
+#define gFrogLeftEyeDL mm_gFrogLeftEyeDL
+#define gFrogLeftForearmDL mm_gFrogLeftForearmDL
+#define gFrogLeftHandDL mm_gFrogLeftHandDL
+#define gFrogLeftHeelDL mm_gFrogLeftHeelDL
+#define gFrogLeftIrisDL mm_gFrogLeftIrisDL
+#define gFrogLeftShinDL mm_gFrogLeftShinDL
+#define gFrogLeftThighDL mm_gFrogLeftThighDL
+#define gFrogLeftToeDL mm_gFrogLeftToeDL
+#define gFrogLeftUpperArmDL mm_gFrogLeftUpperArmDL
+#define gFrogLimbPatternTex mm_gFrogLimbPatternTex
+#define gFrogLowerBodyDL mm_gFrogLowerBodyDL
+#define gFrogLowerBodyPatternTex mm_gFrogLowerBodyPatternTex
+#define gFrogLowerInnerMouthTex mm_gFrogLowerInnerMouthTex
+#define gFrogNostrilTex mm_gFrogNostrilTex
+#define gFrogQuestionMarkTex mm_gFrogQuestionMarkTex
+#define gFrogRightEyeDL mm_gFrogRightEyeDL
+#define gFrogRightForearmDL mm_gFrogRightForearmDL
+#define gFrogRightHandDL mm_gFrogRightHandDL
+#define gFrogRightHeelDL mm_gFrogRightHeelDL
+#define gFrogRightIrisDL mm_gFrogRightIrisDL
+#define gFrogRightShinDL mm_gFrogRightShinDL
+#define gFrogRightThighDL mm_gFrogRightThighDL
+#define gFrogRightToeDL mm_gFrogRightToeDL
+#define gFrogRightUpperArmDL mm_gFrogRightUpperArmDL
+#define gFrogSkel mm_gFrogSkel
+#define gFrogSkinTex mm_gFrogSkinTex
+#define gFrogUpperBodyDL mm_gFrogUpperBodyDL
+#define gFrogUpperBodyPatternTex mm_gFrogUpperBodyPatternTex
+#define gFrogUpperInnerMouthTex mm_gFrogUpperInnerMouthTex

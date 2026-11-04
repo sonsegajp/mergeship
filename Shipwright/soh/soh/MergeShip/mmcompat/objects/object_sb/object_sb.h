@@ -1,0 +1,20 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_sb/object_sb.h"
+
+#define object_sb_Anim_00004C mm_object_sb_Anim_00004C
+#define object_sb_Anim_0000B4 mm_object_sb_Anim_0000B4
+#define object_sb_Anim_000124 mm_object_sb_Anim_000124
+#define object_sb_Anim_000194 mm_object_sb_Anim_000194
+#define object_sb_Anim_002C8C mm_object_sb_Anim_002C8C
+#define object_sb_DL_000D80 mm_object_sb_DL_000D80
+#define object_sb_DL_000E70 mm_object_sb_DL_000E70
+#define object_sb_DL_0025B0 mm_object_sb_DL_0025B0
+#define object_sb_DL_002858 mm_object_sb_DL_002858
+#define object_sb_Skel_002BF0 mm_object_sb_Skel_002BF0
+#define object_sb_Tex_001020 mm_object_sb_Tex_001020
+#define object_sb_Tex_001820 mm_object_sb_Tex_001820
+#define object_sb_Tex_001920 mm_object_sb_Tex_001920
+#define object_sb_Tex_0019A0 mm_object_sb_Tex_0019A0
+#define object_sb_Tex_001A20 mm_object_sb_Tex_001A20
+#define object_sb_Tex_002AF0 mm_object_sb_Tex_002AF0

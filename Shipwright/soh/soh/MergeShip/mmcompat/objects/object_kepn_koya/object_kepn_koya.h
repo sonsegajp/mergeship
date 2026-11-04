@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_kepn_koya/object_kepn_koya.h"
+
+#define object_kepn_koya_Colheader_00805C mm_object_kepn_koya_Colheader_00805C
+#define object_kepn_koya_DL_003470 mm_object_kepn_koya_DL_003470
+#define object_kepn_koya_DL_003478 mm_object_kepn_koya_DL_003478
+#define object_kepn_koya_TLUT_005118 mm_object_kepn_koya_TLUT_005118
+#define object_kepn_koya_Tex_005318 mm_object_kepn_koya_Tex_005318
+#define object_kepn_koya_Tex_005418 mm_object_kepn_koya_Tex_005418
+#define object_kepn_koya_Tex_005C18 mm_object_kepn_koya_Tex_005C18
+#define object_kepn_koya_Tex_006418 mm_object_kepn_koya_Tex_006418
+#define object_kepn_koya_Tex_006618 mm_object_kepn_koya_Tex_006618
+#define object_kepn_koya_Tex_006818 mm_object_kepn_koya_Tex_006818
+#define object_kepn_koya_Tex_006A18 mm_object_kepn_koya_Tex_006A18
+#define object_kepn_koya_Tex_006E18 mm_object_kepn_koya_Tex_006E18
+#define object_kepn_koya_Tex_007218 mm_object_kepn_koya_Tex_007218
+#define object_kepn_koya_Tex_007298 mm_object_kepn_koya_Tex_007298

@@ -1,0 +1,43 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bji/object_bji.h"
+
+#define gShikashiEyeTexAnim mm_gShikashiEyeTexAnim
+#define gShikashiHeadDL mm_gShikashiHeadDL
+#define gShikashiLeftArmDL mm_gShikashiLeftArmDL
+#define gShikashiLeftFootDL mm_gShikashiLeftFootDL
+#define gShikashiLeftForearmDL mm_gShikashiLeftForearmDL
+#define gShikashiLeftHandDL mm_gShikashiLeftHandDL
+#define gShikashiLeftLegDL mm_gShikashiLeftLegDL
+#define gShikashiLeftThighDL mm_gShikashiLeftThighDL
+#define gShikashiPelvisDL mm_gShikashiPelvisDL
+#define gShikashiRightArmDL mm_gShikashiRightArmDL
+#define gShikashiRightFootDL mm_gShikashiRightFootDL
+#define gShikashiRightForearmDL mm_gShikashiRightForearmDL
+#define gShikashiRightHandDL mm_gShikashiRightHandDL
+#define gShikashiRightLegDL mm_gShikashiRightLegDL
+#define gShikashiRightThighDL mm_gShikashiRightThighDL
+#define gShikashiSkel mm_gShikashiSkel
+#define gShikashiTorsoDL mm_gShikashiTorsoDL
+#define object_bji_Anim_00066C mm_object_bji_Anim_00066C
+#define object_bji_Anim_000AB0 mm_object_bji_Anim_000AB0
+#define object_bji_Anim_000FDC mm_object_bji_Anim_000FDC
+#define object_bji_Anim_005B58 mm_object_bji_Anim_005B58
+#define object_bji_TLUT_003730 mm_object_bji_TLUT_003730
+#define object_bji_TLUT_003930 mm_object_bji_TLUT_003930
+#define object_bji_TLUT_003B30 mm_object_bji_TLUT_003B30
+#define object_bji_TLUT_003D30 mm_object_bji_TLUT_003D30
+#define object_bji_TLUT_003F30 mm_object_bji_TLUT_003F30
+#define object_bji_TLUT_004330 mm_object_bji_TLUT_004330
+#define object_bji_TLUT_004530 mm_object_bji_TLUT_004530
+#define object_bji_Tex_004130 mm_object_bji_Tex_004130
+#define object_bji_Tex_004730 mm_object_bji_Tex_004730
+#define object_bji_Tex_004770 mm_object_bji_Tex_004770
+#define object_bji_Tex_004870 mm_object_bji_Tex_004870
+#define object_bji_Tex_0048B0 mm_object_bji_Tex_0048B0
+#define object_bji_Tex_0049B0 mm_object_bji_Tex_0049B0
+#define object_bji_Tex_0049F0 mm_object_bji_Tex_0049F0
+#define object_bji_Tex_004DF0 mm_object_bji_Tex_004DF0
+#define object_bji_Tex_004E30 mm_object_bji_Tex_004E30
+#define object_bji_Tex_004E70 mm_object_bji_Tex_004E70
+#define object_bji_Tex_005270 mm_object_bji_Tex_005270

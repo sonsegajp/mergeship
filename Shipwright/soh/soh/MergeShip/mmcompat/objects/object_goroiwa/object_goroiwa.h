@@ -1,0 +1,26 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_goroiwa/object_goroiwa.h"
+
+#define object_goroiwa_DL_0003B0 mm_object_goroiwa_DL_0003B0
+#define object_goroiwa_DL_0028E0 mm_object_goroiwa_DL_0028E0
+#define object_goroiwa_DL_002D70 mm_object_goroiwa_DL_002D70
+#define object_goroiwa_DL_0032E0 mm_object_goroiwa_DL_0032E0
+#define object_goroiwa_DL_003B40 mm_object_goroiwa_DL_003B40
+#define object_goroiwa_DL_0042B0 mm_object_goroiwa_DL_0042B0
+#define object_goroiwa_DL_004960 mm_object_goroiwa_DL_004960
+#define object_goroiwa_DL_004EF0 mm_object_goroiwa_DL_004EF0
+#define object_goroiwa_DL_005C20 mm_object_goroiwa_DL_005C20
+#define object_goroiwa_DL_0072F0 mm_object_goroiwa_DL_0072F0
+#define object_goroiwa_DL_0077D0 mm_object_goroiwa_DL_0077D0
+#define object_goroiwa_DL_007C60 mm_object_goroiwa_DL_007C60
+#define object_goroiwa_DL_0082D0 mm_object_goroiwa_DL_0082D0
+#define object_goroiwa_DL_008B90 mm_object_goroiwa_DL_008B90
+#define object_goroiwa_TLUT_005EE0 mm_object_goroiwa_TLUT_005EE0
+#define object_goroiwa_TLUT_005F00 mm_object_goroiwa_TLUT_005F00
+#define object_goroiwa_Tex_000520 mm_object_goroiwa_Tex_000520
+#define object_goroiwa_Tex_000D20 mm_object_goroiwa_Tex_000D20
+#define object_goroiwa_Tex_001520 mm_object_goroiwa_Tex_001520
+#define object_goroiwa_Tex_005F20 mm_object_goroiwa_Tex_005F20
+#define object_goroiwa_Tex_006720 mm_object_goroiwa_Tex_006720
+#define object_goroiwa_Tex_008DA0 mm_object_goroiwa_Tex_008DA0

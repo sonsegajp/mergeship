@@ -1,0 +1,24 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_dmask/object_dmask.h"
+
+#define object_dmask_Anim_00017C mm_object_dmask_Anim_00017C
+#define object_dmask_Anim_0001A8 mm_object_dmask_Anim_0001A8
+#define object_dmask_Anim_001090 mm_object_dmask_Anim_001090
+#define object_dmask_Anim_0011A0 mm_object_dmask_Anim_0011A0
+#define object_dmask_Anim_0013A4 mm_object_dmask_Anim_0013A4
+#define object_dmask_Anim_004288 mm_object_dmask_Anim_004288
+#define object_dmask_DL_000430 mm_object_dmask_DL_000430
+#define object_dmask_DL_001E70 mm_object_dmask_DL_001E70
+#define object_dmask_Skel_001D0 mm_object_dmask_Skel_001D0
+#define object_dmask_Skel_010B0 mm_object_dmask_Skel_010B0
+#define object_dmask_Skel_013D0 mm_object_dmask_Skel_013D0
+#define object_dmask_Skel_042B0 mm_object_dmask_Skel_042B0
+#define object_dmask_Tex_000578 mm_object_dmask_Tex_000578
+#define object_dmask_Tex_000D78 mm_object_dmask_Tex_000D78
+#define object_dmask_Tex_002220 mm_object_dmask_Tex_002220
+#define object_dmask_Tex_003220 mm_object_dmask_Tex_003220
+#define object_dmask_Tex_003420 mm_object_dmask_Tex_003420
+#define object_dmask_Tex_003620 mm_object_dmask_Tex_003620
+#define object_dmask_Tex_003820 mm_object_dmask_Tex_003820
+#define object_dmask_Tex_003A20 mm_object_dmask_Tex_003A20

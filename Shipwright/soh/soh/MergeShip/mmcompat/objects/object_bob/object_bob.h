@@ -1,0 +1,32 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_bob/object_bob.h"
+
+#define gHylianWoman2CollarTex mm_gHylianWoman2CollarTex
+#define gHylianWoman2DressTex mm_gHylianWoman2DressTex
+#define gHylianWoman2EarTex mm_gHylianWoman2EarTex
+#define gHylianWoman2EyeClosedTex mm_gHylianWoman2EyeClosedTex
+#define gHylianWoman2EyeHalfTex mm_gHylianWoman2EyeHalfTex
+#define gHylianWoman2EyeOpenTex mm_gHylianWoman2EyeOpenTex
+#define gHylianWoman2FingersTex mm_gHylianWoman2FingersTex
+#define gHylianWoman2HairTex mm_gHylianWoman2HairTex
+#define gHylianWoman2HeadDL mm_gHylianWoman2HeadDL
+#define gHylianWoman2LeftFootDL mm_gHylianWoman2LeftFootDL
+#define gHylianWoman2LeftForearmDL mm_gHylianWoman2LeftForearmDL
+#define gHylianWoman2LeftHandDL mm_gHylianWoman2LeftHandDL
+#define gHylianWoman2LeftShinDL mm_gHylianWoman2LeftShinDL
+#define gHylianWoman2LeftThighDL mm_gHylianWoman2LeftThighDL
+#define gHylianWoman2LeftUpperArmDL mm_gHylianWoman2LeftUpperArmDL
+#define gHylianWoman2MouthTex mm_gHylianWoman2MouthTex
+#define gHylianWoman2PelvisDL mm_gHylianWoman2PelvisDL
+#define gHylianWoman2RightFootDL mm_gHylianWoman2RightFootDL
+#define gHylianWoman2RightForearmDL mm_gHylianWoman2RightForearmDL
+#define gHylianWoman2RightHandDL mm_gHylianWoman2RightHandDL
+#define gHylianWoman2RightShinDL mm_gHylianWoman2RightShinDL
+#define gHylianWoman2RightThighDL mm_gHylianWoman2RightThighDL
+#define gHylianWoman2RightUpperArmDL mm_gHylianWoman2RightUpperArmDL
+#define gHylianWoman2ShirtTex mm_gHylianWoman2ShirtTex
+#define gHylianWoman2Skel mm_gHylianWoman2Skel
+#define gHylianWoman2SkinTex mm_gHylianWoman2SkinTex
+#define gHylianWoman2TLUT mm_gHylianWoman2TLUT
+#define gHylianWoman2TorsoDL mm_gHylianWoman2TorsoDL

@@ -1,0 +1,41 @@
+#ifndef MM_OBJECTS_OBJECT_HORSE_GAME_CHECK_H
+#define MM_OBJECTS_OBJECT_HORSE_GAME_CHECK_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_object_horse_game_check_Tex_000048 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_Tex_000048"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_Tex_000048[] = dmm_object_horse_game_check_Tex_000048;
+
+#define dmm_object_horse_game_check_DL_001048 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_DL_001048"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_DL_001048[] = dmm_object_horse_game_check_DL_001048;
+
+#define dmm_object_horse_game_check_DL_0013A0 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_DL_0013A0"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_DL_0013A0[] = dmm_object_horse_game_check_DL_0013A0;
+
+#define dmm_object_horse_game_check_DL_0014B0 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_DL_0014B0"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_DL_0014B0[] = dmm_object_horse_game_check_DL_0014B0;
+
+#define dmm_object_horse_game_check_Tex_001590 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_Tex_001590"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_Tex_001590[] = dmm_object_horse_game_check_Tex_001590;
+
+#define dmm_object_horse_game_check_Tex_001D90 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_Tex_001D90"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_Tex_001D90[] = dmm_object_horse_game_check_Tex_001D90;
+
+#define dmm_object_horse_game_check_Tex_002590 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_Tex_002590"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_Tex_002590[] = dmm_object_horse_game_check_Tex_002590;
+
+#define dmm_object_horse_game_check_Colheader_002FB8 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_Colheader_002FB8"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_Colheader_002FB8[] = dmm_object_horse_game_check_Colheader_002FB8;
+
+#define dmm_object_horse_game_check_DL_003030 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_DL_003030"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_DL_003030[] = dmm_object_horse_game_check_DL_003030;
+
+#define dmm_object_horse_game_check_DL_0030C0 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_DL_0030C0"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_DL_0030C0[] = dmm_object_horse_game_check_DL_0030C0;
+
+#define dmm_object_horse_game_check_Tex_0030C8 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_Tex_0030C8"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_Tex_0030C8[] = dmm_object_horse_game_check_Tex_0030C8;
+
+#define dmm_object_horse_game_check_Colheader_003918 "__OTR__mm/objects/object_horse_game_check/object_horse_game_check_Colheader_003918"
+static const ALIGN_ASSET(2) char mm_object_horse_game_check_Colheader_003918[] = dmm_object_horse_game_check_Colheader_003918;
+#endif // MM_OBJECTS_OBJECT_HORSE_GAME_CHECK_H

@@ -1,0 +1,16 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mamenoki/object_mamenoki.h"
+
+#define object_mamenoki_Colheader_0004BC mm_object_mamenoki_Colheader_0004BC
+#define object_mamenoki_DL_000090 mm_object_mamenoki_DL_000090
+#define object_mamenoki_DL_0002D0 mm_object_mamenoki_DL_0002D0
+#define object_mamenoki_DL_000530 mm_object_mamenoki_DL_000530
+#define object_mamenoki_DL_002200 mm_object_mamenoki_DL_002200
+#define object_mamenoki_DL_002208 mm_object_mamenoki_DL_002208
+#define object_mamenoki_Tex_0005C0 mm_object_mamenoki_Tex_0005C0
+#define object_mamenoki_Tex_000DC0 mm_object_mamenoki_Tex_000DC0
+#define object_mamenoki_Tex_0011C0 mm_object_mamenoki_Tex_0011C0
+#define object_mamenoki_Tex_0019C0 mm_object_mamenoki_Tex_0019C0
+#define object_mamenoki_Tex_001DC0 mm_object_mamenoki_Tex_001DC0
+#define object_mamenoki_Tex_002298 mm_object_mamenoki_Tex_002298

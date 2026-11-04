@@ -1,0 +1,23 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_f53_obj/object_f53_obj.h"
+
+#define gBankShutterDL mm_gBankShutterDL
+#define object_f53_obj_DL_000090 mm_object_f53_obj_DL_000090
+#define object_f53_obj_DL_000148 mm_object_f53_obj_DL_000148
+#define object_f53_obj_DL_000158 mm_object_f53_obj_DL_000158
+#define object_f53_obj_DL_001AF0 mm_object_f53_obj_DL_001AF0
+#define object_f53_obj_DL_001BF0 mm_object_f53_obj_DL_001BF0
+#define object_f53_obj_DL_001C00 mm_object_f53_obj_DL_001C00
+#define object_f53_obj_DL_0023B0 mm_object_f53_obj_DL_0023B0
+#define object_f53_obj_DL_0024C8 mm_object_f53_obj_DL_0024C8
+#define object_f53_obj_DL_0024D8 mm_object_f53_obj_DL_0024D8
+#define object_f53_obj_DL_0024E8 mm_object_f53_obj_DL_0024E8
+#define object_f53_obj_DL_002648 mm_object_f53_obj_DL_002648
+#define object_f53_obj_DL_002658 mm_object_f53_obj_DL_002658
+#define object_f53_obj_Tex_000168 mm_object_f53_obj_Tex_000168
+#define object_f53_obj_Tex_001278 mm_object_f53_obj_Tex_001278
+#define object_f53_obj_Tex_001C10 mm_object_f53_obj_Tex_001C10
+#define object_f53_obj_Tex_002668 mm_object_f53_obj_Tex_002668
+#define object_f53_obj_Tex_002E68 mm_object_f53_obj_Tex_002E68
+#define object_f53_obj_Tex_003268 mm_object_f53_obj_Tex_003268

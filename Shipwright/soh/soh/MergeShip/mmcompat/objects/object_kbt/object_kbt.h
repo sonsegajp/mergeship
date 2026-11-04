@@ -1,0 +1,56 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_kbt/object_kbt.h"
+
+#define object_kbt_Anim_000670 mm_object_kbt_Anim_000670
+#define object_kbt_Anim_000FE8 mm_object_kbt_Anim_000FE8
+#define object_kbt_Anim_001674 mm_object_kbt_Anim_001674
+#define object_kbt_Anim_001940 mm_object_kbt_Anim_001940
+#define object_kbt_Anim_001BF4 mm_object_kbt_Anim_001BF4
+#define object_kbt_Anim_002084 mm_object_kbt_Anim_002084
+#define object_kbt_Anim_002710 mm_object_kbt_Anim_002710
+#define object_kbt_Anim_002DE0 mm_object_kbt_Anim_002DE0
+#define object_kbt_Anim_003414 mm_object_kbt_Anim_003414
+#define object_kbt_Anim_003D24 mm_object_kbt_Anim_003D24
+#define object_kbt_Anim_004274 mm_object_kbt_Anim_004274
+#define object_kbt_Anim_00E7BC mm_object_kbt_Anim_00E7BC
+#define object_kbt_Anim_00F0C8 mm_object_kbt_Anim_00F0C8
+#define object_kbt_DL_007550 mm_object_kbt_DL_007550
+#define object_kbt_DL_0076F8 mm_object_kbt_DL_0076F8
+#define object_kbt_DL_0077E0 mm_object_kbt_DL_0077E0
+#define object_kbt_DL_007940 mm_object_kbt_DL_007940
+#define object_kbt_DL_007AE8 mm_object_kbt_DL_007AE8
+#define object_kbt_DL_007C68 mm_object_kbt_DL_007C68
+#define object_kbt_DL_007D50 mm_object_kbt_DL_007D50
+#define object_kbt_DL_007E38 mm_object_kbt_DL_007E38
+#define object_kbt_DL_008150 mm_object_kbt_DL_008150
+#define object_kbt_DL_008738 mm_object_kbt_DL_008738
+#define object_kbt_DL_008810 mm_object_kbt_DL_008810
+#define object_kbt_DL_0088E8 mm_object_kbt_DL_0088E8
+#define object_kbt_DL_008A60 mm_object_kbt_DL_008A60
+#define object_kbt_DL_008C48 mm_object_kbt_DL_008C48
+#define object_kbt_DL_008D20 mm_object_kbt_DL_008D20
+#define object_kbt_DL_008E98 mm_object_kbt_DL_008E98
+#define object_kbt_Skel_00DEE8 mm_object_kbt_Skel_00DEE8
+#define object_kbt_TLUT_009078 mm_object_kbt_TLUT_009078
+#define object_kbt_Tex_009278 mm_object_kbt_Tex_009278
+#define object_kbt_Tex_009378 mm_object_kbt_Tex_009378
+#define object_kbt_Tex_009478 mm_object_kbt_Tex_009478
+#define object_kbt_Tex_009678 mm_object_kbt_Tex_009678
+#define object_kbt_Tex_009E78 mm_object_kbt_Tex_009E78
+#define object_kbt_Tex_009EB8 mm_object_kbt_Tex_009EB8
+#define object_kbt_Tex_009EF8 mm_object_kbt_Tex_009EF8
+#define object_kbt_Tex_009F78 mm_object_kbt_Tex_009F78
+#define object_kbt_Tex_00A078 mm_object_kbt_Tex_00A078
+#define object_kbt_Tex_00A0F8 mm_object_kbt_Tex_00A0F8
+#define object_kbt_Tex_00A1F8 mm_object_kbt_Tex_00A1F8
+#define object_kbt_Tex_00A2F8 mm_object_kbt_Tex_00A2F8
+#define object_kbt_Tex_00A338 mm_object_kbt_Tex_00A338
+#define object_kbt_Tex_00A3B8 mm_object_kbt_Tex_00A3B8
+#define object_kbt_Tex_00A5B8 mm_object_kbt_Tex_00A5B8
+#define object_kbt_Tex_00ADB8 mm_object_kbt_Tex_00ADB8
+#define object_kbt_Tex_00B5B8 mm_object_kbt_Tex_00B5B8
+#define object_kbt_Tex_00BDB8 mm_object_kbt_Tex_00BDB8
+#define object_kbt_Tex_00C5B8 mm_object_kbt_Tex_00C5B8
+#define object_kbt_Tex_00CDB8 mm_object_kbt_Tex_00CDB8
+#define object_kbt_Tex_00D5B8 mm_object_kbt_Tex_00D5B8

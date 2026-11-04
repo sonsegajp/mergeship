@@ -1,0 +1,47 @@
+#ifndef MM_Z2_IKANAMAE_Z2_IKANAMAE_H
+#define MM_Z2_IKANAMAE_Z2_IKANAMAE_H 1
+
+#include "align_asset_macro.h"
+
+#define dmm_Z2_IKANAMAECollisionHeader_002824 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAECollisionHeader_002824"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAECollisionHeader_002824[] = dmm_Z2_IKANAMAECollisionHeader_002824;
+
+#define dmm_Z2_IKANAMAETLUT_008070 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETLUT_008070"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETLUT_008070[] = dmm_Z2_IKANAMAETLUT_008070;
+
+#define dmm_Z2_IKANAMAETex_005050 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_005050"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_005050[] = dmm_Z2_IKANAMAETex_005050;
+
+#define dmm_Z2_IKANAMAETex_003050 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_003050"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_003050[] = dmm_Z2_IKANAMAETex_003050;
+
+#define dmm_Z2_IKANAMAETex_003850 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_003850"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_003850[] = dmm_Z2_IKANAMAETex_003850;
+
+#define dmm_Z2_IKANAMAETex_005850 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_005850"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_005850[] = dmm_Z2_IKANAMAETex_005850;
+
+#define dmm_Z2_IKANAMAETex_004850 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_004850"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_004850[] = dmm_Z2_IKANAMAETex_004850;
+
+#define dmm_Z2_IKANAMAETex_002850 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_002850"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_002850[] = dmm_Z2_IKANAMAETex_002850;
+
+#define dmm_Z2_IKANAMAETex_006050 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_006050"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_006050[] = dmm_Z2_IKANAMAETex_006050;
+
+#define dmm_Z2_IKANAMAETLUT_008050 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETLUT_008050"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETLUT_008050[] = dmm_Z2_IKANAMAETLUT_008050;
+
+#define dmm_Z2_IKANAMAETex_004050 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_004050"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_004050[] = dmm_Z2_IKANAMAETex_004050;
+
+#define dmm_Z2_IKANAMAETex_007850 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_007850"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_007850[] = dmm_Z2_IKANAMAETex_007850;
+
+#define dmm_Z2_IKANAMAETex_007050 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_007050"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_007050[] = dmm_Z2_IKANAMAETex_007050;
+
+#define dmm_Z2_IKANAMAETex_006850 "__OTR__mm/scenes/nonmq/Z2_IKANAMAE/Z2_IKANAMAETex_006850"
+static const ALIGN_ASSET(2) char mm_Z2_IKANAMAETex_006850[] = dmm_Z2_IKANAMAETex_006850;
+#endif // MM_Z2_IKANAMAE_Z2_IKANAMAE_H

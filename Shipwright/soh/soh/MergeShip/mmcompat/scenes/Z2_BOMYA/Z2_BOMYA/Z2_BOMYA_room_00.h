@@ -1,0 +1,21 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_BOMYA/Z2_BOMYA/Z2_BOMYA_room_00.h"
+
+#define Z2_BOMYA_room_00DL_000BB0 mm_Z2_BOMYA_room_00DL_000BB0
+#define Z2_BOMYA_room_00DL_001658 mm_Z2_BOMYA_room_00DL_001658
+#define Z2_BOMYA_room_00DL_001C60 mm_Z2_BOMYA_room_00DL_001C60
+#define Z2_BOMYA_room_00DL_002808 mm_Z2_BOMYA_room_00DL_002808
+#define Z2_BOMYA_room_00DL_002AE0 mm_Z2_BOMYA_room_00DL_002AE0
+#define Z2_BOMYA_room_00DL_002D50 mm_Z2_BOMYA_room_00DL_002D50
+#define Z2_BOMYA_room_00DL_0047C0 mm_Z2_BOMYA_room_00DL_0047C0
+#define Z2_BOMYA_room_00DL_006A00 mm_Z2_BOMYA_room_00DL_006A00
+#define Z2_BOMYA_room_00DL_007250 mm_Z2_BOMYA_room_00DL_007250
+#define Z2_BOMYA_room_00DL_007508 mm_Z2_BOMYA_room_00DL_007508
+#define Z2_BOMYA_room_00DL_0077D0 mm_Z2_BOMYA_room_00DL_0077D0
+#define Z2_BOMYA_room_00DL_007950 mm_Z2_BOMYA_room_00DL_007950
+#define Z2_BOMYA_room_00DL_007AD0 mm_Z2_BOMYA_room_00DL_007AD0
+#define Z2_BOMYA_room_00DL_007C50 mm_Z2_BOMYA_room_00DL_007C50
+#define Z2_BOMYA_room_00DL_007C60 mm_Z2_BOMYA_room_00DL_007C60
+#define Z2_BOMYA_room_00DL_007DA8 mm_Z2_BOMYA_room_00DL_007DA8
+#define Z2_BOMYA_room_00DL_007EA8 mm_Z2_BOMYA_room_00DL_007EA8

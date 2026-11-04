@@ -1,0 +1,24 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_ms/object_ms.h"
+
+#define gBeanSalesmanBackOfHandTex mm_gBeanSalesmanBackOfHandTex
+#define gBeanSalesmanBeanbagDL mm_gBeanSalesmanBeanbagDL
+#define gBeanSalesmanBeanbagTex mm_gBeanSalesmanBeanbagTex
+#define gBeanSalesmanBodyDL mm_gBeanSalesmanBodyDL
+#define gBeanSalesmanEarTex mm_gBeanSalesmanEarTex
+#define gBeanSalesmanEatingAnim mm_gBeanSalesmanEatingAnim
+#define gBeanSalesmanEyeTex mm_gBeanSalesmanEyeTex
+#define gBeanSalesmanHeadDL mm_gBeanSalesmanHeadDL
+#define gBeanSalesmanLeftForearmDL mm_gBeanSalesmanLeftForearmDL
+#define gBeanSalesmanLeftHandDL mm_gBeanSalesmanLeftHandDL
+#define gBeanSalesmanLeftUpperArmDL mm_gBeanSalesmanLeftUpperArmDL
+#define gBeanSalesmanMouthDL mm_gBeanSalesmanMouthDL
+#define gBeanSalesmanMouthTex mm_gBeanSalesmanMouthTex
+#define gBeanSalesmanNoseTex mm_gBeanSalesmanNoseTex
+#define gBeanSalesmanPantsTex mm_gBeanSalesmanPantsTex
+#define gBeanSalesmanShoeTex mm_gBeanSalesmanShoeTex
+#define gBeanSalesmanSkel mm_gBeanSalesmanSkel
+#define gBeanSalesmanSkinGradientTex mm_gBeanSalesmanSkinGradientTex
+#define gBeanSalesmanTLUT mm_gBeanSalesmanTLUT
+#define gBeanSalesmanTattooTex mm_gBeanSalesmanTattooTex

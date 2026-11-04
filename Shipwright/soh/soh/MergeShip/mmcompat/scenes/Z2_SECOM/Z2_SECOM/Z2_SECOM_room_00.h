@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_SECOM/Z2_SECOM/Z2_SECOM_room_00.h"
+
+#define Z2_SECOM_room_00DL_000260 mm_Z2_SECOM_room_00DL_000260
+#define Z2_SECOM_room_00DL_000740 mm_Z2_SECOM_room_00DL_000740
+#define Z2_SECOM_room_00DL_000A98 mm_Z2_SECOM_room_00DL_000A98
+#define Z2_SECOM_room_00DL_001700 mm_Z2_SECOM_room_00DL_001700
+#define Z2_SECOM_room_00DL_002498 mm_Z2_SECOM_room_00DL_002498
+#define Z2_SECOM_room_00DL_0026A0 mm_Z2_SECOM_room_00DL_0026A0
+#define Z2_SECOM_room_00TLUT_002ED0 mm_Z2_SECOM_room_00TLUT_002ED0
+#define Z2_SECOM_room_00Tex_0026D0 mm_Z2_SECOM_room_00Tex_0026D0
+#define Z2_SECOM_room_00Tex_002EF0 mm_Z2_SECOM_room_00Tex_002EF0

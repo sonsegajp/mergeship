@@ -1,0 +1,27 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_BOTI/Z2_BOTI/Z2_BOTI.h"
+
+#define Z2_BOTICollisionHeader_006E30 mm_Z2_BOTICollisionHeader_006E30
+#define Z2_BOTICutsceneData_000514 mm_Z2_BOTICutsceneData_000514
+#define Z2_BOTICutsceneData_001E04 mm_Z2_BOTICutsceneData_001E04
+#define Z2_BOTICutsceneData_0072AC mm_Z2_BOTICutsceneData_0072AC
+#define Z2_BOTITLUT_00B2B0 mm_Z2_BOTITLUT_00B2B0
+#define Z2_BOTITLUT_00DDD0 mm_Z2_BOTITLUT_00DDD0
+#define Z2_BOTITLUT_00DFD0 mm_Z2_BOTITLUT_00DFD0
+#define Z2_BOTITex_007AB0 mm_Z2_BOTITex_007AB0
+#define Z2_BOTITex_0082B0 mm_Z2_BOTITex_0082B0
+#define Z2_BOTITex_008AB0 mm_Z2_BOTITex_008AB0
+#define Z2_BOTITex_0092B0 mm_Z2_BOTITex_0092B0
+#define Z2_BOTITex_009AB0 mm_Z2_BOTITex_009AB0
+#define Z2_BOTITex_00A2B0 mm_Z2_BOTITex_00A2B0
+#define Z2_BOTITex_00AAB0 mm_Z2_BOTITex_00AAB0
+#define Z2_BOTITex_00B2D0 mm_Z2_BOTITex_00B2D0
+#define Z2_BOTITex_00B3D0 mm_Z2_BOTITex_00B3D0
+#define Z2_BOTITex_00BBD0 mm_Z2_BOTITex_00BBD0
+#define Z2_BOTITex_00BCD0 mm_Z2_BOTITex_00BCD0
+#define Z2_BOTITex_00BDD0 mm_Z2_BOTITex_00BDD0
+#define Z2_BOTITex_00C5D0 mm_Z2_BOTITex_00C5D0
+#define Z2_BOTITex_00C9D0 mm_Z2_BOTITex_00C9D0
+#define Z2_BOTITex_00D1D0 mm_Z2_BOTITex_00D1D0
+#define Z2_BOTITex_00D9D0 mm_Z2_BOTITex_00D9D0

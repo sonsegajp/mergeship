@@ -1,0 +1,55 @@
+plugins {
+    id 'com.android.application'
+}
+
+// The native libraries and SDL's Java sources are made by android/build_android.ps1 under build/android.
+def buildAndroid = file('../../build/android')
+
+android {
+    namespace 'com.mergeship2.app'
+    compileSdk 34
+    ndkVersion '28.2.13676358' // strips the native libraries' debug info
+
+    defaultConfig {
+        applicationId 'com.mergeship2.app'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '0.1'
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // A personal build: signed with the SDK's debug key, installable with adb.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += [new File(buildAndroid, 'sdl-java')]
+            jniLibs.srcDirs = [new File(buildAndroid, 'jniLibs')]
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            // Extracted to the app's library folder, where libmain.so dlopens libsoh.so and lib2ship.so by name.
+            useLegacyPackaging true
+        }
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

@@ -1,0 +1,13 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_astr_obj/object_astr_obj.h"
+
+#define object_astr_obj_Colheader_002498 mm_object_astr_obj_Colheader_002498
+#define object_astr_obj_DL_002170 mm_object_astr_obj_DL_002170
+#define object_astr_obj_DL_002178 mm_object_astr_obj_DL_002178
+#define object_astr_obj_DL_0022E0 mm_object_astr_obj_DL_0022E0
+#define object_astr_obj_DL_002380 mm_object_astr_obj_DL_002380
+#define object_astr_obj_TLUT_000000 mm_object_astr_obj_TLUT_000000
+#define object_astr_obj_Tex_000020 mm_object_astr_obj_Tex_000020
+#define object_astr_obj_Tex_000820 mm_object_astr_obj_Tex_000820
+#define object_astr_obj_Tex_001020 mm_object_astr_obj_Tex_001020

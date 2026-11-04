@@ -1,0 +1,39 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_F41/Z2_F41/Z2_F41.h"
+
+#define Z2_F41CollisionHeader_005164 mm_Z2_F41CollisionHeader_005164
+#define Z2_F41CutsceneData_000578 mm_Z2_F41CutsceneData_000578
+#define Z2_F41TLUT_013A90 mm_Z2_F41TLUT_013A90
+#define Z2_F41TLUT_013AB0 mm_Z2_F41TLUT_013AB0
+#define Z2_F41TLUT_013AD0 mm_Z2_F41TLUT_013AD0
+#define Z2_F41Tex_005190 mm_Z2_F41Tex_005190
+#define Z2_F41Tex_005990 mm_Z2_F41Tex_005990
+#define Z2_F41Tex_006190 mm_Z2_F41Tex_006190
+#define Z2_F41Tex_007110 mm_Z2_F41Tex_007110
+#define Z2_F41Tex_007910 mm_Z2_F41Tex_007910
+#define Z2_F41Tex_008110 mm_Z2_F41Tex_008110
+#define Z2_F41Tex_008910 mm_Z2_F41Tex_008910
+#define Z2_F41Tex_009110 mm_Z2_F41Tex_009110
+#define Z2_F41Tex_009910 mm_Z2_F41Tex_009910
+#define Z2_F41Tex_00A110 mm_Z2_F41Tex_00A110
+#define Z2_F41Tex_00A910 mm_Z2_F41Tex_00A910
+#define Z2_F41Tex_00B110 mm_Z2_F41Tex_00B110
+#define Z2_F41Tex_00B910 mm_Z2_F41Tex_00B910
+#define Z2_F41Tex_00C110 mm_Z2_F41Tex_00C110
+#define Z2_F41Tex_00C910 mm_Z2_F41Tex_00C910
+#define Z2_F41Tex_00D110 mm_Z2_F41Tex_00D110
+#define Z2_F41Tex_00D910 mm_Z2_F41Tex_00D910
+#define Z2_F41Tex_00E110 mm_Z2_F41Tex_00E110
+#define Z2_F41Tex_00E910 mm_Z2_F41Tex_00E910
+#define Z2_F41Tex_00F110 mm_Z2_F41Tex_00F110
+#define Z2_F41Tex_00F910 mm_Z2_F41Tex_00F910
+#define Z2_F41Tex_010110 mm_Z2_F41Tex_010110
+#define Z2_F41Tex_010910 mm_Z2_F41Tex_010910
+#define Z2_F41Tex_011110 mm_Z2_F41Tex_011110
+#define Z2_F41Tex_011910 mm_Z2_F41Tex_011910
+#define Z2_F41Tex_011990 mm_Z2_F41Tex_011990
+#define Z2_F41Tex_012190 mm_Z2_F41Tex_012190
+#define Z2_F41Tex_012990 mm_Z2_F41Tex_012990
+#define Z2_F41Tex_013190 mm_Z2_F41Tex_013190
+#define Z2_F41Tex_013990 mm_Z2_F41Tex_013990

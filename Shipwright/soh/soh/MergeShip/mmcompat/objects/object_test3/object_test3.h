@@ -1,0 +1,57 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_test3/object_test3.h"
+
+#define gKafeiBody1TLUT mm_gKafeiBody1TLUT
+#define gKafeiBody2TLUT mm_gKafeiBody2TLUT
+#define gKafeiBootTex mm_gKafeiBootTex
+#define gKafeiClothesNeckOpeningTex mm_gKafeiClothesNeckOpeningTex
+#define gKafeiClothesPatternTex mm_gKafeiClothesPatternTex
+#define gKafeiEyesClosedTex mm_gKafeiEyesClosedTex
+#define gKafeiEyesDownTex mm_gKafeiEyesDownTex
+#define gKafeiEyesHalfTex mm_gKafeiEyesHalfTex
+#define gKafeiEyesLeftTex mm_gKafeiEyesLeftTex
+#define gKafeiEyesOpenTex mm_gKafeiEyesOpenTex
+#define gKafeiEyesRightTex mm_gKafeiEyesRightTex
+#define gKafeiEyesTLUT mm_gKafeiEyesTLUT
+#define gKafeiEyesUpTex mm_gKafeiEyesUpTex
+#define gKafeiEyesWincingTex mm_gKafeiEyesWincingTex
+#define gKafeiFingersTex mm_gKafeiFingersTex
+#define gKafeiHairPartAndUndersideTex mm_gKafeiHairPartAndUndersideTex
+#define gKafeiHairTex mm_gKafeiHairTex
+#define gKafeiHeadDL mm_gKafeiHeadDL
+#define gKafeiInnerSleeveTex mm_gKafeiInnerSleeveTex
+#define gKafeiLeftFootDL mm_gKafeiLeftFootDL
+#define gKafeiLeftForearmDL mm_gKafeiLeftForearmDL
+#define gKafeiLeftHandDL mm_gKafeiLeftHandDL
+#define gKafeiLeftShinDL mm_gKafeiLeftShinDL
+#define gKafeiLeftShoulderDL mm_gKafeiLeftShoulderDL
+#define gKafeiLeftThighDL mm_gKafeiLeftThighDL
+#define gKafeiMouthClosedTex mm_gKafeiMouthClosedTex
+#define gKafeiMouthHalfTex mm_gKafeiMouthHalfTex
+#define gKafeiMouthOpenTex mm_gKafeiMouthOpenTex
+#define gKafeiMouthSmileTex mm_gKafeiMouthSmileTex
+#define gKafeiMouthTLUT mm_gKafeiMouthTLUT
+#define gKafeiNose1DL mm_gKafeiNose1DL
+#define gKafeiNose2DL mm_gKafeiNose2DL
+#define gKafeiNoseTex mm_gKafeiNoseTex
+#define gKafeiPendantOfMemoriesDL mm_gKafeiPendantOfMemoriesDL
+#define gKafeiPendantOfMemoriesTex mm_gKafeiPendantOfMemoriesTex
+#define gKafeiRightFootDL mm_gKafeiRightFootDL
+#define gKafeiRightForearmDL mm_gKafeiRightForearmDL
+#define gKafeiRightHandDL mm_gKafeiRightHandDL
+#define gKafeiRightShinDL mm_gKafeiRightShinDL
+#define gKafeiRightShoulderDL mm_gKafeiRightShoulderDL
+#define gKafeiRightThighDL mm_gKafeiRightThighDL
+#define gKafeiSkel mm_gKafeiSkel
+#define gKafeiSkinTex mm_gKafeiSkinTex
+#define gKafeiSleevePatternTex mm_gKafeiSleevePatternTex
+#define gKafeiSunMaskDL mm_gKafeiSunMaskDL
+#define gKafeiSunMaskEmptyDL mm_gKafeiSunMaskEmptyDL
+#define gKafeiSunMaskEyeTex mm_gKafeiSunMaskEyeTex
+#define gKafeiSunMaskPattern1Tex mm_gKafeiSunMaskPattern1Tex
+#define gKafeiSunMaskPattern2Tex mm_gKafeiSunMaskPattern2Tex
+#define gKafeiSunMaskPattern3Tex mm_gKafeiSunMaskPattern3Tex
+#define gKafeiTorsoDL mm_gKafeiTorsoDL
+#define gKafeiTrouserHemTex mm_gKafeiTrouserHemTex
+#define gKafeiWaistDL mm_gKafeiWaistDL

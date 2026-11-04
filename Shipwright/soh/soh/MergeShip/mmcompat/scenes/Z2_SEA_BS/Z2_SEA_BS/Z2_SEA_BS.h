@@ -1,0 +1,21 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_SEA_BS/Z2_SEA_BS/Z2_SEA_BS.h"
+
+#define Z2_SEA_BSCollisionHeader_000A64 mm_Z2_SEA_BSCollisionHeader_000A64
+#define Z2_SEA_BSTLUT_005090 mm_Z2_SEA_BSTLUT_005090
+#define Z2_SEA_BSTLUT_0050B0 mm_Z2_SEA_BSTLUT_0050B0
+#define Z2_SEA_BSTLUT_0050D0 mm_Z2_SEA_BSTLUT_0050D0
+#define Z2_SEA_BSTLUT_0050F0 mm_Z2_SEA_BSTLUT_0050F0
+#define Z2_SEA_BSTex_000A90 mm_Z2_SEA_BSTex_000A90
+#define Z2_SEA_BSTex_001290 mm_Z2_SEA_BSTex_001290
+#define Z2_SEA_BSTex_001A90 mm_Z2_SEA_BSTex_001A90
+#define Z2_SEA_BSTex_001C90 mm_Z2_SEA_BSTex_001C90
+#define Z2_SEA_BSTex_002090 mm_Z2_SEA_BSTex_002090
+#define Z2_SEA_BSTex_002890 mm_Z2_SEA_BSTex_002890
+#define Z2_SEA_BSTex_003090 mm_Z2_SEA_BSTex_003090
+#define Z2_SEA_BSTex_003490 mm_Z2_SEA_BSTex_003490
+#define Z2_SEA_BSTex_003890 mm_Z2_SEA_BSTex_003890
+#define Z2_SEA_BSTex_003C90 mm_Z2_SEA_BSTex_003C90
+#define Z2_SEA_BSTex_004490 mm_Z2_SEA_BSTex_004490
+#define Z2_SEA_BSTex_004C90 mm_Z2_SEA_BSTex_004C90

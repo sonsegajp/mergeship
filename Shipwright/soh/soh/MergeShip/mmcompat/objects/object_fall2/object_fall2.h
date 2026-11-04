@@ -1,0 +1,27 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_fall2/object_fall2.h"
+
+#define gFall2FKAnim_5EF4 mm_gFall2FKAnim_5EF4
+#define gFall2KFSkel_8898 mm_gFall2KFSkel_8898
+#define gOpenMouthMoonDL mm_gOpenMouthMoonDL
+#define gOpenMouthMoonEyesTex mm_gOpenMouthMoonEyesTex
+#define gOpenMouthMoonFaceTLUT mm_gOpenMouthMoonFaceTLUT
+#define gOpenMouthMoonFaceTex mm_gOpenMouthMoonFaceTex
+#define gOpenMouthMoonFarSideTLUT mm_gOpenMouthMoonFarSideTLUT
+#define gOpenMouthMoonFarSideTex mm_gOpenMouthMoonFarSideTex
+#define gOpenMouthMoonTeethTex mm_gOpenMouthMoonTeethTex
+#define object_fall2_DL_006E00 mm_object_fall2_DL_006E00
+#define object_fall2_DL_006EF0 mm_object_fall2_DL_006EF0
+#define object_fall2_DL_006FF8 mm_object_fall2_DL_006FF8
+#define object_fall2_DL_007100 mm_object_fall2_DL_007100
+#define object_fall2_DL_007208 mm_object_fall2_DL_007208
+#define object_fall2_DL_007310 mm_object_fall2_DL_007310
+#define object_fall2_DL_007418 mm_object_fall2_DL_007418
+#define object_fall2_DL_007520 mm_object_fall2_DL_007520
+#define object_fall2_DL_007628 mm_object_fall2_DL_007628
+#define object_fall2_DL_007730 mm_object_fall2_DL_007730
+#define object_fall2_Matanimheader_008840 mm_object_fall2_Matanimheader_008840
+#define object_fall2_Tex_007838 mm_object_fall2_Tex_007838
+#define object_fall2_Tex_008038 mm_object_fall2_Tex_008038
+#define object_fall2_Vtx_005F10 mm_object_fall2_Vtx_005F10

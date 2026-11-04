@@ -1,0 +1,53 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mm/object_mm.h"
+
+#define object_mm_Anim_000468 mm_object_mm_Anim_000468
+#define object_mm_Anim_00099C mm_object_mm_Anim_00099C
+#define object_mm_Anim_000FC4 mm_object_mm_Anim_000FC4
+#define object_mm_Anim_001F84 mm_object_mm_Anim_001F84
+#define object_mm_Anim_002238 mm_object_mm_Anim_002238
+#define object_mm_Anim_0099B4 mm_object_mm_Anim_0099B4
+#define object_mm_Anim_00A4E0 mm_object_mm_Anim_00A4E0
+#define object_mm_Anim_00A8D8 mm_object_mm_Anim_00A8D8
+#define object_mm_Anim_00B09C mm_object_mm_Anim_00B09C
+#define object_mm_Anim_00BA78 mm_object_mm_Anim_00BA78
+#define object_mm_Anim_00C32C mm_object_mm_Anim_00C32C
+#define object_mm_Anim_00C640 mm_object_mm_Anim_00C640
+#define object_mm_Anim_00CD90 mm_object_mm_Anim_00CD90
+#define object_mm_Anim_00DA50 mm_object_mm_Anim_00DA50
+#define object_mm_DL_005B30 mm_object_mm_DL_005B30
+#define object_mm_DL_005E70 mm_object_mm_DL_005E70
+#define object_mm_DL_006598 mm_object_mm_DL_006598
+#define object_mm_DL_0066D0 mm_object_mm_DL_0066D0
+#define object_mm_DL_006808 mm_object_mm_DL_006808
+#define object_mm_DL_006A10 mm_object_mm_DL_006A10
+#define object_mm_DL_006B48 mm_object_mm_DL_006B48
+#define object_mm_DL_006C80 mm_object_mm_DL_006C80
+#define object_mm_DL_006E88 mm_object_mm_DL_006E88
+#define object_mm_DL_006F20 mm_object_mm_DL_006F20
+#define object_mm_DL_007188 mm_object_mm_DL_007188
+#define object_mm_DL_0072F8 mm_object_mm_DL_0072F8
+#define object_mm_DL_007430 mm_object_mm_DL_007430
+#define object_mm_DL_007610 mm_object_mm_DL_007610
+#define object_mm_DL_007780 mm_object_mm_DL_007780
+#define object_mm_DL_008348 mm_object_mm_DL_008348
+#define object_mm_DL_0083E0 mm_object_mm_DL_0083E0
+#define object_mm_DL_0085C8 mm_object_mm_DL_0085C8
+#define object_mm_Skel_0096E8 mm_object_mm_Skel_0096E8
+#define object_mm_TLUT_002250 mm_object_mm_TLUT_002250
+#define object_mm_Tex_002450 mm_object_mm_Tex_002450
+#define object_mm_Tex_002490 mm_object_mm_Tex_002490
+#define object_mm_Tex_0024D0 mm_object_mm_Tex_0024D0
+#define object_mm_Tex_002510 mm_object_mm_Tex_002510
+#define object_mm_Tex_002550 mm_object_mm_Tex_002550
+#define object_mm_Tex_002650 mm_object_mm_Tex_002650
+#define object_mm_Tex_002750 mm_object_mm_Tex_002750
+#define object_mm_Tex_002950 mm_object_mm_Tex_002950
+#define object_mm_Tex_002B50 mm_object_mm_Tex_002B50
+#define object_mm_Tex_002C50 mm_object_mm_Tex_002C50
+#define object_mm_Tex_002E50 mm_object_mm_Tex_002E50
+#define object_mm_Tex_008778 mm_object_mm_Tex_008778
+#define object_mm_Tex_0087F8 mm_object_mm_Tex_0087F8
+#define object_mm_Tex_0089F8 mm_object_mm_Tex_0089F8
+#define object_mm_Tex_0091F8 mm_object_mm_Tex_0091F8

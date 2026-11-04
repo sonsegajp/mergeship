@@ -1,0 +1,16 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_maruta/object_maruta.h"
+
+#define object_maruta_DL_002220 mm_object_maruta_DL_002220
+#define object_maruta_DL_0023D0 mm_object_maruta_DL_0023D0
+#define object_maruta_DL_002568 mm_object_maruta_DL_002568
+#define object_maruta_DL_002660 mm_object_maruta_DL_002660
+#define object_maruta_DL_002758 mm_object_maruta_DL_002758
+#define object_maruta_DL_002850 mm_object_maruta_DL_002850
+#define object_maruta_DL_002948 mm_object_maruta_DL_002948
+#define object_maruta_DL_002AE0 mm_object_maruta_DL_002AE0
+#define object_maruta_DL_002EC0 mm_object_maruta_DL_002EC0
+#define object_maruta_Tex_000000 mm_object_maruta_Tex_000000
+#define object_maruta_Tex_000800 mm_object_maruta_Tex_000800
+#define object_maruta_Tex_001000 mm_object_maruta_Tex_001000

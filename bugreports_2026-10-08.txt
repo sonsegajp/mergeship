@@ -1,0 +1,292 @@
+MergeShip2 open bug reports -- 2026-10-08 (BUG-0031..BUG-0056, #mergeship-bug-report)
+These were posted while the bot could not read message text (Discord Message Content was off);
+imported from the channel history on 2026-10-08.
+Also fixed (reported in chat): Deku Beans could not be selected on a seed that shuffles them ("Shuffle Deku Beans") until Magic Beans were owned -- they now fill an empty bean slot.
+Note from sonic.sega.jp on BUG-0040: the truncated/cropped icons are MM *items* only; masks are fine.
+
+==================================================================
+BUG-0031
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+equipping Fairy Ocarina in MM shows its icon as the Ocarina of Time. Its model is also the Ocarina of Time (blue) for both Young and Adult Link. Also, if instrument icons are enabled for the three instrument-playing forms (Deku, Goron, Zora) it should also apply to MM
+
+Fix: FIXED. Termina shows Hyrule's Fairy Ocarina as long as that is Hyrule's best ocarina: its icon on the C buttons and pause page, and in Link's hand (young Link holds OoT's Fairy Ocarina hand; adult Link the ocarina in his own hand). "Form Instrument Icons" now applies in Termina too (Deku pipes / Goron drums / Zora guitar; the setting is shared and the icons are read from mergeship2.o2r).
+
+==================================================================
+BUG-0032
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+Zora boomerang does not activate the switch for the Water Temple entrance in Lake Hylia (OOT)
+
+Fix: FIXED. The Zora's fin boomerangs pull the fish-shaped lock at the Lake Hylia Water Temple gate, as the Hookshot does.
+
+==================================================================
+BUG-0033
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+Greg the Rupee message does not use goron mask icon, or at least in MM. check
+
+Fix: FIXED. Greg the Green Rupee's message in Termina (unified randomizer) shows the Goron Mask icon, as Hyrule's does.
+
+==================================================================
+BUG-0034
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+MM mirror shield on Adult Link's back is still raised a bit too high up
+
+Fix: FIXED. Adult Link's MM Mirror Shield and Hero's Shield on his back were lowered to where Ocarina of Time's Mirror Shield sits (measured from behind; tunable via gMergeShip.AdultFit.SheathMirror/SheathHero).
+
+==================================================================
+BUG-0035
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+owl statues do not sync to oot players over anchor
+
+Fix: FIXED. Owl statues a teammate strikes in Termina are merged into Hyrule players' owl statues (Song of Soaring map) from the team state.
+
+==================================================================
+BUG-0036
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+anchor does not have the warp button by player names cross-game
+
+Fix: FIXED. Anchor's warp button now shows for players in the other world: warping takes you through the door to their game and puts you at their position (Hyrule -> Termina and Termina -> Hyrule).
+
+==================================================================
+BUG-0037
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+item icon sprite for Room Key (MM) is truncated at the bottom in OOT
+
+Fix: FIXED. MM item icons on Ocarina of Time's MM item page lost their right and bottom 4 texels (wrong texture coordinates); they now show whole (Room Key, deeds, letters, keg, ...). Masks were unaffected.
+
+==================================================================
+BUG-0038
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+taking off a transformation mask in oot can sometimes make the hud transparent for some reason
+
+Fix: FIXED. The HUD comes back as soon as a transformation's camera ends (it could stay faded after taking a mask off).
+
+==================================================================
+BUG-0039
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+soldiers in clock town should not halt Adult Link, because he is an adult
+
+Fix: FIXED. The Clock Town soldiers let adult Link through, as they do the Fierce Deity.
+
+==================================================================
+BUG-0040
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+mm ammo-based items do not show counters on oot's mm item screen, and many mm item icons are truncated at bottom or poorly cropped
+
+Fix: FIXED. Ammo counts on OoT's MM item page: every counted item shows its own number (all the numbers used to share one place, so only one ever showed). Icon cropping: see BUG-0037 (items only, masks were fine).
+
+==================================================================
+BUG-0041
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: alphablaster (0)
+Message: (imported)
+
+mm model attachments to oot link still glitch out when rapidly turning around, eg bunny hood, mirror shield etc. likely refresh rate issue
+
+Fix: FIXED. MM gear fitted on Link (shields, swords, bow) and the Bunny Hood's ears no longer jump when turning quickly at high refresh rates: their placement is built directly instead of being frame-interpolated as separate pieces.
+
+==================================================================
+BUG-0042
+Status: open
+Reported: 2026-10-08 20:24 UTC
+By: sonic.sega.jp (0)
+Message: (imported)
+
+in adult timeline for whatever reason zora cannot use boomerrangs as game is trying to have him pull out a sword ?
+
+Fix: FIXED. The Zora's B is always its fin boomerangs, whatever sword reached that button (an adult's Master Sword slipping onto it made the game try to draw a sword).
+
+==================================================================
+BUG-0043
+Status: open
+Reported: 2026-10-08 20:26 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557851679964274751
+
+if using a mm bottle in oot, replacing its contents eg spring water to bugs, it wont show its name on the mm item screen (oot), only the c to equip label
+
+Fix: FIXED. An Ocarina of Time item in an MM bottle (Bugs, Fish, ...) shows its own name on OoT's MM item page.
+
+==================================================================
+BUG-0044
+Status: open
+Reported: 2026-10-08 20:30 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557852651553820693
+
+taking off adult/child mask in oot still assigns it to other places where a transformation mask was. it should only stay on the spot where it was used.
+
+Fix: FIXED. The Adult/Child Mask stays only on the button it was used from when the age changes.
+
+==================================================================
+BUG-0045
+Status: open
+Reported: 2026-10-08 20:31 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557852916805533698
+
+deku tree mouth open trigger does not play if transformed and approaching deku tree, i had to unload the area and take off goron mask first
+
+Fix: FIXED. A Deku, Goron or Zora Link can call the Deku Tree (Z near it) -- MM-form lock-on passed the tree by.
+
+==================================================================
+BUG-0046
+Status: open
+Reported: 2026-10-08 20:32 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557853221580447938
+
+mm kokiri sword does no damage in oot
+
+Fix: FIXED. With only MM's Kokiri Sword owned, equipping it left the file "swordless"; an MM sword on B now clears that (it hits normally).
+
+==================================================================
+BUG-0047
+Status: open
+Reported: 2026-10-08 20:32 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557853323640701060
+
+or if the mm kokiri sword does do damage, it does not damage all enemies properly, for example namely the Freezards in Ice Cavern
+
+Fix: FIXED. MM's Kokiri Sword hurts Freezards (as in MM). Ocarina of Time's own Kokiri Sword is unchanged (vanilla Freezards ignore it).
+
+==================================================================
+BUG-0048
+Status: open
+Reported: 2026-10-08 20:48 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557857283336306768
+
+normal magic bean ammo can go above its max 10 in oot
+
+Fix: FIXED. Magic Beans stop at 10 in Ocarina of Time.
+
+==================================================================
+BUG-0049
+Status: open
+Reported: 2026-10-08 21:00 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557860295324733595
+
+owl statues for warp songs do not sync properly over anchor. i manually got the clocktown, milk road and southern swamp ones, and the other player was only offered ikana canyon
+
+Fix: FIXED. Striking an owl statue sends the team state at once, and Hyrule players merge teammates' owl statues (see BUG-0035).
+
+==================================================================
+BUG-0050
+Status: open
+Reported: 2026-10-08 21:02 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557860686871269477
+
+termina field day 2 minimap has white square at top left for some reason
+
+Fix: FIXED. See BUG-0055.
+
+==================================================================
+BUG-0051
+Status: open
+Reported: 2026-10-08 21:05 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557861604249444383
+
+mm: silver gauntlets on young link while holding hookshot z-targeting peahat in peahat grotto will have silver gauntlet attachment grow and attach to the peahat
+
+Fix: FIXED. See BUG-0054.
+
+==================================================================
+BUG-0052
+Status: open
+Reported: 2026-10-08 21:07 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557862142382702593
+
+mm: cutscenes like the epona "Isn't that your horse?" and skull kid backstory termina field cutscene play in randomizer
+
+Fix: FIXED. On a randomizer file Termina skips its entrance cutscenes and Tatl's interruptions (Epona sighting, Skull Kid flashback), as Hyrule's randomizer skips its story scenes.
+
+==================================================================
+BUG-0053
+Status: open
+Reported: 2026-10-08 21:08 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557862368271274046
+
+mm clock town great fairy magic power cutscene also plays in randomizer
+
+Fix: FIXED. On a randomizer file the Great Fairy cutscenes are skipped (Clock Town's magic too).
+
+==================================================================
+BUG-0054
+Status: open
+Reported: 2026-10-08 21:10 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557862892127387739
+
+correction to earlier mm hookshot bug report: It's anywhere with the silver/gold gaunts from oot in mm: hookshotting will detach the gauntlets and move them. In first-person hookshot aim the gaunts will appear in your face
+
+Fix: FIXED. Ocarina of Time's gauntlets on young Link in Termina keep to his arms while hookshotting (their placement no longer gets paired with the hookshot's), and are not drawn in first-person aim.
+
+==================================================================
+BUG-0055
+Status: open
+Reported: 2026-10-08 21:11 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557863138911846413
+
+correction to earlier mm termina field minimap: It's all mm minimaps, the white dots I think are the doors and they are not rendering correctly
+
+Fix: FIXED. Minimap door dots are drawn in their own colour instead of picking up whatever texture was loaded (white squares).
+
+==================================================================
+BUG-0056
+Status: open
+Reported: 2026-10-08 21:14 UTC
+By: alphablaster (748343958190555217)
+Message: https://discord.com/channels/1495808265483845824/1557289377690951711/1557863841541525615
+
+the item icon used for being given the bombers notebook by jim after getting the bombers code is the Adult Mask icon
+
+Fix: FIXED. The Bombers' Notebook's get message (randomizer) shows the notebook icon, not the Adult Mask's.
+

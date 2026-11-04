@@ -1,0 +1,9 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/overlays/ovl_Dm_Char08/ovl_Dm_Char08.h"
+
+#define sTurtleGreatBayTempleCol mm_sTurtleGreatBayTempleCol
+#define sTurtleGreatBayTempleColPolygons mm_sTurtleGreatBayTempleColPolygons
+#define sTurtleGreatBayTempleColPolygons2 mm_sTurtleGreatBayTempleColPolygons2
+#define sTurtleGreatBayTempleColVertices mm_sTurtleGreatBayTempleColVertices
+#define sTurtleGreatBayTempleColVertices2 mm_sTurtleGreatBayTempleColVertices2

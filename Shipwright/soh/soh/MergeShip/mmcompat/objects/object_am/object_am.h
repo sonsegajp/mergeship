@@ -1,0 +1,28 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_am/object_am.h"
+
+#define gArmosHopAnim mm_gArmosHopAnim
+#define gArmosPushedBackAnim mm_gArmosPushedBackAnim
+#define gArmosTakeDamageAnim mm_gArmosTakeDamageAnim
+#define object_am_Colheader_000118 mm_object_am_Colheader_000118
+#define object_am_Colheader_005CF8 mm_object_am_Colheader_005CF8
+#define object_am_DL_0005D0 mm_object_am_DL_0005D0
+#define object_am_DL_0007A8 mm_object_am_DL_0007A8
+#define object_am_DL_0016C8 mm_object_am_DL_0016C8
+#define object_am_DL_002278 mm_object_am_DL_002278
+#define object_am_DL_002550 mm_object_am_DL_002550
+#define object_am_Skel_005948 mm_object_am_Skel_005948
+#define object_am_Tex_002638 mm_object_am_Tex_002638
+#define object_am_Tex_002838 mm_object_am_Tex_002838
+#define object_am_Tex_002938 mm_object_am_Tex_002938
+#define object_am_Tex_002D38 mm_object_am_Tex_002D38
+#define object_am_Tex_002E38 mm_object_am_Tex_002E38
+#define object_am_Tex_003038 mm_object_am_Tex_003038
+#define object_am_Tex_003238 mm_object_am_Tex_003238
+#define object_am_Tex_003A38 mm_object_am_Tex_003A38
+#define object_am_Tex_003C38 mm_object_am_Tex_003C38
+#define object_am_Tex_004438 mm_object_am_Tex_004438
+#define object_am_Tex_004C38 mm_object_am_Tex_004C38
+#define object_am_Tex_005438 mm_object_am_Tex_005438
+#define object_am_Tex_005478 mm_object_am_Tex_005478

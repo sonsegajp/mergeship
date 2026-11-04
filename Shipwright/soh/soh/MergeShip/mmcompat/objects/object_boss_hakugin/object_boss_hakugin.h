@@ -1,0 +1,50 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_boss_hakugin/object_boss_hakugin.h"
+
+#define gGohtBackLeftHoofDL mm_gGohtBackLeftHoofDL
+#define gGohtBackLeftPasternDL mm_gGohtBackLeftPasternDL
+#define gGohtBackLeftShinDL mm_gGohtBackLeftShinDL
+#define gGohtBackLeftThighDL mm_gGohtBackLeftThighDL
+#define gGohtBackRightHoofDL mm_gGohtBackRightHoofDL
+#define gGohtBackRightPasternDL mm_gGohtBackRightPasternDL
+#define gGohtBackRightShinDL mm_gGohtBackRightShinDL
+#define gGohtBackRightThighDL mm_gGohtBackRightThighDL
+#define gGohtEmptyBlob mm_gGohtEmptyBlob
+#define gGohtEyeTex mm_gGohtEyeTex
+#define gGohtFaceAndKneePatternTex mm_gGohtFaceAndKneePatternTex
+#define gGohtFallDownAnim mm_gGohtFallDownAnim
+#define gGohtFallOnSideAnim mm_gGohtFallOnSideAnim
+#define gGohtFrontLeftHoofDL mm_gGohtFrontLeftHoofDL
+#define gGohtFrontLeftLowerLegDL mm_gGohtFrontLeftLowerLegDL
+#define gGohtFrontLeftUpperLegDL mm_gGohtFrontLeftUpperLegDL
+#define gGohtFrontRightHoofDL mm_gGohtFrontRightHoofDL
+#define gGohtFrontRightLowerLegDL mm_gGohtFrontRightLowerLegDL
+#define gGohtFrontRightUpperLegDL mm_gGohtFrontRightUpperLegDL
+#define gGohtGetUpFromSideAnim mm_gGohtGetUpFromSideAnim
+#define gGohtHeadDL mm_gGohtHeadDL
+#define gGohtHornTex mm_gGohtHornTex
+#define gGohtJawDL mm_gGohtJawDL
+#define gGohtLightOrbMaterialDL mm_gGohtLightOrbMaterialDL
+#define gGohtLightOrbModelDL mm_gGohtLightOrbModelDL
+#define gGohtLightOrbTex mm_gGohtLightOrbTex
+#define gGohtLightningMaterialDL mm_gGohtLightningMaterialDL
+#define gGohtLightningModelDL mm_gGohtLightningModelDL
+#define gGohtLightningTex mm_gGohtLightningTex
+#define gGohtMachineryTex mm_gGohtMachineryTex
+#define gGohtMetalPlateWithCirclePatternTex mm_gGohtMetalPlateWithCirclePatternTex
+#define gGohtMetalPlateWithMulticoloredPatternTex mm_gGohtMetalPlateWithMulticoloredPatternTex
+#define gGohtPelvisDL mm_gGohtPelvisDL
+#define gGohtRockMaterialDL mm_gGohtRockMaterialDL
+#define gGohtRockModelDL mm_gGohtRockModelDL
+#define gGohtRockTex mm_gGohtRockTex
+#define gGohtRunAnim mm_gGohtRunAnim
+#define gGohtSkel mm_gGohtSkel
+#define gGohtStalactiteMaterialDL mm_gGohtStalactiteMaterialDL
+#define gGohtStalactiteModelDL mm_gGohtStalactiteModelDL
+#define gGohtStationaryAnim mm_gGohtStationaryAnim
+#define gGohtThawAndBreakWallAnim mm_gGohtThawAndBreakWallAnim
+#define gGohtThoraxDL mm_gGohtThoraxDL
+#define gGohtTitleCardTex mm_gGohtTitleCardTex
+#define gGohtTwitchOnSideAnim mm_gGohtTwitchOnSideAnim
+#define gGohtWritheOnSideAnim mm_gGohtWritheOnSideAnim

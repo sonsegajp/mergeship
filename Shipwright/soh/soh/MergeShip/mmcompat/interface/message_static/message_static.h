@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/interface/message_static/message_static.h"
+
+#define gMessageArrowTex mm_gMessageArrowTex
+#define gMessageContinueTriangleTex mm_gMessageContinueTriangleTex
+#define gMessageDefaultBackgroundTex mm_gMessageDefaultBackgroundTex
+#define gMessageEndSquareTex mm_gMessageEndSquareTex
+#define gMessageFadingBackgroundTex mm_gMessageFadingBackgroundTex
+#define gMessageNoteStaffBackgroundTex mm_gMessageNoteStaffBackgroundTex
+#define gMessageNotebookBackgroundTex mm_gMessageNotebookBackgroundTex
+#define gMessageSignBackgroundTex mm_gMessageSignBackgroundTex

@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_hunsui/object_hunsui.h"
+
+#define object_hunsui_Colheader_000C74 mm_object_hunsui_Colheader_000C74
+#define object_hunsui_Colheader_00190C mm_object_hunsui_Colheader_00190C
+#define object_hunsui_DL_000220 mm_object_hunsui_DL_000220
+#define object_hunsui_DL_000EC0 mm_object_hunsui_DL_000EC0
+#define object_hunsui_Matanimheader_000BF0 mm_object_hunsui_Matanimheader_000BF0
+#define object_hunsui_Matanimheader_001888 mm_object_hunsui_Matanimheader_001888
+#define object_hunsui_Tex_0003E0 mm_object_hunsui_Tex_0003E0
+#define object_hunsui_Tex_001078 mm_object_hunsui_Tex_001078

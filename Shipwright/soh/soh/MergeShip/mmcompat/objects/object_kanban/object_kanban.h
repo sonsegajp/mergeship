@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_kanban/object_kanban.h"
+
+#define gSignLeftSideLowerModelDL mm_gSignLeftSideLowerModelDL
+#define gSignLeftSideUpperModelDL mm_gSignLeftSideUpperModelDL
+#define gSignLowerSideLeftModelDL mm_gSignLowerSideLeftModelDL
+#define gSignLowerSideRightModelDL mm_gSignLowerSideRightModelDL
+#define gSignMaterialDL mm_gSignMaterialDL
+#define gSignParticleDL mm_gSignParticleDL
+#define gSignParticleTex mm_gSignParticleTex
+#define gSignPostLowerModelDL mm_gSignPostLowerModelDL
+#define gSignPostStandModelDL mm_gSignPostStandModelDL
+#define gSignPostUpperModelDL mm_gSignPostUpperModelDL
+#define gSignRightSideLowerModelDL mm_gSignRightSideLowerModelDL
+#define gSignRightSideUpperModelDL mm_gSignRightSideUpperModelDL
+#define gSignUpperSideLeftModelDL mm_gSignUpperSideLeftModelDL
+#define gSignUpperSideRightModelDL mm_gSignUpperSideRightModelDL

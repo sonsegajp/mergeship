@@ -1,0 +1,21 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_wdhand/object_wdhand.h"
+
+#define gDexihandArmSegmentDL mm_gDexihandArmSegmentDL
+#define gDexihandBaseDL mm_gDexihandBaseDL
+#define gDexihandCloseAnim mm_gDexihandCloseAnim
+#define gDexihandIdleAnim mm_gDexihandIdleAnim
+#define gDexihandOpenAnim mm_gDexihandOpenAnim
+#define gDexihandSkel mm_gDexihandSkel
+#define object_wdhand_Anim_000364 mm_object_wdhand_Anim_000364
+#define object_wdhand_DL_001908 mm_object_wdhand_DL_001908
+#define object_wdhand_DL_001998 mm_object_wdhand_DL_001998
+#define object_wdhand_DL_001A20 mm_object_wdhand_DL_001A20
+#define object_wdhand_DL_001AD0 mm_object_wdhand_DL_001AD0
+#define object_wdhand_DL_001B80 mm_object_wdhand_DL_001B80
+#define object_wdhand_DL_001C40 mm_object_wdhand_DL_001C40
+#define object_wdhand_DL_001CF0 mm_object_wdhand_DL_001CF0
+#define object_wdhand_Tex_000870 mm_object_wdhand_Tex_000870
+#define object_wdhand_Tex_000C70 mm_object_wdhand_Tex_000C70
+#define object_wdhand_Tex_001070 mm_object_wdhand_Tex_001070

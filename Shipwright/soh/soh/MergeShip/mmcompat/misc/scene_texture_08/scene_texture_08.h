@@ -1,0 +1,21 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/misc/scene_texture_08/scene_texture_08.h"
+
+#define scene_texture_08_Tex_000000 mm_scene_texture_08_Tex_000000
+#define scene_texture_08_Tex_000800 mm_scene_texture_08_Tex_000800
+#define scene_texture_08_Tex_001000 mm_scene_texture_08_Tex_001000
+#define scene_texture_08_Tex_001800 mm_scene_texture_08_Tex_001800
+#define scene_texture_08_Tex_002000 mm_scene_texture_08_Tex_002000
+#define scene_texture_08_Tex_002800 mm_scene_texture_08_Tex_002800
+#define scene_texture_08_Tex_003000 mm_scene_texture_08_Tex_003000
+#define scene_texture_08_Tex_003400 mm_scene_texture_08_Tex_003400
+#define scene_texture_08_Tex_003C00 mm_scene_texture_08_Tex_003C00
+#define scene_texture_08_Tex_004000 mm_scene_texture_08_Tex_004000
+#define scene_texture_08_Tex_004800 mm_scene_texture_08_Tex_004800
+#define scene_texture_08_Tex_005000 mm_scene_texture_08_Tex_005000
+#define scene_texture_08_Tex_005800 mm_scene_texture_08_Tex_005800
+#define scene_texture_08_Tex_006000 mm_scene_texture_08_Tex_006000
+#define scene_texture_08_Tex_006800 mm_scene_texture_08_Tex_006800
+#define scene_texture_08_Tex_007000 mm_scene_texture_08_Tex_007000
+#define scene_texture_08_Tex_007800 mm_scene_texture_08_Tex_007800

@@ -1,0 +1,14 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_goronswitch/object_goronswitch.h"
+
+#define object_goronswitch_Colheader_0005C8 mm_object_goronswitch_Colheader_0005C8
+#define object_goronswitch_DL_000260 mm_object_goronswitch_DL_000260
+#define object_goronswitch_DL_000268 mm_object_goronswitch_DL_000268
+#define object_goronswitch_DL_0007D0 mm_object_goronswitch_DL_0007D0
+#define object_goronswitch_DL_0007D8 mm_object_goronswitch_DL_0007D8
+#define object_goronswitch_TLUT_000970 mm_object_goronswitch_TLUT_000970
+#define object_goronswitch_TLUT_000990 mm_object_goronswitch_TLUT_000990
+#define object_goronswitch_Tex_0009B0 mm_object_goronswitch_Tex_0009B0
+#define object_goronswitch_Tex_0019B0 mm_object_goronswitch_Tex_0019B0
+#define object_goronswitch_Tex_0021B0 mm_object_goronswitch_Tex_0021B0

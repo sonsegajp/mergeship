@@ -1,0 +1,33 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/scenes/Z2_SEA/Z2_SEA/Z2_SEA_room_00.h"
+
+#define Z2_SEA_room_00DL_000DB0 mm_Z2_SEA_room_00DL_000DB0
+#define Z2_SEA_room_00DL_001838 mm_Z2_SEA_room_00DL_001838
+#define Z2_SEA_room_00DL_001DE8 mm_Z2_SEA_room_00DL_001DE8
+#define Z2_SEA_room_00DL_002490 mm_Z2_SEA_room_00DL_002490
+#define Z2_SEA_room_00DL_002C18 mm_Z2_SEA_room_00DL_002C18
+#define Z2_SEA_room_00DL_003280 mm_Z2_SEA_room_00DL_003280
+#define Z2_SEA_room_00DL_003A20 mm_Z2_SEA_room_00DL_003A20
+#define Z2_SEA_room_00DL_0047F8 mm_Z2_SEA_room_00DL_0047F8
+#define Z2_SEA_room_00DL_004F48 mm_Z2_SEA_room_00DL_004F48
+#define Z2_SEA_room_00DL_005758 mm_Z2_SEA_room_00DL_005758
+#define Z2_SEA_room_00DL_0068C8 mm_Z2_SEA_room_00DL_0068C8
+#define Z2_SEA_room_00DL_007730 mm_Z2_SEA_room_00DL_007730
+#define Z2_SEA_room_00DL_008510 mm_Z2_SEA_room_00DL_008510
+#define Z2_SEA_room_00DL_009F48 mm_Z2_SEA_room_00DL_009F48
+#define Z2_SEA_room_00DL_00AE58 mm_Z2_SEA_room_00DL_00AE58
+#define Z2_SEA_room_00DL_00B540 mm_Z2_SEA_room_00DL_00B540
+#define Z2_SEA_room_00DL_00B9D8 mm_Z2_SEA_room_00DL_00B9D8
+#define Z2_SEA_room_00DL_00BCB0 mm_Z2_SEA_room_00DL_00BCB0
+#define Z2_SEA_room_00DL_00C818 mm_Z2_SEA_room_00DL_00C818
+#define Z2_SEA_room_00DL_00CB08 mm_Z2_SEA_room_00DL_00CB08
+#define Z2_SEA_room_00DL_00EA30 mm_Z2_SEA_room_00DL_00EA30
+#define Z2_SEA_room_00DL_00EA38 mm_Z2_SEA_room_00DL_00EA38
+#define Z2_SEA_room_00DL_00EA40 mm_Z2_SEA_room_00DL_00EA40
+#define Z2_SEA_room_00Tex_00CBA8 mm_Z2_SEA_room_00Tex_00CBA8
+#define Z2_SEA_room_00Tex_00D3A8 mm_Z2_SEA_room_00Tex_00D3A8
+#define Z2_SEA_room_00Tex_00DBA8 mm_Z2_SEA_room_00Tex_00DBA8
+#define Z2_SEA_room_00Tex_00E3A8 mm_Z2_SEA_room_00Tex_00E3A8
+#define Z2_SEA_room_00Tex_00E428 mm_Z2_SEA_room_00Tex_00E428
+#define Z2_SEA_room_00Tex_00E828 mm_Z2_SEA_room_00Tex_00E828

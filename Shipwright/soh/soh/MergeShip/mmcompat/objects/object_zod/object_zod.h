@@ -1,0 +1,45 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_zod/object_zod.h"
+
+#define gTijoArmsFoldedAnim mm_gTijoArmsFoldedAnim
+#define gTijoBassDrumDL mm_gTijoBassDrumDL
+#define gTijoChairTex mm_gTijoChairTex
+#define gTijoCrashCymbalDL mm_gTijoCrashCymbalDL
+#define gTijoCymbalHiHatTex mm_gTijoCymbalHiHatTex
+#define gTijoDrum1DL mm_gTijoDrum1DL
+#define gTijoDrum2DL mm_gTijoDrum2DL
+#define gTijoDrum3DL mm_gTijoDrum3DL
+#define gTijoDrum4DL mm_gTijoDrum4DL
+#define gTijoDrum5DL mm_gTijoDrum5DL
+#define gTijoDrumFrameDL mm_gTijoDrumFrameDL
+#define gTijoDrumFrameTex mm_gTijoDrumFrameTex
+#define gTijoDrumsEyesTex mm_gTijoDrumsEyesTex
+#define gTijoDrumsHairTex mm_gTijoDrumsHairTex
+#define gTijoDrumsMouthTex mm_gTijoDrumsMouthTex
+#define gTijoDrumsSkinTex mm_gTijoDrumsSkinTex
+#define gTijoEyesClosedTex mm_gTijoEyesClosedTex
+#define gTijoEyesHalfOpenTex mm_gTijoEyesHalfOpenTex
+#define gTijoEyesOpenTex mm_gTijoEyesOpenTex
+#define gTijoHandTex mm_gTijoHandTex
+#define gTijoHeadDL mm_gTijoHeadDL
+#define gTijoHiHatDL mm_gTijoHiHatDL
+#define gTijoLeftArmDL mm_gTijoLeftArmDL
+#define gTijoLeftForearmDL mm_gTijoLeftForearmDL
+#define gTijoLeftHandDL mm_gTijoLeftHandDL
+#define gTijoLowerBodyChairDL mm_gTijoLowerBodyChairDL
+#define gTijoMouthClosedTex mm_gTijoMouthClosedTex
+#define gTijoMouthOpenTex mm_gTijoMouthOpenTex
+#define gTijoNoseTex mm_gTijoNoseTex
+#define gTijoPlayingAndantinoAnim mm_gTijoPlayingAndantinoAnim
+#define gTijoPlayingLentoAnim mm_gTijoPlayingLentoAnim
+#define gTijoPlayingVivaceAnim mm_gTijoPlayingVivaceAnim
+#define gTijoReadyToPlayAnim mm_gTijoReadyToPlayAnim
+#define gTijoRideCymbalDL mm_gTijoRideCymbalDL
+#define gTijoRightArmDL mm_gTijoRightArmDL
+#define gTijoRightForearmDL mm_gTijoRightForearmDL
+#define gTijoRightHandDL mm_gTijoRightHandDL
+#define gTijoSkel mm_gTijoSkel
+#define gTijoSkinSpotsTex mm_gTijoSkinSpotsTex
+#define gTijoSkinTex mm_gTijoSkinTex
+#define gTijoUpperBodyDL mm_gTijoUpperBodyDL

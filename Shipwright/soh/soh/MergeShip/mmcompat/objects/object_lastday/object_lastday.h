@@ -1,0 +1,18 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_lastday/object_lastday.h"
+
+#define object_lastday_DL_000060 mm_object_lastday_DL_000060
+#define object_lastday_DL_000210 mm_object_lastday_DL_000210
+#define object_lastday_DL_000370 mm_object_lastday_DL_000370
+#define object_lastday_DL_000510 mm_object_lastday_DL_000510
+#define object_lastday_Matanimheader_000148 mm_object_lastday_Matanimheader_000148
+#define object_lastday_Matanimheader_000308 mm_object_lastday_Matanimheader_000308
+#define object_lastday_Matanimheader_000448 mm_object_lastday_Matanimheader_000448
+#define object_lastday_Matanimheader_000608 mm_object_lastday_Matanimheader_000608
+#define object_lastday_Tex_000610 mm_object_lastday_Tex_000610
+#define object_lastday_Tex_000E10 mm_object_lastday_Tex_000E10
+#define object_lastday_Tex_001610 mm_object_lastday_Tex_001610
+#define object_lastday_Tex_001E10 mm_object_lastday_Tex_001E10
+#define object_lastday_Tex_002210 mm_object_lastday_Tex_002210
+#define object_lastday_Vtx_000000 mm_object_lastday_Vtx_000000

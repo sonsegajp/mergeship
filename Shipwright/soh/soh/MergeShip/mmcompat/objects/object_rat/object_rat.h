@@ -1,0 +1,19 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_rat/object_rat.h"
+
+#define gRealBombchuBackLeftLegDL mm_gRealBombchuBackLeftLegDL
+#define gRealBombchuBackRightLegDL mm_gRealBombchuBackRightLegDL
+#define gRealBombchuBodyDL mm_gRealBombchuBodyDL
+#define gRealBombchuEyeTex mm_gRealBombchuEyeTex
+#define gRealBombchuFrontLeftLegDL mm_gRealBombchuFrontLeftLegDL
+#define gRealBombchuFrontRightLegDL mm_gRealBombchuFrontRightLegDL
+#define gRealBombchuHeadDL mm_gRealBombchuHeadDL
+#define gRealBombchuMouthTex mm_gRealBombchuMouthTex
+#define gRealBombchuRunAnim mm_gRealBombchuRunAnim
+#define gRealBombchuSkel mm_gRealBombchuSkel
+#define gRealBombchuSkinTex mm_gRealBombchuSkinTex
+#define gRealBombchuSpotAnim mm_gRealBombchuSpotAnim
+#define gRealBombchuTailBaseDL mm_gRealBombchuTailBaseDL
+#define gRealBombchuTailEndDL mm_gRealBombchuTailEndDL
+#define gRealBombchuTailMiddleDL mm_gRealBombchuTailMiddleDL

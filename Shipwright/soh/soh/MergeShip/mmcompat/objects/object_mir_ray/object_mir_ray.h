@@ -1,0 +1,12 @@
+#pragma once
+// MergeShip2 -- MM source names its assets without the prefix the imported headers use.
+#include "mm/objects/object_mir_ray/object_mir_ray.h"
+
+#define object_mir_ray_DL_000160 mm_object_mir_ray_DL_000160
+#define object_mir_ray_DL_000168 mm_object_mir_ray_DL_000168
+#define object_mir_ray_DL_0004B0 mm_object_mir_ray_DL_0004B0
+#define object_mir_ray_DL_000550 mm_object_mir_ray_DL_000550
+#define object_mir_ray_Matanimheader_0003F8 mm_object_mir_ray_Matanimheader_0003F8
+#define object_mir_ray_Tex_000270 mm_object_mir_ray_Tex_000270
+#define object_mir_ray_Tex_0002F0 mm_object_mir_ray_Tex_0002F0
+#define object_mir_ray_Tex_000558 mm_object_mir_ray_Tex_000558

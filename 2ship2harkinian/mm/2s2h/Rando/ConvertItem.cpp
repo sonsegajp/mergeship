@@ -27,6 +27,25 @@ extern GetItemEntry sGetItemTable[GI_MAX - 1];
 
 #define CAN_OWL_WARP(owlId) ((gSaveContext.save.saveInfo.playerData.owlActivationFlags >> owlId) & 1)
 
+#include "2s2h/MergeShip/MergeShipTerminaEquip.h" // MergeShip2: the swords Termina holds
+
+// MergeShip2: the best of Majora's Mask's swords Termina holds (EQUIP_VALUE_SWORD_*): the one in use, or one kept on
+// Termina's equipment page (MergeShipTerminaEquip.h) -- with Hyrule's sword on B, MM's is put away there and its
+// equipment value is "none", so a progressive sword counted from the value alone gave a second Kokiri Sword (the
+// user's seed, 2026-11-03).
+static s32 MergeShip_HeldSwordValue() {
+    s32 value = GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD);
+
+    if (MergeShip_TerminaEquip_Owns(ITEM_SWORD_GILDED)) {
+        value = MAX(value, EQUIP_VALUE_SWORD_GILDED);
+    } else if (MergeShip_TerminaEquip_Owns(ITEM_SWORD_RAZOR)) {
+        value = MAX(value, EQUIP_VALUE_SWORD_RAZOR);
+    } else if (MergeShip_TerminaEquip_Owns(ITEM_SWORD_KOKIRI)) {
+        value = MAX(value, EQUIP_VALUE_SWORD_KOKIRI);
+    }
+    return value;
+}
+
 // ALRIGHT BUCKLE UP. This file is for converting items to their "obtainable" form. This is used for various reasons,
 // and you don't always want to convert items, depending on the context. For example, if you're rendering ammo in a shop
 // for an item you don't have yet, you don't want to convert it, because you want to show the player what they're
@@ -247,25 +266,25 @@ bool Rando::IsItemObtainable(RandoItemId randoItemId, RandoCheckId randoCheckId)
         case RI_PROGRESSIVE_SWORD:
             if (hasObtainedCheck) {
                 return false;
-            } else if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) == EQUIP_VALUE_SWORD_GILDED ||
+            } else if (MergeShip_HeldSwordValue() == EQUIP_VALUE_SWORD_GILDED ||
                        (STOLEN_ITEM_1 >= ITEM_SWORD_GILDED) || (STOLEN_ITEM_2 >= ITEM_SWORD_GILDED)) {
                 return false;
             }
             return true;
         case RI_SWORD_KOKIRI:
-            if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) >= EQUIP_VALUE_SWORD_KOKIRI ||
+            if (MergeShip_HeldSwordValue() >= EQUIP_VALUE_SWORD_KOKIRI ||
                 (STOLEN_ITEM_1 >= ITEM_SWORD_KOKIRI) || (STOLEN_ITEM_2 >= ITEM_SWORD_KOKIRI)) {
                 return false;
             }
             break;
         case RI_SWORD_RAZOR:
-            if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) >= EQUIP_VALUE_SWORD_RAZOR ||
+            if (MergeShip_HeldSwordValue() >= EQUIP_VALUE_SWORD_RAZOR ||
                 (STOLEN_ITEM_1 >= ITEM_SWORD_RAZOR) || (STOLEN_ITEM_2 >= ITEM_SWORD_RAZOR)) {
                 return false;
             }
             break;
         case RI_SWORD_GILDED:
-            if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) >= EQUIP_VALUE_SWORD_GILDED ||
+            if (MergeShip_HeldSwordValue() >= EQUIP_VALUE_SWORD_GILDED ||
                 (STOLEN_ITEM_1 >= ITEM_SWORD_GILDED) || (STOLEN_ITEM_2 >= ITEM_SWORD_GILDED)) {
                 return false;
             }
@@ -753,13 +772,13 @@ RandoItemId Rando::ConvertItem(RandoItemId randoItemId, RandoCheckId randoCheckI
                 assert(false);
                 return RI_JUNK;
             case RI_PROGRESSIVE_SWORD:
-                if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) == EQUIP_VALUE_SWORD_NONE &&
+                if (MergeShip_HeldSwordValue() == EQUIP_VALUE_SWORD_NONE &&
                     (STOLEN_ITEM_1 < ITEM_SWORD_KOKIRI) && (STOLEN_ITEM_2 < ITEM_SWORD_KOKIRI)) {
                     return RI_SWORD_KOKIRI;
-                } else if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) == EQUIP_VALUE_SWORD_KOKIRI ||
+                } else if (MergeShip_HeldSwordValue() == EQUIP_VALUE_SWORD_KOKIRI ||
                            (STOLEN_ITEM_1 == ITEM_SWORD_KOKIRI) || (STOLEN_ITEM_2 == ITEM_SWORD_KOKIRI)) {
                     return RI_SWORD_RAZOR;
-                } else if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) == EQUIP_VALUE_SWORD_RAZOR ||
+                } else if (MergeShip_HeldSwordValue() == EQUIP_VALUE_SWORD_RAZOR ||
                            (STOLEN_ITEM_1 == ITEM_SWORD_RAZOR) || (STOLEN_ITEM_2 == ITEM_SWORD_RAZOR)) {
                     return RI_SWORD_GILDED;
                 }

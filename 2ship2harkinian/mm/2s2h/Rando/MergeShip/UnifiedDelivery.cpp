@@ -33,6 +33,7 @@ extern "C" {
 #include "variables.h"
 #include "2s2h/MergeShip/MergeShipOoTItems.h"
 #include "2s2h/MergeShip/MergeShipOoTEquip.h"
+#include "2s2h/MergeShip/MergeShipTerminaEquip.h"
 #include "2s2h/MergeShip/MergeShipHyrule.h"
 extern PlayState* gPlayState;
 }
@@ -622,6 +623,53 @@ void Project(bool force) {
     applied = count;
 }
 
+// The doubled Kokiri Sword (the user's seed, 2026-11-03): RI_PROGRESSIVE_SWORD resolved from the sword in use alone, so
+// with Hyrule's sword on B (MM's put away on Termina's equipment page) a second progressive sword gave MM's Kokiri Sword
+// again. A file that has it -- MM's Kokiri Sword recorded from two or more of Termina's progressive-sword checks --
+// gets each step it missed (the Razor Sword, then the Gilded Sword) unless Termina holds it already, and the record is
+// corrected to that step, which also keeps this from running again. Every frame, as Project; a scan only when the
+// ledger has grown.
+void RepairDoubledSwords() {
+    static u32 sScanned = UINT32_MAX;
+    MsSharedSave* shared = Shared();
+    if ((shared == nullptr) || !Rando::MergeShip::UnifiedActive() || (gPlayState == nullptr)) {
+        return;
+    }
+    Player* player = GET_PLAYER(gPlayState);
+    if ((player == nullptr) || (player->stateFlags1 & (PLAYER_STATE1_400 | PLAYER_STATE1_TALKING)) ||
+        (gPlayState->msgCtx.msgMode != MSGMODE_NONE)) {
+        return;
+    }
+    const u32 count = (shared->ledgerCount < MS_SHARED_LEDGER_MAX) ? shared->ledgerCount : MS_SHARED_LEDGER_MAX;
+    if (count == sScanned) {
+        return;
+    }
+    sScanned = count;
+    s32 progressive = 0;
+    for (u32 i = 0; i < count; i++) {
+        MsLedgerEntry& e = shared->ledger[i];
+        if ((e.world != MS_WORLD_TERMINA) || (e.flags & MS_LEDGER_REMOTE) || (e.check <= RC_UNKNOWN) ||
+            (e.check >= RC_MAX) || (RANDO_SAVE_CHECKS[e.check].randoItemId != RI_PROGRESSIVE_SWORD)) {
+            continue;
+        }
+        progressive++;
+        if ((e.item != MSI_MM_KOKIRI_SWORD) || (progressive < 2)) {
+            continue;
+        }
+        const MsItemKey want = (progressive == 2) ? MSI_MM_RAZOR_SWORD : MSI_MM_GILDED_SWORD;
+        const u8 wantItem = (progressive == 2) ? ITEM_SWORD_RAZOR : ITEM_SWORD_GILDED;
+        const bool held = MergeShip_TerminaEquip_Owns(wantItem) ||
+                          ((progressive == 2) && MergeShip_TerminaEquip_Owns(ITEM_SWORD_GILDED)) ||
+                          (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) >= ((progressive == 2) ? EQUIP_VALUE_SWORD_RAZOR
+                                                                                          : EQUIP_VALUE_SWORD_GILDED));
+        const bool given = !held && GiveTermina(want, true);
+        e.item = (uint16_t)want;
+        Log("REPAIR #%u check=%d: a second Kokiri Sword from a progressive sword -> %s (%s)", i + 1, (int)e.check,
+            kRows[want].keyName, given ? "given" : (held ? "already held" : "not given"));
+        MergeShipHost_CommitSharedSave();
+    }
+}
+
 void RegisterHooks() {
     static bool registered = false;
     if (registered) {
@@ -630,6 +678,7 @@ void RegisterHooks() {
     registered = true;
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnGameStateUpdate>([]() {
         Project(false);
+        RepairDoubledSwords();
         // The team's Termina checks (MsSharedSave.teamTerminaChecks), every frame the file plays the unified seed: a
         // file just made at the door, loaded, or resumed is not unified yet when it loads or when the shared save is
         // applied to it (its seed comes after), so those moments alone missed them. Only bit tests once all are marked.

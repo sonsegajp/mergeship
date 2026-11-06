@@ -76,6 +76,11 @@ Keep line endings as they are (`git config core.autocrlf false`): libultraship's
 
 ## Credits and licenses
 
+MergeShip contributors:
+
+- [Vio (@AgitationSkeleton)](https://github.com/AgitationSkeleton): the transformation forms and Fierce Deity features
+  from soh_fd, including the Fierce Deity's sword beam, and most of the bug reports and testing.
+
 Ship of Harkinian and 2 Ship 2 Harkinian are by [HarbourMasters](https://github.com/HarbourMasters) and their
 contributors. Each port, and each library under them, keeps its own license file in its folder. MergeShip is built on
 their work.

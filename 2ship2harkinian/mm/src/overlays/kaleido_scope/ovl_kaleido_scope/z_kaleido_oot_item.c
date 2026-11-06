@@ -400,10 +400,11 @@ static void MergeShip_Kaleido_TryEquipOoTItem(PlayState* play, u16 cursorItem, u
         Audio_PlaySfx(NA_SE_SY_ERROR);
         return;
     }
-    // MergeShip2 (task 5): Hyrule's magic arrows need Hyrule's Fairy Bow owned first, as Majora's Mask's page needs its
-    // Hero's Bow (z_kaleido_item.c): a unified seed can find them out of order.
+    // MergeShip2 (task 5): Hyrule's magic arrows need a bow owned first (a unified seed can find them out of order).
+    // BUG-0160: either game's -- Hyrule's Fairy Bow, or else Termina's Hero's Bow, shoots them
+    // (MergeShip_Kaleido_MagicArrowBowSlot).
     if (((cursorItem == ITEM_ARROW_FIRE) || (cursorItem == ITEM_ARROW_ICE) || (cursorItem == ITEM_ARROW_LIGHT)) &&
-        !MergeShip_Own_HasBowForArrows(false)) {
+        !MergeShip_Own_HasBowForArrows(false) && !MergeShip_Own_HasBowForArrows(true)) {
         Audio_PlaySfx(NA_SE_SY_ERROR);
         return;
     }
@@ -507,8 +508,15 @@ s32 MergeShip_Kaleido_OoTMagicArrowBowCell(PauseContext* pauseCtx, s16* x, s16* 
 // Ocarina of Time puts ITEM_BOW_ARROW_FIRE .. there with SLOT_BOW, the bow's own slot, so the bow is on one button only
 // (MM's swap-by-slot); a Hyrule arrow's is Hyrule's bow cell's, MS_OOT_BUTTON_SLOT(MS_OOT_SLOT_BOW), the slot the Fairy
 // Bow itself is equipped with (MergeShip_Own_ButtonBowIsOoT), and Majora's Mask's own keep MM's SLOT_BOW.
+// BUG-0160: each game's arrow goes onto its own game's bow, or onto the other game's while that is the only bow owned
+// (a Hyrule Ice Arrow with only the Hero's Bow is the Hero's Bow with an Ice Arrow).
 u16 MergeShip_Kaleido_MagicArrowBowSlot(PauseContext* pauseCtx) {
-    return MS_OOT_BUTTON_SLOT_IS_OOT(pauseCtx->equipTargetSlot) ? MS_OOT_BUTTON_SLOT(MS_OOT_SLOT_BOW) : SLOT_BOW;
+    const s32 hyruleBow = MergeShip_Own_HasBowForArrows(false);
+    const s32 terminaBow = MergeShip_Own_HasBowForArrows(true);
+    const s32 onHyruleBow = MS_OOT_BUTTON_SLOT_IS_OOT(pauseCtx->equipTargetSlot) ? (hyruleBow || !terminaBow)
+                                                                                  : (hyruleBow && !terminaBow);
+
+    return onHyruleBow ? MS_OOT_BUTTON_SLOT(MS_OOT_SLOT_BOW) : SLOT_BOW;
 }
 
 // MM KaleidoScope_UpdateItemCursor.

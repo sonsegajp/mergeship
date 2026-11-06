@@ -658,8 +658,11 @@ extern "C" s32 MergeShipAnchor_MinimapIcon(Actor* actor, Color_RGB8* color, f32*
     }
     const AnchorClient& client = anchor->clients[clientId];
     const std::string teamId = CVarGetString(CVAR_REMOTE_ANCHOR("TeamId"), "default");
+    // BUG-0159: only a teammate in this very scene and room -- one elsewhere (another scene, the other world, the file
+    // select) keeps his dummy parked far away, and his arrow was drawn on this room's map all the same.
     if (!CVarGetInteger(CVAR_REMOTE_ANCHOR("ShowOtherPlayersOnMinimap"), 1) ||
-        (anchor->roomState.showLocationsMode == 0) || !client.online ||
+        (anchor->roomState.showLocationsMode == 0) || !client.online || !client.isSaveLoaded ||
+        !anchor->IsInOwnScene(client) ||
         ((anchor->roomState.showLocationsMode != 2) && (client.teamId != teamId)) ||
         ((gPlayState != nullptr) && (client.curRoomNum != gPlayState->roomCtx.curRoom.num))) {
         return 2;

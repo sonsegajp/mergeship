@@ -11,6 +11,7 @@
 #include "soh/MergeShip/MergeShipDekuBeans.h"
 #include "soh/MergeShip/MergeShipAssets.h"
 #include "mm/archives/item_name_static/item_name_static.h"
+#include "mm/archives/icon_item_static/icon_item_static_yar.h" // MM's bow with its magic arrows (BUG-0148)
 #include "soh/MergeShip/MergeShipOwnership.h"
 #include "soh/MergeShip/MergeShipHost.h"
 #include "soh/OTRGlobals.h" // Randomizer_GetSettingValue (the seed's Bombchu Bag mode)
@@ -777,8 +778,43 @@ s32 MergeShip_MMEquip_ItemSlotCanCycle(s32 invSlot) {
     return false;
 }
 
+static s32 sMergeShipItemButton = -1;
+
+void MergeShip_MMEquip_NoteItemButton(s32 button) {
+    sMergeShipItemButton = button;
+}
+
+s32 MergeShip_MMEquip_ArrowButtonBowIsMM(s32 button) {
+    const s32 mmBow = MergeShip_MMEquip_Owns(MMEQUIP_BOW);
+    const s32 ootBow = MergeShip_MMEquip_OoTItemOwned(MMEQUIP_SLOT_BOW);
+
+    if (!MergeShip_MMEquip_IsEnabled() || (button < 1) || (button >= ARRAY_COUNT(gSaveContext.equips.buttonItems))) {
+        return false;
+    }
+    // The Termina items page's arrows land with no slot; Ocarina of Time's page's with the bow's (or their own).
+    if (gSaveContext.equips.cButtonSlots[button - 1] == SLOT_NONE) {
+        return mmBow || !ootBow;
+    }
+    return mmBow && !ootBow;
+}
+
+void* MergeShip_MMEquip_ArrowButtonIcon(s32 button, void* texture) {
+    static const char* sMMBowArrowIcons[] = { mm_gItemIconBowFireTex, mm_gItemIconBowIceTex, mm_gItemIconBowLightTex };
+    u8 item;
+
+    if ((button < 1) || (button >= ARRAY_COUNT(gSaveContext.equips.buttonItems))) {
+        return texture;
+    }
+    item = gSaveContext.equips.buttonItems[button];
+    if ((item < ITEM_BOW_ARROW_FIRE) || (item > ITEM_BOW_ARROW_LIGHT) || !MergeShip_MMEquip_ArrowButtonBowIsMM(button)) {
+        return texture;
+    }
+    return (void*)sMMBowArrowIcons[item - ITEM_BOW_ARROW_FIRE];
+}
+
 // Player_UseItem: the version of the Bow / Hookshot slot follows the item used -- MM's from the Termina items page
 // (ITEM_MM_BOW_HERO, ITEM_MM_HOOKSHOT), Ocarina of Time's from its own slot -- so its model, reach and name match.
+// BUG-0148/0160: a magic arrow, the bow its button belongs to (MergeShip_MMEquip_ArrowButtonBowIsMM).
 void MergeShip_MMEquip_OnUseItem(s32 item) {
     s32 slot;
     s32 mm;
@@ -787,7 +823,13 @@ void MergeShip_MMEquip_OnUseItem(s32 item) {
     if (!MergeShip_MMEquip_IsEnabled()) {
         return;
     }
-    if ((item == ITEM_MM_BOW_HERO) || (item == ITEM_MM_HOOKSHOT)) {
+    if ((item >= ITEM_BOW_ARROW_FIRE) && (item <= ITEM_BOW_ARROW_LIGHT) &&
+        MergeShip_MMEquip_ArrowButtonBowIsMM(sMergeShipItemButton)) {
+        mm = sSlotVariants[MMEQUIP_SLOT_BOW][0];
+        if ((mm >= 0) && (MergeShip_MMEquip_SlotSelection(MMEQUIP_SLOT_BOW) != mm)) {
+            MergeShip_MMEquip_Select(MMEQUIP_SLOT_BOW, mm);
+        }
+    } else if ((item == ITEM_MM_BOW_HERO) || (item == ITEM_MM_HOOKSHOT)) {
         slot = (item == ITEM_MM_BOW_HERO) ? MMEQUIP_SLOT_BOW : MMEQUIP_SLOT_HOOKSHOT;
         mm = sSlotVariants[slot][0];
         if ((mm >= 0) && MergeShip_MMEquip_Owns(mm) && (MergeShip_MMEquip_SlotSelection(slot) != mm)) {

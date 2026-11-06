@@ -24,6 +24,10 @@ extern "C" {
 #include <mergeship/SharedSave.h>     // MergeShip2 (BUG-0131): Hyrule's items
 #include "2s2h/MergeShip/MergeShipHost.h" // MergeShipHost_SharedSave
 #include "2s2h/MergeShip/MergeShipHyrule.h" // MergeShip_Hyrule_QuestIconTexture
+extern "C" {
+#include "2s2h/MergeShip/MergeShipOwnership.h"    // MergeShip2 (BUG-0151): MergeShip_Own_MMOwns
+#include "2s2h/MergeShip/MergeShipTerminaEquip.h" // MergeShip_TerminaEquip_Owns
+}
 
 namespace BenGui {
 extern std::shared_ptr<ItemTrackerWindow> mItemTrackerWindow;
@@ -485,11 +489,11 @@ void DrawItemTrackerGroup(TrackerGroup& trackerGroup) {
     }
 }
 
-// ---- MergeShip2 (BUG-0131): Hyrule's column -------------------------------------------------------------------------
-// "Both Worlds' Items" (gEnhancements.MergeShip.ItemTrackerBothWorlds, on; mergeship.exe): beside Termina's groups, the
-// item tracker draws Hyrule's items -- Ocarina of Time's items, equipment, upgrades, medallions, Spiritual Stones, songs
-// and masks -- as Hyrule's file holds them (the shared save Hyrule writes, MsSharedSave; SoH's tracker draws Termina's
-// beside Hyrule's the same way). Owned at full colour, faded otherwise, as the tracker draws its own.
+// ---- MergeShip2 (BUG-0131/0151): both worlds' items ------------------------------------------------------------------
+// "Both Worlds' Items" (gEnhancements.MergeShip.ItemTrackerBothWorlds, on; mergeship.exe): the item tracker is the one
+// tracker Ship of Harkinian draws too -- Hyrule's half (Ocarina of Time's items, equipment, upgrades, dungeon rewards and
+// songs, as Hyrule's file holds them in the shared save, MsSharedSave) and Termina's beside it, in the same order. Owned
+// at full colour, faded otherwise, as the tracker draws its own.
 
 namespace {
 
@@ -502,6 +506,11 @@ struct HyruleCell {
 
 #define MS_OOT_ICON(name) "__OTR__oot/textures/icon_item_static/" name
 
+#define MS_OOT_QUEST_ICON(name) "__OTR__oot/textures/icon_item_24_static/" name
+
+// BUG-0151: the order Ship of Harkinian's tracker draws Hyrule in (randomizer_item_tracker.cpp mainWindowItems: the
+// inventory, the equipment, the misc items, the dungeon rewards, the songs), six to a row, so that both games draw the
+// one tracker the same way.
 std::vector<HyruleCell> HyruleCells(const MsSharedSave* s) {
     const ImVec4 white(1, 1, 1, 1);
     auto item = [&](MsItem bit) { return (s->items & (1u << bit)) != 0; };
@@ -509,11 +518,39 @@ std::vector<HyruleCell> HyruleCells(const MsSharedSave* s) {
     auto equip = [&](int shift, int index) { return (s->ootOwnedEquipment & (1u << (shift + index))) != 0; };
     auto quest = [&](int bit) { return (s->hyruleQuest & (1u << bit)) != 0; };
     auto song = [&](MsSong bit) { return (s->songs & (1u << bit)) != 0; };
-    auto mask = [&](MsHyruleItem bit) { return (s->hyruleItems & (1u << bit)) != 0; };
     const uint32_t strength = (s->ootUpgrades >> 6) & 7;
     const uint32_t scale = (s->ootUpgrades >> 9) & 7;
+    // Ocarina of Time's masks and trade items, as MsHyruleItem numbers them
+    static const char* kTradeIcons[MS_HYRULE_ITEM_COUNT] = {
+        MS_OOT_ICON("gItemIconWeirdEggTex"),     MS_OOT_ICON("gItemIconChickenTex"),
+        MS_OOT_ICON("gItemIconZeldasLetterTex"), MS_OOT_ICON("gItemIconMaskKeatonTex"),
+        MS_OOT_ICON("gItemIconMaskSkullTex"),    MS_OOT_ICON("gItemIconMaskSpookyTex"),
+        MS_OOT_ICON("gItemIconMaskBunnyHoodTex"), MS_OOT_ICON("gItemIconMaskGoronTex"),
+        MS_OOT_ICON("gItemIconMaskZoraTex"),     MS_OOT_ICON("gItemIconMaskGerudoTex"),
+        MS_OOT_ICON("gItemIconMaskTruthTex"),    MS_OOT_ICON("gItemIconPocketEggTex"),
+        MS_OOT_ICON("gItemIconPocketCuccoTex"),  MS_OOT_ICON("gItemIconCojiroTex"),
+        MS_OOT_ICON("gItemIconOddMushroomTex"),  MS_OOT_ICON("gItemIconOddPotionTex"),
+        MS_OOT_ICON("gItemIconPoachersSawTex"),  MS_OOT_ICON("gItemIconBrokenGoronsSwordTex"),
+        MS_OOT_ICON("gItemIconPrescriptionTex"), MS_OOT_ICON("gItemIconEyeballFrogTex"),
+        MS_OOT_ICON("gItemIconEyeDropsTex"),     MS_OOT_ICON("gItemIconClaimCheckTex"),
+    };
+    static const char* kTradeNames[MS_HYRULE_ITEM_COUNT] = {
+        "Weird Egg",    "Chicken",       "Zelda's Letter", "Keaton Mask",   "Skull Mask",    "Spooky Mask",
+        "Bunny Hood",   "Goron Mask",    "Zora Mask",      "Gerudo Mask",   "Mask of Truth", "Pocket Egg",
+        "Pocket Cucco", "Cojiro",        "Odd Mushroom",   "Odd Potion",    "Poacher's Saw", "Broken Goron's Sword",
+        "Prescription", "Eyeball Frog",  "World's Finest Eye Drops", "Claim Check",
+    };
+    auto trade = [&](uint8_t held, MsHyruleItem fallback) -> HyruleCell {
+        if (held < MS_HYRULE_ITEM_COUNT) {
+            return { kTradeIcons[held], kTradeNames[held], true, white };
+        }
+        return { kTradeIcons[fallback], kTradeNames[fallback], false, white };
+    };
+    // the bottles: Hyrule's own four, or the combined set's first four
+    const uint8_t* bottles = s->itemsCombined ? s->bottles : s->ootBottles;
+
     std::vector<HyruleCell> cells = {
-        // Ocarina of Time's items, as its Select Item page orders them
+        // the inventory, as Ocarina of Time's Select Item page orders it
         { MS_OOT_ICON("gItemIconDekuStickTex"), "Deku Stick", own(MS_OWN_STICK), white },
         { MS_OOT_ICON("gItemIconDekuNutTex"), "Deku Nut", own(MS_OWN_NUT), white },
         { MS_OOT_ICON("gItemIconBombTex"), "Bombs", own(MS_OWN_BOMB), white },
@@ -535,20 +572,27 @@ std::vector<HyruleCell> HyruleCells(const MsSharedSave* s) {
         { MS_OOT_ICON("gItemIconHammerTex"), "Megaton Hammer", item(MS_ITEM_MEGATON_HAMMER), white },
         { MS_OOT_ICON("gItemIconArrowLightTex"), "Light Arrow", item(MS_ITEM_ARROW_LIGHT), white },
         { MS_OOT_ICON("gItemIconNayrusLoveTex"), "Nayru's Love", item(MS_ITEM_NAYRUS_LOVE), white },
-        // equipment (inventory.equipment: swords from bit 0, shields 4, tunics 8, boots 12)
+    };
+    for (int i = 0; i < 4; i++) {
+        cells.push_back({ MS_OOT_ICON("gItemIconBottleEmptyTex"), "Bottle", bottles[i] != MS_BOTTLE_NONE, white });
+    }
+    cells.push_back(trade(s->hyruleTradeAdult, MS_HYRULE_POCKET_EGG));
+    cells.push_back(trade(s->hyruleTradeChild, MS_HYRULE_WEIRD_EGG));
+    const std::vector<HyruleCell> rest = {
+        // the equipment (inventory.equipment: swords from bit 0, shields 4, tunics 8, boots 12), in the tracker's order
         { MS_OOT_ICON("gItemIconSwordKokiriTex"), "Kokiri Sword", equip(0, 0), white },
         { MS_OOT_ICON("gItemIconSwordMasterTex"), "Master Sword", equip(0, 1), white },
         { MS_OOT_ICON("gItemIconSwordBiggoronTex"), "Biggoron's Sword", equip(0, 2) || equip(0, 3), white },
-        { MS_OOT_ICON("gItemIconShieldDekuTex"), "Deku Shield", equip(4, 0), white },
-        { MS_OOT_ICON("gItemIconShieldHylianTex"), "Hylian Shield", equip(4, 1), white },
-        { MS_OOT_ICON("gItemIconShieldMirrorTex"), "Mirror Shield", equip(4, 2), white },
         { MS_OOT_ICON("gItemIconTunicKokiriTex"), "Kokiri Tunic", equip(8, 0), white },
         { MS_OOT_ICON("gItemIconTunicGoronTex"), "Goron Tunic", equip(8, 1), white },
         { MS_OOT_ICON("gItemIconTunicZoraTex"), "Zora Tunic", equip(8, 2), white },
+        { MS_OOT_ICON("gItemIconShieldDekuTex"), "Deku Shield", equip(4, 0), white },
+        { MS_OOT_ICON("gItemIconShieldHylianTex"), "Hylian Shield", equip(4, 1), white },
+        { MS_OOT_ICON("gItemIconShieldMirrorTex"), "Mirror Shield", equip(4, 2), white },
         { MS_OOT_ICON("gItemIconBootsKokiriTex"), "Kokiri Boots", equip(12, 0), white },
         { MS_OOT_ICON("gItemIconBootsIronTex"), "Iron Boots", equip(12, 1), white },
         { MS_OOT_ICON("gItemIconBootsHoverTex"), "Hover Boots", equip(12, 2), white },
-        // upgrades (inventory.upgrades: strength from bit 6, scale from 9)
+        // the misc items (inventory.upgrades: strength from bit 6, scale from 9)
         { (strength >= 3)   ? MS_OOT_ICON("gItemIconGoldenGauntletsTex")
           : (strength == 2) ? MS_OOT_ICON("gItemIconSilverGauntletsTex")
                             : MS_OOT_ICON("gItemIconGoronsBraceletTex"),
@@ -556,28 +600,31 @@ std::vector<HyruleCell> HyruleCells(const MsSharedSave* s) {
           white },
         { (scale >= 2) ? MS_OOT_ICON("gItemIconScaleGoldenTex") : MS_OOT_ICON("gItemIconScaleSilverTex"),
           (scale >= 2) ? "Golden Scale" : "Silver Scale", scale > 0, white },
-        { MergeShip_Hyrule_QuestIconTexture(MERGESHIP_OOT_QUEST_STONE_OF_AGONY), "Stone of Agony",
-          quest(MERGESHIP_OOT_QUEST_STONE_OF_AGONY), white },
+        { (s->walletLevel >= 2) ? MS_OOT_ICON("gItemIconGiantsWalletTex") : MS_OOT_ICON("gItemIconAdultsWalletTex"),
+          (s->walletLevel >= 2) ? "Giant's Wallet" : "Adult's Wallet", s->walletLevel > 0, white },
+        { MS_OOT_QUEST_ICON("gQuestIconHeartContainerTex"), "Heart Containers", s->healthCapacity > 0x30, white },
+        { MS_OOT_QUEST_ICON("gQuestIconHeartPieceTex"), "Pieces of Heart", s->heartPieces > 0, white },
+        { (s->magicLevel >= 2) ? MS_OOT_QUEST_ICON("gQuestIconMagicJarBigTex") : MS_OOT_QUEST_ICON("gQuestIconMagicJarSmallTex"),
+          "Magic", s->magicLevel > 0, white },
         { MergeShip_Hyrule_QuestIconTexture(MERGESHIP_OOT_QUEST_GERUDO_CARD), "Gerudo's Card",
           quest(MERGESHIP_OOT_QUEST_GERUDO_CARD), white },
-        { nullptr, "", false, white },
-        { nullptr, "", false, white },
+        { MS_OOT_QUEST_ICON("gQuestIconGoldSkulltulaTex"), "Gold Skulltula Tokens", s->gsTokens > 0, white },
+        { MergeShip_Hyrule_QuestIconTexture(MERGESHIP_OOT_QUEST_STONE_OF_AGONY), "Stone of Agony",
+          quest(MERGESHIP_OOT_QUEST_STONE_OF_AGONY), white },
     };
-    // the medallions and the Spiritual Stones
+    cells.insert(cells.end(), rest.begin(), rest.end());
+    // the dungeon rewards: the Spiritual Stones (finishing the misc items' row), then the medallions
+    static const char* kStoneNames[] = { "Kokiri's Emerald", "Goron's Ruby", "Zora's Sapphire" };
+    for (int i = 0; i < 3; i++) {
+        cells.push_back({ MergeShip_Hyrule_QuestIconTexture(MERGESHIP_OOT_QUEST_KOKIRI_EMERALD + i), kStoneNames[i],
+                          quest(MERGESHIP_OOT_QUEST_KOKIRI_EMERALD + i), white });
+    }
     static const char* kQuestNames[] = { "Forest Medallion", "Fire Medallion", "Water Medallion", "Spirit Medallion",
                                          "Shadow Medallion", "Light Medallion" };
     for (int i = 0; i < 6; i++) {
         cells.push_back({ MergeShip_Hyrule_QuestIconTexture(MERGESHIP_OOT_QUEST_MEDALLION_FOREST + i), kQuestNames[i],
                           quest(MERGESHIP_OOT_QUEST_MEDALLION_FOREST + i), white });
     }
-    static const char* kStoneNames[] = { "Kokiri's Emerald", "Goron's Ruby", "Zora's Sapphire" };
-    for (int i = 0; i < 3; i++) {
-        cells.push_back({ MergeShip_Hyrule_QuestIconTexture(MERGESHIP_OOT_QUEST_KOKIRI_EMERALD + i), kStoneNames[i],
-                          quest(MERGESHIP_OOT_QUEST_KOKIRI_EMERALD + i), white });
-    }
-    cells.push_back({ nullptr, "", false, white });
-    cells.push_back({ nullptr, "", false, white });
-    cells.push_back({ nullptr, "", false, white });
     // the songs: Ocarina of Time's note, in its pause screen's colours for the warp songs
     struct SongCell {
         MsSong bit;
@@ -598,15 +645,136 @@ std::vector<HyruleCell> HyruleCells(const MsSharedSave* s) {
     for (const SongCell& sc : kSongs) {
         cells.push_back({ MS_OOT_ICON("gSongNoteTex"), sc.name, song(sc.bit), sc.tint });
     }
-    // the masks
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskKeatonTex"), "Keaton Mask", mask(MS_HYRULE_MASK_KEATON), white });
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskSkullTex"), "Skull Mask", mask(MS_HYRULE_MASK_SKULL), white });
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskSpookyTex"), "Spooky Mask", mask(MS_HYRULE_MASK_SPOOKY), white });
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskBunnyHoodTex"), "Bunny Hood", mask(MS_HYRULE_MASK_BUNNY), white });
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskGoronTex"), "Goron Mask", mask(MS_HYRULE_MASK_GORON), white });
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskZoraTex"), "Zora Mask", mask(MS_HYRULE_MASK_ZORA), white });
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskGerudoTex"), "Gerudo Mask", mask(MS_HYRULE_MASK_GERUDO), white });
-    cells.push_back({ MS_OOT_ICON("gItemIconMaskTruthTex"), "Mask of Truth", mask(MS_HYRULE_MASK_TRUTH), white });
+    return cells;
+}
+
+// BUG-0151: the Termina half, Ship of Harkinian's Termina column cell for cell (MergeShipUnifiedTracker.cpp
+// MergeShip_ItemTracker_DrawTerminaColumn): MM's swords and shields, its other items, the trade items, the remains, the
+// songs and the masks, owned as this file holds them.
+std::vector<HyruleCell> TerminaCells() {
+    const ImVec4 white(1, 1, 1, 1);
+    struct TerminaIcon {
+        u8 item; // ITEM_NONE: an empty cell, so that each group starts a row
+        const char* name;
+        ImVec4 tint;
+    };
+    static const TerminaIcon kIcons[] = {
+        { ITEM_SWORD_KOKIRI, "Kokiri Sword (MM)", white },
+        { ITEM_SWORD_RAZOR, "Razor Sword", white },
+        { ITEM_SWORD_GILDED, "Gilded Sword", white },
+        { ITEM_SWORD_GREAT_FAIRY, "Great Fairy's Sword", white },
+        { ITEM_SHIELD_HERO, "Hero's Shield", white },
+        { ITEM_SHIELD_MIRROR, "Mirror Shield (MM)", white },
+        { ITEM_BOW, "Hero's Bow", white },
+        { ITEM_HOOKSHOT, "Hookshot (MM)", white },
+        { ITEM_POWDER_KEG, "Powder Keg", white },
+        { ITEM_PICTOGRAPH_BOX, "Pictograph Box", white },
+        { ITEM_BOMBERS_NOTEBOOK, "Bombers' Notebook", white },
+        { ITEM_MOONS_TEAR, "Moon's Tear", white },
+        { ITEM_DEED_LAND, "Land Title Deed", white },
+        { ITEM_DEED_SWAMP, "Swamp Title Deed", white },
+        { ITEM_DEED_MOUNTAIN, "Mountain Title Deed", white },
+        { ITEM_DEED_OCEAN, "Ocean Title Deed", white },
+        { ITEM_ROOM_KEY, "Room Key", white },
+        { ITEM_LETTER_TO_KAFEI, "Letter to Kafei", white },
+        { ITEM_LETTER_MAMA, "Express Mail to Mama", white },
+        { ITEM_PENDANT_OF_MEMORIES, "Pendant of Memories", white },
+        { ITEM_REMAINS_ODOLWA, "Odolwa's Remains", white },
+        { ITEM_REMAINS_GOHT, "Goht's Remains", white },
+        { ITEM_REMAINS_GYORG, "Gyorg's Remains", white },
+        { ITEM_REMAINS_TWINMOLD, "Twinmold's Remains", white },
+        { ITEM_SONG_SONATA, "Sonata of Awakening", ImVec4(150 / 255.0f, 1.0f, 100 / 255.0f, 1) },
+        { ITEM_SONG_LULLABY, "Goron's Lullaby", ImVec4(1.0f, 80 / 255.0f, 40 / 255.0f, 1) },
+        { ITEM_SONG_NOVA, "New Wave Bossa Nova", ImVec4(100 / 255.0f, 150 / 255.0f, 1.0f, 1) },
+        { ITEM_SONG_ELEGY, "Elegy of Emptiness", ImVec4(1.0f, 160 / 255.0f, 0, 1) },
+        { ITEM_SONG_OATH, "Oath to Order", ImVec4(1.0f, 100 / 255.0f, 1.0f, 1) },
+        { ITEM_SONG_HEALING, "Song of Healing", white },
+        { ITEM_SONG_SOARING, "Song of Soaring", white },
+        { ITEM_NONE, "", white },
+        { ITEM_NONE, "", white },
+        { ITEM_NONE, "", white },
+        { ITEM_NONE, "", white },
+        { ITEM_NONE, "", white },
+        { ITEM_MASK_DEKU, "Deku Mask", white },
+        { ITEM_MASK_GORON, "Goron Mask (MM)", white },
+        { ITEM_MASK_ZORA, "Zora Mask (MM)", white },
+        { ITEM_MASK_FIERCE_DEITY, "Fierce Deity's Mask", white },
+        { ITEM_MASK_TRUTH, "Mask of Truth (MM)", white },
+        { ITEM_MASK_KAFEIS_MASK, "Kafei's Mask", white },
+        { ITEM_MASK_ALL_NIGHT, "All-Night Mask", white },
+        { ITEM_MASK_BUNNY, "Bunny Hood (MM)", white },
+        { ITEM_MASK_KEATON, "Keaton Mask (MM)", white },
+        { ITEM_MASK_GARO, "Garo's Mask", white },
+        { ITEM_MASK_ROMANI, "Romani's Mask", white },
+        { ITEM_MASK_CIRCUS_LEADER, "Circus Leader's Mask", white },
+        { ITEM_MASK_POSTMAN, "Postman's Hat", white },
+        { ITEM_MASK_COUPLE, "Couple's Mask", white },
+        { ITEM_MASK_GREAT_FAIRY, "Great Fairy's Mask", white },
+        { ITEM_MASK_GIBDO, "Gibdo Mask", white },
+        { ITEM_MASK_DON_GERO, "Don Gero's Mask", white },
+        { ITEM_MASK_KAMARO, "Kamaro's Mask", white },
+        { ITEM_MASK_CAPTAIN, "Captain's Hat", white },
+        { ITEM_MASK_STONE, "Stone Mask", white },
+        { ITEM_MASK_BREMEN, "Bremen Mask", white },
+        { ITEM_MASK_BLAST, "Blast Mask", white },
+        { ITEM_MASK_SCENTS, "Mask of Scents", white },
+        { ITEM_MASK_GIANT, "Giant's Mask", white },
+    };
+    auto owns = [](u8 item) -> bool {
+        switch (item) {
+            case ITEM_SWORD_KOKIRI:
+            case ITEM_SWORD_RAZOR:
+            case ITEM_SWORD_GILDED:
+            case ITEM_SWORD_GREAT_FAIRY:
+            case ITEM_SHIELD_HERO:
+            case ITEM_SHIELD_MIRROR:
+                return MergeShip_TerminaEquip_Owns(item);
+            case ITEM_BOMBERS_NOTEBOOK:
+                return CHECK_QUEST_ITEM(QUEST_BOMBERS_NOTEBOOK);
+            case ITEM_MOONS_TEAR:
+                return IsTradeItemObtained(RI_MOONS_TEAR);
+            case ITEM_DEED_LAND:
+                return IsTradeItemObtained(RI_DEED_LAND);
+            case ITEM_DEED_SWAMP:
+                return IsTradeItemObtained(RI_DEED_SWAMP);
+            case ITEM_DEED_MOUNTAIN:
+                return IsTradeItemObtained(RI_DEED_MOUNTAIN);
+            case ITEM_DEED_OCEAN:
+                return IsTradeItemObtained(RI_DEED_OCEAN);
+            case ITEM_ROOM_KEY:
+                return IsTradeItemObtained(RI_ROOM_KEY);
+            case ITEM_LETTER_TO_KAFEI:
+                return IsTradeItemObtained(RI_LETTER_TO_KAFEI);
+            case ITEM_LETTER_MAMA:
+                return IsTradeItemObtained(RI_LETTER_TO_MAMA);
+            case ITEM_PENDANT_OF_MEMORIES:
+                return IsTradeItemObtained(RI_PENDANT_OF_MEMORIES);
+            case ITEM_REMAINS_ODOLWA:
+            case ITEM_REMAINS_GOHT:
+            case ITEM_REMAINS_GYORG:
+            case ITEM_REMAINS_TWINMOLD:
+                return CHECK_QUEST_ITEM(QUEST_REMAINS_ODOLWA + (item - ITEM_REMAINS_ODOLWA));
+            case ITEM_SONG_SONATA:
+            case ITEM_SONG_LULLABY:
+            case ITEM_SONG_NOVA:
+            case ITEM_SONG_ELEGY:
+            case ITEM_SONG_OATH:
+            case ITEM_SONG_HEALING:
+            case ITEM_SONG_SOARING:
+                return CHECK_QUEST_ITEM(QUEST_SONG_SONATA + (item - ITEM_SONG_SONATA));
+            default:
+                return MergeShip_Own_MMOwns(item);
+        }
+    };
+    const bool isSaveLoaded = (gPlayState != NULL) && (gSaveContext.gameMode == GAMEMODE_NORMAL);
+    std::vector<HyruleCell> cells;
+    for (const TerminaIcon& icon : kIcons) {
+        if (icon.item == ITEM_NONE) {
+            cells.push_back({ nullptr, "", false, white });
+            continue;
+        }
+        cells.push_back({ (const char*)gItemIcons[icon.item], icon.name, isSaveLoaded && owns(icon.item), icon.tint });
+    }
     return cells;
 }
 
@@ -615,23 +783,24 @@ bool MergeShip_ItemTracker_BothWorlds() {
            (MergeShipHost_SharedSave() != nullptr);
 }
 
-void MergeShip_ItemTracker_DrawHyruleColumn() {
-    const MsSharedSave* shared = static_cast<const MsSharedSave*>(MergeShipHost_SharedSave());
+void MergeShip_ItemTracker_DrawGrid(const std::vector<HyruleCell>& cells) {
     auto gui = std::dynamic_pointer_cast<Fast::Fast3dGui>(Ship::Context::GetRawInstance()->GetWindow()->GetGui());
-    if ((shared == nullptr) || (gui == nullptr)) {
+    if (gui == nullptr) {
         return;
     }
     const float scale = CVarGetFloat("gSettings.ItemTracker.Scale", 1.0f);
     const ImVec2 cellSize(ITEM_TEXTURE_SIZE * scale, ITEM_TEXTURE_SIZE * scale);
-    const std::vector<HyruleCell> cells = HyruleCells(shared);
 
-    if (!ImGui::BeginTable("Hyrule##MergeShipBothWorlds", 6)) {
-        return;
-    }
+    // BUG-0149/0156: a fixed grid of cells, not a table: a table spans the window's whole width, so whatever stood beside
+    // it pushed the window wider every frame, into a grey bar across the screen.
+    ImGui::BeginGroup();
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+    s32 index = 0;
     for (const HyruleCell& cell : cells) {
-        ImGui::TableNextColumn();
+        if ((index++ % 6) != 0) {
+            ImGui::SameLine();
+        }
         ImGui::Dummy(cellSize);
         if ((cell.texture == nullptr) || (cell.texture[0] == '\0')) {
             continue;
@@ -646,7 +815,19 @@ void MergeShip_ItemTracker_DrawHyruleColumn() {
         UIWidgets::Tooltip(cell.name);
     }
     ImGui::PopStyleVar(2);
-    ImGui::EndTable();
+    ImGui::EndGroup();
+}
+
+// BUG-0151: the one tracker both games draw -- Hyrule's half, then Termina's beside it, as Ship of Harkinian draws them.
+void MergeShip_ItemTracker_DrawBothWorlds() {
+    const MsSharedSave* shared = static_cast<const MsSharedSave*>(MergeShipHost_SharedSave());
+    if (shared == nullptr) {
+        return;
+    }
+    const float scale = CVarGetFloat("gSettings.ItemTracker.Scale", 1.0f);
+    MergeShip_ItemTracker_DrawGrid(HyruleCells(shared));
+    ImGui::SameLine(0.0f, ITEM_TEXTURE_SIZE * scale * 0.5f);
+    MergeShip_ItemTracker_DrawGrid(TerminaCells());
 }
 
 } // namespace
@@ -689,13 +870,14 @@ void ItemTrackerWindow::Draw() {
         singleWindowOpen = ImGui::Begin("Item Tracker", nullptr, windowFlags);
     }
 
-    // MergeShip2 (BUG-0131): Termina's groups and, beside them, Hyrule's column.
+    // MergeShip2 (BUG-0131/0151): with both worlds' items, the one tracker Ship of Harkinian draws too -- Hyrule's half
+    // and Termina's -- in place of Termina's own groups.
     const bool msBothWorlds = !shouldWindowSplit && singleWindowOpen && MergeShip_ItemTracker_BothWorlds();
     if (msBothWorlds) {
-        ImGui::BeginGroup();
+        MergeShip_ItemTracker_DrawBothWorlds();
     }
     uint32_t index = 0;
-    for (auto& group : itemTrackerGroups) {
+    for (auto& group : (msBothWorlds ? std::vector<TrackerGroup>() : itemTrackerGroups)) {
         if (group.items.empty()) {
             index++;
             continue;
@@ -721,13 +903,6 @@ void ItemTrackerWindow::Draw() {
         }
 
         index++;
-    }
-    if (msBothWorlds) {
-        ImGui::EndGroup();
-        ImGui::SameLine(0.0f, ITEM_TEXTURE_SIZE * 0.5f);
-        ImGui::BeginGroup();
-        MergeShip_ItemTracker_DrawHyruleColumn();
-        ImGui::EndGroup();
     }
     if (!shouldWindowSplit) {
         ImGui::PopStyleColor(1);

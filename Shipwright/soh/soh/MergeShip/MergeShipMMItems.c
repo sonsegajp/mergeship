@@ -132,6 +132,16 @@ s32 MergeShip_MMItems_IsPageItem(u8 item) {
            ((item == ITEM_OCARINA_TIME) && (INV_CONTENT(ITEM_OCARINA_FAIRY) != ITEM_OCARINA_TIME));
 }
 
+static s32 sMergeShipTerminaArrowEquip = false;
+
+void MergeShip_MMItems_SetTerminaArrowEquip(s32 on) {
+    sMergeShipTerminaArrowEquip = on ? true : false;
+}
+
+s32 MergeShip_MMItems_TerminaArrowEquip(void) {
+    return sMergeShipTerminaArrowEquip;
+}
+
 s16 MergeShip_MMItems_PageSlotOoTSlot(s16 slot) {
     const u8 item = MergeShip_MMItems_PageSlotItem(slot);
 

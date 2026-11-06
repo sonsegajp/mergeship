@@ -654,12 +654,12 @@ void KaleidoScope_UpdateItemCursor(PlayState* play) {
                     CHECK_BTN_ANY(CONTROLLER1(&play->state)->press.button,
                                   BTN_CLEFT | BTN_CDOWN | BTN_CRIGHT | BTN_DPAD_EQUIP)) {
 
-                    // MergeShip2 (task 5): a magic arrow needs the Hero's Bow owned first (a unified seed can find
-                    // them out of order; "Combine Shared Items" counts Hyrule's too); deny it with the pause error
-                    // sound instead of equipping it.
+                    // MergeShip2 (task 5): a magic arrow needs a bow owned first (a unified seed can find them out
+                    // of order; "Combine Shared Items" counts Hyrule's too); deny it with the pause error sound
+                    // instead of equipping it. BUG-0160: either game's bow (MergeShip_Kaleido_MagicArrowBowSlot).
                     if (((cursorItem == ITEM_ARROW_FIRE) || (cursorItem == ITEM_ARROW_ICE) ||
                          (cursorItem == ITEM_ARROW_LIGHT)) &&
-                        !MergeShip_Own_HasBowForArrows(true)) {
+                        !MergeShip_Own_HasBowForArrows(true) && !MergeShip_Own_HasBowForArrows(false)) {
                         Audio_PlaySfx(NA_SE_SY_ERROR);
                         return;
                     }

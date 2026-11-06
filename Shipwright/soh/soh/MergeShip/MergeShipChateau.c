@@ -14,7 +14,7 @@
 #define MERGESHIP_BUTTON_STATUS_INDEX(button) (((button) >= 4) ? ((button) + 1) : (button))
 
 // MM WEEKEVENTREG_DRANK_CHATEAU_ROMANI. Never saved: MergeShipChateau.cpp clears it when a file is loaded and when
-// Link dies (MM clears it with the three-day cycle).
+// Link dies (MM clears it with the three-day cycle). In mergeship.exe the shared save carries it (BUG-0153).
 static s32 sDrankChateauRomani = false;
 
 s32 MergeShip_Chateau_IsActive(void) {
@@ -23,6 +23,14 @@ s32 MergeShip_Chateau_IsActive(void) {
 
 void MergeShip_Chateau_Reset(void) {
     sDrankChateauRomani = false;
+}
+
+s32 MergeShip_Chateau_Drunk(void) {
+    return sDrankChateauRomani;
+}
+
+void MergeShip_Chateau_SetDrunk(s32 drunk) {
+    sDrankChateauRomani = drunk ? true : false;
 }
 
 // MM Player_Action_67, PLAYER_IA_BOTTLE_CHATEAU: D_8085D790 is 1 | 2 -- health refilled (healthAccumulator 0x140) and

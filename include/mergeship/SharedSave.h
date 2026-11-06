@@ -470,7 +470,9 @@ typedef struct MsSharedSave {
 
     /* Majora's Mask's 24 masks */
     uint8_t transformationMasks; /* bit (1 << MM form): 0 Fierce Deity, 1 Goron, 2 Zora, 3 Deku */
-    uint8_t pad1;
+    uint8_t chateauMagic;        /* BUG-0153 (was pad1): MS_CHATEAU_VALID | MS_CHATEAU_ACTIVE -- Chateau Romani's
+                                  * endless magic (MM WEEKEVENTREG_DRANK_CHATEAU_ROMANI, SoH MergeShipChateau.c), one
+                                  * status for both games. Older files read 0: each game keeps its own. */
     uint16_t mmTradeOwned;       /* MM's trade items owned, bit (item - Moon's Tear): Moon's Tear, the Land / Swamp /
                                   * Mountain / Ocean Title Deeds, Room Key, Letter to Mama, Letter to Kafei, Pendant of
                                   * Memories (the slots cycle through them, 2026-09-24). Set by each capture; carved
@@ -697,6 +699,9 @@ static inline int MsShared_TeamTerminaCheck(const MsSharedSave* shared, uint32_t
 #define MS_GOAL_FLAG_COMPLETE 0x80u /* the whole goal was met and an ending played */
 
 /* MsSharedSave.hyruleBlock */
+#define MS_CHATEAU_VALID 0x80u  /* chateauMagic was written by a capture */
+#define MS_CHATEAU_ACTIVE 0x01u /* Chateau Romani's endless magic is on */
+
 #define MS_HYRULE_BLOCK_SOH 0x01u   /* SoH has captured the Hyrule block */
 #define MS_HYRULE_BLOCK_2SHIP 0x02u /* 2Ship has captured it (what Termina holds of it) */
 /* MsSharedSave.hyruleQuest: the Ocarina of Time QuestItem bits that are not songs (0-5 the medallions, 18-20 the

@@ -289,6 +289,9 @@ void DummyPlayer_Update(Actor* actor, PlayState* play) {
     player->currentBoots = client.currentBoots;
     player->currentShield = client.currentShield;
     player->currentMask = client.currentMask;
+    // MergeShip2 (BUG-0158): the worn mask's object, as Player_Update readies it (func_801229FC: Player_Draw draws a
+    // mask only once maskId has caught up with currentMask) -- a teammate's Bremen Mask, Bunny Hood ... were never drawn.
+    func_801229FC(player);
     MergeShip_AdultMask_SetRemote(player, client.adultMask); // MergeShip2 (BUG-0057)
     player->prevMask = client.prevMask;
     player->stateFlags1 = client.stateFlags1;

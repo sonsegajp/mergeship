@@ -6,6 +6,7 @@
 
 #include "z_en_stop_heishi.h"
 #include "2s2h/MergeShip/MergeShipAdultLink.h"
+#include "2s2h/MergeShip/MergeShipOoTEquip.h" // MergeShip2 (BUG-0154/0155): any sword on B counts
 #include "z64quake.h"
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY)
@@ -482,7 +483,7 @@ void func_80AE7F34(EnStopheishi* this, PlayState* play) {
             } else if (this->actor.textId == 0x536) {
                 this->actor.textId = 0x573;
             }
-        } else if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) == EQUIP_VALUE_SWORD_NONE) {
+        } else if (!MergeShip_OoTEquip_HumanHasSword()) { // MergeShip2 (BUG-0154/0155)
             if (this->actor.textId == 0x516) {
                 this->actor.textId = 0x55E;
             } else if (this->actor.textId == 0x520) {

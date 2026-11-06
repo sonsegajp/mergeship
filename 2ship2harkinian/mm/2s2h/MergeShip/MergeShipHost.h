@@ -49,10 +49,6 @@ void MergeShipHost_OnSceneExit(PlayState* play);
 s32 MergeShipHost_HoldTransition(PlayState* play);
 // BgCtowerRot_Init: the stone doors between the salesman's room and the passage stand open (the way back to Hyrule).
 s32 MergeShipHost_StoneDoorsStayOpen(void);
-// Play_Init (z_play.c), before the scene builds its sky from the day (Environment_Init): the Termina file's calendar is
-// one Majora's Mask can play -- a raw day past 4 folded into the day the game reads, and day 4 only for the moon's crash
-// (the dark "day 4" sky, MergeShipHost.cpp FoldCalendar).
-void MergeShipHost_CheckCalendar(PlayState* play);
 // A warp song to one of Ocarina of Time's warp pads (MergeShip_RequestHyruleWarp): the same trip back as the door,
 // with the file slot, the shared save and Link's body. False when this Termina has no Hyrule file to go back to.
 s32 MergeShipHost_RequestHyruleWarp(u16 ootEntrance);

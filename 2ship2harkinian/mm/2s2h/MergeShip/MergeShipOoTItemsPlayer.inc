@@ -734,10 +734,15 @@ static u8 sMsRocsGroundFrames = 0;
 static Actor* sMsBeanFlowers[MS_BEAN_FLOWERS_MAX];
 static PlayState* sMsBeanFlowersPlay = NULL;
 
+extern s32 gMergeShipRocsJumpMounted; // MergeShipOoTItems.cpp
+static const ALIGN_ASSET(2) char sMsRocsJumpAnim[] = "__OTR__objects/gameplay_keep/gPlayerAnim_link_rocs_feather_jump";
+
 static void MergeShip_OoTItems_RocsJump(PlayState* play, Player* this) {
     // BUG-0079: as SoH's (RocsFeather.cpp): young Link 7.0 up, the adult 7.5 (and the Fierce Deity, his size), forward
     // 5; the ripple and splash at his home position, 1.5 times as large for the adult; a hop (side hop, backflip)
-    // ends, so a ledge can be grabbed again.
+    // ends, so a ledge can be grabbed again. BUG-0161: SoH's own feather jump (gPlayerAnim_link_rocs_feather_jump,
+    // from soh.o2r), and actionVar2 1 as SoH sets it -- Player_Action_25 then holds that pose to the ground instead of
+    // morphing into the landing pose as soon as Link starts to fall.
     const s32 adult = MergeShip_AdultLink_IsActive(this) || (this->transformation == PLAYER_FORM_FIERCE_DEITY);
     const f32 effectsScale = adult ? 1.5f : 1.0f;
     Vec3f pos;
@@ -749,11 +754,17 @@ static void MergeShip_OoTItems_RocsJump(PlayState* play, Player* this) {
     if ((this->transformation == PLAYER_FORM_GORON) && (Player_Action_96 == this->actionFunc)) {
         func_80834CD0(this, 12.0f, 0);
     } else {
+        const s32 humanLike =
+            (this->transformation == PLAYER_FORM_HUMAN) || (this->transformation == PLAYER_FORM_FIERCE_DEITY);
+
         func_80834D50(play, this,
-                      ((this->transformation == PLAYER_FORM_HUMAN) || (this->transformation == PLAYER_FORM_FIERCE_DEITY))
-                          ? &gPlayerAnim_link_normal_jump
-                          : NULL,
+                      humanLike ? (gMergeShipRocsJumpMounted ? (PlayerAnimationHeader*)sMsRocsJumpAnim
+                                                             : &gPlayerAnim_link_normal_jump)
+                                : NULL,
                       (this->transformation == PLAYER_FORM_DEKU) ? 6.0f : (adult ? 7.5f : 7.0f), 0);
+        if (humanLike) {
+            this->av2.actionVar2 = 1;
+        }
         this->speedXZ = 5.0f;
         this->actor.world.rot.y = this->yaw = this->actor.shape.rot.y;
     }

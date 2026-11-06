@@ -22,6 +22,7 @@ extern "C" {
 #include "soh/MergeShip/MergeShipSongs.h"
 #include "soh/MergeShip/MergeShipOwnership.h"
 #include "soh/MergeShip/MergeShipDekuBeans.h" // the beans Termina shares (BUG-0014)
+#include "soh/MergeShip/MergeShipChateau.h"   // Chateau Romani's endless magic (BUG-0153)
 void MergeShipTest_Log(const char* fmt, ...);
 extern u8 gEquipAgeReqs[][4]; // z_kaleido_scope_PAL.c (BUG-0120)
 }
@@ -584,6 +585,8 @@ extern "C" void MergeShipShared_Capture(MsSharedSave* shared) {
     shared->doubleDefense = gSaveContext.isDoubleDefenseAcquired ? 1 : 0;
     shared->magicLevel = gSaveContext.isMagicAcquired ? (gSaveContext.isDoubleMagicAcquired ? 2 : 1) : 0;
     shared->magicAmount = (u8)gSaveContext.magic;
+    // BUG-0153: Chateau Romani's endless magic, one status for both games
+    shared->chateauMagic = MS_CHATEAU_VALID | (MergeShip_Chateau_Drunk() ? MS_CHATEAU_ACTIVE : 0);
     shared->rupees = (u16)gSaveContext.rupees;
     // The bigger wallet either game has found (as 2Ship's capture keeps it): Hyrule's own smaller one must not shrink a
     // wallet Termina found, or the rupees it holds are cut to the smaller one's size (BUG-0030).
@@ -795,6 +798,9 @@ extern "C" void MergeShipShared_Apply(const MsSharedSave* shared) {
     }
     // The amount only fills a meter Link owns: it never makes one.
     gSaveContext.magic = gSaveContext.isMagicAcquired ? (s8)shared->magicAmount : 0;
+    if (shared->chateauMagic & MS_CHATEAU_VALID) { // BUG-0153
+        MergeShip_Chateau_SetDrunk((shared->chateauMagic & MS_CHATEAU_ACTIVE) != 0);
+    }
     RaiseUpgrade(UPG_WALLET, shared->walletLevel);
     gSaveContext.rupees = (s16)((shared->rupees > CUR_CAPACITY(UPG_WALLET)) ? CUR_CAPACITY(UPG_WALLET) : shared->rupees);
 

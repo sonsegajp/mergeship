@@ -251,6 +251,11 @@ s32 MergeShip_OoTEquip_IsBSwordItem(u8 item) {
     return MsEq_IsMMBSword(item) || ITEM_IS_OOT_EQUIP_SWORD(item) || (item == ITEM_SWORD_GREAT_FAIRY);
 }
 
+s32 MergeShip_OoTEquip_HumanHasSword(void) {
+    return (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) != EQUIP_VALUE_SWORD_NONE) ||
+           MergeShip_OoTEquip_IsBSwordItem(BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_B));
+}
+
 static void MsEq_SetBSword(PlayState* play, u8 item) {
     if (BUTTON_ITEM_EQUIP(0, EQUIP_SLOT_B) == item) {
         return;

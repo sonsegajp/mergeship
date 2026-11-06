@@ -4577,6 +4577,7 @@ int16_t gItemIconDD[] = { 550, 680, 680, 680, 1024, 1024, 1024, 1024 };
 void Interface_DrawItemIconTexture(PlayState* play, void* texture, s16 button) {
     texture = MergeShip_DekuBeans_SwapIcon(texture); // MergeShip2: a bean button holding Deku Beans
     texture = MergeShip_MMEquip_SwapIcon(texture);   // MergeShip2: the Hero's Bow / MM Hookshot on a button
+    texture = MergeShip_MMEquip_ArrowButtonIcon(button, texture); // MergeShip2 (BUG-0148): MM's bow with its arrow
     // MergeShip2 (BUG-0106): the bow a minigame or the horse puts on B (ITEM_BOW, as the temporary-B code knows it) is the
     // bow in use, MM's Hero's Bow when that is the one selected (the only bow owned, or the one used last): its icon
     if ((button == 0) && (gSaveContext.equips.buttonItems[0] == ITEM_BOW) && MergeShip_MMEquip_IsSelected(MMEQUIP_BOW)) {

@@ -135,6 +135,10 @@ s32 MergeShip_OoTEquip_HoldsOoTMirrorShield(struct Player* player);
 s32 MergeShip_OoTEquip_SpinWaveType(struct Player* player, s32 type);
 // The swing sound (OoT func_80833A20: Biggoron's Sword swings like the Hammer unless broken).
 s32 MergeShip_OoTEquip_IsBSwordItem(u8 item);
+// BUG-0154/0155: the human has a sword to fight with: MM's own, or the sword on B (the Great Fairy's Sword, Hyrule's
+// Biggoron's Sword / Giant's Knife / Master / Kokiri Sword), where MM's own sword value is "none". MM's checks for a sword
+// (the Swordsman's School, the Clock Town guards) ask this.
+s32 MergeShip_OoTEquip_HumanHasSword(void);
 // Player_GetStrength: `strength` is MM's for the current form.
 u8 MergeShip_OoTEquip_Strength(u8 strength);
 // A human with gauntlets lifts what MM keeps for the Goron (see the top of the file).

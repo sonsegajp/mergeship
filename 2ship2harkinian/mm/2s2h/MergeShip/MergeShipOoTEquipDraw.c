@@ -171,8 +171,11 @@ static s32 MsEq_IsPath(Gfx* dList, const char* part1, const char* part2) {
     return (strstr(path, part1) != NULL) && ((part2 == NULL) || (strstr(path, part2) != NULL));
 }
 
+// BUG-0158: also an Anchor teammate (ACTOR_UNSET_13, Anchor.h ANCHOR_DUMMY_ACTOR_ID), drawn with his own Ocarina of
+// Time equipment in OOT_EQUIP (DummyPlayer.cpp RemoteSave) -- his Mirror Shield, his sword on the back.
 static s32 MsEq_IsHuman(Player* player) {
-    return MergeShip_OoTEquip_Enabled() && (player->actor.id == ACTOR_PLAYER) &&
+    return MergeShip_OoTEquip_Enabled() &&
+           ((player->actor.id == ACTOR_PLAYER) || (player->actor.id == ACTOR_UNSET_13)) &&
            (player->transformation == PLAYER_FORM_HUMAN);
 }
 
@@ -187,7 +190,8 @@ void MergeShip_OoTEquip_NoteHylianHunch(void) {
 }
 
 s32 MergeShip_OoTEquip_HylianHunch(Player* player) {
-    return (gPlayState != NULL) && MsEq_IsHuman(player) && !MergeShip_AdultLink_IsActive(player) &&
+    return (gPlayState != NULL) && MsEq_IsHuman(player) && (player->actor.id == ACTOR_PLAYER) && // (this game's guard)
+           !MergeShip_AdultLink_IsActive(player) &&
            (gSaveContext.save.shipSaveInfo.mergeShipOoTEquip.shield == MS_OOTEQ_SHIELD_HYLIAN) &&
            ((u32)(gPlayState->gameplayFrames - sHylianHunchFrame) <= 1);
 }
@@ -218,7 +222,8 @@ s32 MergeShip_OoTEquip_SwordInHand(Player* player) {
 }
 
 s32 MergeShip_OoTEquip_HoldsFairyBow(Player* player) {
-    if (!MsEq_IsHuman(player) || MergeShip_AdultLink_IsActive(player)) {
+    // (the held button is this game's: a teammate's bow stays MM's)
+    if (!MsEq_IsHuman(player) || (player->actor.id != ACTOR_PLAYER) || MergeShip_AdultLink_IsActive(player)) {
         return false;
     }
     return MsEq_HeldBowIsOoT(player);

@@ -196,13 +196,23 @@ static RegisterShipInitFunc sMergeShipOoTItemsInit(RegisterMergeShipOoTItems, {}
 #include <ship/resource/archive/O2rArchive.h>
 #include <filesystem>
 
+// BUG-0161: and its jump, SoH's own animation (objects/gameplay_keep/gPlayerAnim_link_rocs_feather_jump and its _Data,
+// which the header names): mounted at its own paths, which Majora's Mask's gameplay_keep does not have.
+extern "C" s32 gMergeShipRocsJumpMounted;
+s32 gMergeShipRocsJumpMounted = false;
+
 extern "C" void MergeShip_OoTItems_MountRocsFeather(void) {
     static const struct {
         const char* from;
         const char* to;
+        bool jump;
     } kFiles[] = {
-        { "textures/icon_item_static/gRocsFeatherTex", "mergeship/rocs/gRocsFeatherTex" },
-        { "textures/item_name_static/gRocsFeatherItemNameENGTex", "mergeship/rocs/gRocsFeatherItemNameENGTex" },
+        { "textures/icon_item_static/gRocsFeatherTex", "mergeship/rocs/gRocsFeatherTex", false },
+        { "textures/item_name_static/gRocsFeatherItemNameENGTex", "mergeship/rocs/gRocsFeatherItemNameENGTex", false },
+        { "objects/gameplay_keep/gPlayerAnim_link_rocs_feather_jump",
+          "objects/gameplay_keep/gPlayerAnim_link_rocs_feather_jump", true },
+        { "objects/gameplay_keep/gPlayerAnim_link_rocs_feather_jump_Data",
+          "objects/gameplay_keep/gPlayerAnim_link_rocs_feather_jump_Data", true },
     };
     const std::string path = Ship::Context::LocateFileAcrossAppDirs("soh.o2r", "2ship");
     if (!std::filesystem::exists(path)) {
@@ -216,13 +226,18 @@ extern "C" void MergeShip_OoTItems_MountRocsFeather(void) {
         return;
     }
     std::map<std::string, std::vector<char>> files;
+    s32 jumpFiles = 0;
     for (const auto& f : kFiles) {
         std::shared_ptr<Ship::File> file = soh->LoadFile(std::string(f.from));
         if ((file == nullptr) || (file->Buffer == nullptr)) {
             SPDLOG_ERROR("MergeShip: {} is missing from soh.o2r", f.from);
+            if (f.jump) {
+                continue; // (the hop falls back to Majora's Mask's jump)
+            }
             return;
         }
         files[f.to] = std::vector<char>(file->Buffer->begin(), file->Buffer->end());
+        jumpFiles += f.jump ? 1 : 0;
     }
     auto archives = Ship::Context::GetRawInstance()->GetResourceManager()->GetArchiveManager();
     uint32_t gameVersion = 0;
@@ -238,7 +253,9 @@ extern "C" void MergeShip_OoTItems_MountRocsFeather(void) {
         SPDLOG_ERROR("MergeShip: the Roc's Feather's icon could not be mounted");
         return;
     }
-    MergeShipTest_Log("OOTITEMS Roc's Feather icon and name mounted from %s", path.c_str());
+    gMergeShipRocsJumpMounted = (jumpFiles == 2);
+    MergeShipTest_Log("OOTITEMS Roc's Feather icon and name mounted from %s (jump %d)", path.c_str(),
+                      gMergeShipRocsJumpMounted);
 }
 
 // BUG-0031: Hyrule's form instrument icons (mergeship2.o2r, which Termina does not mount), at their own paths.

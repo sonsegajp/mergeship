@@ -51,6 +51,10 @@ extern "C" {
 s32 MergeShip_Chateau_IsActive(void);
 // Ends it (a file loaded, Link dead).
 void MergeShip_Chateau_Reset(void);
+// BUG-0153: drunk or not, as the other game left it (the shared save's chateauMagic, MergeShipSharedSave.cpp): the
+// drink's endless magic follows Link between the worlds. Set (true) or ended (false).
+s32 MergeShip_Chateau_Drunk(void);
+void MergeShip_Chateau_SetDrunk(s32 drunk);
 
 // MM GI_CHATEAU's get-item entry (MOD_NONE, getItemId MERGESHIP_GI_MM_CHATEAU), drawn with MM's model.
 GetItemEntry MergeShip_Chateau_GetItemEntry(void);

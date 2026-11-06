@@ -616,6 +616,24 @@ static const char* MergeShip_MMChild_AdultShieldHand(s32 type, s32 shield, s32 l
 
 static s8 sMergeShipMMChildLoggedSheath = -1;
 
+// BUG-0152: Biggoron's Sword / the Giant's Knife put away is worn on the back, alone (no scabbard), in the Master
+// Sword's place -- as Termina's young Link wears it (2Ship MergeShipOoTEquip.h MERGESHIP_BGS_ON_BACK_*, the same
+// option): Ocarina of Time's adult hand list holding it, moved as its Master Sword moves from the hand into the
+// scabbard, under the sheath fit.
+#define MERGESHIP_BGS_ON_BACK_X (-714.409f)
+#define MERGESHIP_BGS_ON_BACK_Y (-310.307f)
+#define MERGESHIP_BGS_ON_BACK_Z (77.999f)
+
+static Mtx* MergeShip_MMChild_BgsOnBackMtx(PlayState* play) {
+    Mtx* mtx;
+
+    MS_INTERP_PUSH();
+    Matrix_Translate(MERGESHIP_BGS_ON_BACK_X, MERGESHIP_BGS_ON_BACK_Y, MERGESHIP_BGS_ON_BACK_Z, MTXMODE_NEW);
+    mtx = MATRIX_NEWMTX(play->state.gfxCtx);
+    MS_INTERP_POP();
+    return mtx;
+}
+
 // The sheath limb while the sword on B is the Master Sword or Biggoron's Sword (2Ship MergeShip_OoTEquip_OverrideLimb
 // and MergeShip_OoTEquip_BackShieldDL): the adult's scabbard under the sheath fit, holding the Master Sword while it
 // is the sword put away (Biggoron's Sword is never sheathed; the scabbard stays empty), and the shield on the back as
@@ -636,6 +654,8 @@ static Gfx* MergeShip_MMChild_ComposeAdultSheath(PlayState* play, s32 lod, s32 s
     s32 n = 0;
     Gfx* out;
     const s32 adultSword = (sword == PLAYER_SWORD_MASTER) || (sword == PLAYER_SWORD_BIGGORON);
+    const s32 bgsOnBack = sheathed && (sword == PLAYER_SWORD_BIGGORON) &&
+                          CVarGetInteger(CVAR_ENHANCEMENT("MergeShip.BgsOnBack"), 1); // BUG-0152
 
     if (!MergeShip_MMChild_AdultGearOn() || (shieldOnBack && MergeShip_MMChild_MMShieldOnBack(shield))) {
         return NULL;
@@ -651,6 +671,13 @@ static Gfx* MergeShip_MMChild_ComposeAdultSheath(PlayState* play, s32 lod, s32 s
     } else if (sheathed && (sword == PLAYER_SWORD_MASTER)) {
         scabbard = ResourceMgr_LoadGfxByName(lod ? gLinkAdultMasterSwordAndSheathFarDL
                                                  : gLinkAdultMasterSwordAndSheathNearDL);
+    } else if (bgsOnBack) {
+        // the sword alone (its hand list without the hand), in place of the empty scabbard
+        scabbard = ResourceMgr_LoadGfxByName(
+            MergeShip_MMChild_AdultSwordHand(PLAYER_MODELTYPE_LH_BGS, PLAYER_SWORD_BIGGORON,
+                                             (gSaveContext.equips.buttonItems[0] == ITEM_SWORD_KNIFE) &&
+                                                 (gSaveContext.swordHealth <= 0.0f),
+                                             lod));
     } else {
         scabbard = ResourceMgr_LoadGfxByName(lod ? gLinkAdultSheathFarDL : gLinkAdultSheathNearDL);
     }
@@ -677,8 +704,20 @@ static Gfx* MergeShip_MMChild_ComposeAdultSheath(PlayState* play, s32 lod, s32 s
     }
 
     out = Graph_Alloc(play->state.gfxCtx,
-                      (((shieldList != NULL) ? MergeShip_MMChild_GfxLength(shieldList) : 0) + 8) * sizeof(Gfx));
-    if (adultSword) {
+                      (((shieldList != NULL) ? MergeShip_MMChild_GfxLength(shieldList) : 0) +
+                       (bgsOnBack ? MergeShip_MMChild_GfxLength(scabbard) : 0) + 10) *
+                          sizeof(Gfx));
+    if (bgsOnBack) {
+        gSPMatrix(&out[n], MergeShip_MMChild_FitMtx(play, MMCHILD_FIT_SHEATH), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        n++;
+        gSPMatrix(&out[n], MergeShip_MMChild_BgsOnBackMtx(play), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        n++;
+        n += MergeShip_MMChild_FilterHand(&out[n], scabbard, &sMergeShipOoTAdultSkin, false, &tris);
+        gSPPopMatrix(&out[n], G_MTX_MODELVIEW);
+        n++;
+        gSPPopMatrix(&out[n], G_MTX_MODELVIEW);
+        n++;
+    } else if (adultSword) {
         gSPMatrix(&out[n], MergeShip_MMChild_FitMtx(play, MMCHILD_FIT_SHEATH), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         n++;
         gSPDisplayList(&out[n], scabbard);

@@ -351,11 +351,11 @@ static void MergeShip_Kaleido_TryEquipMMItem(PlayState* play, Vtx* itemVtx) {
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
         return;
     }
-    // MergeShip2 (task 5): MM's magic arrows need MM's Hero's Bow first (a unified seed can find them out of order), as
-    // Ocarina of Time's page asks its own bow for its arrows (z_kaleido_item.c).
+    // MergeShip2 (task 5): MM's magic arrows need a bow first (a unified seed can find them out of order). BUG-0160:
+    // either game's -- MM's Hero's Bow, or else Hyrule's Fairy Bow, shoots them.
     if (((sMMItemCursorItem == ITEM_ARROW_FIRE) || (sMMItemCursorItem == ITEM_ARROW_ICE) ||
          (sMMItemCursorItem == ITEM_ARROW_LIGHT)) &&
-        !MergeShip_MMEquip_Owns(MMEQUIP_BOW)) {
+        !MergeShip_MMEquip_Owns(MMEQUIP_BOW) && !MergeShip_Own_OoTOwns(ITEM_BOW)) {
         Audio_PlaySfxGeneral(NA_SE_SY_ERROR, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
         return;
@@ -373,6 +373,8 @@ static void MergeShip_Kaleido_TryEquipMMItem(PlayState* play, Vtx* itemVtx) {
     // Ocarina of Time's equip animation (the icon flies to the button); MergeShip_Kaleido_FinishMaskEquip lands it.
     // MergeShip2: an item held in Ocarina of Time's grid (ocarina, ammo items, bottles) is equipped through its slot.
     MergeShip_Own_OnPageEquip(sMMItemCursorItem, 1); // Majora's Mask's copy is the one in use
+    MergeShip_MMItems_SetTerminaArrowEquip((sMMItemCursorItem == ITEM_ARROW_FIRE) || (sMMItemCursorItem == ITEM_ARROW_ICE) ||
+                                           (sMMItemCursorItem == ITEM_ARROW_LIGHT)); // BUG-0148
     KaleidoScope_SetupItemEquip(play, sMMItemCursorItem, MergeShip_MMItems_PageSlotOoTSlot(sMMItemCursorPoint),
                                 itemVtx[sMMItemCursorPoint * 4].v.ob[0] * 10,
                                 itemVtx[sMMItemCursorPoint * 4].v.ob[1] * 10);

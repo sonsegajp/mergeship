@@ -6,6 +6,7 @@
 
 #include "z_en_kendo_js.h"
 #include "overlays/actors/ovl_En_Maruta/z_en_maruta.h"
+#include "2s2h/MergeShip/MergeShipOoTEquip.h" // MergeShip2 (BUG-0154/0155): any sword on B counts
 
 #define FLAGS                                                                                  \
     (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_UPDATE_CULLING_DISABLED | \
@@ -226,7 +227,7 @@ void func_80B26758(EnKendoJs* this, PlayState* play) {
     if (Message_ShouldAdvance(play) && (this->unk_288 == 0x2716)) {
         switch (play->msgCtx.choiceIndex) {
             case 0:
-                if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) == EQUIP_VALUE_SWORD_NONE) {
+                if (!MergeShip_OoTEquip_HumanHasSword()) { // MergeShip2 (BUG-0154/0155)
                     Audio_PlaySfx(NA_SE_SY_ERROR);
                     Message_StartTextbox(play, 0x272C, &this->actor);
                     this->unk_288 = 0x272C;
@@ -244,7 +245,7 @@ void func_80B26758(EnKendoJs* this, PlayState* play) {
                 break;
 
             case 1:
-                if (GET_CUR_EQUIP_VALUE(EQUIP_TYPE_SWORD) == EQUIP_VALUE_SWORD_NONE) {
+                if (!MergeShip_OoTEquip_HumanHasSword()) { // MergeShip2 (BUG-0154/0155)
                     Audio_PlaySfx(NA_SE_SY_ERROR);
                     Message_StartTextbox(play, 0x272C, &this->actor);
                     this->unk_288 = 0x272C;

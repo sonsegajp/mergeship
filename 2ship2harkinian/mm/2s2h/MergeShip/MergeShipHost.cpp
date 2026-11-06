@@ -359,6 +359,19 @@ void FoldCalendar(const char* when) {
     StartFirstDay(when);
 }
 
+// BUG-0157: Majora's Mask keeps the weather through an exit (Player's scene exits set retainWeatherMode, and a pending
+// respawn keeps it too, Environment_Init): Ikana's gloom (WEATHER_MODE_2: its dark skybox and light setting 5), the
+// rain or the snow. Through the door Link leaves one region of Termina for Hyrule and comes back to another, so the
+// weather he left with came along -- a dark sky and lighting over the arrival, until a grotto (a scene without a
+// pending respawn) cleared it. An arrival starts clear; the scene's own weather tags set it again.
+void ClearWeather(const char* when) {
+    if ((gWeatherMode != WEATHER_MODE_CLEAR) || gSaveContext.retainWeatherMode) {
+        DoorLog(when, "weather: mode %d (retained %d) cleared", gWeatherMode, gSaveContext.retainWeatherMode);
+    }
+    gWeatherMode = WEATHER_MODE_CLEAR;
+    gSaveContext.retainWeatherMode = false;
+}
+
 // Creates Majora's Mask's file `fileNum` as the file select does (Sram_InitSave), named after the Hyrule file.
 void CreateFile(s32 fileNum, const char* name, std::vector<u8>& buffer) {
     Rand_Seed(osGetTime()); // the title demo would have seeded it (SkipToFileSelect does the same)
@@ -425,7 +438,8 @@ void Boot() {
     gSaveContext.fileNum = fileNum;
     Sram_OpenSave(fileSelect, &sram);
     free(fileSelect);
-    FoldCalendar("booting");  // a raw day past 4: the moon's dark sky over the first scene (MergeShipHost_CheckCalendar)
+    FoldCalendar("booting");  // a raw day past 4: the moon's dark sky over the first scene
+    ClearWeather("booting");  // BUG-0157
     StartFirstDay("booting"); // BUG-0100: before the file's load hooks (the randomizer's clock) read the day
 
     // FileSelect_LoadGame.
@@ -672,31 +686,6 @@ s32 MergeShipHost_StoneDoorsStayOpen(void) {
     return MergeShipHost_TerminaDoorActive();
 }
 
-void MergeShipHost_CheckCalendar(PlayState* play) {
-    (void)play;
-    // Gameplay of the Termina file of a Hyrule file only: not a cutscene's own layer (the moon's crash beyond Termina
-    // Field, the ending), the credits, or a file of Majora's Mask's own file select.
-    if (!sLinked || (gSaveContext.fileNum != sLinkedFileNum) || (gSaveContext.gameMode != GAMEMODE_NORMAL) ||
-        (gSaveContext.save.cutsceneIndex >= 0xFFF0)) {
-        return;
-    }
-    FoldCalendar("scene");
-    // Day 4 belongs to the moon's crash alone (Interface_StartMoonCrash: Termina Field's crash entrance, whose
-    // cutscene reads the file back). A scene anywhere else on day 4 missed the crash -- the moon's dark sky over it and
-    // the clock's end: the clock is set to the last minute of the third night, so that Majora's Mask's own crash comes
-    // at dawn (EnTest4, or the final hours' timer).
-    if ((gSaveContext.save.day == 4) && ((gSaveContext.save.entrance & ~0xF) != ENTRANCE(TERMINA_FIELD, 12))) {
-        gSaveContext.save.day = 3;
-        gSaveContext.save.eventDayCount = 3;
-        gSaveContext.save.time = CLOCK_TIME(5, 59);
-        gSaveContext.save.isNight = true;
-        DoorLog("scene", "calendar: day 4 outside the moon's crash (entrance 0x%X): the third night's last minute",
-                gSaveContext.save.entrance);
-    }
-    // (StartFirstDay may have moved the clock to 6:01.)
-    gSaveContext.save.isNight = (CURRENT_TIME >= CLOCK_TIME(18, 0)) || (CURRENT_TIME < CLOCK_TIME(6, 30));
-}
-
 const char* MergeShipHost_DoorState(void) {
     return sDoorState;
 }
@@ -823,6 +812,7 @@ void MergeShipHost_OnResume(const MsTransfer* arrival) {
         }
         sDoor = Door::Arrived;
         FoldCalendar("arrived");
+        ClearWeather("arrived"); // BUG-0157
         StartFirstDay("arrived"); // BUG-0100: a file still on day 0 from an earlier trip
         DoorLog("arrived", "back from Hyrule: entrance 0x%X, day %d", sArrivalEntrance, gSaveContext.save.day);
         return;
@@ -832,6 +822,7 @@ void MergeShipHost_OnResume(const MsTransfer* arrival) {
         ApplyShared(arrival);
         ApplyArrivalBody(arrival);
         FoldCalendar("arrived");
+        ClearWeather("arrived");  // BUG-0157
         StartFirstDay("arrived"); // (the arrival's scene builds its sky from the day: before the transition below)
         gPlayState->nextEntrance =
             rando ? MergeShipEntrances_Arrive((s16)arrival->entrance, false) : ArrivalEntrance(arrival);
@@ -879,9 +870,6 @@ s32 MergeShipHost_HoldTransition(PlayState* play) {
 }
 s32 MergeShipHost_StoneDoorsStayOpen(void) {
     return 0;
-}
-void MergeShipHost_CheckCalendar(PlayState* play) {
-    (void)play;
 }
 s32 MergeShipHost_CanReachHyrule(void) {
     return 0;

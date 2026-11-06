@@ -793,9 +793,10 @@ void KaleidoScope_DrawItemSelect(PlayState* play) {
                             (cursorItem != ITEM_NONE) &&
                             (((cursorItem != ITEM_ARROW_FIRE) && (cursorItem != ITEM_ARROW_ICE) &&
                               (cursorItem != ITEM_ARROW_LIGHT)) ||
-                             MergeShip_Own_OoTOwns(ITEM_BOW))) {
+                             MergeShip_Own_OoTOwns(ITEM_BOW) || MergeShip_MMEquip_Owns(MMEQUIP_BOW))) {
                             if (GameInteractor_Should(VB_EQUIP_ITEM_TO_C_BUTTON, true, play, cursorSlot, cursorItem)) {
                                 MergeShip_Own_OnPageEquip((u8)cursorItem, 0); // MergeShip2: Ocarina of Time's copy
+                                MergeShip_MMItems_SetTerminaArrowEquip(false);
                                 KaleidoScope_SetupItemEquip(play, cursorItem, cursorSlot,
                                                             pauseCtx->itemVtx[index].v.ob[0] * 10,
                                                             pauseCtx->itemVtx[index].v.ob[1] * 10);
@@ -1223,7 +1224,9 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
 
         if (D_8082A488 == 0) {
             pauseCtx->equipTargetItem -= MERGESHIP_MAGIC_ARROW_EQUIP_ITEM - ITEM_BOW_ARROW_FIRE; // MergeShip2: was 0xBF
-            if (!CVarGetInteger(CVAR_ENHANCEMENT("SeparateArrows"), 0)) {
+            if (MergeShip_MMItems_TerminaArrowEquip()) {
+                pauseCtx->equipTargetSlot = SLOT_NONE; // MergeShip2 (BUG-0148): the Termina page's arrow has none
+            } else if (!CVarGetInteger(CVAR_ENHANCEMENT("SeparateArrows"), 0)) {
                 pauseCtx->equipTargetSlot = SLOT_BOW;
             }
             sEquipMoveTimer = 6;
@@ -1311,10 +1314,42 @@ void KaleidoScope_UpdateItemEquip(PlayState* play) {
                         pauseCtx->equipTargetItem = ITEM_BOW_ARROW_LIGHT;
                         break;
                 }
-                if (!CVarGetInteger(CVAR_ENHANCEMENT("SeparateArrows"), 0)) {
+                if (MergeShip_MMItems_TerminaArrowEquip()) {
+                    pauseCtx->equipTargetSlot = SLOT_NONE; // MergeShip2 (BUG-0148): the Termina page's arrow has none
+                } else if (!CVarGetInteger(CVAR_ENHANCEMENT("SeparateArrows"), 0)) {
                     pauseCtx->equipTargetSlot = SLOT_BOW;
                 }
             }
+
+            // MergeShip2 (BUG-0148): the Termina items page's magic arrow lands with no slot. Ocarina of Time's slot swap
+            // below would hand every other slot-less button (MM's Hero's Bow, masks, the Termina page's items) the
+            // button's old item; only another of its own arrows (the same item, no slot) trades places with it.
+            if (MergeShip_MMItems_TerminaArrowEquip() && (pauseCtx->equipTargetSlot == SLOT_NONE) &&
+                (pauseCtx->equipTargetItem >= ITEM_BOW_ARROW_FIRE) && (pauseCtx->equipTargetItem <= ITEM_BOW_ARROW_LIGHT)) {
+                uint16_t target = pauseCtx->equipTargetCBtn + 1;
+
+                for (uint16_t other = 1; other < ARRAY_COUNT(gSaveContext.equips.buttonItems); other++) {
+                    if ((other == target) || (gSaveContext.equips.buttonItems[other] != pauseCtx->equipTargetItem) ||
+                        (gSaveContext.equips.cButtonSlots[other - 1] != SLOT_NONE)) {
+                        continue;
+                    }
+                    gSaveContext.equips.buttonItems[other] = gSaveContext.equips.buttonItems[target];
+                    gSaveContext.equips.cButtonSlots[other - 1] = gSaveContext.equips.cButtonSlots[target - 1];
+                    if (gSaveContext.equips.buttonItems[other] != ITEM_NONE) {
+                        Interface_LoadItemIcon2(play, other);
+                    }
+                }
+                gSaveContext.equips.buttonItems[target] = pauseCtx->equipTargetItem;
+                gSaveContext.equips.cButtonSlots[target - 1] = SLOT_NONE;
+                Interface_LoadItemIcon1(play, target);
+                MergeShip_MMItems_SetTerminaArrowEquip(false);
+                pauseCtx->unk_1E4 = 0;
+                sEquipMoveTimer = 10;
+                WREG(90) = 320;
+                WREG(87) = WREG(91);
+                return;
+            }
+            MergeShip_MMItems_SetTerminaArrowEquip(false);
 
             // MergeShip2: a transformation mask from the Masks page has no inventory slot; MM's swap rule.
             // The Termina items face's items (keg, Pictograph Box, trade items) have no inventory slot either.

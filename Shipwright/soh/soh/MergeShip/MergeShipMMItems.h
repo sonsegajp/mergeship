@@ -137,6 +137,11 @@ u8 MergeShip_MMItems_PageSlotItem(s16 slot);
 s16 MergeShip_MMItems_PageSlotOoTSlot(s16 slot);
 // True when the item is one this module gives a Termina-items slot (keg, box, trade items).
 s32 MergeShip_MMItems_IsPageItem(u8 item);
+// BUG-0148: a magic arrow being equipped from the Termina items page (set by its page before the equip animation,
+// cleared by Ocarina of Time's page and when it lands). It lands with no slot, so Ocarina of Time's slot swap leaves
+// every other button alone, and shoots from MM's Hero's Bow (MergeShip_MMEquip_ArrowButtonBowIsMM).
+void MergeShip_MMItems_SetTerminaArrowEquip(s32 on);
+s32 MergeShip_MMItems_TerminaArrowEquip(void);
 // Owns the item (a page item; bottle contents are in Ocarina of Time's bottle slots).
 s32 MergeShip_MMItems_Owns(u8 item);
 

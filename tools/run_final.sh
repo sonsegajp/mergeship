@@ -71,6 +71,19 @@ for name in ("shipofharkinian.json", "2ship2harkinian.json"):
     if os.environ.get("MS_MENU") != "1":
         for key in ("gOpenWindows", "gWindows"):
             data["CVars"].setdefault(key, {})["Menu"] = 0
+    # MS_CVARS_JSON='{"gTrackers": {...}}': settings merged into both games' CVars before the run (colours, layouts).
+    def merge(dst, src):
+        for k, v in src.items():
+            if isinstance(v, dict) and isinstance(dst.get(k), dict):
+                merge(dst[k], v)
+            else:
+                dst[k] = v
+    if os.environ.get("MS_CVARS_JSON"):
+        merge(data["CVars"], json.loads(os.environ["MS_CVARS_JSON"]))
+    # MS_OPEN_WINDOWS=ItemTracker,...: windows open from the start (a window reads its setting only when it is made).
+    for win in filter(None, os.environ.get("MS_OPEN_WINDOWS", "").split(",")):
+        for key in ("gOpenWindows", "gWindows"):
+            data["CVars"].setdefault(key, {})[win] = 1
     # A 1280x960 window (MS_WINDOW=WxH for another), so text and small models are readable in the recording.
     window = data.setdefault("Window", {})
     width, height = (int(v) for v in os.environ.get("MS_WINDOW", "1280x960").split("x"))

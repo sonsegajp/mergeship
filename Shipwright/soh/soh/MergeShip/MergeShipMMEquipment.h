@@ -116,6 +116,15 @@ void MergeShip_MMEquip_OnEquipmentDelete(s32 equipType, s32 equipValue);
 s8 MergeShip_MMEquip_ItemToItemAction(s32 item);
 // Player_UseItem: the Bow / Hookshot slot's version follows the item used (MM's from the Termina items page).
 void MergeShip_MMEquip_OnUseItem(s32 item);
+// BUG-0148/0160: Player_ProcessItemButtons -- the button whose item is being used (sItemButtons' order: B, the C
+// buttons, the D-pad), for the magic arrows' bow.
+void MergeShip_MMEquip_NoteItemButton(s32 button);
+// A magic arrow on `button` (ITEM_BOW_ARROW_FIRE .. LIGHT) shoots from MM's Hero's Bow: one from the Termina items page
+// (no inventory slot) when MM's bow is owned, or any one while it is the only bow owned. Ocarina of Time's Fairy Bow
+// otherwise.
+s32 MergeShip_MMEquip_ArrowButtonBowIsMM(s32 button);
+// Interface_DrawItemIconTexture: such a button shows MM's bow with the arrow (MM gItemIconBowFireTex ..).
+void* MergeShip_MMEquip_ArrowButtonIcon(s32 button, void* texture);
 
 // ---- age rules --------------------------------------------------------------------------------------------------
 // Ocarina of Time's Equipment page (z_kaleido_scope.h CHECK_AGE_REQ_EQUIP), which shows only Ocarina of Time's swords

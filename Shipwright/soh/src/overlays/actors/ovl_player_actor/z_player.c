@@ -3315,6 +3315,7 @@ void Player_ProcessItemButtons(Player* this, PlayState* play) {
 
         item = Player_GetItemOnButton(play, i);
         GameInteractor_Should(VB_OVERRIDE_BUTTON_ITEM_USED, true, &i, this, &item);
+        MergeShip_MMEquip_NoteItemButton(i); // MergeShip2 (BUG-0148/0160): a magic arrow's bow is its button's
 
         if ((i == 0) && MergeShip_MMMasks_UseBAction(play, this)) {
             // MergeShip2: MM Player_GetItemOnButton's ITEM_F0 / ITEM_F1 / ITEM_F2 -- B is the mask's, also with

@@ -2375,9 +2375,6 @@ void Play_Init(GameState* thisx) {
         gSaveContext.save.isNight = false;
     }
 
-    // MergeShip2: Termina's calendar before the scene's sky is built from it (the dark "day 4" sky).
-    MergeShipHost_CheckCalendar(this);
-
     func_800EDDB0(this);
 
     if (((gSaveContext.gameMode != GAMEMODE_NORMAL) && (gSaveContext.gameMode != GAMEMODE_TITLE_SCREEN)) ||

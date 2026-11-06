@@ -15,6 +15,31 @@ What it adds on top of the two ports:
 
 Every MergeShip feature is optional, from the **Mergeship** menu in either game.
 
+## Screenshots
+
+<table>
+<tr>
+<td width="50%"><img src="docs/screenshots/deku_kokiri_forest.jpg" alt="Deku Link in Kokiri Forest"><br><b>Deku Link</b> in Kokiri Forest. Majora's Mask's masks work in Ocarina of Time.</td>
+<td width="50%"><img src="docs/screenshots/goron_death_mountain.jpg" alt="Goron Link rolling on Death Mountain Trail"><br><b>Goron Link</b> rolling up Death Mountain Trail, past a Tektite.</td>
+</tr>
+<tr>
+<td><img src="docs/screenshots/zora_lake_hylia.jpg" alt="Zora Link swimming in Lake Hylia"><br><b>Zora Link</b> swimming through Lake Hylia.</td>
+<td><img src="docs/screenshots/fierce_deity_hyrule_field.jpg" alt="The Fierce Deity in Hyrule Field"><br><b>The Fierce Deity</b> in Hyrule Field.</td>
+</tr>
+<tr>
+<td><img src="docs/screenshots/young_link_clock_town.jpg" alt="Young Link in Clock Town with the Hylian Shield"><br><b>Into Termina</b> through the Lost Woods, with Hyrule's Hylian Shield on his back.</td>
+<td><img src="docs/screenshots/adult_link_clock_town.jpg" alt="Adult Link in Clock Town"><br><b>Adult Link in Termina</b>, with the Master Sword and the Hylian Shield.</td>
+</tr>
+<tr>
+<td><img src="docs/screenshots/item_tracker.jpg" alt="The item tracker with both worlds"><br><b>One item tracker</b> for both worlds: Hyrule's items on the left, Termina's on the right.</td>
+<td><img src="docs/screenshots/settings_menu.jpg" alt="Termina's settings in Ocarina of Time's menu"><br><b>One settings menu</b>: Termina's settings, opened from Ocarina of Time's menu.</td>
+</tr>
+<tr>
+<td><img src="docs/screenshots/ganondorf_clock_town.jpg" alt="Ganondorf in Clock Town"><br><b>A secret Ganondorf mode</b>, here in Clock Town.</td>
+<td></td>
+</tr>
+</table>
+
 **No game data is included.** You need your own Ocarina of Time and Majora's Mask ROMs. On its first run the game
 builds `oot.o2r` and `mm.o2r` from them.
 

@@ -22,6 +22,8 @@
 #include "soh/Enhancements/custom-message/CustomMessageManager.h"
 #include "soh/Enhancements/item-tables/ItemTableManager.h"
 #include "soh/ShipInit.hpp"
+#include <mergeship/SharedSave.h>           // BUG-0153: chateauMagic
+#include "soh/MergeShip/MergeShipHost.h"    // MergeShipHost_SharedSave
 
 extern "C" {
 #include <z64.h>
@@ -77,6 +79,12 @@ void OnLoadGame(int32_t fileNum) {
     RegisterChateauGetItem();
     // MM: WEEKEVENTREG_DRANK_CHATEAU_ROMANI belongs to the cycle; here, to the play session (MergeShipChateau.h).
     MergeShip_Chateau_Reset();
+    // BUG-0153: in mergeship.exe, as the shared save holds it (Termina's cycle may still have it). The shared save's
+    // own apply (MergeShipHost.cpp's load hook) sets the same; this hook may come after it.
+    const MsSharedSave* shared = static_cast<const MsSharedSave*>(MergeShipHost_SharedSave());
+    if ((shared != nullptr) && (shared->lastWriter != 0) && (shared->chateauMagic & MS_CHATEAU_VALID)) {
+        MergeShip_Chateau_SetDrunk((shared->chateauMagic & MS_CHATEAU_ACTIVE) != 0);
+    }
 }
 
 void OnExitGame(int32_t fileNum) {

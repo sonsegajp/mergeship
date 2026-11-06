@@ -690,6 +690,9 @@ extern "C" void MergeShipShared_Capture(MsSharedSave* shared) {
     shared->doubleDefense = Max(shared->doubleDefense, player.doubleDefense ? 1 : 0);
     shared->magicLevel = Max(shared->magicLevel, player.isMagicAcquired ? (player.isDoubleMagicAcquired ? 2 : 1) : 0);
     shared->magicAmount = (u8)player.magic;
+    // BUG-0153: Chateau Romani's endless magic, one status for both games
+    shared->chateauMagic =
+        MS_CHATEAU_VALID | (CHECK_WEEKEVENTREG(WEEKEVENTREG_DRANK_CHATEAU_ROMANI) ? MS_CHATEAU_ACTIVE : 0);
     shared->rupees = (u16)player.rupees;
     shared->walletLevel = Max(shared->walletLevel, (u8)CUR_UPG_VALUE(UPG_WALLET));
     // The bank's balance, with the rupees (SharedSave.h bankRupees, BUG-0030).
@@ -900,6 +903,13 @@ extern "C" void MergeShipShared_Apply(const MsSharedSave* shared, int flags) {
     // The magic in it only fills a meter Link owns (Hyrule's, carried above, or MM's own Great Fairy's): Termina never
     // gets a meter by itself (a new MM file has none, MergeShipHost.cpp).
     player.magic = player.isMagicAcquired ? (s8)shared->magicAmount : 0;
+    if (shared->chateauMagic & MS_CHATEAU_VALID) { // BUG-0153
+        if (shared->chateauMagic & MS_CHATEAU_ACTIVE) {
+            SET_WEEKEVENTREG(WEEKEVENTREG_DRANK_CHATEAU_ROMANI);
+        } else {
+            CLEAR_WEEKEVENTREG(WEEKEVENTREG_DRANK_CHATEAU_ROMANI);
+        }
+    }
     RaiseUpgrade(UPG_WALLET, (shared->walletLevel > 2) ? 2 : shared->walletLevel);
     player.rupees = (s16)((shared->rupees > CUR_CAPACITY(UPG_WALLET)) ? CUR_CAPACITY(UPG_WALLET) : shared->rupees);
     if (shared->bankValid) {

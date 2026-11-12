@@ -474,12 +474,15 @@ void GenerateItemPool() {
     // Deku Princess, the Seahorse, a Zora Egg -- comes with Spring Water instead: Termina already has each of them
     // where MM puts it, and a second one from the pool was a duplicate (the user, 2026-09-30: "Stuff like deku
     // princess absolutely should not do that"). Seeds made before this still hold them; the delivery gives an empty
-    // bottle when the world already has its one (MsDelivery_BottleOnePerWorld).
+    // bottle when the world already has its one (MsDelivery_BottleOnePerWorld). The Hylian Loach is unused in MM (no
+    // check holds it, nothing takes it, its texts are empty), so its bottle comes with Spring Water too (the user,
+    // 2026-11-12: "it shows up in MM and its unused").
     if (ctx->GetOption(RSK_SHUFFLE_MM_ITEMS)) {
         for (int rg = RG_MM_POWDER_KEG; rg <= RG_MM_PENDANT_OF_MEMORIES; rg++) {
             const bool story = (rg == RG_MM_BOTTLE_WITH_DEKU_PRINCESS) || (rg == RG_MM_BOTTLE_WITH_SEAHORSE) ||
                                (rg == RG_MM_BOTTLE_WITH_ZORA_EGG);
-            AddItemToPool(story ? RG_MM_BOTTLE_WITH_SPRING_WATER : static_cast<RandomizerGet>(rg), 1, 1, 1, 1);
+            const bool unused = (rg == RG_MM_BOTTLE_WITH_HYLIAN_LOACH);
+            AddItemToPool((story || unused) ? RG_MM_BOTTLE_WITH_SPRING_WATER : static_cast<RandomizerGet>(rg), 1, 1, 1, 1);
         }
     }
     // MergeShip2: Majora's Mask's songs (the Progressive Goron Lullaby twice: Intro, then full), the four remains and

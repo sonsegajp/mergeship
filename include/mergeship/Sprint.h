@@ -8,8 +8,8 @@
  *   - a jump keeps the sprint's speed and the sprint goes on after landing, while A and the stick stay held (the user:
  *     "have it remain after jumps"): Hyrule's air control would cut the speed to the run's limit (MsSprint_CarriesJump);
  *   - the pose (applied as each limb is drawn, after the animation is final, during the run animations only): the
- *     upper body leans forward from the hips with the head kept up, the arms and legs swing wider around the run's
- *     average pose, the elbows bend more.
+ *     upper body leans forward from the hips with the head up (facing forward, as in the other animations), the
+ *     arms and legs swing wider around the run's average pose, the elbows bend more.
  * Both games play the same run animations (mm.o2r's are byte-identical to oot.o2r's), so the run's average pose is one
  * table for both (kMsSprintMeans, measured from the archives).
  * Pure C, header-only: each engine includes it from its player code.
@@ -29,7 +29,7 @@
 typedef struct MsSprintParams {
     float speed;  /* run speed factor */
     float lean;   /* the upper body's forward lean, degrees */
-    float head;   /* how much of the lean the head takes back (0..1) */
+    float head;   /* how much of the lean the head takes back (1 = all of it; above 1 it looks up past the run) */
     float arms;   /* arm swing factor around the run's average */
     float stride; /* leg swing factor around the run's average */
     float elbowL; /* degrees added to the left elbow's bend */
@@ -38,7 +38,11 @@ typedef struct MsSprintParams {
 } MsSprintParams;
 
 #define MS_SPRINT_DEFAULT_LEAN 24.0f
-#define MS_SPRINT_DEFAULT_HEAD 0.6f
+/* The head takes back more than the lean: the run itself looks down and forward, so taking back just the lean (1.0)
+ * still read as looking down; at 1.6 the face looks straight ahead as in the other animations (the user,
+ * 2026-11-12: "make sure link doesnt tilt his head down ... facing up/forward like other anims"; judged from
+ * renders of the pose at 0.6, 1.0, 1.6 and 2.2 -- 2.2 looks up at the sky). */
+#define MS_SPRINT_DEFAULT_HEAD 1.6f
 #define MS_SPRINT_DEFAULT_ARMS 1.7f
 #define MS_SPRINT_DEFAULT_STRIDE 1.45f
 #define MS_SPRINT_DEFAULT_ELBOW_L -50.0f

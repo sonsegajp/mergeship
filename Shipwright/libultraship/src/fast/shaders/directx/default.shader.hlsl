@@ -187,6 +187,13 @@ PSInput VSMain(
 #define MOD(x, y) ((x) - (y) * floor((x)/(y)))
 #define WRAP(x, low, high) MOD((x)-(low), (high)-(low)) + (low)
 
+// MergeShip2 render styles (RenderStyle in interpreter.h)
+@if(o_dither)
+    // 4x4 ordered dither threshold in [0, 1)
+    float msBayer2(float2 a) { a = floor(a); return frac(a.x / 2.0 + a.y * a.y * 0.75); }
+    float msBayer4(float2 a) { return msBayer2(0.5 * a) * 0.25 + msBayer2(a); }
+@end
+
 struct PSOutput {
     float4 color : SV_TARGET;
     @if(o_prim_depth)
@@ -195,6 +202,23 @@ struct PSOutput {
 };
 
 PSOutput PSMain(PSInput input, float4 screenSpace : SV_Position) {
+    @if(o_toon)
+        // MergeShip2 toon style: the vertex shade in four flat bands (its hue kept)
+        {
+            float msLight = max(input.input@{o_shade_slot}.r, max(input.input@{o_shade_slot}.g, input.input@{o_shade_slot}.b));
+            @if(o_style == 14)
+                // (a surface whose light is painted into its vertex colours, the rooms: finer bands, soft edges)
+                float msStep = msLight * 6.0;
+                float msEdge = 0.2;
+                float msBand = max((floor(msStep) + smoothstep(0.5 - msEdge, 0.5 + msEdge, frac(msStep))) / 6.0, 0.08);
+            @else
+                float msStep = msLight * 4.0;
+                float msEdge = fwidth(msStep) * 0.75 + 0.0001;
+                float msBand = max((floor(msStep) + smoothstep(0.5 - msEdge, 0.5 + msEdge, frac(msStep))) / 4.0, 0.125);
+            @end
+            input.input@{o_shade_slot}.rgb *= msBand / max(msLight, 0.0001);
+        }
+    @end
     @for(i in 0..2)
         @if(o_textures[i])
             float2 tc@{i} = input.uv@{i};
@@ -317,6 +341,70 @@ PSOutput PSMain(PSInput input, float4 screenSpace : SV_Position) {
         float intensity = (texel.r + texel.g + texel.b) / 3.0;
         float3 new_texel = input.grayscale.rgb * intensity;
         texel.rgb = lerp(texel.rgb, new_texel, input.grayscale.a);
+    @end
+
+    // MergeShip2 render styles: the colour filters, on the finished colour
+    @if(o_style == 5)
+        texel.rgb = floor(texel.rgb * 31.0 + msBayer4(screenSpace.xy)) / 31.0;
+    @end
+    @if(o_style == 6)
+        {
+            // an 8-bit console's palette: twelve hues, grey or coloured, in six steps of brightness
+            float msV = max(texel.r, max(texel.g, texel.b));
+            float msD = msV - min(texel.r, min(texel.g, texel.b));
+            float msS = msD / max(msV, 0.25);
+            float msH = 0.0;
+            if (msD > 0.0001) {
+                if (msV == texel.r) {
+                    msH = (texel.g - texel.b) / msD;
+                } else if (msV == texel.g) {
+                    msH = 2.0 + (texel.b - texel.r) / msD;
+                } else {
+                    msH = 4.0 + (texel.r - texel.g) / msD;
+                }
+                msH = frac(msH / 6.0);
+            }
+            msH = floor(msH * 12.0 + 0.5) / 12.0;
+            msS = msS < 0.2 ? 0.0 : (msS < 0.55 ? 0.5 : 0.9);
+            msV = min(floor(sqrt(msV) * 5.0 + 0.35 + 0.3 * msBayer4(screenSpace.xy)) / 5.0, 1.0);
+            msV = msV * msV;
+            float3 msK = saturate(abs(frac(float3(msH, msH, msH) + float3(1.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0);
+            texel.rgb = msV * lerp(float3(1.0, 1.0, 1.0), msK, msS);
+        }
+    @end
+    @if(o_style == 8)
+        texel.rgb = dot(texel.rgb, float3(0.299, 0.587, 0.114)).xxx;
+    @end
+    @if(o_style == 9)
+        texel.rgb = min(float3(dot(texel.rgb, float3(0.393, 0.769, 0.189)), dot(texel.rgb, float3(0.349, 0.686, 0.168)),
+                               dot(texel.rgb, float3(0.272, 0.534, 0.131))), float3(1.0, 1.0, 1.0));
+    @end
+    @if(o_style == 10)
+        texel.rgb = float3(1.0, 1.0, 1.0) - texel.rgb;
+    @end
+    @if(o_style == 11)
+        {
+            float msL = dot(texel.rgb, float3(0.299, 0.587, 0.114));
+            texel.rgb = float3(0.10, 1.0, 0.20) * min(msL * 1.5 + 0.04, 1.0) *
+                        (0.82 + 0.18 * step(1.0, MOD(screenSpace.y, 2.0)));
+        }
+    @end
+    @if(o_style == 12)
+        {
+            float msT = dot(texel.rgb, float3(0.299, 0.587, 0.114)) * 4.0;
+            float3 msC = lerp(float3(0.0, 0.0, 0.2), float3(0.25, 0.0, 0.8), saturate(msT));
+            msC = lerp(msC, float3(0.9, 0.1, 0.25), saturate(msT - 1.0));
+            msC = lerp(msC, float3(1.0, 0.8, 0.0), saturate(msT - 2.0));
+            texel.rgb = lerp(msC, float3(1.0, 1.0, 1.0), saturate(msT - 3.0));
+        }
+    @end
+    @if(o_style == 13)
+        {
+            float msQ = floor(dot(texel.rgb, float3(0.299, 0.587, 0.114)) * 3.0 + msBayer4(screenSpace.xy));
+            float3 msC = lerp(float3(0.06, 0.22, 0.06), float3(0.19, 0.38, 0.19), saturate(msQ));
+            msC = lerp(msC, float3(0.55, 0.67, 0.06), saturate(msQ - 1.0));
+            texel.rgb = lerp(msC, float3(0.61, 0.74, 0.06), saturate(msQ - 2.0));
+        }
     @end
 
     @if(o_alpha && o_noise)

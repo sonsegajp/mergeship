@@ -88,6 +88,30 @@ enum class ShaderOpts {
 #define SHADER_OPT(opt) ((uint64_t)(1 << static_cast<int>(ShaderOpts::opt)))
 #endif
 
+// MergeShip2 render styles (console variable gMergeShip.RenderStyle). A draw's style is part of its shader key:
+// bits 36-39 of the options word, and in bits 40-42 the colour input that carries the vertex shade, for the styles
+// that band it. Toon, flat and faceted change how the world is shaded and are left off screen rectangles and
+// anything drawn without a depth test (text, HUD, menus); the others are colour filters over everything drawn.
+#define RENDER_STYLE_SHIFT 36
+#define RENDER_STYLE_SHADE_SHIFT 40
+enum RenderStyle {
+    RENDER_STYLE_NONE,
+    RENDER_STYLE_TOON,         // the vertex shade in flat bands
+    RENDER_STYLE_FLAT,         // every texture as its average colour
+    RENDER_STYLE_TOON_FLAT,    // both
+    RENDER_STYLE_FACETED,      // one shade per triangle
+    RENDER_STYLE_16BIT,        // 5 bits a channel with an ordered dither
+    RENDER_STYLE_8BIT,         // 3-3-2 bits with an ordered dither
+    RENDER_STYLE_POSTERIZE,
+    RENDER_STYLE_GRAYSCALE,
+    RENDER_STYLE_SEPIA,
+    RENDER_STYLE_NEGATIVE,
+    RENDER_STYLE_NIGHT_VISION,
+    RENDER_STYLE_THERMAL,
+    RENDER_STYLE_GAME_BOY,
+    RENDER_STYLE_COUNT
+};
+
 struct ColorCombinerKey {
     uint64_t combine_mode;
     uint64_t options;
@@ -124,6 +148,9 @@ struct CCFeatures {
     bool do_mix[2][2];
     bool color_alpha_same[2];
     int16_t shader_id;
+    // MergeShip2 (appended): the draw's render style, and which colour input is the vertex shade (0: none)
+    int render_style;
+    int shade_slot;
 };
 
 void gfx_cc_get_features(uint64_t shader_id0, uint64_t shader_id1, struct CCFeatures* cc_features);
@@ -220,6 +247,7 @@ struct LoadedVertex {
     float u, v;
     struct RGBA color;
     uint8_t clip_rej;
+    uint8_t alpha; // the vertex's own alpha (color.a holds the fog factor while fog is on)
 };
 
 struct RawTexMetadata {
@@ -319,6 +347,10 @@ struct RDP {
     bool viewport_or_scissor_changed;
     void* z_buf_address;
     void* color_image_address;
+
+    // MergeShip2: G_SETBLENDMODE_EX (0 = the N64 blender) and its blend constant
+    uint32_t blend_ex_mode;
+    struct RGBA blend_ex_color;
 };
 
 typedef enum Attribute {
@@ -561,6 +593,42 @@ class Interpreter {
     // 0 = previous tick, 1 = current tick. Set by the port before each
     // DrawAndRunGraphicsCommands call, like mInterpolationIndex.
     float mInterpolationT = 1.0f;
+
+    // MergeShip2 additions. Everything new goes below this line (and at the end of RDP, which this library alone
+    // allocates), so that no existing member moves and a game module built before them still runs against this
+    // library.
+    uint32_t mBlendExModeActive = 0; // G_SETBLENDMODE_EX the backend currently has (0 = the N64 blender)
+    struct RGBA mBlendExColorActive {};
+    // Render style (G_RENDERSTYLE_* in lus_gbi.h) of this frame, from the console variable gRenderStyle, and whether
+    // the triangle being drawn is a screen rectangle (those keep their own look: text, HUD, backgrounds).
+    uint32_t mRenderStyle = 0;
+    bool mDrawingRectangle = false;
+    bool mFlattenUpload = false; // textures are being imported as their average colour (the flat styles)
+    void UploadTextureStyled(const uint8_t* rgba32Buf, uint32_t width, uint32_t height);
+
+    // Real-time shadows (interpreter.cpp, "MergeShip2 real-time shadows"). While mShadowPass is set the display list
+    // is being run a first time, as the light sees the world: only what writes depth in the world's own view is
+    // drawn, into mShadowFb, through mShadowLight in place of the camera.
+    bool mShadowPass = false;
+    bool mShadowWorld = false;  // (in that pass) the projection in effect is a view of the world
+    bool mShadowDrawn = false;  // this frame's pass was run: G_REGS_EX 8 may darken by it
+    bool mShadowArmed = false;  // the last frame asked for shadows (G_REGS_EX 8 ran): the next one runs the pass
+    int mShadowFb = -1;
+    float mShadowLight[4][4]{}; // the world into the light's view
+    float mShadowDir[3]{};      // the way to the light
+    float mShadowParams[4]{};   // GfxRenderingAPI::ApplyShadows's
+    bool ShadowLightFromGame();
+    void RunShadowPass(Gfx* commands, const std::unordered_map<Mtx*, MtxF>& mtx_replacements);
+    void ShadowMatrix();
+    void ApplyShadows();
+
+    // The finished picture's glow and look (interpreter.cpp, "MergeShip2 the picture's look"): G_REGS_EX 13 keeps
+    // the world's camera while it is in effect, G_REGS_EX 12 runs the pass over what has been drawn by then.
+    float mWorldInverse[4][4]{}; // a point of the picture back into the world (GfxRenderingAPI::ApplyPost's)
+    int mWorldViewport[4]{};
+    bool mWorldKept = false; // this frame's (it is forgotten when a frame starts)
+    void KeepWorldCamera();
+    void ApplyPost(const float* params);
 };
 
 void gfx_set_target_ucode(UcodeHandlers ucode);

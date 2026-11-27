@@ -200,6 +200,8 @@ const char* MergeShip_OoTEquip_Name(u8 item);
 #define MS_OOTEQ_DL_STRIP_SHEATH (1 << 1) // drop the triangles textured as a scabbard
 #define MS_OOTEQ_DL_REMAP_0D (1 << 2)     // matrices loaded from segment 0x0D are loaded from segment 0x0E instead
 Gfx* MergeShip_OoTEquip_RewriteDL(const char* path, u32 flags);
+// BUG-0164: a copy keeping only the triangles drawn with the texture named (part of its name) loaded; NULL without any.
+Gfx* MergeShip_OoTEquip_KeepTextureDL(const char* path, const char* keep);
 // A copy of the list at `path` ending where the texture named `texture` starts being loaded (include/mergeship/DlCut.hpp);
 // NULL when it has none.
 Gfx* MergeShip_OoTEquip_CutDLBeforeTexture(const char* path, const char* texture);

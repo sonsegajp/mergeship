@@ -8,6 +8,8 @@
 #include "soh/OTRGlobals.h"
 #include "soh/Enhancements/savestate_serialize.h"
 
+s32 Play_MergeShipLampsOn(void); // (z_play.c)
+
 #define LIGHTS_BUFFER_SIZE 32
 //#define LIGHTS_BUFFER_SIZE 1024 // Kill me
 
@@ -110,6 +112,12 @@ void Lights_BindPoint(Lights* lights, LightParams* params, Vec3f* vec) {
     f32 posDiff;
     f32 scale;
     Light* light;
+
+    // MergeShip2, "Real Light Sources": the pass over the screen lights a character by the lamps as it does the
+    // walls about him (z_play.c); with the game's own light from them as well he would be lit twice.
+    if (Play_MergeShipLampsOn()) {
+        return;
+    }
 
     if (vec != NULL) {
         xDiff = params->point.x - vec->x;

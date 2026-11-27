@@ -250,12 +250,14 @@ void TracePlayer() {
         return;
     }
     Log("P scene=%d room=%d entrance=0x%X form=%d pos=(%.1f,%.1f,%.1f) yaw=%d spd=%.2f s1=%08X s2=%08X hp=%d/%d "
-        "rupees=%d day=%d time=0x%04X door=%s",
+        "rupees=%d day=%d time=0x%04X door=%s cs=%d/%d csAct=%d msg=%d/0x%X trans=%d",
         gPlayState->sceneId, gPlayState->roomCtx.curRoom.num, gSaveContext.save.entrance, gSaveContext.save.playerForm,
         p->actor.world.pos.x, p->actor.world.pos.y, p->actor.world.pos.z, p->actor.shape.rot.y, p->speedXZ,
         p->stateFlags1, p->stateFlags2, gSaveContext.save.saveInfo.playerData.health,
         gSaveContext.save.saveInfo.playerData.healthCapacity, gSaveContext.save.saveInfo.playerData.rupees,
-        gSaveContext.save.day, gSaveContext.save.time, MergeShipHost_DoorState());
+        gSaveContext.save.day, gSaveContext.save.time, MergeShipHost_DoorState(), gPlayState->csCtx.state,
+        CutsceneManager_GetCurrentCsId(), p->csAction, gPlayState->msgCtx.msgMode, gPlayState->msgCtx.currentTextId,
+        gPlayState->transitionTrigger);
 }
 
 void LogInventory() {

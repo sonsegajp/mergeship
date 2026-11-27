@@ -99,6 +99,8 @@ if [ "$ENGINE" = "2ship" ]; then
     export MERGESHIP_TEST_SCRIPT_MM="$W/script.txt"
 else
     export MERGESHIP_TEST_SCRIPT_SOH="$W/script.txt"
+    # A test that crosses to Termina: 2Ship's side of it (as tools/test_host.ps1 passes it).
+    [ -f "$T/script_2ship.txt" ] && export MERGESHIP_TEST_SCRIPT_2SHIP="$W/script_2ship.txt"
 fi
 echo "running $NAME on mergeship.exe (first engine $ENGINE, ${TO}s), recording every frame"
 timeout $TO ./mergeship.exe --engine $ENGINE --muted --record "$W/frames.mp4" > /dev/null 2>&1 &
@@ -107,7 +109,9 @@ GAME=$!
 while kill -0 $GAME 2>/dev/null; do
     if ls logs/*crash.dmp > /dev/null 2>&1; then
         sleep 5
-        taskkill //IM mergeship.exe //F > /dev/null 2>&1
+        # (only this run's own game, by the folder its exe runs from: never the player's)
+        # (MS_RUN names another private copy when several runs go side by side: each ends only its own game)
+        powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter \"Name='mergeship.exe'\" | Where-Object { \$_.ExecutablePath -like '*\\$(basename $RUN)\\mergeship.exe' } | ForEach-Object { Stop-Process -Id \$_.ProcessId -Force }" > /dev/null 2>&1
         echo "crash dump written; game ended"
         break
     fi
@@ -116,8 +120,9 @@ done
 wait $GAME
 echo "exit=$?"
 # ffmpeg finishes the video once the game's pipe closes.
+# (only this run's ffmpeg, by the recording it writes: another run's may be going beside it)
 for i in $(seq 1 60); do
-    tasklist 2>/dev/null | grep -qi "^ffmpeg.exe" || break
+    powershell -NoProfile -Command "if (Get-CimInstance Win32_Process -Filter \"Name='ffmpeg.exe'\" | Where-Object { \$_.CommandLine -like '*$NAME?frames.mp4*' }) { exit 1 }" > /dev/null 2>&1 && break
     sleep 1
 done
 

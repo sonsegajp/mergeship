@@ -69,6 +69,7 @@ typedef enum {
     MSEQ_FIT_FOOT_R,
     MSEQ_FIT_ARM,
     MSEQ_FIT_NONE,
+    MSEQ_FIT_BOW_FP,
     MSEQ_FIT_MAX
 } MsEqFitId;
 
@@ -92,6 +93,8 @@ static const MsEqFit sFits[MSEQ_FIT_MAX] = {
     // The adult's fist is 679 long against the child's 499.
     { "Arm", { 0.0f, 0.0f, 0.0f, 0.74f, 0.74f, 0.74f } },
     { "None", { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f } },
+    // BUG-0164: Hyrule's Fairy Bow in MM's first-person hand (the hand of MM's own first-person bow list).
+    { "BowFP", { 0.0f, 0.0f, 0.0f, 0.8f, 0.8f, 0.8f } },
 };
 
 static void MsEq_GetFit(s32 fit, f32* out) {
@@ -197,6 +200,15 @@ s32 MergeShip_OoTEquip_HylianHunch(Player* player) {
 }
 
 Gfx* MergeShip_OoTEquip_FairyBowFirstPersonDL(PlayState* play) {
+    // BUG-0164: young Link's own first-person hand (MM sPlayerFirstPersonRightHandDLs' human list, object_link_child_DL_018490,
+    // without its Hero's Bow), not his third-person fist, which showed in first person as a flat slab.
+    Gfx* hand = MergeShip_OoTEquip_KeepTextureDL(
+        object_link_child_DL_018490, CVarGetString("gMergeShip.BowFPHandTexture", "object_link_child_Tex_019240"));
+
+    if (hand != NULL) {
+        return MsEq_Compose(play, (const char*)hand, sAdultHandBowFirstPersonDL, MS_OOTEQ_DL_STRIP_HAND,
+                            MSEQ_FIT_BOW_FP);
+    }
     return MsEq_Compose(play, gLinkHumanRightHandClosedDL, sAdultHandBowFirstPersonDL, MS_OOTEQ_DL_STRIP_HAND,
                         MSEQ_FIT_HAND_R);
 }

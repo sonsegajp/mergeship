@@ -1,4 +1,5 @@
 #include "soh/MergeShip/MergeShipGanondorf.h"
+#include "soh/MergeShip/MergeShipPort3ds.h"
 #include "global.h"
 #include "vt.h"
 
@@ -88,6 +89,10 @@ s32 MergeShip_GiantsMask_PlayPlayerSfx(Actor* actor, u16 sfxId);
 #include "textures/place_title_cards/g_pn_56.h"
 #include "textures/place_title_cards/g_pn_57.h"
 #endif
+
+s32 MergeShipTest_ActorsFrozen(s32 category); // MergeShip2: test harness (soh/MergeShip/MergeShipTest.cpp)
+void MergeShipTest_DrawingActor(Actor* actor); // ... the actor whose draw function runs (null: none)
+s32 MergeShipTest_Clean(void);                 // ... 1 while a script wants nothing but the scene in the picture
 
 static CollisionPoly* sCurCeilingPoly;
 static s32 sCurCeilingBgId;
@@ -447,6 +452,9 @@ void Attention_Init(TargetContext* targetCtx, Actor* actor, PlayState* play) {
 }
 
 void Attention_Draw(TargetContext* targetCtx, PlayState* play) {
+    if (MergeShipTest_Clean()) {
+        return; // MergeShip2: the test harness photographs an actor without the target arrow over it
+    }
     Actor* actor = targetCtx->targetedActor;
 
     OPEN_DISPS(play->state.gfxCtx);
@@ -1137,7 +1145,7 @@ void TitleCard_Draw(PlayState* play, TitleCardContext* titleCtx) {
     s32 doubleWidth;
     s32 titleY;
 
-    if (titleCtx->alpha != 0) {
+    if (titleCtx->alpha != 0 && !MergeShipTest_Clean()) { // MergeShip2: the test harness's pictures: no place name
         width = titleCtx->width;
         height = titleCtx->height;
         s16 TitleCard_PosX_Modifier = titleCtx->isBossCard ? CVarGetInteger(CVAR_COSMETIC("HUD.TitleCard.Boss.PosX"), 0)
@@ -2699,7 +2707,8 @@ void Actor_UpdateAll(PlayState* play, ActorContext* actorCtx) {
             } else if (!Object_IsLoaded(&play->objectCtx, actor->objBankIndex)) {
                 Actor_Kill(actor);
                 actor = actor->next;
-            } else if ((unkFlag && !(actor->flags & unkFlag)) ||
+            } else if (MergeShipTest_ActorsFrozen(i) || // MergeShip2: the test harness holds the actors still
+                       (unkFlag && !(actor->flags & unkFlag)) ||
                        (!unkFlag && unkCondition && (sp74 != actor) && (actor != player->naviActor) &&
                         (actor != player->heldActor) && (&player->actor != actor->parent))) {
                 CollisionCheck_ResetDamage(&actor->colChkInfo);
@@ -2849,7 +2858,9 @@ void Actor_Draw(PlayState* play, Actor* actor) {
         }
     }
 
+    MergeShipTest_DrawingActor(actor);
     actor->draw(actor, play);
+    MergeShipTest_DrawingActor(NULL);
     MergeShip_MMMasks_NpcDanceEnd(); // MergeShip2: the dance partner's limbs are drawn
 
     if (actor->colorFilterTimer != 0) {
@@ -2860,7 +2871,8 @@ void Actor_Draw(PlayState* play, Actor* actor) {
         }
     }
 
-    if (actor->shape.shadowDraw != NULL) {
+    // MergeShip2 real-time shadows (z_play.c): with those drawn, the round shadow under an actor is left out
+    if (actor->shape.shadowDraw != NULL && !Play_MergeShipShadowsOn()) {
         actor->shape.shadowDraw(actor, lights, play);
     }
 

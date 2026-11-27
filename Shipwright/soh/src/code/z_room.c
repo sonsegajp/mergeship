@@ -5,6 +5,7 @@
 #include "global.h"
 #include "vt.h"
 #include "soh/MergeShip/MergeShip3dsSkin.h"
+#include "soh/MergeShip/MergeShipPort3ds.h"
 #include "soh/Enhancements/game-interactor/GameInteractor_Hooks.h"
 #include <string.h>
 #include <assert.h>
@@ -632,12 +633,115 @@ s32 func_800973FC(PlayState* play, RoomContext* roomCtx) {
     return 1;
 }
 
+// MergeShip2 (MergeShipPort3ds.h): a room the Ocarina of Time 3D pack holds is drawn from the pack's two lists, with
+// the state Room Draw Polygon Type 0 sets up. The 3DS room is one model, so nothing is culled or sorted per part.
+//
+// Each material in the lists carries its own shader (the 3DS game's texture combiner for that material) and blend.
+// The ambient light those shaders take is the key colour's centre, which segment 0x08 sets at the top of each list.
+static Gfx* Room_Port3dsLight(GraphicsContext* gfxCtx, EnvLightSettings* light) {
+    Gfx* list = Graph_Alloc(gfxCtx, 3 * sizeof(Gfx));
+    Gfx* gfx = list;
+
+    gDPSetKeyR(gfx++, light->ambientColor[0], 0, 0);
+    gDPSetKeyGB(gfx++, light->ambientColor[1], 0, 0, light->ambientColor[2], 0, 0);
+    gSPEndDisplayList(gfx++);
+    return list;
+}
+
+static s32 Room_DrawPort3ds(PlayState* play, Room* room, u32 flags) {
+    // MergeShip2 (the "Grass Moves in the Wind" option; libultraship G_REGS_EX 10, SwayEx): the room's own plants
+    // stand in the renderer's wind. {how far a plant's top moves; under 0: by the weights the pack gives the room's
+    // vertices (tools/port3ds/review/sway_pack.py)}
+    static const f32 sRoomWind[4] = { 3.6f, -1.0f, 0.0f, 0.0f };
+    s32 wind = CVarGetInteger("gMergeShip.GrassWind", 0);
+    Gfx* opa = NULL;
+    Gfx* xlu = NULL;
+    void* handle = NULL;
+    EnvLightSettings light;
+    Gfx* lightList;
+    s32 i;
+
+    if (!MergeShipPort3ds_RoomLists(play, room, &opa, &xlu, &handle)) {
+        return false;
+    }
+    if (room == &play->roomCtx.curRoom) {
+        MergeShipPort3ds_SetRoomDrawn(true);
+    }
+
+    // The scene's 3DS light of this frame (Room_Draw works it out); without one, the game's light.
+    if (!MergeShipPort3ds_SceneLight(&light)) {
+        for (i = 0; i < 3; i++) {
+            light.ambientColor[i] = play->lightCtx.ambientColor[i];
+            light.light1Color[i] = play->envCtx.dirLight1.params.dir.color[i];
+            light.light2Color[i] = play->envCtx.dirLight2.params.dir.color[i];
+            light.light1Dir[i] = play->envCtx.lightSettings.light1Dir[i];
+            light.light2Dir[i] = play->envCtx.lightSettings.light2Dir[i];
+        }
+    }
+    MergeShipPort3ds_RelightRoom(handle, &light);
+    lightList = Room_Port3dsLight(play->state.gfxCtx, &light);
+
+    OPEN_DISPS(play->state.gfxCtx);
+
+    if (flags & 1) {
+        func_800342EC(&D_801270A0, play);
+        gSPSegment(POLY_OPA_DISP++, 0x03, room->segment);
+        func_80093C80(play);
+        gSPMatrix(POLY_OPA_DISP++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPSegment(POLY_OPA_DISP++, 0x08, lightList);
+        if (opa != NULL) {
+            if (wind) {
+                POLY_OPA_DISP->words.w0 = (0x4Fu << 24) | (10u << 16);
+                POLY_OPA_DISP->words.w1 = (uintptr_t)sRoomWind;
+                POLY_OPA_DISP++;
+            }
+            gSPDisplayList(POLY_OPA_DISP++, opa);
+            if (wind) {
+                POLY_OPA_DISP->words.w0 = (0x4Fu << 24) | (10u << 16);
+                POLY_OPA_DISP->words.w1 = 0;
+                POLY_OPA_DISP++;
+            }
+        }
+    }
+
+    if (flags & 2) {
+        func_8003435C(&D_801270A0, play);
+        gSPSegment(POLY_XLU_DISP++, 0x03, room->segment);
+        Gfx_SetupDL_25Xlu(play->state.gfxCtx);
+        gSPMatrix(POLY_XLU_DISP++, &gMtxClear, G_MTX_MODELVIEW | G_MTX_LOAD);
+        gSPSegment(POLY_XLU_DISP++, 0x08, lightList);
+        if (xlu != NULL) {
+            if (wind) {
+                POLY_XLU_DISP->words.w0 = (0x4Fu << 24) | (10u << 16);
+                POLY_XLU_DISP->words.w1 = (uintptr_t)sRoomWind;
+                POLY_XLU_DISP++;
+            }
+            gSPDisplayList(POLY_XLU_DISP++, xlu);
+            if (wind) {
+                POLY_XLU_DISP->words.w0 = (0x4Fu << 24) | (10u << 16);
+                POLY_XLU_DISP->words.w1 = 0;
+                POLY_XLU_DISP++;
+            }
+        }
+    }
+
+    CLOSE_DISPS(play->state.gfxCtx);
+    return true;
+}
+
 void Room_Draw(PlayState* play, Room* room, u32 flags) {
 #if MERGESHIP_OOT3D
     MergeShip3dsScroll_Update(play->gameplayFrames);
 #endif
+    if (room == &play->roomCtx.curRoom) {
+        MergeShipPort3ds_SetRoomDrawn(false);
+        MergeShipPort3ds_UpdateSceneLight(play, room);
+    }
     if (room->segment != NULL) {
         gSegments[3] = VIRTUAL_TO_PHYSICAL(room->segment);
+        if (Room_DrawPort3ds(play, room, flags)) {
+            return;
+        }
         assert(room->meshHeader->base.type < ARRAY_COUNTU(sRoomDrawHandlers));
         sRoomDrawHandlers[room->meshHeader->base.type](play, room, flags);
     }

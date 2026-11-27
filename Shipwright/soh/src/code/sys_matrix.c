@@ -553,14 +553,18 @@ void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ
     FrameInterpolation_RecordMatrixSetTranslateRotateYXZ(translateX, translateY, translateZ, rot);
 }
 
+void MergeShipTest_MatrixMade(f32 x, f32 y, f32 z); // MergeShip2: test harness (soh/MergeShip/MergeShipTest.cpp)
+
 Mtx* Matrix_MtxFToMtx(MtxF* src, Mtx* dest) {
     FrameInterpolation_RecordMatrixMtxFToMtx(src, dest);
+    MergeShipTest_MatrixMade(src->xw, src->yw, src->zw);
     guMtxF2L(src, dest);
     return dest;
 }
 
 Mtx* Matrix_ToMtx(Mtx* dest, char* file, s32 line) {
     FrameInterpolation_RecordMatrixToMtx(dest, file, line);
+    MergeShipTest_MatrixMade(sCurrentMatrix->xw, sCurrentMatrix->yw, sCurrentMatrix->zw);
     guMtxF2L(Matrix_CheckFloats(sCurrentMatrix, file, line), dest);
     return dest;
     // return Matrix_MtxFToMtx(MATRIX_CHECKFLOATS(sCurrentMatrix), dest);

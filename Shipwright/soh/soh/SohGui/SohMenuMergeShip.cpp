@@ -1,5 +1,6 @@
 #include "SohMenu.h"
 #include <libultraship/bridge/consolevariablebridge.h>
+#include "soh/MergeShip/MergeShipPort3ds.h" // MergeShip2: MERGESHIP_PORT3DS (the 3DS port, off for now)
 #include <mergeship/AnchorNet.h> // MergeShip2: the Anchor options both games share
 #include <mergeship/EngineApi.h> // MergeShip2: MS_CVAR_SHARE_FIRST_CYCLE
 #ifdef MERGESHIP_HOSTED
@@ -50,6 +51,11 @@ static const std::map<int32_t, const char*> sDogReactionValues = {
     { 1, "All" },
     { 2, "All But Richard" },
     { 3, "Only Richard" },
+};
+// MergeShip2: the renderer's styles (libultraship fast/interpreter.h RenderStyle, in that order).
+static const std::map<int32_t, const char*> sRenderStyleValues = {
+    { 0, "Off" },      { 1, "Toon" },   { 2, "Flat Colour" }, { 3, "Toon + Flat Colour" },
+    { 4, "Low Poly" }, { 5, "16-bit" }, { 6, "8-bit" },
 };
 // MergeShip2 (soh_fd): MergeShipFormColors.cpp's CVAR_FORM_COLORS_* values.
 static const std::map<int32_t, const char*> sFormTunicColorsValues = {
@@ -627,6 +633,181 @@ void SohMenu::AddMenuMergeShip() {
         .Options(CheckboxOptions().DefaultValue(false).Tooltip(
             "Off: the Fierce Deity's Mask comes only from the Happy Mask Salesman, once every mask he sells is "
             "bought. On: Majora's Mask's moon child gives it too."));
+
+#if MERGESHIP_PORT3DS // (the 3DS port is switched off for now: MergeShipPort3ds.h)
+    // MergeShip2: Ocarina of Time 3D assets (soh/MergeShip/MergeShipPort3ds.h; tools/port3ds makes the pack).
+    path.sidebarName = "3DS Assets";
+    AddSidebarEntry("Mergeship", path.sidebarName, 1);
+    path.column = SECTION_COLUMN_1;
+    AddWidget(path, "Ocarina of Time 3D", WIDGET_SEPARATOR_TEXT);
+    AddWidget(path, "3DS Rooms", WIDGET_CVAR_CHECKBOX)
+        .CVar(CVAR_ENHANCEMENT("MergeShip.Port3ds.Rooms"))
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Draws Hyrule's rooms with Ocarina of Time 3D's models and textures. Needs mods/port3ds.o2r, made from "
+            "your own copy of the game by tools/port3ds; rooms the pack does not hold draw as always. Collision, "
+            "actors and cameras stay Ocarina of Time's."));
+
+    AddWidget(path, "3DS Characters", WIDGET_CVAR_CHECKBOX)
+        .CVar(CVAR_ENHANCEMENT("MergeShip.Port3ds.Models"))
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Draws the characters the pack holds with Ocarina of Time 3D's models. With \"3DS Animations\" on they "
+            "move by the 3DS game's own animations, on their own skeletons; without it the game's animations move "
+            "them. Needs mods/port3ds.o2r; a character the pack does not hold draws as always."));
+
+    AddWidget(path, "3DS Objects", WIDGET_CVAR_CHECKBOX)
+        .CVar(CVAR_ENHANCEMENT("MergeShip.Port3ds.Objects"))
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Draws pots, crates, signs, boulders, item models and the other things the game draws without a "
+            "skeleton from Ocarina of Time 3D's models, where the pack holds one. Needs mods/port3ds.o2r; anything "
+            "the pack does not hold draws as always."));
+
+    AddWidget(path, "3DS Animations", WIDGET_CVAR_CHECKBOX)
+        .CVar(CVAR_ENHANCEMENT("MergeShip.Port3ds.Animations"))
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Link, and with \"3DS Characters\" every person, enemy and boss, moves with Ocarina of Time 3D's own "
+            "animations (they were made for the 3DS models: hands and feet land where they were meant to, and "
+            "people who stand stock-still in the original breathe). Needs mods/port3ds.o2r; an animation the pack "
+            "does not hold plays as always. Link's work with either model; transformations keep their own."));
+
+    AddWidget(path, "3DS Icons", WIDGET_CVAR_CHECKBOX)
+        .CVar(CVAR_ENHANCEMENT("MergeShip.Port3ds.Interface"))
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Shows Ocarina of Time 3D's item and quest icons in the menus and on the buttons (they are the same "
+            "pictures, drawn larger). Needs mods/port3ds.o2r."));
+
+    AddWidget(path, "3DS Sharper Textures", WIDGET_CVAR_CHECKBOX)
+        .CVar(CVAR_ENHANCEMENT("MergeShip.Port3ds.HdTextures"))
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "The 3DS textures were made for a small screen and look soft on a large one. With this on, every 3DS "
+            "texture the pack holds an upscaled make of (two to four times the size, same picture) is drawn from "
+            "that one. Needs a mods/port3ds.o2r made with tools/port3ds/hdtex.py; a texture without one draws as "
+            "always."));
+#endif // MERGESHIP_PORT3DS
+
+    // MergeShip2: render styles (libultraship reads the CVar itself, so Termina is drawn in the same style).
+    path.sidebarName = "Render Styles";
+    AddSidebarEntry("Mergeship", path.sidebarName, 1);
+    path.column = SECTION_COLUMN_1;
+    AddWidget(path, "Render Styles", WIDGET_SEPARATOR_TEXT);
+    AddWidget(path, "Render Style", WIDGET_CVAR_COMBOBOX)
+        .CVar("gMergeShip.RenderStyle")
+        .Options(ComboboxOptions()
+                     .ComboMap(sRenderStyleValues)
+                     .DefaultIndex(0)
+                     .Tooltip("How both worlds are drawn.\n\n"
+                              "Toon: light and shadow in flat bands, with ink outlines around characters and "
+                              "objects.\n"
+                              "Flat Colour: every texture becomes its average colour.\n"
+                              "Toon + Flat Colour: both, like a cel-shaded cartoon.\n"
+                              "Low Poly: one flat shade per polygon.\n"
+                              "These four reshade the 3D world only; text, the HUD and menus stay as they are.\n\n"
+                              "16-bit: the whole game at about 240 lines with hard pixels, unfiltered textures and "
+                              "15-bit colour with a dither pattern.\n"
+                              "8-bit: about 180 lines and 256 colours."));
+
+    // MergeShip2: real-time shadows (z_play.c Play_MergeShipShadows; libultraship draws them).
+    AddWidget(path, "Lighting", WIDGET_SEPARATOR_TEXT);
+    AddWidget(path, "Real-Time Shadows", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.Shadows")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Everything in Hyrule casts a shadow on everything else: Link, people, enemies, trees, walls and "
+            "cliffs, from the sun by day and the moon by night, and from above indoors. The round shadows under "
+            "characters are left out while this is on. Direct3D 11 only; it draws the world a second time from "
+            "the light, so it costs some speed."));
+    AddWidget(path, "Shadow Strength: %d%%", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gMergeShip.ShadowStrength")
+        .Options(IntSliderOptions().Min(10).Max(80).DefaultValue(45).Tooltip(
+            "How dark a shadow is. Moonlight and indoor light throw weaker ones."));
+    static const std::map<int32_t, const char*> sShadowDetailValues = {
+        { 0, "Low" },
+        { 1, "Medium" },
+        { 2, "High" },
+    };
+    AddWidget(path, "Warm Sunlight", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.SunWarmth")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "With Real-Time Shadows: what the sun reaches is drawn a little brighter and warmer, against the "
+            "cooler shade, as on a sunny day."));
+    AddWidget(path, "Real Light Sources", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.RealLights")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Torches, fires, fairies, explosions and spells light the walls, floors and things around them, with "
+            "their own colour and flicker (the game itself lights only characters by them). Direct3D 11 only."));
+    AddWidget(path, "Light Source Strength: %d%%", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gMergeShip.RealLightsStrength")
+        .Options(IntSliderOptions().Min(20).Max(200).DefaultValue(100).Tooltip(
+            "How bright the light of torches and other light sources is drawn."));
+    AddWidget(path, "Ambient Shading", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.AmbientShading")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Corners, the foot of a wall, the ground under a bush or a ledge: wherever other surfaces stand close "
+            "over a place, less light reaches it, and it is drawn a little darker. It gives rooms and landscapes "
+            "depth, indoors and out. Direct3D 11 only."));
+    AddWidget(path, "Ambient Shading Strength: %d%%", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gMergeShip.AmbientShadingStrength")
+        .Options(IntSliderOptions().Min(20).Max(100).DefaultValue(60).Tooltip("How dark the ambient shading goes."));
+    AddWidget(path, "Cloud Shadows", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.CloudShadows")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "The shadows of clouds drift over open country with the wind, by day and faintly under the moon. "
+            "Direct3D 11 only."));
+    AddWidget(path, "Shadow Detail", WIDGET_CVAR_COMBOBOX)
+        .CVar("gMergeShip.ShadowDetail")
+        .Options(ComboboxOptions().ComboMap(sShadowDetailValues).DefaultIndex(2).Tooltip(
+            "How fine the shadows' edges are. Lower is lighter on the graphics card (the shadow picture is 2, 8 "
+            "or 32 MB of its memory)."));
+
+    // MergeShip2: more grass, and the wind in it (MergeShipPort3ds.cpp MergeShipPort3ds_DrawGrass; z_en_kusa.c;
+    // libultraship moves it).
+    AddWidget(path, "Grass", WIDGET_SEPARATOR_TEXT);
+#if MERGESHIP_PORT3DS // (the added grass is the 3DS pack's; the wind below moves the game's own grass too)
+    AddWidget(path, "More Grass", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.Grass")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Grass grows on every floor that is grass in the game (where footsteps sound of it): tufts of Ocarina "
+            "of Time 3D's own grass around you, in Hyrule Field, the forest, the ranch and wherever else. They are "
+            "lit and shadowed like the rest of the world. Needs mods/port3ds.o2r with its grass texture."));
+    AddWidget(path, "Grass Density: %d", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gMergeShip.GrassDensity")
+        .Options(IntSliderOptions().Min(1).Max(6).DefaultValue(4).Tooltip("How thick the added grass grows."));
+#endif // MERGESHIP_PORT3DS
+    AddWidget(path, "Grass Moves in the Wind", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.GrassWind")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "The added grass, and the game's own grass and bushes, sway in a wind that crosses the land in waves. "
+            "It moves on every drawn frame, as smoothly as the picture itself."));
+
+    // MergeShip2: the finished picture's glow and look (z_play.c Play_MergeShipPost; libultraship draws it).
+    AddWidget(path, "Picture", WIDGET_SEPARATOR_TEXT);
+    AddWidget(path, "Glow", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.Glow")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "Bright things glow over what is around them: flames, fairies, lava, magic, the sun and a bright sky "
+            "behind trees. The HUD, text and menus stay as they are. Direct3D 11 only."));
+    AddWidget(path, "Glow Strength: %d%%", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gMergeShip.GlowStrength")
+        .Options(IntSliderOptions().Min(10).Max(200).DefaultValue(100).Tooltip("How strong the glow is."));
+    AddWidget(path, "Film Look", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.FilmLook")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "The world's picture is given a film's curve and grade: deeper darks, bright parts that run out softly, "
+            "fuller colours, slightly cool shadows and warm lights. The HUD, text and menus stay as they are. "
+            "Direct3D 11 only."));
+    AddWidget(path, "Film Look Strength: %d%%", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gMergeShip.FilmLookStrength")
+        .Options(IntSliderOptions().Min(0).Max(100).DefaultValue(50).Tooltip("How much of the film look."));
+    AddWidget(path, "Darker Corners", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.Vignette")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "The picture's corners are a little darker, as through a lens. Direct3D 11 only."));
+    AddWidget(path, "Background Blur", WIDGET_CVAR_CHECKBOX)
+        .CVar("gMergeShip.FocusBlur")
+        .Options(CheckboxOptions().DefaultValue(false).Tooltip(
+            "In a conversation, and while you are locked on to something, the two of you are sharp and what lies "
+            "well behind or in front is blurred, as a camera focused on you would have it. Direct3D 11 only."));
+    AddWidget(path, "Background Blur Strength: %d%%", WIDGET_CVAR_SLIDER_INT)
+        .CVar("gMergeShip.FocusBlurStrength")
+        .Options(IntSliderOptions().Min(20).Max(100).DefaultValue(70).Tooltip("How strongly it is blurred."));
 
 #ifdef MERGESHIP_HOSTED
     // MergeShip2 (BUG-0096): Termina's own settings, set from here (include/mergeship/MenuMirror.hpp). The ones both

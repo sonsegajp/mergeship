@@ -26,6 +26,7 @@ char* ResourceMgr_LoadPlayerAnimByName(char* animPath);
 char* ResourceMgr_GetNameByCRC(uint64_t crc, char* alloc);
 Gfx* ResourceMgr_LoadGfxByCRC(uint64_t crc);
 Gfx* ResourceMgr_LoadGfxByName(char* path);
+Gfx* ResourceMgr_LoadGfxByNameForDraw(const char* path); // MergeShip2: ResourceManagerHelpers.cpp
 Vtx* ResourceMgr_LoadVtxByCRC(uint64_t crc);
 Vtx* ResourceMgr_LoadVtxByName(char* path);
 CollisionHeader* ResourceMgr_LoadColByName(char* path);
@@ -80,7 +81,8 @@ extern "C" void gSPDisplayList(Gfx* pkt, Gfx* dl) {
 
         // ResourceMgr_PushCurrentDirectory(imgData);
         // gsSPPushCD(pkt++, imgData);
-        dl = ResourceMgr_LoadGfxByName(imgData);
+        // MergeShip2: a draw call (the 3DS pack may have a model for this list)
+        dl = ResourceMgr_LoadGfxByNameForDraw(imgData);
     }
 
     __gSPDisplayList(pkt, dl);

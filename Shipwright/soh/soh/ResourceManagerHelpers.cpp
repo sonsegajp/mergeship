@@ -1,3 +1,4 @@
+#include "soh/MergeShip/MergeShipPort3ds.h"
 #include <libultraship/bridge/consolevariablebridge.h>
 #include <fast/interpreter.h>
 #include <fast/resource/ResourceType.h>
@@ -389,6 +390,17 @@ extern "C" Gfx* ResourceMgr_LoadGfxByName(const char* path) {
     return (Gfx*)&res->Instructions[0];
 }
 
+// MergeShip2 (MergeShipPort3ds.h, "3DS Objects"): the list the game DRAWS by this path. A list the 3DS pack has a
+// model for is the pack's. Only whole draw calls come here (GbiWrap.cpp's gSPDisplayList, the chest's two lists):
+// code that reads a list's commands, patches them or draws a list from its middle (gSPDisplayListOffset) takes the
+// game's own list above -- the pack's list is another list, a few calls long.
+extern "C" Gfx* ResourceMgr_LoadGfxByNameForDraw(const char* path) {
+    if (Gfx* object = MergeShipPort3ds_ObjectList(ResourceMgr_ResolveLinkTunicDListPath(path))) {
+        return object;
+    }
+    return ResourceMgr_LoadGfxByName(path);
+}
+
 extern "C" uint8_t ResourceMgr_FileIsCustomByName(const char* path) {
     auto res = std::static_pointer_cast<Fast::DisplayList>(ResourceMgr_GetResourceByNameHandlingMQ(path));
     return res->GetInitData()->IsCustom;
@@ -673,6 +685,15 @@ extern "C" SkeletonHeader* ResourceMgr_LoadSkeletonByName(const char* path, Skel
     if (skelAnime != nullptr) {
         auto stringPath = std::string(path);
         SOH::SkeletonPatcher::RegisterSkeleton(stringPath, skelAnime);
+    }
+
+    // MergeShip2 (MergeShipPort3ds.h): which skeleton resource this limb table is, for its 3DS model
+    if (skelHeader != nullptr) {
+        std::string plain = std::string(path);
+        if (plain.starts_with(sOtr)) {
+            plain = plain.substr(sOtr.length());
+        }
+        MergeShipPort3ds_OnSkeletonLoaded(plain.c_str(), skelHeader->segment);
     }
 
 #if MERGESHIP_OOT3D

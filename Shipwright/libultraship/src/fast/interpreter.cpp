@@ -11,13 +11,17 @@
 #include <dlfcn.h>
 #endif
 
+#include <algorithm>
 #include <any>
 #include <map>
 #include <set>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 #include <list>
 #include <stack>
+#include <chrono>
+#include <intrin.h>
 #include "fast/resource/type/Light.h"
 
 #ifndef _LANGUAGE_C
@@ -35,6 +39,7 @@
 #include "ship/window/gui/Gui.h"
 #include "ship/resource/ResourceManager.h"
 #include "ship/utils/Utils.h"
+#include "ship/utils/StrHash64.h"
 #include "ship/Context.h"
 #include "ship/config/ConsoleVariable.h"
 
@@ -114,6 +119,11 @@ static std::string GetPathWithoutFileName(char* filePath) {
 constexpr size_t MAX_TRI_BUFFER = 256;
 
 Interpreter::Interpreter() {
+    // MergeShip2: the ids of pushed shaders count from zero. (The counter had no initial value: a session that
+    // happened to start it on junk drew every pushed shader with junk in its other shader options, among them
+    // the render style, which showed as whole scenes tinted or dark now and then, or as a shader that would
+    // not compile.)
+    mShadersIndex = 0;
     mRsp = new RSP();
     mRdp = new RDP();
     mBufVbo = new float[MAX_TRI_BUFFER * (32 * 3)];
@@ -134,6 +144,407 @@ void GfxSetInstance(std::shared_ptr<Interpreter> gfx) {
 // N64 prim_depth is 15-bit (0 near, 0x7FFF far).
 static constexpr float N64_PRIM_DEPTH_MAX = 32767.0f;
 
+// ---------------------------------------------------------------------------------------------------------------
+// MergeShip2 render styles: ink outlines (the toon styles). Every lit vertex keeps the direction its normal points
+// on screen; a back face of a lit, opaque, depth-tested model is not thrown away but drawn again in ink, each
+// corner pushed out along that direction by a pixel or two, so it shows as a rim around the model's silhouette.
+// The ink triangles are gathered here and drawn after each batch of the frame's own triangles.
+static constexpr uint32_t kExNoOutline = 0x10; // extra geometry mode bit (the pack sets it on cut-out materials)
+// The toon styles on a surface with painted light, as the shaders are told (a style number of its own, after the
+// ones in RenderStyle: "o_style == 14" in the shader templates).
+static constexpr uint32_t kStyleToonPainted = 14;
+static float sOutlineNormal[MAX_VERTICES + 4][2];
+static bool sOutlineHasNormal[MAX_VERTICES + 4];
+static std::vector<float> sOutlineVbo; // x y z w r g b for each corner
+static size_t sOutlineTris = 0;
+
+static bool OutlineStyle(const Interpreter* gfx) {
+    return gfx->mRenderStyle == RENDER_STYLE_TOON || gfx->mRenderStyle == RENDER_STYLE_TOON_FLAT;
+}
+
+static bool PixelStyle(uint32_t style) {
+    return style == RENDER_STYLE_16BIT || style == RENDER_STYLE_8BIT;
+}
+
+static void EmitOutlineTriangle(Interpreter* gfx, uint8_t i1, uint8_t i2, uint8_t i3) {
+    const uint8_t idx[3] = { i1, i2, i3 };
+    RSP* rsp = gfx->mRsp;
+    RDP* rdp = gfx->mRdp;
+    bool vertexNormals = true;
+    for (int k = 0; k < 3; k++) {
+        if (idx[k] >= MAX_VERTICES || rsp->loaded_vertices[idx[k]].w <= 0.0f) {
+            return;
+        }
+        vertexNormals = vertexNormals && sOutlineHasNormal[idx[k]];
+    }
+    const uint32_t modeL = rdp->other_mode_l;
+    const bool depthTested = (rsp->geometry_mode & G_ZBUFFER) == G_ZBUFFER && (modeL & Z_CMP) == Z_CMP &&
+                             (modeL & Z_UPD) == Z_UPD && (modeL & ZMODE_DEC) != ZMODE_DEC;
+    const bool blended = ((modeL & (3 << 20)) == (G_BL_CLR_MEM << 20) && (modeL & (3 << 16)) == (G_BL_1MA << 16)) ||
+                         ((modeL & (3 << 22)) == (G_BL_CLR_MEM << 22) && (modeL & (3 << 18)) == (G_BL_1MA << 18));
+    const bool cutOut = (modeL & CVG_X_ALPHA) == CVG_X_ALPHA || (modeL & (3U << G_MDSFT_ALPHACOMPARE)) != 0 ||
+                        (rsp->extra_geometry_mode & kExNoOutline) != 0;
+    const bool invisible = (modeL & (3 << 24)) == (G_BL_0 << 24) && (modeL & (3 << 20)) == (G_BL_CLR_MEM << 20);
+    const bool plainBlendEx = rdp->blend_ex_mode == 0 || (((rdp->blend_ex_mode >> 8) & 0xF) == G_BLENDEX_ONE &&
+                                                          ((rdp->blend_ex_mode >> 4) & 0xF) == G_BLENDEX_ZERO);
+    if (!depthTested || blended || cutOut || invisible || !plainBlendEx) {
+        return;
+    }
+
+    const float width = (float)std::max<uint32_t>(gfx->mCurDimensions.width, 1);
+    const float height = (float)std::max<uint32_t>(gfx->mCurDimensions.height, 1);
+    const float thickness = std::max(1.0f, height / 420.0f); // in pixels, for what is near
+
+    // A surface without normals (a room: its light is painted into its vertex colours) is pushed out whole, the way
+    // its own plane leans on screen: a face seen edge-on, at a silhouette, moves the most, and one that faces
+    // straight away from the eye not at all. The plane's normal comes from the corners in clip space (as in
+    // FacetLight below), pointing away from the eye.
+    float faceDir[2] = { 0.0f, 0.0f };
+    float faceLean = 1.0f;
+    if (!vertexNormals) {
+        const float(*p)[4] = rsp->P_matrix;
+        const float sx = sqrtf(p[0][0] * p[0][0] + p[1][0] * p[1][0] + p[2][0] * p[2][0]);
+        const float sy = sqrtf(p[0][1] * p[0][1] + p[1][1] * p[1][1] + p[2][1] * p[2][1]);
+        const float sw = sqrtf(p[0][3] * p[0][3] + p[1][3] * p[1][3] + p[2][3] * p[2][3]);
+        const float adjust = gfx->AdjXForAspectRatio(1.0f);
+        if (sx < 1e-6f || sy < 1e-6f || sw < 0.5f || fabsf(adjust) < 1e-6f) {
+            return; // (a view without perspective)
+        }
+        float pos[3][3];
+        for (int k = 0; k < 3; k++) {
+            const LoadedVertex* v = &rsp->loaded_vertices[idx[k]];
+            pos[k][0] = v->x / (adjust * sx);
+            pos[k][1] = v->y / sy;
+            pos[k][2] = -v->w / sw;
+        }
+        const float e1[3] = { pos[1][0] - pos[0][0], pos[1][1] - pos[0][1], pos[1][2] - pos[0][2] };
+        const float e2[3] = { pos[2][0] - pos[0][0], pos[2][1] - pos[0][1], pos[2][2] - pos[0][2] };
+        float n[3] = { e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0] };
+        const float length = sqrtf(n[0] * n[0] + n[1] * n[1] + n[2] * n[2]);
+        if (length < 1e-12f) {
+            return;
+        }
+        const float away = (n[0] * pos[0][0] + n[1] * pos[0][1] + n[2] * pos[0][2]) > 0.0f ? 1.0f : -1.0f;
+        for (int k = 0; k < 3; k++) {
+            n[k] *= away / length;
+        }
+        const float dx = n[0] * adjust * sx * width;
+        const float dy = n[1] * sy * height;
+        const float lean = sqrtf(dx * dx + dy * dy);
+        faceLean = std::min(1.0f, sqrtf(n[0] * n[0] + n[1] * n[1]) * 2.5f);
+        if (lean < 1e-6f || faceLean < 0.05f) {
+            return;
+        }
+        faceDir[0] = dx / lean;
+        faceDir[1] = dy / lean;
+    }
+
+    // Ink sits a little behind the faces it was made from (0.15% of their distance), so that the two sides of a
+    // thin sheet do not fight. The projection's depth offset, out of the (view and) projection matrix:
+    const float(*proj)[4] = rsp->P_matrix;
+    float push = 0.0f;
+    int axis = 0;
+    for (int i = 1; i < 3; i++) {
+        if (fabsf(proj[i][3]) > fabsf(proj[axis][3])) {
+            axis = i;
+        }
+    }
+    if (fabsf(proj[axis][3]) > 1e-6f) {
+        const float scale = -proj[axis][2] / proj[axis][3];
+        push = 0.0015f * fabsf(proj[3][2] + proj[3][3] * scale);
+    }
+
+    // in fog, the ink fades with what it outlines
+    const bool fog = (modeL >> 30) == G_BL_CLR_FOG && (rsp->geometry_mode & G_FOG) != 0;
+
+    const GfxClipParameters clip = gfx->mRapi->GetClipParameters();
+    for (int k = 0; k < 3; k++) {
+        const LoadedVertex* v = &rsp->loaded_vertices[idx[k]];
+        float nx = faceDir[0];
+        float ny = faceDir[1];
+        if (vertexNormals) {
+            nx = sOutlineNormal[idx[k]][0] * width;
+            ny = sOutlineNormal[idx[k]][1] * height;
+            const float length = sqrtf(nx * nx + ny * ny);
+            if (length > 1e-6f) {
+                nx /= length;
+                ny /= length;
+            } else {
+                nx = ny = 0.0f;
+            }
+        }
+        const float pixels = std::max(0.9f, thickness * std::clamp(350.0f / v->w, 0.4f, 1.0f)) * faceLean;
+        const float x = v->x + nx * (2.0f * pixels / width) * v->w;
+        const float y = v->y + ny * (2.0f * pixels / height) * v->w;
+        float z = v->z + push;
+        if (clip.z_is_from_0_to_1) {
+            z = (z + v->w) / 2.0f;
+        }
+        float ink[3] = { 0.07f, 0.05f, 0.06f };
+        if (fog) {
+            const float f = v->color.a / 255.0f;
+            ink[0] += (rdp->fog_color.r / 255.0f - ink[0]) * f;
+            ink[1] += (rdp->fog_color.g / 255.0f - ink[1]) * f;
+            ink[2] += (rdp->fog_color.b / 255.0f - ink[2]) * f;
+        }
+        const float corner[7] = { x, clip.invertY ? -y : y, z, v->w, ink[0], ink[1], ink[2] };
+        sOutlineVbo.insert(sOutlineVbo.end(), corner, corner + 7);
+    }
+    if (++sOutlineTris >= 2048) {
+        gfx->Flush();
+    }
+}
+
+static void FlushOutlines(Interpreter* gfx) {
+    static bool sBusy = false;
+    if (sOutlineTris == 0 || sBusy) {
+        return;
+    }
+    sBusy = true;
+    ShaderProgram* previous = gfx->mRenderingState.mShaderProgram;
+    // the plainest program there is: the vertex colour, no texture, no fog, opaque
+    ColorCombinerKey key{};
+    key.combine_mode = ((uint64_t)G_CCMUX_SHADE << 13) | ((uint64_t)G_ACMUX_1 << 25);
+    key.options = (uint64_t)0xFFFF << SHADER_ID_SHIFT;
+    ColorCombiner* comb = gfx->LookupOrCreateColorCombiner(key);
+    ShaderProgram* prg = comb->prg[0];
+    if (prg == nullptr) {
+        // (a new program is loaded as it is made, and is then the current one)
+        comb->prg[0] = prg = gfx->LookupOrCreateShaderProgram(comb->shader_id0, comb->shader_id1);
+    }
+    if (prg != nullptr) {
+        if (gfx->mRenderingState.mShaderProgram != prg) {
+            gfx->mRapi->UnloadShader(gfx->mRenderingState.mShaderProgram);
+            gfx->mRapi->LoadShader(prg);
+        }
+        uint8_t numInputs = 0;
+        bool usedTextures[2] = { false, false };
+        gfx->mRapi->ShaderGetInfo(prg, &numInputs, usedTextures);
+        if (numInputs == 1 && !usedTextures[0] && !usedTextures[1]) {
+            const uint8_t none[4] = { 0, 0, 0, 0 };
+            gfx->mRapi->SetDepthTestAndMask(true, true);
+            gfx->mRapi->SetZmodeDecal(false);
+            gfx->mRapi->SetUseAlpha(false);
+            gfx->mRapi->SetBlendMode(0, none);
+            gfx->mRapi->DrawTriangles(sOutlineVbo.data(), sOutlineVbo.size(), sOutlineTris);
+            // back to what the frame's own triangles had
+            gfx->mRapi->SetDepthTestAndMask((gfx->mRenderingState.depth_test_and_mask & 1) != 0,
+                                            (gfx->mRenderingState.depth_test_and_mask & 2) != 0);
+            gfx->mRapi->SetZmodeDecal(gfx->mRenderingState.decal_mode);
+            gfx->mRapi->SetUseAlpha(gfx->mRenderingState.alpha_blend);
+            const uint8_t constant[4] = { gfx->mBlendExColorActive.r, gfx->mBlendExColorActive.g,
+                                          gfx->mBlendExColorActive.b, gfx->mBlendExColorActive.a };
+            gfx->mRapi->SetBlendMode(gfx->mBlendExModeActive, constant);
+        }
+        gfx->mRapi->UnloadShader(prg);
+        if (previous != nullptr) {
+            gfx->mRapi->LoadShader(previous);
+        }
+    }
+    gfx->mRenderingState.mShaderProgram = previous;
+    sOutlineVbo.clear();
+    sOutlineTris = 0;
+    sBusy = false;
+}
+
+// MergeShip2, the low poly style: how bright a triangle is for where it faces, under a fixed light from above and
+// one side. The triangle's normal comes from its corners in clip space, and is turned into the world's frame through
+// the view the projection matrix carries (Ocarina of Time and Majora's Mask put the camera there), so the shading
+// stays on the world when the camera turns.
+static float FacetLight(Interpreter* gfx, const LoadedVertex* a, const LoadedVertex* b, const LoadedVertex* c) {
+    const float(*p)[4] = gfx->mRsp->P_matrix;
+    const float sx = sqrtf(p[0][0] * p[0][0] + p[1][0] * p[1][0] + p[2][0] * p[2][0]);
+    const float sy = sqrtf(p[0][1] * p[0][1] + p[1][1] * p[1][1] + p[2][1] * p[2][1]);
+    const float sw = sqrtf(p[0][3] * p[0][3] + p[1][3] * p[1][3] + p[2][3] * p[2][3]);
+    const float adjust = gfx->AdjXForAspectRatio(1.0f);
+    if (sx < 1e-6f || sy < 1e-6f || sw < 0.5f || fabsf(adjust) < 1e-6f || a->w <= 0.0f || b->w <= 0.0f ||
+        c->w <= 0.0f) {
+        return 1.0f; // (a view without perspective, or a triangle through the eye)
+    }
+    const LoadedVertex* v[3] = { a, b, c };
+    float pos[3][3];
+    for (int i = 0; i < 3; i++) {
+        pos[i][0] = v[i]->x / (adjust * sx);
+        pos[i][1] = v[i]->y / sy;
+        pos[i][2] = -v[i]->w / sw;
+    }
+    const float e1[3] = { pos[1][0] - pos[0][0], pos[1][1] - pos[0][1], pos[1][2] - pos[0][2] };
+    const float e2[3] = { pos[2][0] - pos[0][0], pos[2][1] - pos[0][1], pos[2][2] - pos[0][2] };
+    float n[3] = { e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0] };
+    const float length = sqrtf(n[0] * n[0] + n[1] * n[1] + n[2] * n[2]);
+    if (length < 1e-12f) {
+        return 1.0f;
+    }
+    // towards the eye, which is at the origin
+    const float side = (n[0] * pos[0][0] + n[1] * pos[0][1] + n[2] * pos[0][2]) > 0.0f ? -1.0f : 1.0f;
+    for (int i = 0; i < 3; i++) {
+        n[i] *= side / length;
+    }
+    float world[3];
+    for (int i = 0; i < 3; i++) {
+        world[i] = n[0] * p[i][0] / sx + n[1] * p[i][1] / sy - n[2] * p[i][3] / sw;
+    }
+    const float light = world[0] * 0.342f + world[1] * 0.831f + world[2] * 0.439f;
+    return 0.66f + 0.5f * std::max(light, 0.0f) + 0.16f * std::min(light, 0.0f);
+}
+
+// MergeShip2, 3DS characters: the pack's texture for one the game put in a segment (extra geometry mode bit
+// kExTextureRedirect; tools/port3ds/characters.py writes "port3ds/alt/<the game's texture path>"). Null: there is none.
+static constexpr uint32_t kExTextureRedirect = 0x20;
+// MergeShip2, the 3DS interface option ("gEnhancements.MergeShip.Port3ds.Interface", read once a frame): the
+// textures the game loads from "textures/" (its icons) are the pack's "port3ds/alt/textures/..." where it has them.
+static bool sInterfaceRedirect = false;
+// The stand-ins the pack marks. The game's own HUD pictures are shades that its code colours (a heart between two
+// reds, a double-defence heart the other way round, a counter's digit as one flat colour cut out by the texture's
+// alpha); the 3DS pictures have their colours, or are white with a black edge. A triangle whose texture is a
+// marked stand-in, and whose combiner reads the texture at all, is drawn with another colour combiner (GfxSpTri1;
+// the alpha combiner stays, so what the game fades still fades):
+//   "port3ds/own/<the game's texture path>" (1): the picture's own colours: a heart, a rupee, a key;
+//   "port3ds/tint/<the game's texture path>" (2): the picture by the primitive colour: a digit, green in a full
+//   wallet, with its edge still black.
+static std::unordered_map<const void*, int> sStandInKinds;
+
+// MergeShip2, the 3DS sharper textures option ("gEnhancements.MergeShip.Port3ds.HdTextures", read once a frame): a
+// texture of the pack, "port3ds/<...>", is its upscaled make "port3ds/hd/<...>" where the pack has one
+// (tools/port3ds/hdtex.py). The larger picture carries its own scales against the size the list loads, so nothing
+// else changes. Returns the texture itself where there is none or the option is off.
+static bool sHdTextures = false;
+// (real-time shadows, the light's pass: what faces away from the light covers too; ShadowLightFromGame)
+static bool sShadowBothSides = false;
+// (and the shadow map's size, a side: "gMergeShip.ShadowDetail" 0, 1, 2; read once a frame)
+static int sShadowMapSize = 4096;
+// (and whether the light starts at the map's near side: what is nearer is cut away, GfxRenderingAPI::StartShadowMap)
+static bool sShadowClip = false;
+// (and what GfxRenderingAPI::ApplyShadows's params [4] to [11] are: the soft edges' and the fade's measures,
+// ShadowLightFromGame)
+static float sShadowSoft[8] = { 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+// (and the rest of the pass over the screen: ambient shading, clouds, the colour of shade; whether the game's light
+// is known this frame, and whether it casts)
+static float sShadowAir[8] = { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f };
+static float sShadowSun[3] = { 1.0f, 1.0f, 1.0f };
+static bool sShadowLit = false;
+static bool sShadowCasts = false;
+// (and a measuring aid: "gMergeShip.ShadowTiming" writes what the light's pass costs to the log)
+static bool sShadowTiming = false;
+
+// MergeShip2 swaying grass. G_REGS_EX 10 (w1: a SwayEx of the game's, or 0 for none) puts what is drawn after it in
+// the wind: GfxSpVertex moves each vertex sideways by the wind at its place in the world, times the vertex's own
+// weight -- the low byte of its flag (0 holds still, 255 moves all the way), or, where `byHeight` is given, how high
+// it stands in its model over `base` (a bush: its foot holds, its top moves). The wind is the renderer's, by its
+// own clock (Interpreter::Run), so the grass moves on every drawn frame and not only on the game's own; and in the
+// light's pass alike, so its shadow moves with it.
+struct SwayEx {
+    float amp;      // how far a weight of 1 moves, in the world's units
+    float byHeight; // 0: the weight is the vertex's flag; over 0: the weight a unit of height over `base` gives;
+                    // under 0: the weights are the vertex array's own table (SwayTableFor)
+    float base;
+    float pad;
+};
+static const SwayEx* sSway = nullptr;
+static float sSwayTime = 0.0f; // seconds
+// (real-time shadows: G_REGS_EX 11 with 1 leaves what follows out of the light's pass altogether -- it casts no
+// shadow and costs that pass nothing; with 0 what follows casts again)
+static bool sShadowNoCast = false;
+// (the weights of the vertices being loaded, where their array has a table; set around GfxSpVertex)
+static const uint8_t* sSwayTable = nullptr;
+
+static const uint8_t* ExResource(uint64_t hash, size_t* size);
+
+// The weights of `count` vertices of the array `hash` names, from `first` on: the pack's "<array>_sway", a byte a
+// vertex (tools/port3ds/review/sway_pack.py marks the plants of a room so). nullptr: the array has none.
+static const uint8_t* SwayTableFor(uint64_t hash, const void* first, size_t count) {
+    struct Table {
+        const uint8_t* base;    // the array's first vertex
+        const uint8_t* weights; // nullptr: none
+        size_t vertices;
+    };
+    static std::unordered_map<uint64_t, Table> sTables;
+    auto it = sTables.find(hash);
+    if (it == sTables.end()) {
+        Table table{};
+        auto manager = Ship::Context::GetRawInstance()->GetResourceManager();
+        table.base = (const uint8_t*)manager->GetResourceRawPointer(hash);
+        const std::string* name = manager->GetArchiveManager()->HashToString(hash);
+        if (table.base != nullptr && name != nullptr && name->compare(0, 8, "port3ds/") == 0) {
+            size_t size = 0;
+            const uint8_t* data = ExResource(CRC64((*name + "_sway").c_str()), &size);
+            if (data != nullptr && size > 0) {
+                table.weights = data;
+                table.vertices = size;
+            }
+        }
+        it = sTables.emplace(hash, table).first;
+    }
+    const Table& table = it->second;
+    if (table.weights == nullptr || (const uint8_t*)first < table.base) {
+        return nullptr;
+    }
+    const size_t index = (size_t)((const uint8_t*)first - table.base) / sizeof(F3DVtx);
+    return index + count <= table.vertices ? table.weights + index : nullptr;
+}
+
+// The wind at a place: (x, z) it pushes by, for a weight of 1 and an amp of 1. It blows one way, in gusts: waves
+// some three hundred units long that cross the land at a walking pace and lay the grass over as they pass (one sees
+// them travel through a field), rising and dying down over longer stretches; and a quick flutter of every tuft's
+// own on top. The grass leans with the wind and swings back past upright only a little.
+static inline void SwayAt(float wx, float wz, float* sx, float* sz) {
+    const float along = wx * 0.80f + wz * 0.60f; // (the way the wind blows)
+    const float gust = sinf(sSwayTime * 2.3f - along * 0.021f + sinf(wx * 0.0061f - wz * 0.0083f) * 1.7f);
+    const float swell = 0.62f + 0.38f * sinf(sSwayTime * 0.41f - along * 0.0037f + wz * 0.0021f);
+    const float flutter = sinf(sSwayTime * 6.9f + wx * 0.31f + wz * 0.27f);
+    const float cross = sinf(sSwayTime * 3.3f - wx * 0.047f + wz * 0.074f);
+    const float push = swell * (0.30f + 0.62f * gust + 0.16f * flutter);
+    *sx = 0.80f * push - 0.10f * cross * swell;
+    *sz = 0.60f * push + 0.13f * cross * swell;
+}
+
+static std::shared_ptr<Fast::Texture> HdTexture(const std::shared_ptr<Fast::Texture>& texture) {
+    struct Known {
+        std::string path;
+        std::shared_ptr<Fast::Texture> hd;
+    };
+    static std::unordered_map<const Fast::Texture*, Known> sKnown;
+    if (!sHdTextures || texture == nullptr || texture->GetInitData() == nullptr) {
+        return texture;
+    }
+    const std::string& path = texture->GetInitData()->Path;
+    auto it = sKnown.find(texture.get());
+    if (it == sKnown.end() || it->second.path != path) {
+        Known known;
+        known.path = path;
+        if (path.compare(0, 8, "port3ds/") == 0 && path.compare(0, 11, "port3ds/hd/") != 0) {
+            const std::string hd = "port3ds/hd/" + path.substr(8);
+            auto manager = Ship::Context::GetRawInstance()->GetResourceManager();
+            if (manager->GetArchiveManager()->HasFile(hd)) {
+                known.hd = std::static_pointer_cast<Fast::Texture>(manager->LoadResourceProcess(hd));
+            }
+        }
+        it = sKnown.insert_or_assign(texture.get(), std::move(known)).first;
+    }
+    return it->second.hd != nullptr ? it->second.hd : texture;
+}
+
+static std::shared_ptr<Fast::Texture> RedirectedTexture(const char* name) {
+    static std::unordered_map<std::string, std::shared_ptr<Fast::Texture>> sKnown;
+    const std::string plain = strncmp(name, "__OTR__", 7) == 0 ? name + 7 : name;
+    auto it = sKnown.find(plain);
+    if (it == sKnown.end()) {
+        std::shared_ptr<Fast::Texture> texture;
+        const std::string alt = "port3ds/alt/" + plain;
+        auto manager = Ship::Context::GetRawInstance()->GetResourceManager();
+        if (manager->GetArchiveManager()->HasFile(alt)) {
+            texture = std::static_pointer_cast<Fast::Texture>(manager->LoadResourceProcess(alt));
+            if (texture != nullptr && manager->GetArchiveManager()->HasFile("port3ds/own/" + plain)) {
+                sStandInKinds[texture.get()] = 1;
+            } else if (texture != nullptr && manager->GetArchiveManager()->HasFile("port3ds/tint/" + plain)) {
+                sStandInKinds[texture.get()] = 2;
+            }
+        }
+        it = sKnown.emplace(plain, texture).first;
+    }
+    return it->second;
+}
+
 void Interpreter::Flush() {
     if (mBufVboLen > 0) {
         mRapi->SetCurrentPrimDepth((float)mRdp->prim_depth / N64_PRIM_DEPTH_MAX);
@@ -141,6 +552,7 @@ void Interpreter::Flush() {
         mBufVboLen = 0;
         mBufVboNumTris = 0;
     }
+    FlushOutlines(this);
 }
 
 ShaderProgram* Interpreter::LookupOrCreateShaderProgram(uint64_t id0, uint64_t id1) {
@@ -364,6 +776,12 @@ void Interpreter::GenerateCC(ColorCombiner* comb, const ColorCombinerKey& key) {
                 }
                 shaderId0 |= (uint64_t)val << (i * 32 + j * 4);
             }
+        }
+        // MergeShip2: the toon styles band the vertex shade, so their shaders are told which colour input it is
+        const uint32_t renderStyle = (uint32_t)((key.options >> RENDER_STYLE_SHIFT) & 0xF);
+        if (renderStyle == RENDER_STYLE_TOON || renderStyle == RENDER_STYLE_TOON_FLAT ||
+            renderStyle == kStyleToonPainted) {
+            shaderId1 |= (uint64_t)(inputNumber[G_CCMUX_SHADE] & 7) << RENDER_STYLE_SHADE_SHIFT;
         }
     }
     {
@@ -598,6 +1016,227 @@ static bool IsPyramidLike(uint32_t width, uint32_t height, uint32_t tileW, uint3
     return renderedPixels > 0 && loadedPixels > renderedPixels && loadedPixels * 8 < renderedPixels * 13; // < 1.625x
 }
 
+// MergeShip2, the flat styles: a texture as flat colours that keep its drawing. Its texels are sorted into at most
+// six colours (the ones it mostly has); each texel then takes the colour most of its neighbourhood has, so specks go
+// and patches stay; and a small texture is enlarged, the borders of its patches running straight between texels
+// instead of in stairs, so that the patches have clean edges seen from close. Every texel keeps its alpha (enlarged
+// the same way), so cut-outs keep their shape. A face keeps its eyes and mouth, grass its blades, a wall its stones.
+void Interpreter::UploadTextureStyled(const uint8_t* rgba32Buf, uint32_t width, uint32_t height) {
+    if (!mFlattenUpload || rgba32Buf == nullptr || width == 0 || height == 0 ||
+        (uint64_t)width * height > 2048ull * 2048ull) {
+        mRapi->UploadTexture(rgba32Buf, width, height);
+        return;
+    }
+    const size_t count = (size_t)width * height;
+    uint64_t sum[3] = { 0, 0, 0 };
+    uint64_t weight = 0;
+    for (size_t k = 0; k < count; k++) {
+        const uint8_t* p = rgba32Buf + k * 4;
+        sum[0] += (uint64_t)p[0] * p[3];
+        sum[1] += (uint64_t)p[1] * p[3];
+        sum[2] += (uint64_t)p[2] * p[3];
+        weight += p[3];
+    }
+    if (weight == 0) {
+        mRapi->UploadTexture(rgba32Buf, width, height);
+        return;
+    }
+    constexpr int kMax = 6;
+    float centre[kMax][3] = { { (float)(sum[0] / weight), (float)(sum[1] / weight), (float)(sum[2] / weight) } };
+    int centres = 1;
+    const auto distance = [](const uint8_t* p, const float* c) {
+        const float dr = p[0] - c[0], dg = p[1] - c[1], db = p[2] - c[2];
+        return dr * dr + dg * dg + db * db;
+    };
+    const auto nearest = [&](const uint8_t* p) {
+        int best = 0;
+        float bestD = distance(p, centre[0]);
+        for (int c = 1; c < centres; c++) {
+            const float d = distance(p, centre[c]);
+            if (d < bestD) {
+                bestD = d;
+                best = c;
+            }
+        }
+        return best;
+    };
+
+    // The colours, from a sample of the opaque texels: each further one is the sample farthest from those there
+    // are (while one is far enough to matter), then a few rounds of moving every colour to the middle of the texels
+    // nearest to it.
+    static std::vector<uint32_t> sample;
+    sample.clear();
+    const size_t step = std::max<size_t>(1, count / 4096);
+    for (size_t k = 0; k < count; k += step) {
+        if (rgba32Buf[k * 4 + 3] >= 128) {
+            sample.push_back((uint32_t)k);
+        }
+    }
+    if (sample.size() >= 16) {
+        while (centres < kMax) {
+            float farthest = 0.0f;
+            uint32_t pick = sample[0];
+            for (uint32_t k : sample) {
+                const uint8_t* p = rgba32Buf + (size_t)k * 4;
+                float d = distance(p, centre[0]);
+                for (int c = 1; c < centres; c++) {
+                    d = std::min(d, distance(p, centre[c]));
+                }
+                if (d > farthest) {
+                    farthest = d;
+                    pick = k;
+                }
+            }
+            if (farthest < 30.0f * 30.0f) {
+                break;
+            }
+            const uint8_t* p = rgba32Buf + (size_t)pick * 4;
+            centre[centres][0] = p[0];
+            centre[centres][1] = p[1];
+            centre[centres][2] = p[2];
+            centres++;
+        }
+        uint32_t members[kMax] = {};
+        for (int pass = 0; pass < 6 && centres > 1; pass++) {
+            double total[kMax][3] = {};
+            memset(members, 0, sizeof(members));
+            for (uint32_t k : sample) {
+                const uint8_t* p = rgba32Buf + (size_t)k * 4;
+                const int c = nearest(p);
+                total[c][0] += p[0];
+                total[c][1] += p[1];
+                total[c][2] += p[2];
+                members[c]++;
+            }
+            for (int c = 0; c < centres; c++) {
+                if (members[c] > 0) {
+                    centre[c][0] = (float)(total[c][0] / members[c]);
+                    centre[c][1] = (float)(total[c][1] / members[c]);
+                    centre[c][2] = (float)(total[c][2] / members[c]);
+                }
+            }
+        }
+        // a colour of a few specks goes, and of two that are alike the smaller goes into the larger
+        for (bool again = centres > 1; again;) {
+            again = false;
+            for (int b = 0; b < centres && !again; b++) {
+                bool drop = (size_t)members[b] * 100 < sample.size();
+                int into = -1;
+                for (int a = 0; a < centres && into < 0; a++) {
+                    const float dr = centre[a][0] - centre[b][0], dg = centre[a][1] - centre[b][1],
+                                db = centre[a][2] - centre[b][2];
+                    if (a != b && members[b] <= members[a] && dr * dr + dg * dg + db * db < 34.0f * 34.0f) {
+                        into = a;
+                    }
+                }
+                if (into >= 0 && members[into] + members[b] > 0) {
+                    const float share = (float)members[into] / (float)(members[into] + members[b]);
+                    for (int i = 0; i < 3; i++) {
+                        centre[into][i] = centre[into][i] * share + centre[b][i] * (1.0f - share);
+                    }
+                    members[into] += members[b];
+                    drop = true;
+                }
+                if (drop) {
+                    centres--; // (the last one takes the place of the one that goes)
+                    if (b != centres) {
+                        for (int i = 0; i < 3; i++) {
+                            centre[b][i] = centre[centres][i];
+                        }
+                        members[b] = members[centres];
+                    }
+                    again = centres > 1;
+                }
+            }
+        }
+    }
+
+    // Each texel's colour, then the colour most of it and its eight neighbours have (the texture taken as tiling)
+    static std::vector<uint8_t> label, smooth;
+    label.resize(count);
+    for (size_t k = 0; k < count; k++) {
+        label[k] = centres > 1 ? (uint8_t)nearest(rgba32Buf + k * 4) : 0;
+    }
+    if (centres > 1 && width >= 4 && height >= 4) {
+        smooth.resize(count);
+        for (uint32_t y = 0; y < height; y++) {
+            const uint32_t rows[3] = { (y + height - 1) % height, y, (y + 1) % height };
+            for (uint32_t x = 0; x < width; x++) {
+                const uint32_t cols[3] = { (x + width - 1) % width, x, (x + 1) % width };
+                uint8_t votes[kMax] = {};
+                for (uint32_t yy : rows) {
+                    for (uint32_t xx : cols) {
+                        votes[label[(size_t)yy * width + xx]]++;
+                    }
+                }
+                uint8_t best = label[(size_t)y * width + x];
+                for (int c = 0; c < centres; c++) {
+                    if (votes[c] > votes[best]) {
+                        best = (uint8_t)c;
+                    }
+                }
+                smooth[(size_t)y * width + x] = best;
+            }
+        }
+        label.swap(smooth);
+    }
+
+    // Enlarged two or four times while it is small: every new texel takes the colour that weighs most among the four
+    // texels around it, which cuts the corners of the patches.
+    uint32_t scale = 1;
+    while (std::min(width, height) * scale < 128 && scale < 4 &&
+           (uint64_t)width * height * (scale * 2) * (scale * 2) <= 512ull * 512ull) {
+        scale *= 2;
+    }
+    const uint32_t outWidth = width * scale, outHeight = height * scale;
+    static std::vector<uint8_t> flat;
+    flat.resize((size_t)outWidth * outHeight * 4);
+    if (scale == 1) {
+        for (size_t k = 0; k < count; k++) {
+            const float* colour = centre[label[k]];
+            flat[k * 4 + 0] = (uint8_t)colour[0];
+            flat[k * 4 + 1] = (uint8_t)colour[1];
+            flat[k * 4 + 2] = (uint8_t)colour[2];
+            flat[k * 4 + 3] = rgba32Buf[k * 4 + 3];
+        }
+    } else {
+        for (uint32_t y = 0; y < outHeight; y++) {
+            const float fy = ((float)y + 0.5f) / (float)scale - 0.5f;
+            const int y0 = (int)floorf(fy);
+            const float ty = fy - (float)y0;
+            const uint32_t rows[2] = { (uint32_t)((y0 + (int)height) % (int)height),
+                                       (uint32_t)((y0 + 1 + (int)height) % (int)height) };
+            for (uint32_t x = 0; x < outWidth; x++) {
+                const float fx = ((float)x + 0.5f) / (float)scale - 0.5f;
+                const int x0 = (int)floorf(fx);
+                const float tx = fx - (float)x0;
+                const uint32_t cols[2] = { (uint32_t)((x0 + (int)width) % (int)width),
+                                           (uint32_t)((x0 + 1 + (int)width) % (int)width) };
+                const float weights[4] = { (1.0f - tx) * (1.0f - ty), tx * (1.0f - ty), (1.0f - tx) * ty, tx * ty };
+                float votes[kMax] = {};
+                float alpha = 0.0f;
+                for (int n = 0; n < 4; n++) {
+                    const size_t at = (size_t)rows[n >> 1] * width + cols[n & 1];
+                    votes[label[at]] += weights[n];
+                    alpha += weights[n] * rgba32Buf[at * 4 + 3];
+                }
+                int best = 0;
+                for (int c = 1; c < centres; c++) {
+                    if (votes[c] > votes[best]) {
+                        best = c;
+                    }
+                }
+                uint8_t* out = &flat[((size_t)y * outWidth + x) * 4];
+                out[0] = (uint8_t)centre[best][0];
+                out[1] = (uint8_t)centre[best][1];
+                out[2] = (uint8_t)centre[best][2];
+                out[3] = (uint8_t)(alpha + 0.5f);
+            }
+        }
+    }
+    mRapi->UploadTexture(flat.data(), outWidth, outHeight);
+}
+
 void Interpreter::ImportTextureRgba16(int tile, bool importReplacement) {
     const RawTexMetadata* metadata = &mRdp->loaded_texture[mRdp->texture_tile[tile].tmem_index].raw_tex_metadata;
     const uint8_t* addr =
@@ -670,7 +1309,7 @@ void Interpreter::ImportTextureRgba16(int tile, bool importReplacement) {
         }
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureRgba32(int tile, bool importReplacement) {
@@ -737,7 +1376,7 @@ void Interpreter::ImportTextureRgba32(int tile, bool importReplacement) {
             i++;
         }
     }
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureIA4(int tile, bool importReplacement) {
@@ -782,7 +1421,7 @@ void Interpreter::ImportTextureIA4(int tile, bool importReplacement) {
         }
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureIA8(int tile, bool importReplacement) {
@@ -824,7 +1463,7 @@ void Interpreter::ImportTextureIA8(int tile, bool importReplacement) {
         }
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureIA16(int tile, bool importReplacement) {
@@ -874,7 +1513,7 @@ void Interpreter::ImportTextureIA16(int tile, bool importReplacement) {
         }
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureI4(int tile, bool importReplacement) {
@@ -926,7 +1565,7 @@ void Interpreter::ImportTextureI4(int tile, bool importReplacement) {
         }
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureI8(int tile, bool importReplacement) {
@@ -966,7 +1605,7 @@ void Interpreter::ImportTextureI8(int tile, bool importReplacement) {
         }
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureCi4(int tile, bool importReplacement) {
@@ -1055,7 +1694,7 @@ void Interpreter::ImportTextureCi4(int tile, bool importReplacement) {
         }
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureCi8(int tile, bool importReplacement) {
@@ -1132,7 +1771,7 @@ void Interpreter::ImportTextureCi8(int tile, bool importReplacement) {
         height = tile_h;
     }
 
-    mRapi->UploadTexture(mTexUploadBuffer, width, height);
+    UploadTextureStyled(mTexUploadBuffer, width, height);
 }
 
 void Interpreter::ImportTextureImg(int tile, bool importReplacement) {
@@ -1149,7 +1788,7 @@ void Interpreter::ImportTextureImg(int tile, bool importReplacement) {
 
     uint16_t width = metadata->width;
     uint16_t height = metadata->height;
-    mRapi->UploadTexture(addr, width, height);
+    UploadTextureStyled(addr, width, height);
 }
 
 void Interpreter::ImportTextureRaw(int tile, bool importReplacement) {
@@ -1196,7 +1835,7 @@ void Interpreter::ImportTextureRaw(int tile, bool importReplacement) {
 
     if (resultNewLineSize == 4 * width && resultNewHeight == height) {
         // Can use the texture directly since it has the correct dimensions
-        mRapi->UploadTexture(addr, width, height);
+        UploadTextureStyled(addr, width, height);
         return;
     }
 
@@ -1244,7 +1883,7 @@ void Interpreter::ImportTextureRaw(int tile, bool importReplacement) {
             uploadHeight = resultNewHeight;
         }
     }
-    mRapi->UploadTexture(mTexUploadBuffer, uploadWidth, uploadHeight);
+    UploadTextureStyled(mTexUploadBuffer, uploadWidth, uploadHeight);
 }
 
 void Interpreter::ImportTexture(int i, int tile, bool importReplacement) {
@@ -1309,6 +1948,10 @@ void Interpreter::ImportTexture(int i, int tile, bool importReplacement) {
         }
     } else {
         key = { origAddr, {}, fmt, siz, paletteIndex, origSizeBytes };
+    }
+
+    if (mFlattenUpload) {
+        key.palette_index |= 0x80; // MergeShip2: the flat-colour copy of a texture is cached beside the real one
     }
 
     if (TextureCacheLookup(i, key)) {
@@ -1537,6 +2180,9 @@ void Interpreter::GfxSpMatrix(uint8_t parameters, const int32_t* addr) {
         mRsp->lights_changed = 1;
     }
     MatrixMul(mRsp->MP_matrix, mRsp->modelview_matrix_stack[mRsp->modelview_matrix_stack_size - 1], mRsp->P_matrix);
+    if (mShadowPass) {
+        ShadowMatrix();
+    }
 }
 
 void Interpreter::GfxSpPopMatrix(uint32_t count) {
@@ -1546,6 +2192,9 @@ void Interpreter::GfxSpPopMatrix(uint32_t count) {
             if (mRsp->modelview_matrix_stack_size > 0) {
                 MatrixMul(mRsp->MP_matrix, mRsp->modelview_matrix_stack[mRsp->modelview_matrix_stack_size - 1],
                           mRsp->P_matrix);
+                if (mShadowPass) {
+                    ShadowMatrix();
+                }
             }
         }
     }
@@ -1578,6 +2227,9 @@ void Interpreter::AdjustWidthHeightForScale(uint32_t& width, uint32_t& height, u
 }
 
 void Interpreter::GfxSpVertex(size_t n_vertices, size_t dest_index, const F3DVtx* vertices) {
+    if (mShadowPass && sShadowNoCast) {
+        return; // (MergeShip2 real-time shadows: these cast none, G_REGS_EX 11)
+    }
     for (size_t i = 0; i < n_vertices; i++, dest_index++) {
         const F3DVtx_t* v = &vertices[i].v;
         const F3DVtx_tn* vn = &vertices[i].n;
@@ -1604,12 +2256,43 @@ void Interpreter::GfxSpVertex(size_t n_vertices, size_t dest_index, const F3DVtx
             world_pos[2] = v->ob[0] * mtx[0][2] + v->ob[1] * mtx[1][2] + v->ob[2] * mtx[2][2] + mtx[3][2];
         }
 
-        x = AdjXForAspectRatio(x);
+        if (sSway != nullptr) {
+            // MergeShip2 swaying grass (SwayEx): the vertex's place moves sideways in the world, which is through
+            // the view the projection carries (or the light's, in its pass)
+            float weight;
+            if (sSway->byHeight > 0.0f) {
+                weight = (v->ob[1] - sSway->base) * sSway->byHeight;
+            } else if (sSway->byHeight < 0.0f) {
+                weight = sSwayTable != nullptr ? (float)sSwayTable[i] * (1.0f / 255.0f) : 0.0f;
+            } else {
+                weight = (float)(v->flag & 0xFF) * (1.0f / 255.0f);
+            }
+            if (weight > 0.0f) {
+                weight = weight > 1.0f ? 1.0f : weight;
+                const float(*m)[4] = mRsp->modelview_matrix_stack[mRsp->modelview_matrix_stack_size - 1];
+                const float wx = v->ob[0] * m[0][0] + v->ob[1] * m[1][0] + v->ob[2] * m[2][0] + m[3][0];
+                const float wz = v->ob[0] * m[0][2] + v->ob[1] * m[1][2] + v->ob[2] * m[2][2] + m[3][2];
+                float sx, sz;
+                SwayAt(wx, wz, &sx, &sz);
+                const float reach = sSway->amp * weight * weight;
+                const float(*c)[4] = mShadowPass ? mShadowLight : mRsp->P_matrix;
+                sx *= reach;
+                sz *= reach;
+                x += sx * c[0][0] + sz * c[2][0];
+                y += sx * c[0][1] + sz * c[2][1];
+                z += sx * c[0][2] + sz * c[2][2];
+                w += sx * c[0][3] + sz * c[2][3];
+            }
+        }
+
+        if (!mShadowPass) { // (MergeShip2 real-time shadows: the light's view is square)
+            x = AdjXForAspectRatio(x);
+        }
 
         short U = v->tc[0] * mRsp->texture_scaling_factor.s >> 16;
         short V = v->tc[1] * mRsp->texture_scaling_factor.t >> 16;
 
-        if (mRsp->geometry_mode & G_LIGHTING) {
+        if ((mRsp->geometry_mode & G_LIGHTING) && !mShadowPass) { // (the light's pass is shapes alone)
             if (mRsp->lights_changed) {
                 for (int i = 0; i < mRsp->current_num_lights - 1; i++) {
                     CalculateNormalDir(&mRsp->current_lights[i].l, mRsp->current_lights_coeffs[i]);
@@ -1681,6 +2364,15 @@ void Interpreter::GfxSpVertex(size_t n_vertices, size_t dest_index, const F3DVtx
             d->color.g = g > 255 ? 255 : g;
             d->color.b = b > 255 ? 255 : b;
 
+            if (dest_index < MAX_VERTICES + 4) { // MergeShip2 (toon outlines): where the normal points on screen
+                sOutlineNormal[dest_index][0] =
+                    AdjXForAspectRatio(vn->n[0] * mRsp->MP_matrix[0][0] + vn->n[1] * mRsp->MP_matrix[1][0] +
+                                       vn->n[2] * mRsp->MP_matrix[2][0]);
+                sOutlineNormal[dest_index][1] = vn->n[0] * mRsp->MP_matrix[0][1] + vn->n[1] * mRsp->MP_matrix[1][1] +
+                                                vn->n[2] * mRsp->MP_matrix[2][1];
+                sOutlineHasNormal[dest_index] = true;
+            }
+
             if (mRsp->geometry_mode & G_TEXTURE_GEN) {
                 float dotx = 0, doty = 0;
                 dotx += vn->n[0] * mRsp->current_lookat_coeffs[0][0];
@@ -1716,6 +2408,9 @@ void Interpreter::GfxSpVertex(size_t n_vertices, size_t dest_index, const F3DVtx
             d->color.r = v->cn[0];
             d->color.g = v->cn[1];
             d->color.b = v->cn[2];
+            if (dest_index < MAX_VERTICES + 4) {
+                sOutlineHasNormal[dest_index] = false;
+            }
         }
 
         d->u = U;
@@ -1762,6 +2457,7 @@ void Interpreter::GfxSpVertex(size_t n_vertices, size_t dest_index, const F3DVtx
         } else {
             d->color.a = v->cn[3];
         }
+        d->alpha = v->cn[3];
     }
 }
 
@@ -1782,6 +2478,9 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
     struct LoadedVertex* v3 = &mRsp->loaded_vertices[vtx3_idx];
     struct LoadedVertex* v_arr[3] = { v1, v2, v3 };
 
+    if (mShadowPass && sShadowNoCast) {
+        return; // (MergeShip2 real-time shadows: these cast none, G_REGS_EX 11)
+    }
     // if (rand()%2) return;
 
     if (v1->clip_rej & v2->clip_rej & v3->clip_rej) {
@@ -1792,8 +2491,13 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
     const uint32_t cull_both = get_attr(CULL_BOTH);
     const uint32_t cull_front = get_attr(CULL_FRONT);
     const uint32_t cull_back = get_attr(CULL_BACK);
+    bool outline_only = false; // MergeShip2 (toon styles): a back face, drawn as ink
 
-    if ((mRsp->geometry_mode & cull_both) != 0) {
+    // (MergeShip2 real-time shadows: out of doors a surface covers what is behind it from the light whichever way it
+    // faces: a cliff drawn from one side only still stands between the sun and the ground)
+    const bool shadowBothSides =
+        mShadowPass && sShadowBothSides && (mRsp->geometry_mode & cull_both) != cull_both;
+    if ((mRsp->geometry_mode & cull_both) != 0 && !shadowBothSides) {
         float dx1 = v1->x / (v1->w) - v2->x / (v2->w);
         float dy1 = v1->y / (v1->w) - v2->y / (v2->w);
         float dx2 = v3->x / (v3->w) - v2->x / (v2->w);
@@ -1820,7 +2524,10 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
             }
         } else if (cull_type == cull_back) {
             if (cross >= 0) {
-                return;
+                if (is_rect || cross == 0 || !OutlineStyle(this) || mShadowPass) {
+                    return;
+                }
+                outline_only = true;
             }
         } else if (cull_type == cull_both) {
             // Why is this even an option?
@@ -1834,6 +2541,35 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
     bool prim_depth_enabled = (mRdp->other_mode_l & G_ZS_PRIM) != 0;
     bool depth_test = (zbuffer_enabled || prim_depth_enabled) && (mRdp->other_mode_l & Z_CMP) == Z_CMP;
     bool depth_mask = (mRdp->other_mode_l & Z_UPD) == Z_UPD;
+    // (in the light's pass: a solid surface, drawn as its shape alone -- see below)
+    bool shadowPlain = false;
+    if (mShadowPass) {
+        // MergeShip2 real-time shadows, the light's pass: only what stands in the world and covers what is behind
+        // it. Not the screen's rectangles, not what is drawn into another framebuffer or through a view that is
+        // not the world's, nothing that leaves the depth alone (the sky, glows, the game's own round shadows), no
+        // decals, and nothing that blends (water, glass): a cut-out's holes are its shader's doing and stay holes.
+        const bool blends = ((mRdp->other_mode_l & (3 << 20)) == (G_BL_CLR_MEM << 20) &&
+                             (mRdp->other_mode_l & (3 << 16)) == (G_BL_1MA << 16)) ||
+                            ((mRdp->other_mode_l & (3 << 22)) == (G_BL_CLR_MEM << 22) &&
+                             (mRdp->other_mode_l & (3 << 18)) == (G_BL_1MA << 18));
+        const bool cutout = (mRdp->other_mode_l & CVG_X_ALPHA) == CVG_X_ALPHA ||
+                            (mRdp->other_mode_l & (3U << G_MDSFT_ALPHACOMPARE)) == G_AC_THRESHOLD;
+        // (explicit blend factors, G_SETBLENDMODE_EX: one and zero is a surface that covers; and so is the plain
+        // mix by alpha where the surface writes its depth, which is how the 3DS characters' materials are drawn --
+        // they blend so that they can fade. Water and glass leave the depth alone and are out by that already.)
+        const uint32_t ex = mRdp->blend_ex_mode;
+        const uint32_t exSrc = (ex >> 8) & 0xF;
+        const uint32_t exDst = (ex >> 4) & 0xF;
+        const bool exCovers = (exSrc == G_BLENDEX_ONE && exDst == G_BLENDEX_ZERO) ||
+                              (exSrc == G_BLENDEX_SRC_ALPHA && exDst == G_BLENDEX_ONE_MINUS_SRC_ALPHA);
+        const bool exBlends = ex != 0 && !exCovers;
+        if (is_rect || mFbActive || !mShadowWorld || !depth_test || !depth_mask ||
+            (mRdp->other_mode_l & ZMODE_DEC) == ZMODE_DEC || (blends && !cutout && ex == 0) || exBlends) {
+            return;
+        }
+        // (a cut-out of the pack's is marked so for the toon styles' ink: its holes are its own shader's doing)
+        shadowPlain = !cutout && (mRsp->extra_geometry_mode & kExNoOutline) == 0;
+    }
     uint8_t depth_test_and_mask = (depth_test ? 1 : 0) | (depth_mask ? 2 : 0);
     if (depth_test_and_mask != mRenderingState.depth_test_and_mask) {
         Flush();
@@ -1848,7 +2584,7 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
         mRenderingState.decal_mode = zmode_decal;
     }
 
-    if (mRdp->viewport_or_scissor_changed) {
+    if (mRdp->viewport_or_scissor_changed && !mShadowPass) { // (the light's pass has its own, the whole map)
         if (memcmp(&mRdp->viewport, &mRenderingState.viewport, sizeof(mRdp->viewport)) != 0) {
             Flush();
             mRapi->SetViewport(mRdp->viewport.x, mRdp->viewport.y, mRdp->viewport.width, mRdp->viewport.height);
@@ -1860,6 +2596,11 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
             mRenderingState.scissor = mRdp->scissor;
         }
         mRdp->viewport_or_scissor_changed = false;
+    }
+
+    if (outline_only) {
+        EmitOutlineTriangle(this, vtx1_idx, vtx2_idx, vtx3_idx);
+        return;
     }
 
     uint64_t cc_id = mRdp->combine_mode;
@@ -1887,6 +2628,50 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
         }
         use_alpha = true;
     }
+
+    if (shadowPlain) {
+        // MergeShip2 real-time shadows, the light's pass: a solid surface is only its shape there. All of them are
+        // drawn with one plain shader, without texture or blending, so nothing changes from one material to the
+        // next and they go to the card in a few large lots.
+        use_alpha = use_fog = texture_edge = use_noise = use_2cyc = alpha_threshold = invisible = use_grayscale =
+            false;
+    }
+
+    // MergeShip2: explicit blending (G_SETBLENDMODE_EX) needs the shader's alpha and blending on
+    const uint32_t blend_ex_mode = shadowPlain ? 0 : mRdp->blend_ex_mode;
+    if (blend_ex_mode != 0) {
+        use_alpha = true;
+    }
+
+    // MergeShip2 render styles (RenderStyle in interpreter.h). The ones that reshade the world stay off screen
+    // rectangles and everything drawn without a depth test, which is the text, the HUD and the menus.
+    uint32_t render_style = mRenderStyle;
+    if (render_style >= RENDER_STYLE_TOON && render_style <= RENDER_STYLE_FACETED && (is_rect || !depth_test)) {
+        render_style = RENDER_STYLE_NONE;
+    }
+    if (mShadowPass) {
+        render_style = RENDER_STYLE_NONE; // (real-time shadows: the light's pass is depth alone)
+    }
+    const bool flat_textures = render_style == RENDER_STYLE_FLAT || render_style == RENDER_STYLE_TOON_FLAT ||
+                               render_style == RENDER_STYLE_FACETED;
+    // The toon styles on a surface whose light is painted into its vertex colours (the rooms: nothing is computed
+    // from normals there): finer bands with soft edges, kStyleToonPainted to the shaders. Hard bands cut such a
+    // surface along its triangles. Surfaces drawn with a blend (water, glows, shadows) keep their smooth shade.
+    if ((render_style == RENDER_STYLE_TOON || render_style == RENDER_STYLE_TOON_FLAT) &&
+        (mRsp->geometry_mode & G_LIGHTING) == 0) {
+        const uint32_t src = (blend_ex_mode >> 8) & 0xF;
+        const uint32_t dst = (blend_ex_mode >> 4) & 0xF;
+        const bool opaque =
+            blend_ex_mode != 0 ? (src == G_BLENDEX_ONE && dst == G_BLENDEX_ZERO) : (!use_alpha || texture_edge);
+        render_style = opaque ? kStyleToonPainted : (uint32_t)RENDER_STYLE_NONE;
+    }
+    if (flat_textures != mFlattenUpload) {
+        mFlattenUpload = flat_textures;
+        mRdp->textures_changed[0] = true;
+        mRdp->textures_changed[1] = true;
+    }
+    const bool faceted = render_style == RENDER_STYLE_FACETED;
+    cc_options |= (uint64_t)render_style << RENDER_STYLE_SHIFT;
 
     if (use_alpha) {
         cc_options |= SHADER_OPT(ALPHA);
@@ -1916,27 +2701,56 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
         cc_options |= SHADER_OPT(PRIM_DEPTH);
     }
 
-    if (!mShaderStack.empty()) {
-        cc_options |= (mShaderStack.top() << SHADER_ID_SHIFT);
+    if (!mShaderStack.empty() && !shadowPlain) {
+        cc_options |= ((uint64_t)(mShaderStack.top() & 0xFFFF) << SHADER_ID_SHIFT);
     } else {
-        cc_options |= -1 << SHADER_ID_SHIFT;
+        cc_options |= (uint64_t)0xFFFF << SHADER_ID_SHIFT;
     }
 
-    if (mRdp->loaded_texture[0].masked) {
-        cc_options |= SHADER_OPT(TEXEL0_MASK);
-    }
-    if (mRdp->loaded_texture[1].masked) {
-        cc_options |= SHADER_OPT(TEXEL1_MASK);
-    }
-    if (mRdp->loaded_texture[0].blended) {
-        cc_options |= SHADER_OPT(TEXEL0_BLEND);
-    }
-    if (mRdp->loaded_texture[1].blended) {
-        cc_options |= SHADER_OPT(TEXEL1_BLEND);
+    if (!shadowPlain) {
+        if (mRdp->loaded_texture[0].masked) {
+            cc_options |= SHADER_OPT(TEXEL0_MASK);
+        }
+        if (mRdp->loaded_texture[1].masked) {
+            cc_options |= SHADER_OPT(TEXEL1_MASK);
+        }
+        if (mRdp->loaded_texture[0].blended) {
+            cc_options |= SHADER_OPT(TEXEL0_BLEND);
+        }
+        if (mRdp->loaded_texture[1].blended) {
+            cc_options |= SHADER_OPT(TEXEL1_BLEND);
+        }
     }
 
     ColorCombinerKey key;
     key.combine_mode = mRdp->combine_mode;
+    if (shadowPlain) {
+        // (the shade alone, colour and alpha: (0 - 0) * 0 + SHADE in both cycles)
+        const uint64_t rgb = 15u | (15u << 4) | (31u << 8) | ((uint64_t)G_CCMUX_SHADE << 13);
+        const uint64_t alpha = 7u | (7u << 3) | (7u << 6) | ((uint64_t)G_ACMUX_SHADE << 9);
+        key.combine_mode = rgb | (alpha << 16) | (rgb << 28) | (alpha << 44);
+    }
+    if (!sStandInKinds.empty() && !shadowPlain) {
+        // MergeShip2, the 3DS interface option: a marked stand-in (sStandInKinds)
+        const RawTexMetadata& standIn =
+            mRdp->loaded_texture[mRdp->texture_tile[mRdp->first_tile_index].tmem_index].raw_tex_metadata;
+        const auto kind = standIn.resource != nullptr ? sStandInKinds.find(standIn.resource.get()) : sStandInKinds.end();
+        if (kind != sStandInKinds.end()) {
+            const uint32_t rgb = (uint32_t)(key.combine_mode & 0xFFFF);
+            const uint32_t alpha = (uint32_t)((key.combine_mode >> 16) & 0xFFF);
+            const bool reads = (rgb & 0xF) == G_CCMUX_TEXEL0 || ((rgb >> 4) & 0xF) == G_CCMUX_TEXEL0 ||
+                               ((rgb >> 8) & 0x1F) == G_CCMUX_TEXEL0 || ((rgb >> 13) & 7) == G_CCMUX_TEXEL0 ||
+                               (alpha & 7) == G_ACMUX_TEXEL0 || ((alpha >> 3) & 7) == G_ACMUX_TEXEL0 ||
+                               ((alpha >> 6) & 7) == G_ACMUX_TEXEL0 || ((alpha >> 9) & 7) == G_ACMUX_TEXEL0;
+            if (reads) {
+                // (a - b) * c + d: the texture alone, or the texture by the primitive colour
+                const uint32_t own = (uint32_t)G_CCMUX_TEXEL0 << 13;
+                const uint32_t tint = G_CCMUX_TEXEL0 | ((G_CCMUX_0 & 0xF) << 4) | (G_CCMUX_PRIMITIVE << 8) |
+                                      ((G_CCMUX_0 & 7) << 13);
+                key.combine_mode = (key.combine_mode & ~(uint64_t)0xFFFF) | (kind->second == 1 ? own : tint);
+            }
+        }
+    }
     key.options = cc_options;
 
     ColorCombiner* comb = LookupOrCreateColorCombiner(key);
@@ -2050,6 +2864,9 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
             }
 
             bool linear_filter = (mRdp->other_mode_h & (3U << G_MDSFT_TEXTFILT)) != G_TF_POINT;
+            if (PixelStyle(mRenderStyle)) {
+                linear_filter = false; // MergeShip2: hard texels for the 16-bit and 8-bit styles
+            }
             if (linear_filter != mRenderingState.mTextures[i]->second.linear_filter ||
                 cms != mRenderingState.mTextures[i]->second.cms || cmt != mRenderingState.mTextures[i]->second.cmt) {
                 Flush();
@@ -2083,12 +2900,36 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
         mRapi->SetUseAlpha(use_alpha);
         mRenderingState.alpha_blend = use_alpha;
     }
+    if (blend_ex_mode != mBlendExModeActive ||
+        (blend_ex_mode != 0 && memcmp(&mRdp->blend_ex_color, &mBlendExColorActive, sizeof(RGBA)) != 0)) {
+        Flush();
+        const uint8_t constant[4] = { mRdp->blend_ex_color.r, mRdp->blend_ex_color.g, mRdp->blend_ex_color.b,
+                                      mRdp->blend_ex_color.a };
+        mRapi->SetBlendMode(blend_ex_mode, constant);
+        mBlendExModeActive = blend_ex_mode;
+        mBlendExColorActive = mRdp->blend_ex_color;
+    }
     uint8_t numInputs;
     bool usedTextures[2];
 
     mRapi->ShaderGetInfo(prg, &numInputs, usedTextures);
 
+
     struct GfxClipParameters clip_parameters = mRapi->GetClipParameters();
+
+    // MergeShip2, faceted style: the three vertex shades averaged into one
+    RGBA facet_color[3];
+    if (faceted) {
+        RGBA mean;
+        const float facet = FacetLight(this, v1, v2, v3) / 3.0f;
+        mean.r = (uint8_t)std::min((v1->color.r + v2->color.r + v3->color.r) * facet, 255.0f);
+        mean.g = (uint8_t)std::min((v1->color.g + v2->color.g + v3->color.g) * facet, 255.0f);
+        mean.b = (uint8_t)std::min((v1->color.b + v2->color.b + v3->color.b) * facet, 255.0f);
+        for (int i = 0; i < 3; i++) {
+            facet_color[i] = mean;
+            facet_color[i].a = v_arr[i]->color.a;
+        }
+    }
 
     for (int i = 0; i < 3; i++) {
         float z = v_arr[i]->z, w = v_arr[i]->w;
@@ -2107,6 +2948,14 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
             }
             float u = v_arr[i]->u / 32.0f;
             float v = v_arr[i]->v / 32.0f;
+            if (t == 1 && (mRsp->extra_geometry_mode & G_EX_TEXEL1_UPPER_VERTEX)) {
+                // MergeShip2: a second UV set, loaded 32 slots above the triangle's vertices
+                const ptrdiff_t slot = v_arr[i] - mRsp->loaded_vertices;
+                if (slot >= 0 && slot < 32) {
+                    u = mRsp->loaded_vertices[slot + 32].u / 32.0f;
+                    v = mRsp->loaded_vertices[slot + 32].v / 32.0f;
+                }
+            }
 
             uint32_t uv_tile = effective_tile[t];
             int shifts = mRdp->texture_tile[uv_tile].shifts;
@@ -2178,6 +3027,7 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
             RGBA* color;
             RGBA tmp;
             for (int k = 0; k < 1 + (use_alpha ? 1 : 0); k++) {
+                bool is_shade = false;
                 switch (comb->shader_input_mapping[k][j]) {
                         // Note: CCMUX constants and ACMUX constants used here have same value, which is why this works
                         // (except LOD fraction).
@@ -2185,7 +3035,8 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
                         color = &mRdp->prim_color;
                         break;
                     case G_CCMUX_SHADE:
-                        color = &v_arr[i]->color;
+                        color = faceted ? &facet_color[i] : &v_arr[i]->color;
+                        is_shade = true;
                         break;
                     case G_CCMUX_ENVIRONMENT:
                         color = &mRdp->env_color;
@@ -2252,10 +3103,13 @@ void Interpreter::GfxSpTri1(uint8_t vtx1_idx, uint8_t vtx2_idx, uint8_t vtx3_idx
                     mBufVbo[mBufVboLen++] = color->g / 255.0f;
                     mBufVbo[mBufVboLen++] = color->b / 255.0f;
                 } else {
-                    if (use_fog && !use_blend_color && color == &v_arr[i]->color) {
+                    if (use_fog && !use_blend_color && is_shade) {
                         // Shade alpha is 100% for standard fog, blend color mode preserves
-                        // it since fog alpha is the blend factor
-                        mBufVbo[mBufVboLen++] = 1.0f;
+                        // it since fog alpha is the blend factor. (MergeShip2: G_EX_KEEP_VERTEX_ALPHA keeps the
+                        // vertex's own alpha.)
+                        mBufVbo[mBufVboLen++] = (mRsp->extra_geometry_mode & G_EX_KEEP_VERTEX_ALPHA)
+                                                    ? v_arr[i]->alpha / 255.0f
+                                                    : 1.0f;
                     } else {
                         mBufVbo[mBufVboLen++] = color->a / 255.0f;
                     }
@@ -2515,14 +3369,36 @@ void Interpreter::GfxDpLoadTlut(uint8_t tile, uint32_t high_index) {
     uint32_t entryCount = high_index + 1;
     uint32_t byteCount = entryCount * 2;
 
+    // MergeShip2: a palette resource is exactly as long as its colours, however many entries the display list loads
+    // (child Malon's eyes load 256 from a shorter one; the N64 read on into whatever followed). Reading past the
+    // resource can run off the end of mapped memory, so only what the resource holds is copied and the rest is zero.
+    uint32_t available = UINT32_MAX;
+    const auto& meta = mRdp->texture_to_load.raw_tex_metadata;
+    if (meta.resource != nullptr && meta.resource->ImageData != nullptr) {
+        const uint8_t* begin = meta.resource->ImageData;
+        const uint8_t* end = begin + meta.resource->ImageDataSize;
+        if (src >= begin && src <= end) {
+            available = (uint32_t)(end - src);
+        }
+    }
+    auto copyTlut = [&](uint8_t* dst, uint32_t srcOffset, uint32_t length) {
+        uint32_t readable = srcOffset >= available ? 0 : std::min(length, available - srcOffset);
+        if (readable > 0) {
+            memcpy(dst, src + srcOffset, readable);
+        }
+        if (readable < length) {
+            memset(dst + readable, 0, length - readable);
+        }
+    };
+
     if (tmem >= 256) {
         // N64 TMEM palette area starts at tmem word 256. Each CI4 palette = 16 entries = 16 tmem words.
         uint32_t paletteByteOffset = (tmem - 256) * 2;
 
         if (high_index == 255 && paletteByteOffset == 0) {
             // CI8: full 256-entry palette spanning both halves
-            memcpy(mRdp->palette_staging[0], src, 256);
-            memcpy(mRdp->palette_staging[1], src + 256, 256);
+            copyTlut(mRdp->palette_staging[0], 0, 256);
+            copyTlut(mRdp->palette_staging[1], 256, 256);
             mRdp->palettes[0] = mRdp->palette_staging[0];
             mRdp->palettes[1] = mRdp->palette_staging[1];
             mRdp->palette_dram_addr[0] = src;
@@ -2530,14 +3406,14 @@ void Interpreter::GfxDpLoadTlut(uint8_t tile, uint32_t high_index) {
         } else if (paletteByteOffset < 256) {
             // Palettes 0-7 range
             uint32_t copyLen = (paletteByteOffset + byteCount <= 256) ? byteCount : (256 - paletteByteOffset);
-            memcpy(mRdp->palette_staging[0] + paletteByteOffset, src, copyLen);
+            copyTlut(mRdp->palette_staging[0] + paletteByteOffset, 0, copyLen);
             mRdp->palettes[0] = mRdp->palette_staging[0];
             mRdp->palette_dram_addr[0] = src;
         } else {
             // Palettes 8-15 range
             uint32_t offset = paletteByteOffset - 256;
             uint32_t copyLen = (offset + byteCount <= 256) ? byteCount : (256 - offset);
-            memcpy(mRdp->palette_staging[1] + offset, src, copyLen);
+            copyTlut(mRdp->palette_staging[1] + offset, 0, copyLen);
             mRdp->palettes[1] = mRdp->palette_staging[1];
             mRdp->palette_dram_addr[1] = src;
         }
@@ -3402,13 +4278,39 @@ bool gfx_mtx_otr_filepath_handler_custom(F3DGfx** cmd0) {
     }
 }
 
+// MergeShip2: a room of the Ocarina of Time 3D pack loads a matrix by name for every cluster of its vertices, well
+// over a thousand a frame, and through the resource manager each is a search by name: about two microseconds, which
+// came to near half of a frame's whole drawing (measured: "gMergeShip.ShadowTiming"). The pack's matrices never
+// change, so they are remembered by their hash, and kept loaded. nullptr: not one of the pack's (as always, then).
+static const int32_t* PackMatrix(uint64_t hash) {
+    struct Kept {
+        std::shared_ptr<Ship::IResource> resource;
+        const int32_t* mtx;
+    };
+    static std::unordered_map<uint64_t, Kept> sKept;
+    auto it = sKept.find(hash);
+    if (it == sKept.end()) {
+        Kept kept{};
+        auto manager = Ship::Context::GetRawInstance()->GetResourceManager();
+        const std::string* name = manager->GetArchiveManager()->HashToString(hash);
+        if (name != nullptr && name->compare(0, 12, "port3ds/mtx/") == 0) {
+            kept.resource = manager->LoadResource(hash);
+            kept.mtx = kept.resource != nullptr ? (const int32_t*)kept.resource->GetRawPointer() : nullptr;
+        }
+        it = sKept.emplace(hash, std::move(kept)).first;
+    }
+    return it->second.mtx;
+}
+
 bool gfx_mtx_otr_handler_custom_f3dex2(F3DGfx** cmd0) {
     (*cmd0)++;
     F3DGfx* cmd = *cmd0;
 
     const uint64_t hash = ((uint64_t)cmd->words.w0 << 32) + cmd->words.w1;
-    const int32_t* mtx =
-        (const int32_t*)Ship::Context::GetRawInstance()->GetResourceManager()->GetResourceRawPointer(hash);
+    const int32_t* mtx = PackMatrix(hash);
+    if (mtx == nullptr) {
+        mtx = (const int32_t*)Ship::Context::GetRawInstance()->GetResourceManager()->GetResourceRawPointer(hash);
+    }
 
     if (mtx != NULL) {
         Interpreter* gfx = mInstance.lock().get();
@@ -3635,7 +4537,11 @@ bool gfx_vtx_hash_handler_custom(F3DGfx** cmd0) {
     if (offset > 0xFFFFF) {
         (*cmd0)--;
         F3DGfx* cmd = *cmd0;
+        if (sSway != nullptr && sSway->byHeight < 0.0f) { // (MergeShip2 swaying grass: a room's own plants)
+            sSwayTable = SwayTableFor(hash, (const void*)offset, C0(12, 8));
+        }
         gfx->GfxSpVertex(C0(12, 8), C0(1, 7) - C0(12, 8), (F3DVtx*)offset);
+        sSwayTable = nullptr;
         (*cmd0)++;
     } else {
         F3DVtx* vtx = (F3DVtx*)Ship::Context::GetRawInstance()->GetResourceManager()->GetResourceRawPointer(hash);
@@ -3649,7 +4555,11 @@ bool gfx_vtx_hash_handler_custom(F3DGfx** cmd0) {
             // TODO: WTF??
             cmd->words.w1 = (uintptr_t)vtx;
 
+            if (sSway != nullptr && sSway->byHeight < 0.0f) { // (MergeShip2 swaying grass: a room's own plants)
+                sSwayTable = SwayTableFor(hash, vtx, C0(12, 8));
+            }
             gfx->GfxSpVertex(C0(12, 8), C0(1, 7) - C0(12, 8), vtx);
+            sSwayTable = nullptr;
             (*cmd0)++;
         }
     }
@@ -3998,8 +4908,16 @@ bool gfx_set_timg_handler_rdp(F3DGfx** cmd0) {
 
     if ((i & 1) != 1) {
         if (gfx_check_image_signature(imgData) == 1) {
-            std::shared_ptr<Fast::Texture> tex =
-                std::static_pointer_cast<Fast::Texture>(gfx->ResolveResourceCached(imgData));
+            std::shared_ptr<Fast::Texture> tex;
+            if (gfx->mRsp->extra_geometry_mode & kExTextureRedirect) {
+                tex = RedirectedTexture(imgData); // MergeShip2 (3DS characters)
+            } else if (sInterfaceRedirect && strncmp(imgData + 7, "textures/", 9) == 0) {
+                tex = RedirectedTexture(imgData); // MergeShip2 (3DS item and quest icons)
+            }
+            if (tex == nullptr) {
+                tex = std::static_pointer_cast<Fast::Texture>(gfx->ResolveResourceCached(imgData));
+            }
+            tex = HdTexture(tex); // MergeShip2 (3DS sharper textures)
 
             if (tex == nullptr) {
                 (*cmd0)++;
@@ -4031,19 +4949,34 @@ bool gfx_set_timg_otr_hash_handler_custom(F3DGfx** cmd0) {
     (*cmd0)++;
     uint64_t hash = ((uint64_t)(*cmd0)->words.w0 << 32) + (uint64_t)(*cmd0)->words.w1;
 
-    const char* fileName =
-        Ship::Context::GetRawInstance()->GetResourceManager()->GetArchiveManager()->HashToCString(hash);
     uint32_t texFlags = 0;
     RawTexMetadata rawTexMetadata = {};
 
-    if (fileName == nullptr) {
-        (*cmd0)++;
-        return false;
+    // MergeShip2: the Ocarina of Time 3D pack's textures are remembered by their hash and kept loaded (they never
+    // change, and the search by name is a couple of microseconds a material: PackMatrix has the measurements)
+    struct PackTexture {
+        std::shared_ptr<Fast::Texture> texture;
+        const char* name; // (the archive's own string)
+    };
+    static std::unordered_map<uint64_t, PackTexture> sPackTextures;
+    std::shared_ptr<Fast::Texture> texture;
+    const char* fileName = nullptr;
+    if (auto kept = sPackTextures.find(hash); kept != sPackTextures.end()) {
+        texture = kept->second.texture;
+        fileName = kept->second.name;
+    } else {
+        fileName = Ship::Context::GetRawInstance()->GetResourceManager()->GetArchiveManager()->HashToCString(hash);
+        if (fileName == nullptr) {
+            (*cmd0)++;
+            return false;
+        }
+        texture = std::static_pointer_cast<Fast::Texture>(
+            Ship::Context::GetRawInstance()->GetResourceManager()->LoadResourceProcess(fileName));
+        if (texture != nullptr && strncmp(fileName, "port3ds/", 8) == 0) {
+            sPackTextures.emplace(hash, PackTexture{ texture, fileName });
+        }
     }
-
-    std::shared_ptr<Fast::Texture> texture = std::static_pointer_cast<Fast::Texture>(
-        Ship::Context::GetRawInstance()->GetResourceManager()->LoadResourceProcess(
-            Ship::Context::GetRawInstance()->GetResourceManager()->GetArchiveManager()->HashToCString(hash)));
+    texture = HdTexture(texture); // MergeShip2 (3DS sharper textures)
     if (texture != nullptr) {
         texFlags = texture->Flags;
         rawTexMetadata.width = texture->Width;
@@ -4099,6 +5032,7 @@ bool gfx_set_timg_otr_filepath_handler_custom(F3DGfx** cmd0) {
 
     std::shared_ptr<Fast::Texture> texture = std::static_pointer_cast<Fast::Texture>(
         Ship::Context::GetRawInstance()->GetResourceManager()->LoadResourceProcess(fileName));
+    texture = HdTexture(texture); // MergeShip2 (3DS sharper textures)
     if (texture != nullptr) {
         Interpreter* gfx = mInstance.lock().get();
         texFlags = texture->Flags;
@@ -4126,6 +5060,14 @@ bool gfx_set_fb_handler_custom(F3DGfx** cmd0) {
     Interpreter* gfx = mInstance.lock().get();
     gfx->Flush();
 
+    if (gfx->mShadowPass) {
+        // MergeShip2 real-time shadows: the light's pass keeps to its own framebuffer; what the game draws into
+        // another meanwhile is left out of it (GfxSpTri1)
+        gfx->mFbActive = cmd->words.w1 != 0;
+        gfx->mActiveFrameBuffer =
+            cmd->words.w1 ? gfx->mFrameBuffers.find((int32_t)cmd->words.w1) : gfx->mFrameBuffers.end();
+        return false;
+    }
     if (cmd->words.w1) {
         gfx->SetFrameBuffer((int32_t)cmd->words.w1, 1.0f);
         gfx->mActiveFrameBuffer = gfx->mFrameBuffers.find((int32_t)cmd->words.w1);
@@ -4143,6 +5085,9 @@ bool gfx_reset_fb_handler_custom(F3DGfx** cmd0) {
     gfx->Flush();
     gfx->mFbActive = false;
     gfx->mActiveFrameBuffer = gfx->mFrameBuffers.end();
+    if (gfx->mShadowPass) {
+        return false; // (MergeShip2 real-time shadows: see gfx_set_fb_handler_custom)
+    }
     gfx->mRapi->StartDrawToFramebuffer(gfx->mRendersToFb ? gfx->mGameFb : 0,
                                        (float)gfx->mCurDimensions.height / gfx->mNativeDimensions.height);
     // Force viewport and scissor to reapply against the main framebuffer, in case a previous smaller
@@ -4159,6 +5104,9 @@ bool gfx_copy_fb_handler_custom(F3DGfx** cmd0) {
     bool* hasCopiedPtr = (bool*)cmd->words.w1;
 
     gfx->Flush();
+    if (gfx->mShadowPass) {
+        return false; // (MergeShip2 real-time shadows: see gfx_set_fb_handler_custom)
+    }
     gfx->CopyFrameBuffer(C0(11, 11), C0(0, 11), (bool)C0(22, 1), hasCopiedPtr);
     return false;
 }
@@ -4181,6 +5129,9 @@ bool gfx_read_fb_handler_custom(F3DGfx** cmd0) {
     height = C1(16, 16);
 
     gfx->Flush();
+    if (gfx->mShadowPass) {
+        return false; // (MergeShip2 real-time shadows: read when the frame itself is drawn)
+    }
     gfx->mRapi->ReadFramebufferToCPU(fbId, width, height, rgba16Buffer);
 
 #ifndef IS_BIGENDIAN
@@ -4625,6 +5576,523 @@ bool gfx_stubbed_command_handler(F3DGfx** cmd0) {
     return false;
 }
 
+// ---------------------------------------------------------------------------------------------------------------
+// MergeShip2: extended vertices, for models that have what an N64 vertex cannot hold (tools/port3ds writes them).
+//
+// G_SKIN_PALETTE_OTR_HASH (0x4C; two words, then the palette resource's hash): w0 bits 0-7 are the entry count
+//   (0 clears the palette). The palette is `count` records of { u8 slot; u8 pad[3]; float m[4][3]; }: a slot of the
+//   matrix array in segment 0x0D (where the game's own skeletons put theirs) and the constant matrix that takes a
+//   vertex from the model's bind pose into that matrix's frame (rows as this file's matrices, row 3 the
+//   translation). Entry i becomes "constant i x array[slot i]" for the vertices loaded after it.
+// G_VTX_EX_OTR_HASH (0x4D; two words, then the vertex resource's hash): w0 bits 12-19 are the count, bits 0-7 the
+//   first vertex buffer slot; w1 is the byte offset into the resource. Loads F3DVtxEx records: a float position, a
+//   normal AND a colour (a lit vertex is light x colour), two texture coordinate sets (the second goes to the slot 32
+//   above, where G_EX_TEXEL1_UPPER_VERTEX reads it) and up to four palette entries with weights. A vertex without
+//   weights goes through the model matrix like any other vertex.
+// G_PUSH_SHADER_OTR_HASH (0x4E; two words, then a hash): G_PUSH_SHADER with the shader named by the hash of an
+//   archive file (the shader's name without an extension is a file of its own in the pack), so a binary display
+//   list can carry it. G_POP_SHADER ends it as usual.
+static constexpr int8_t OTR_G_SKIN_PALETTE_OTR_HASH = OPCODE(0x4c);
+static constexpr int8_t OTR_G_VTX_EX_OTR_HASH = OPCODE(0x4d);
+static constexpr int8_t OTR_G_PUSH_SHADER_OTR_HASH = OPCODE(0x4e);
+
+#pragma pack(push, 1)
+struct F3DVtxEx {
+    float pos[3];
+    int8_t nrm[3];
+    uint8_t flags; // 1: the first texture coordinate set comes from the normal (sphere map), 2: the second does
+    uint8_t color[4];
+    int16_t uv[2][2]; // 10.5 fixed; for a set made from the normal, the texture's size in the same units
+    uint8_t bone[4];
+    uint8_t weight[4]; // of 255; all zero: not skinned
+};
+struct SkinPaletteEntry {
+    uint8_t slot;
+    uint8_t pad[3];
+    float m[4][3];
+};
+#pragma pack(pop)
+
+static constexpr uint32_t kSkinPaletteMax = 96;
+static float sSkinPalette[kSkinPaletteMax][4][4];
+static uint32_t sSkinPaletteCount = 0;
+
+// The pack's vertex and palette data, kept loaded while lists that use it may still run.
+static const uint8_t* ExResource(uint64_t hash, size_t* size) {
+    static std::unordered_map<uint64_t, std::shared_ptr<Ship::IResource>> sLoaded;
+    auto it = sLoaded.find(hash);
+    if (it == sLoaded.end()) {
+        it = sLoaded.emplace(hash, Ship::Context::GetRawInstance()->GetResourceManager()->LoadResource(hash)).first;
+    }
+    if (it->second == nullptr) {
+        *size = 0;
+        return nullptr;
+    }
+    *size = it->second->GetPointerSize();
+    return (const uint8_t*)it->second->GetRawPointer();
+}
+
+// A matrix of the game's, as GfxSpMatrix reads it (the interpolated one when the frame has it).
+static void ReadGameMatrix(Interpreter* gfx, const int32_t* addr, float matrix[4][4]) {
+    if (auto it = gfx->mCurMtxReplacements->find((Mtx*)addr); it != gfx->mCurMtxReplacements->end()) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                float v = it->second.mf[i][j];
+                int as_int = (int)(v * 65536.0f);
+                matrix[i][j] = as_int * (1.0f / 65536.0f);
+            }
+        }
+        return;
+    }
+#ifndef GBI_FLOATS
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j += 2) {
+            int32_t int_part = addr[i * 2 + j / 2];
+            uint32_t frac_part = addr[8 + i * 2 + j / 2];
+            matrix[i][j] = (int32_t)((int_part & 0xffff0000) | (frac_part >> 16)) / 65536.0f;
+            matrix[i][j + 1] = (int32_t)((int_part << 16) | (frac_part & 0xffff)) / 65536.0f;
+        }
+    }
+#else
+    memcpy(matrix, addr, sizeof(float) * 16);
+#endif
+}
+
+bool gfx_skin_palette_handler_custom(F3DGfx** cmd0) {
+    Interpreter* gfx = mInstance.lock().get();
+    F3DGfx* cmd = *cmd0;
+    const uint32_t count = C0(0, 8);
+    (*cmd0)++;
+    const uint64_t hash = ((uint64_t)(*cmd0)->words.w0 << 32) + (*cmd0)->words.w1;
+
+    sSkinPaletteCount = 0;
+    if (count == 0 || count > kSkinPaletteMax) {
+        return false;
+    }
+    size_t size = 0;
+    const uint8_t* data = ExResource(hash, &size);
+    const uintptr_t array = gfx->mSegmentPointers[0x0D];
+    if (data == nullptr || size < (size_t)count * sizeof(SkinPaletteEntry) || array == 0) {
+        return false;
+    }
+    for (uint32_t i = 0; i < count; i++) {
+        SkinPaletteEntry entry;
+        memcpy(&entry, data + (size_t)i * sizeof(SkinPaletteEntry), sizeof(entry));
+        float constant[4][4];
+        for (int r = 0; r < 4; r++) {
+            constant[r][0] = entry.m[r][0];
+            constant[r][1] = entry.m[r][1];
+            constant[r][2] = entry.m[r][2];
+            constant[r][3] = r == 3 ? 1.0f : 0.0f;
+        }
+        float game[4][4];
+        ReadGameMatrix(gfx, (const int32_t*)(array + (uintptr_t)entry.slot * sizeof(Mtx)), game);
+        Interpreter::MatrixMul(sSkinPalette[i], constant, game);
+    }
+    sSkinPaletteCount = count;
+    return false;
+}
+
+static void GfxSpVertexEx(Interpreter* gfx, size_t count, size_t dest, const F3DVtxEx* vertices) {
+    RSP* rsp = gfx->mRsp;
+    const bool lighting = (rsp->geometry_mode & G_LIGHTING) != 0 && !gfx->mShadowPass; // (shapes alone there)
+    const float(*model)[4] = rsp->modelview_matrix_stack[rsp->modelview_matrix_stack_size - 1];
+    const int lights = std::clamp((int)rsp->current_num_lights - 1, 0, MAX_LIGHTS);
+
+    // Light and look-at directions: in model space for plain vertices (as GfxSpVertex has them), and as they are
+    // (world space: the game's model matrices carry no view) for skinned ones, whose palette is world matrices.
+    float dirModel[MAX_LIGHTS][3], dirWorld[MAX_LIGHTS][3], lookModel[2][3], lookWorld[2][3];
+    for (int i = 0; i < lights + 2; i++) {
+        const F3DLight_t* light = i < lights ? &rsp->current_lights[i].l : &rsp->lookat[i - lights];
+        float* world = i < lights ? dirWorld[i] : lookWorld[i - lights];
+        float* local = i < lights ? dirModel[i] : lookModel[i - lights];
+        world[0] = light->dir[0] / 127.0f;
+        world[1] = light->dir[1] / 127.0f;
+        world[2] = light->dir[2] / 127.0f;
+        Interpreter::TransposedMatrixMul(local, world, model);
+        Interpreter::NormalizeVector(local);
+        Interpreter::NormalizeVector(world);
+    }
+
+    for (size_t n = 0; n < count; n++, dest++) {
+        if (dest >= MAX_VERTICES) {
+            return;
+        }
+        F3DVtxEx v;
+        memcpy(&v, &vertices[n], sizeof(v));
+        LoadedVertex* d = &rsp->loaded_vertices[dest];
+
+        float pos[3] = { v.pos[0], v.pos[1], v.pos[2] };
+        float nrm[3] = { v.nrm[0] / 127.0f, v.nrm[1] / 127.0f, v.nrm[2] / 127.0f };
+        const uint32_t total = (uint32_t)v.weight[0] + v.weight[1] + v.weight[2] + v.weight[3];
+        const bool skinned = total > 0 && sSkinPaletteCount > 0;
+        const float(*clip)[4] = rsp->MP_matrix;
+        const float(*dirs)[3] = dirModel;
+        const float(*look)[3] = lookModel;
+        if (skinned) {
+            float p[3] = { 0.0f, 0.0f, 0.0f };
+            float q[3] = { 0.0f, 0.0f, 0.0f };
+            for (int k = 0; k < 4; k++) {
+                if (v.weight[k] == 0 || v.bone[k] >= sSkinPaletteCount) {
+                    continue;
+                }
+                const float w = v.weight[k] / (float)total;
+                const float(*m)[4] = sSkinPalette[v.bone[k]];
+                for (int c = 0; c < 3; c++) {
+                    p[c] += w * (v.pos[0] * m[0][c] + v.pos[1] * m[1][c] + v.pos[2] * m[2][c] + m[3][c]);
+                    q[c] += w * (nrm[0] * m[0][c] + nrm[1] * m[1][c] + nrm[2] * m[2][c]);
+                }
+            }
+            memcpy(pos, p, sizeof(pos));
+            memcpy(nrm, q, sizeof(nrm));
+            Interpreter::NormalizeVector(nrm);
+            // (real-time shadows, the light's pass: the world goes through the light's view, not the camera's)
+            clip = gfx->mShadowPass ? gfx->mShadowLight : rsp->P_matrix;
+            dirs = dirWorld;
+            look = lookWorld;
+        }
+
+        float x = pos[0] * clip[0][0] + pos[1] * clip[1][0] + pos[2] * clip[2][0] + clip[3][0];
+        float y = pos[0] * clip[0][1] + pos[1] * clip[1][1] + pos[2] * clip[2][1] + clip[3][1];
+        float z = pos[0] * clip[0][2] + pos[1] * clip[1][2] + pos[2] * clip[2][2] + clip[3][2];
+        float w = pos[0] * clip[0][3] + pos[1] * clip[1][3] + pos[2] * clip[2][3] + clip[3][3];
+        if (!gfx->mShadowPass) { // (the light's view is square: GfxSpVertex)
+            x = gfx->AdjXForAspectRatio(x);
+        }
+
+        if (lighting) {
+            float r = rsp->current_lights[lights].l.col[0];
+            float g = rsp->current_lights[lights].l.col[1];
+            float b = rsp->current_lights[lights].l.col[2];
+            for (int i = 0; i < lights; i++) {
+                const float intensity = nrm[0] * dirs[i][0] + nrm[1] * dirs[i][1] + nrm[2] * dirs[i][2];
+                if (intensity > 0.0f) {
+                    r += intensity * rsp->current_lights[i].l.col[0];
+                    g += intensity * rsp->current_lights[i].l.col[1];
+                    b += intensity * rsp->current_lights[i].l.col[2];
+                }
+            }
+            d->color.r = (uint8_t)(std::min(r, 255.0f) * v.color[0] / 255.0f);
+            d->color.g = (uint8_t)(std::min(g, 255.0f) * v.color[1] / 255.0f);
+            d->color.b = (uint8_t)(std::min(b, 255.0f) * v.color[2] / 255.0f);
+            // (toon outlines: where the normal points on screen)
+            sOutlineNormal[dest][0] =
+                gfx->AdjXForAspectRatio(nrm[0] * clip[0][0] + nrm[1] * clip[1][0] + nrm[2] * clip[2][0]);
+            sOutlineNormal[dest][1] = nrm[0] * clip[0][1] + nrm[1] * clip[1][1] + nrm[2] * clip[2][1];
+            sOutlineHasNormal[dest] = true;
+        } else {
+            d->color.r = v.color[0];
+            d->color.g = v.color[1];
+            d->color.b = v.color[2];
+            sOutlineHasNormal[dest] = false;
+        }
+
+        float uv[2][2];
+        for (int set = 0; set < 2; set++) {
+            if (v.flags & (1 << set)) {
+                // sphere map from the normal: the view-space normal's x and y over the whole texture
+                for (int axis = 0; axis < 2; axis++) {
+                    float dot = nrm[0] * look[axis][0] + nrm[1] * look[axis][1] + nrm[2] * look[axis][2];
+                    dot = std::clamp(dot, -1.0f, 1.0f);
+                    uv[set][axis] = (dot + 1.0f) * 0.5f * v.uv[set][axis];
+                }
+            } else {
+                uv[set][0] = (float)(v.uv[set][0] * rsp->texture_scaling_factor.s >> 16);
+                uv[set][1] = (float)(v.uv[set][1] * rsp->texture_scaling_factor.t >> 16);
+            }
+        }
+        d->u = uv[0][0];
+        d->v = uv[0][1];
+        if (dest + 32 < MAX_VERTICES) {
+            rsp->loaded_vertices[dest + 32].u = uv[1][0];
+            rsp->loaded_vertices[dest + 32].v = uv[1][1];
+        }
+
+        d->clip_rej = 0;
+        if (x < -w) {
+            d->clip_rej |= 1;
+        }
+        if (x > w) {
+            d->clip_rej |= 2;
+        }
+        if (y < -w) {
+            d->clip_rej |= 4;
+        }
+        if (y > w) {
+            d->clip_rej |= 8;
+        }
+        if (z > w) {
+            d->clip_rej |= 32;
+        }
+        d->x = x;
+        d->y = y;
+        d->z = z;
+        d->w = w;
+
+        if (rsp->geometry_mode & G_FOG) {
+            if (fabsf(w) < 0.001f) {
+                w = 0.001f;
+            }
+            float winv = 1.0f / w;
+            if (winv < 0.0f) {
+                winv = std::numeric_limits<int16_t>::max();
+            }
+            float fog_z = z * winv * rsp->fog_mul + rsp->fog_offset;
+            fog_z = Ship::Math::clamp(fog_z, 0.0f, 255.0f);
+            d->color.a = fog_z;
+        } else {
+            d->color.a = v.color[3];
+        }
+        d->alpha = v.color[3];
+    }
+}
+
+bool gfx_vtx_ex_handler_custom(F3DGfx** cmd0) {
+    Interpreter* gfx = mInstance.lock().get();
+    F3DGfx* cmd = *cmd0;
+    const size_t count = C0(12, 8);
+    const size_t dest = C0(0, 8);
+    const uintptr_t offset = cmd->words.w1;
+    (*cmd0)++;
+    const uint64_t hash = ((uint64_t)(*cmd0)->words.w0 << 32) + (*cmd0)->words.w1;
+
+    size_t size = 0;
+    const uint8_t* data = ExResource(hash, &size);
+    if (data == nullptr || offset + count * sizeof(F3DVtxEx) > size) {
+        return false;
+    }
+    GfxSpVertexEx(gfx, count, dest, (const F3DVtxEx*)(data + offset));
+    return false;
+}
+
+bool gfx_push_shader_hash_handler_custom(F3DGfx** cmd0) {
+    Interpreter* gfx = mInstance.lock().get();
+    (*cmd0)++;
+    const uint64_t hash = ((uint64_t)(*cmd0)->words.w0 << 32) + (*cmd0)->words.w1;
+
+    // (the names live as long as the program: the renderer keeps the pointers it is given)
+    static std::unordered_map<uint64_t, std::string> sNames;
+    auto it = sNames.find(hash);
+    if (it == sNames.end()) {
+        const std::string* name =
+            Ship::Context::GetRawInstance()->GetResourceManager()->GetArchiveManager()->HashToString(hash);
+        it = sNames.emplace(hash, name != nullptr ? *name : std::string()).first;
+    }
+    if (it->second.empty()) {
+        gfx->mShaderStack.push(0xFFFF); // (no such shader: the default one, and the pop still pairs up)
+        return false;
+    }
+    const char* path = it->second.c_str();
+    size_t shaderId = static_cast<size_t>(-1);
+    for (const auto& shader : gfx->mShaders) {
+        if (strcmp(shader.second, path) == 0) {
+            shaderId = shader.first;
+            break;
+        }
+    }
+    if (shaderId == static_cast<size_t>(-1)) {
+        shaderId = gfx->mShadersIndex++;
+        gfx->mShaders[shaderId] = path;
+    }
+    gfx->mShaderStack.push(shaderId);
+    return false;
+}
+
+// MergeShip2: G_SETBLENDMODE_EX
+bool gfx_set_blend_mode_ex_handler_custom(F3DGfx** cmd0) {
+    Interpreter* gfx = mInstance.lock().get();
+    F3DGfx* cmd = *(cmd0);
+
+    gfx->mRdp->blend_ex_mode = C0(0, 12);
+    gfx->mRdp->blend_ex_color = { (uint8_t)C1(24, 8), (uint8_t)C1(16, 8), (uint8_t)C1(8, 8), (uint8_t)C1(0, 8) };
+    return false;
+}
+
+// MergeShip2: G_REGS_EX (0x4F). A model that stands in for a skeleton is drawn after the skeleton's limbs have been
+// walked, and the game's code sets the colour registers limb by limb while it walks (an eye in one colour, the body
+// in another). The registers as they were at a limb are kept in a slot, and the model's lists take from the slot of
+// the limb each part belongs to.
+//   w0 bits 16-23 = 0: keep the environment and primitive colours, as they are now, in slot w1.
+//                 = 1: lists read slot w1 from here on (0xFFFFFFFF: none). w0 bit 0: the model is being drawn where
+//                      the game draws what fades (its translucent buffer).
+//                 = 2: take from the slot being read. w1 bits 0-1: what the primitive colour's rgb becomes (0 stays,
+//                      1 the kept environment colour's, 2 the kept primitive colour's), bits 2-4 its alpha (0 stays,
+//                      1 the kept environment alpha, 2 the kept primitive alpha, 3 and 4 one minus those); bits 8-9
+//                      and 10-12 the same for the environment colour. Nothing is taken while no slot is read.
+//                 = 3: an opaque material whose alpha a kept register scales (w1: 1 the kept environment alpha, 2 the
+//                      kept primitive alpha): while the model is drawn where the game draws what fades and that
+//                      alpha is below 255, the material blends by its alpha (G_SETBLENDMODE_EX source alpha, one
+//                      minus source alpha) instead of covering what is behind it.
+// A model that stands in for one of the game's plain lists (a pot, a boulder) is lit as the 3DS game lights it: by
+// the scene's own light settings and its material's factors, not by the lights the game bound for the actor (the
+// game's own props are mostly shaded by their vertex colours, and its lights may be near black).
+//                 = 4: keep the lights as they are now.
+//                 = 5: put the kept lights back.
+//                 = 6: light what follows by the scene's settings (7): two directional lights by the material's
+//                      diffuse factor (w1 bits 8-15, of 255) and the ambient by its ambient factor (bits 0-7).
+//                      Nothing changes while the game has given no settings or they are not valid.
+//                 = 7: w1 points at the scene's settings, storage of the game's that is read whenever 6 runs:
+//                      { u8 valid; u8 ambient[3]; u8 color1[3]; s8 dir1[3]; u8 color2[3]; s8 dir2[3]; }.
+// Real-time shadows ("MergeShip2 real-time shadows" below):
+//                 = 8: what has been drawn so far is darkened where it lies in shadow, and the next frame draws its
+//                      shadows' depth first. The game puts it where the world's opaque surfaces are all drawn and
+//                      nothing else yet: at the head of its translucent buffer, behind the view's matrices.
+//                 = 9: w1 points at the light, storage of the game's that is read at the start of every frame:
+//                      { u8 on; u8 pad[3]; f32 dir[3] (the way to the light); f32 focus[3] (the middle of what the
+//                      shadows cover); f32 radius (half that area's width); f32 shade (how bright a surface in
+//                      shadow stays, 0 to 1); f32 away (the same for a surface turned away from the light) }.
+static constexpr int8_t OTR_G_REGS_EX = OPCODE(0x4f);
+namespace {
+struct RegSlot {
+    RGBA env;
+    RGBA prim;
+};
+constexpr uint32_t kRegSlots = 4096;
+RegSlot sRegSlots[kRegSlots];
+int32_t sRegSlotRead = -1;
+bool sRegFades = false;
+struct SceneLightsEx {
+    uint8_t valid;
+    uint8_t ambient[3];
+    uint8_t color1[3];
+    int8_t dir1[3];
+    uint8_t color2[3];
+    int8_t dir2[3];
+};
+const SceneLightsEx* sSceneLightsEx = nullptr;
+struct ShadowLightEx {
+    uint8_t on;
+    uint8_t bothSides;
+    uint8_t fromPlane; // the light comes down from a level plane at `top`: what is above it is not there for it
+    uint8_t casts;     // shadows are cast (else the pass over the screen is only for the rest: ao, clouds)
+    float dir[3];
+    float focus[3];
+    float radius;
+    float shade;
+    float away;
+    float top;   // (fromPlane) the plane's height
+    float deep;  // (fromPlane) how far under it the light reaches
+    float reach; // (fromPlane) how high the plane is over the ground: a shadow fades out towards that far from
+                 // what casts it
+    float ao;      // how dark the ambient shading goes (0: none)
+    float aoReach; // how far it looks, in the world's units
+    float clouds;  // how dark a cloud's shadow is (0: none)
+    float tint[3]; // what a shadow leaves of red, green and blue against its plain shade
+    float sun[3];  // how much brighter what the light reaches is drawn (1: as it is)
+    int32_t lampCount;   // the game's lamps (point lights) that light what stands about them: how many, at most 12
+    float lampStrength;  // how strongly their light is drawn
+    float lamps[12][8];  // each: its place (x, y, z), how far it reaches, its colour (0 to 1), one unused
+};
+const ShadowLightEx* sShadowLightEx = nullptr;
+F3DLight sKeptLights[MAX_LIGHTS + 1];
+uint8_t sKeptNumLights = 0;
+bool sLightsKept = false;
+} // namespace
+
+bool gfx_regs_ex_handler_custom(F3DGfx** cmd0) {
+    Interpreter* gfx = mInstance.lock().get();
+    F3DGfx* cmd = *(cmd0);
+    const uint32_t what = C0(16, 8);
+    const uint32_t w1 = (uint32_t)cmd->words.w1;
+    if (what == 8) {
+        if (!gfx->mShadowPass) {
+            gfx->ApplyShadows();
+        }
+    } else if (what == 10) {
+        sSway = (const SwayEx*)cmd->words.w1; // (swaying grass; 0: none)
+    } else if (what == 11) {
+        sShadowNoCast = w1 != 0; // (what follows casts no shadow; 0: it does again)
+    } else if (what == 9) {
+        sShadowLightEx = (const ShadowLightEx*)cmd->words.w1;
+    } else if (what == 13) {
+        if (!gfx->mShadowPass) {
+            gfx->KeepWorldCamera();
+        }
+    } else if (what == 12) {
+        // (w1: the pass's numbers, 48 of them; 0: the game left the place empty)
+        if (!gfx->mShadowPass && cmd->words.w1 != 0) {
+            gfx->ApplyPost((const float*)cmd->words.w1);
+        }
+    } else if (what == 0) {
+        if (w1 < kRegSlots) {
+            sRegSlots[w1] = { gfx->mRdp->env_color, gfx->mRdp->prim_color };
+        }
+    } else if (what == 1) {
+        sRegSlotRead = w1 < kRegSlots ? (int32_t)w1 : -1;
+        sRegFades = sRegSlotRead >= 0 && C0(0, 1) != 0;
+    } else if (what == 3) {
+        if (sRegSlotRead >= 0 && sRegFades && (w1 == 1 || w1 == 2)) {
+            const RegSlot& slot = sRegSlots[sRegSlotRead];
+            if ((w1 == 1 ? slot.env.a : slot.prim.a) < 255) {
+                gfx->mRdp->blend_ex_mode =
+                    (G_BLENDEX_SRC_ALPHA << 8) | (G_BLENDEX_ONE_MINUS_SRC_ALPHA << 4) | G_BLENDEX_EQ_ADD;
+            }
+        }
+    } else if (what == 2 && sRegSlotRead >= 0) {
+        const RegSlot& slot = sRegSlots[sRegSlotRead];
+        const auto take = [&slot](RGBA& to, uint32_t rgb, uint32_t alpha) {
+            if (rgb == 1 || rgb == 2) {
+                const RGBA& from = rgb == 1 ? slot.env : slot.prim;
+                to.r = from.r;
+                to.g = from.g;
+                to.b = from.b;
+            }
+            switch (alpha) {
+                case 1:
+                    to.a = slot.env.a;
+                    break;
+                case 2:
+                    to.a = slot.prim.a;
+                    break;
+                case 3:
+                    to.a = 255 - slot.env.a;
+                    break;
+                case 4:
+                    to.a = 255 - slot.prim.a;
+                    break;
+                default:
+                    break;
+            }
+        };
+        take(gfx->mRdp->prim_color, w1 & 3, (w1 >> 2) & 7);
+        take(gfx->mRdp->env_color, (w1 >> 8) & 3, (w1 >> 10) & 7);
+    } else if (what == 4) {
+        memcpy(sKeptLights, gfx->mRsp->current_lights, sizeof(sKeptLights));
+        sKeptNumLights = gfx->mRsp->current_num_lights;
+        sLightsKept = true;
+    } else if (what == 5) {
+        if (sLightsKept) {
+            memcpy(gfx->mRsp->current_lights, sKeptLights, sizeof(sKeptLights));
+            gfx->mRsp->current_num_lights = sKeptNumLights;
+            gfx->mRsp->lights_changed = true;
+            sLightsKept = false;
+        }
+    } else if (what == 6) {
+        const SceneLightsEx* scene = sSceneLightsEx;
+        if (scene != nullptr && scene->valid) {
+            const float ambient = (float)(w1 & 0xFF) / 255.0f;
+            const float diffuse = (float)((w1 >> 8) & 0xFF) / 255.0f;
+            F3DLight* lights = gfx->mRsp->current_lights;
+            memset(lights, 0, sizeof(F3DLight) * 3);
+            for (int c = 0; c < 3; c++) {
+                const float first = scene->color1[c] * diffuse;
+                const float second = scene->color2[c] * diffuse;
+                const float around = scene->ambient[c] * ambient;
+                lights[0].l.col[c] = lights[0].l.colc[c] = (uint8_t)(first > 255.0f ? 255.0f : first);
+                lights[0].l.dir[c] = scene->dir1[c];
+                lights[1].l.col[c] = lights[1].l.colc[c] = (uint8_t)(second > 255.0f ? 255.0f : second);
+                lights[1].l.dir[c] = scene->dir2[c];
+                lights[2].l.col[c] = lights[2].l.colc[c] = (uint8_t)(around > 255.0f ? 255.0f : around);
+            }
+            gfx->mRsp->current_num_lights = 3; // (two lights and the ambient)
+            gfx->mRsp->lights_changed = true;
+        }
+    } else if (what == 7) {
+        sSceneLightsEx = (const SceneLightsEx*)cmd->words.w1;
+    }
+    return false;
+}
+
 bool gfx_spnoop_command_handler_f3dex2(F3DGfx** cmd0) {
     return false;
 }
@@ -4723,6 +6191,11 @@ static constexpr UcodeHandler otrHandlers = {
     { OTR_G_SETINTENSITY, { "G_SETINTENSITY", gfx_set_intensity_handler_custom } }, // G_SETINTENSITY (0x40)
     { OTR_G_MOVEMEM_HASH, { "OTR_G_MOVEMEM_HASH", gfx_movemem_handler_otr } },      // OTR_G_MOVEMEM_HASH
     { OTR_G_PUSH_SHADER, { "G_PUSH_SHADER", gfx_push_shader } },
+    { OTR_G_SETBLENDMODE_EX, { "G_SETBLENDMODE_EX", gfx_set_blend_mode_ex_handler_custom } },
+    { OTR_G_SKIN_PALETTE_OTR_HASH, { "G_SKIN_PALETTE_OTR_HASH", gfx_skin_palette_handler_custom } },
+    { OTR_G_VTX_EX_OTR_HASH, { "G_VTX_EX_OTR_HASH", gfx_vtx_ex_handler_custom } },
+    { OTR_G_PUSH_SHADER_OTR_HASH, { "G_PUSH_SHADER_OTR_HASH", gfx_push_shader_hash_handler_custom } },
+    { OTR_G_REGS_EX, { "G_REGS_EX", gfx_regs_ex_handler_custom } },
     { OTR_G_POP_SHADER, { "G_POP_SHADER", gfx_pop_shader } },
     { RDP_G_LOADBLOCK_WIDE, { "G_LOADBLOCK_WIDE", gfx_load_block_wide_handler_rdp } }, // RDP_G_LOADBLOCK_WIDE (-15)
     { RDP_G_VTX_WIDE, { "G_VTX_WIDE", gfx_vtx_handler_f3dex2 } },                      // RDP_G_VTX_WIDE (-16)
@@ -4862,7 +6335,25 @@ static void gfx_set_ucode_handler(UcodeHandlers ucode) {
     }
 }
 
+static void gfx_step_inner();
+
+// (a measuring aid, "gMergeShip.ShadowTiming": the processor's time by command, both passes of a frame together)
+static uint64_t sOpTicks[256];
+static uint32_t sOpCount[256];
+
 static void gfx_step() {
+    if (!sShadowTiming) {
+        gfx_step_inner();
+        return;
+    }
+    const uint8_t op = (uint8_t)(g_exec_stack.currCmd()->words.w0 >> 24);
+    const uint64_t before = __rdtsc();
+    gfx_step_inner();
+    sOpTicks[op] += __rdtsc() - before;
+    sOpCount[op]++;
+}
+
+static void gfx_step_inner() {
     auto& cmd = g_exec_stack.currCmd();
     auto cmd0 = cmd;
     int8_t opcode = (int8_t)(cmd->words.w0 >> 24);
@@ -4927,10 +6418,276 @@ static void gfx_step() {
     ++cmd;
 }
 
+// MergeShip2 real-time shadows. The frame's display list is run twice. First as the light sees the world
+// (RunShadowPass): every vertex of the world goes through the light's view in place of the camera's, and only
+// what covers what is behind it is drawn, into a framebuffer of its own whose depth is then the shadow map. Then
+// as always; and where the game put G_REGS_EX 8, behind the world's opaque surfaces and before anything else, the
+// backend darkens what is on the framebuffer by that map (GfxRenderingAPI::ApplyShadows): one pass over the
+// screen, so no material's shader and no model has to know of it. The light is the game's to say (G_REGS_EX 9).
+// A frame runs the light's pass only if the frame before asked for shadows, so a game or a screen that draws no
+// world costs nothing.
+namespace {
+bool Invert4(const float m[4][4], float out[4][4]) {
+    double a[4][8];
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            a[i][j] = m[i][j];
+            a[i][j + 4] = i == j ? 1.0 : 0.0;
+        }
+    }
+    for (int c = 0; c < 4; c++) {
+        int pivot = c;
+        for (int r = c + 1; r < 4; r++) {
+            if (fabs(a[r][c]) > fabs(a[pivot][c])) {
+                pivot = r;
+            }
+        }
+        if (fabs(a[pivot][c]) < 1e-12) {
+            return false;
+        }
+        if (pivot != c) {
+            for (int j = 0; j < 8; j++) {
+                std::swap(a[c][j], a[pivot][j]);
+            }
+        }
+        const double d = a[c][c];
+        for (int j = 0; j < 8; j++) {
+            a[c][j] /= d;
+        }
+        for (int r = 0; r < 4; r++) {
+            if (r != c) {
+                const double f = a[r][c];
+                for (int j = 0; j < 8; j++) {
+                    a[r][j] -= f * a[c][j];
+                }
+            }
+        }
+    }
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            out[i][j] = (float)a[i][j + 4];
+        }
+    }
+    return true;
+}
+} // namespace
+
+// The light's view from what the game gave: straight along the light, a square of twice the radius about the
+// focus, and four radii deep (two towards the light from the focus, two beyond). The focus is moved onto the
+// map's own grid, so that the shadows' edges do not crawl as it moves.
+bool Interpreter::ShadowLightFromGame() {
+    const ShadowLightEx* light = sShadowLightEx;
+    if (light == nullptr || !light->on || !(light->radius > 1.0f)) {
+        return false;
+    }
+    float to[3] = { light->dir[0], light->dir[1], light->dir[2] };
+    const float length = sqrtf(to[0] * to[0] + to[1] * to[1] + to[2] * to[2]);
+    if (!(length > 1e-6f)) {
+        return false;
+    }
+    for (int i = 0; i < 3; i++) {
+        to[i] /= length;
+    }
+    const float up[3] = { 0.0f, fabsf(to[1]) > 0.99f ? 0.0f : 1.0f, fabsf(to[1]) > 0.99f ? 1.0f : 0.0f };
+    float right[3] = { up[1] * to[2] - up[2] * to[1], up[2] * to[0] - up[0] * to[2], up[0] * to[1] - up[1] * to[0] };
+    const float rightLength = sqrtf(right[0] * right[0] + right[1] * right[1] + right[2] * right[2]);
+    for (int i = 0; i < 3; i++) {
+        right[i] /= rightLength;
+    }
+    const float above[3] = { to[1] * right[2] - to[2] * right[1], to[2] * right[0] - to[0] * right[2],
+                             to[0] * right[1] - to[1] * right[0] };
+    const float radius = light->radius;
+    const float texel = 2.0f * radius / (float)sShadowMapSize;
+    float focus[3] = { light->focus[0], light->focus[1], light->focus[2] };
+    const float alongRight = focus[0] * right[0] + focus[1] * right[1] + focus[2] * right[2];
+    const float alongAbove = focus[0] * above[0] + focus[1] * above[1] + focus[2] * above[2];
+    const float moveRight = roundf(alongRight / texel) * texel - alongRight;
+    const float moveAbove = roundf(alongAbove / texel) * texel - alongAbove;
+    float eye[3];
+    for (int i = 0; i < 3; i++) {
+        focus[i] += right[i] * moveRight + above[i] * moveAbove;
+        eye[i] = focus[i] + to[i] * 2.0f * radius;
+    }
+    const float eyeRight = eye[0] * right[0] + eye[1] * right[1] + eye[2] * right[2];
+    const float eyeAbove = eye[0] * above[0] + eye[1] * above[1] + eye[2] * above[2];
+    const float eyeTo = eye[0] * to[0] + eye[1] * to[1] + eye[2] * to[2];
+    memset(mShadowLight, 0, sizeof(mShadowLight));
+    for (int i = 0; i < 3; i++) {
+        mShadowLight[i][0] = right[i] / radius;
+        mShadowLight[i][1] = above[i] / radius;
+        mShadowLight[i][2] = -to[i] / (2.0f * radius);
+        mShadowDir[i] = to[i];
+    }
+    mShadowLight[3][0] = -eyeRight / radius;
+    mShadowLight[3][1] = -eyeAbove / radius;
+    mShadowLight[3][2] = eyeTo / (2.0f * radius) - 1.0f;
+    mShadowLight[3][3] = 1.0f;
+    mShadowParams[0] = light->shade < 0.0f ? 0.0f : (light->shade > 1.0f ? 1.0f : light->shade);
+    mShadowParams[1] = light->away < 0.0f ? 0.0f : (light->away > 1.0f ? 1.0f : light->away);
+    mShadowParams[2] = 2.5f * texel / (4.0f * radius); // (two and a half texels of the map, as depth)
+    mShadowParams[3] = 0.0f;
+    sShadowBothSides = light->bothSides != 0;
+    sShadowCasts = light->casts != 0;
+    sShadowAir[0] = light->ao > 0.0f ? (light->ao < 1.0f ? light->ao : 1.0f) : 0.0f;
+    sShadowAir[1] = light->aoReach > 1.0f ? light->aoReach : 30.0f;
+    sShadowAir[2] = light->clouds > 0.0f ? (light->clouds < 1.0f ? light->clouds : 1.0f) : 0.0f;
+    sShadowAir[3] = 640.0f; // (a cloud's size, in the world's units)
+    for (int i = 0; i < 3; i++) {
+        sShadowSun[i] = light->sun[i] >= 1.0f && light->sun[i] < 1.6f ? light->sun[i] : 1.0f;
+    }
+    sShadowAir[4] = light->tint[0];
+    sShadowAir[5] = light->tint[1];
+    sShadowAir[6] = light->tint[2];
+    sShadowAir[7] = 42.0f; // (the clouds' speed, units a second)
+    sShadowClip = false;
+    // the soft edges: a texel and the light's depth in the world's units; an edge 0.07 wide per unit between what
+    // casts the shadow and what it falls on (a crown 150 up: ten units), and never wider than nine and a half
+    sShadowSoft[0] = texel;
+    sShadowSoft[1] = light->fromPlane && light->deep > 1.0f && to[1] > 0.2f ? light->deep : 4.0f * radius;
+    sShadowSoft[2] = 0.07f;
+    sShadowSoft[3] = std::clamp(9.5f / texel, 2.0f, 16.0f);
+    // (a light from a level plane: its shadows fade out towards the plane's height over the ground)
+    sShadowSoft[4] = light->fromPlane && light->reach > 1.0f ? light->reach * 0.55f : 0.0f;
+    sShadowSoft[5] = light->fromPlane && light->reach > 1.0f ? light->reach * 0.95f : 0.0f;
+    if (light->fromPlane && light->deep > 1.0f && to[1] > 0.2f) {
+        // The light's depth is the height under its plane, in place of the way along the light (either orders what
+        // lies along one ray of the light the same way): the plane is then the map's near side, and the backend
+        // cuts what is above it away there.
+        mShadowLight[0][2] = 0.0f;
+        mShadowLight[1][2] = -2.0f / light->deep;
+        mShadowLight[2][2] = 0.0f;
+        mShadowLight[3][2] = 2.0f * light->top / light->deep - 1.0f;
+        mShadowParams[2] = 2.5f * texel / light->deep;
+        sShadowClip = true;
+    }
+    return true;
+}
+
+// (in the light's pass) the matrix the vertices go through: the light's view where the game's projection is a view
+// of the world, one with perspective; everything else (the screen's own flat projections) is left out.
+void Interpreter::ShadowMatrix() {
+    const float(*p)[4] = mRsp->P_matrix;
+    mShadowWorld = fabsf(p[0][3]) + fabsf(p[1][3]) + fabsf(p[2][3]) > 1e-6f && mRsp->modelview_matrix_stack_size > 0;
+    if (mShadowWorld) {
+        MatrixMul(mRsp->MP_matrix, mRsp->modelview_matrix_stack[mRsp->modelview_matrix_stack_size - 1], mShadowLight);
+    }
+}
+
+// (the backend's shadow map is what is drawn into: Run asked for it, GfxRenderingAPI::StartShadowMap)
+void Interpreter::RunShadowPass(Gfx* commands, const std::unordered_map<Mtx*, MtxF>& mtx_replacements) {
+    SpReset();
+    mCurMtxReplacements = &mtx_replacements;
+    mShadowPass = true;
+    mShadowWorld = false;
+    g_exec_stack.start((F3DGfx*)commands);
+    while (!g_exec_stack.cmd_stack.empty()) {
+        gfx_step();
+    }
+    Flush();
+    mShadowPass = false;
+    mShadowWorld = false;
+    mFbActive = false;
+    mActiveFrameBuffer = mFrameBuffers.end();
+    while (!mShaderStack.empty()) {
+        mShaderStack.pop(); // (should a list have left one standing)
+    }
+    currentDir = std::stack<std::string>();
+}
+
+// G_REGS_EX 8: what is on the framebuffer is darkened by this frame's shadow map; and the next frame is to have one.
+void Interpreter::ApplyShadows() {
+    mShadowArmed = true;
+    if (!sShadowLit || mFbActive) {
+        return;
+    }
+    // the camera as the vertices went through it: the projection in effect (the world's view: the game puts the
+    // command behind it), with the window's shape taken into its x as GfxSpVertex takes it
+    float camera[4][4];
+    memcpy(camera, mRsp->P_matrix, sizeof(camera));
+    const float adjust = AdjXForAspectRatio(1.0f);
+    for (int i = 0; i < 4; i++) {
+        camera[i][0] *= adjust;
+    }
+    float inverse[4][4];
+    if (fabsf(camera[0][3]) + fabsf(camera[1][3]) + fabsf(camera[2][3]) <= 1e-6f || !Invert4(camera, inverse)) {
+        return; // (not a view of the world)
+    }
+    Flush();
+    const int viewport[4] = { (int)mRdp->viewport.x, (int)mRdp->viewport.y, (int)mRdp->viewport.width,
+                              (int)mRdp->viewport.height };
+    // (without the light's pass this frame nothing casts, and nothing is shaded for facing away either)
+    float params[124] = { mShadowParams[0], mShadowDrawn ? mShadowParams[1] : 1.0f,
+                          mShadowParams[2], mShadowParams[3],
+                          sShadowSoft[0],   sShadowSoft[1],
+                          sShadowSoft[2],   sShadowSoft[3],
+                          sShadowSoft[4],   sShadowSoft[5],
+                          mShadowDrawn ? 1.0f : 0.0f, sSwayTime,
+                          sShadowAir[0],    sShadowAir[1],
+                          sShadowAir[2],    sShadowAir[3],
+                          sShadowAir[4],    sShadowAir[5],
+                          sShadowAir[6],    sShadowAir[7],
+                          mShadowDrawn ? sShadowSun[0] : 1.0f, mShadowDrawn ? sShadowSun[1] : 1.0f,
+                          mShadowDrawn ? sShadowSun[2] : 1.0f, 0.0f };
+    // (the game's lamps, as its light says them this frame: the rest of the array, zero where there are none)
+    if (const ShadowLightEx* light = sShadowLightEx; light != nullptr && light->lampCount > 0) {
+        const int lamps = light->lampCount < 12 ? light->lampCount : 12;
+        params[24] = (float)lamps;
+        params[25] = light->lampStrength;
+        memcpy(&params[28], light->lamps, sizeof(float) * 8 * (size_t)lamps);
+    }
+    mRapi->ApplyShadows(0, inverse, mShadowLight, mShadowDir, params, viewport);
+    // (the backend's viewport is the whole framebuffer now: the game's is set again with the next triangle)
+    mRdp->viewport_or_scissor_changed = true;
+    mRenderingState.viewport = {};
+    mRenderingState.scissor = {};
+}
+
+// MergeShip2 the picture's look. G_REGS_EX 13: the world's camera is the projection in effect (the game puts the
+// command at the head of what it draws of the world); it is kept for G_REGS_EX 12.
+void Interpreter::KeepWorldCamera() {
+    float camera[4][4];
+    memcpy(camera, mRsp->P_matrix, sizeof(camera));
+    const float adjust = AdjXForAspectRatio(1.0f);
+    for (int i = 0; i < 4; i++) {
+        camera[i][0] *= adjust;
+    }
+    mWorldKept = false;
+    if (mFbActive || fabsf(camera[0][3]) + fabsf(camera[1][3]) + fabsf(camera[2][3]) <= 1e-6f ||
+        !Invert4(camera, mWorldInverse)) {
+        return; // (not a view of the world)
+    }
+    mWorldViewport[0] = (int)mRdp->viewport.x;
+    mWorldViewport[1] = (int)mRdp->viewport.y;
+    mWorldViewport[2] = (int)mRdp->viewport.width;
+    mWorldViewport[3] = (int)mRdp->viewport.height;
+    mWorldKept = true;
+}
+
+// G_REGS_EX 12: what has been drawn so far -- the world; the game puts the command before its fades, its HUD and
+// its text -- is given its glow and its look (GfxRenderingAPI::ApplyPost).
+void Interpreter::ApplyPost(const float* params) {
+    if (!mWorldKept || mFbActive) {
+        return;
+    }
+    Flush();
+    mRapi->ApplyPost(mWorldInverse, params, mWorldViewport);
+    // (the backend's viewport is the whole framebuffer now: the game's is set again with the next triangle)
+    mRdp->viewport_or_scissor_changed = true;
+    mRenderingState.viewport = {};
+    mRenderingState.scissor = {};
+}
+
 void Interpreter::SpReset() {
+    mWorldKept = false; // (MergeShip2 the picture's look: this frame's camera is not kept yet)
+    sSway = nullptr; // (MergeShip2 swaying grass: none until a list asks)
+    sShadowNoCast = false;
     while (!mShaderStack.empty()) {
         mShaderStack.pop();
     }
+    // MergeShip2: no explicit blending or vertex-alpha / second-UV modes carried over from the last frame
+    mRdp->blend_ex_mode = 0;
+    mRsp->extra_geometry_mode &= ~(G_EX_KEEP_VERTEX_ALPHA | G_EX_TEXEL1_UPPER_VERTEX);
+    sSkinPaletteCount = 0;
     mRsp->modelview_matrix_stack_size = 1;
     mRsp->current_num_lights = 2;
     mRsp->lights_changed = true;
@@ -4956,6 +6713,10 @@ void Interpreter::GetDimensions(uint32_t* width, uint32_t* height, int32_t* posX
     mWapi->GetDimensions(width, height, posX, posY);
 }
 
+// MergeShip2 render styles: the multisampling level the settings ask for. The 16-bit and 8-bit styles draw without
+// (hard edges), so mMsaaLevel is this or 1, decided at the start of each frame.
+static unsigned int sUserMsaaLevel = 1;
+
 void Interpreter::Init(class GfxWindowBackend* wapi, class GfxRenderingAPI* rapi, const char* game_name,
                        bool start_in_fullscreen, uint32_t width, uint32_t height, uint32_t posX, uint32_t posY) {
     mWapi = wapi;
@@ -4966,6 +6727,7 @@ void Interpreter::Init(class GfxWindowBackend* wapi, class GfxRenderingAPI* rapi
     mCurDimensions.internal_mul =
         Ship::Context::GetRawInstance()->GetConsoleVariables()->GetFloat(CVAR_INTERNAL_RESOLUTION, 1);
     mMsaaLevel = Ship::Context::GetRawInstance()->GetConsoleVariables()->GetInteger(CVAR_MSAA_VALUE, 1);
+    sUserMsaaLevel = mMsaaLevel;
 
     mCurDimensions.width = width;
     mCurDimensions.height = height;
@@ -5040,6 +6802,7 @@ bool Interpreter::ViewportMatchesRendererResolution() {
 void Interpreter::StartFrame() {
     mWapi->GetDimensions(&mGfxCurrentWindowDimensions.width, &mGfxCurrentWindowDimensions.height, &mCurWindowPosX,
                          &mCurWindowPosY);
+    mMsaaLevel = PixelStyle(mRenderStyle) ? 1 : sUserMsaaLevel; // MergeShip2 (see sUserMsaaLevel)
     if (mCurDimensions.height == 0) {
         // Avoid division by zero
         mCurDimensions.height = 1;
@@ -5133,6 +6896,60 @@ void Interpreter::RunGuiOnly() {
 void Interpreter::Run(Gfx* commands, const std::unordered_map<Mtx*, MtxF>& mtx_replacements) {
     SpReset();
 
+    // MergeShip2: this frame's render style (RenderStyle in interpreter.h). A game whose own settings do not have the
+    // variable (Termina inside the MergeShip host: the option is in Hyrule's menu) is drawn in the style last read.
+    {
+        static int sLastStyle = RENDER_STYLE_NONE;
+        const int style =
+            Ship::Context::GetRawInstance()->GetConsoleVariables()->GetInteger("gMergeShip.RenderStyle", -1);
+        if (style >= 0) {
+            sLastStyle = style;
+        }
+        // (the colour filters after RENDER_STYLE_8BIT are not offered any more)
+        mRenderStyle = (sLastStyle > 0 && sLastStyle <= RENDER_STYLE_8BIT) ? (uint32_t)sLastStyle : RENDER_STYLE_NONE;
+        // (and the 3DS icons, the same way)
+        static int sLastInterface = 0;
+        const int interfaceOption = Ship::Context::GetRawInstance()->GetConsoleVariables()->GetInteger(
+            "gEnhancements.MergeShip.Port3ds.Interface", -1);
+        if (interfaceOption >= 0) {
+            sLastInterface = interfaceOption;
+        }
+        sInterfaceRedirect = sLastInterface != 0;
+        // (and the sharper textures)
+        static int sLastHd = 0;
+        const int hdOption = Ship::Context::GetRawInstance()->GetConsoleVariables()->GetInteger(
+            "gEnhancements.MergeShip.Port3ds.HdTextures", -1);
+        if (hdOption >= 0) {
+            sLastHd = hdOption;
+        }
+        sHdTextures = sLastHd != 0;
+        // (and the shadows' detail: the map's size)
+        static int sLastDetail = 2;
+        const int detail =
+            Ship::Context::GetRawInstance()->GetConsoleVariables()->GetInteger("gMergeShip.ShadowDetail", -1);
+        if (detail >= 0) {
+            sLastDetail = detail;
+        }
+        sShadowMapSize = sLastDetail <= 0 ? 1024 : (sLastDetail == 1 ? 2048 : 4096);
+        sShadowTiming =
+            Ship::Context::GetRawInstance()->GetConsoleVariables()->GetInteger("gMergeShip.ShadowTiming", 0) != 0;
+    }
+    const auto runStart = std::chrono::steady_clock::now();
+    double lightMs = 0.0;
+    {
+        // (swaying grass: the wind's clock, the same for the light's pass and the frame's own. The real clock, so
+        // that the wind keeps its pace whatever the frame rate; "gMergeShip.WindStepMs" makes it a fixed step a
+        // drawn frame instead, for a recording that is made slower or faster than it is played.)
+        static auto sWindLast = runStart;
+        static double sWindSeconds = 0.0;
+        const int step =
+            Ship::Context::GetRawInstance()->GetConsoleVariables()->GetInteger("gMergeShip.WindStepMs", 0);
+        const double passed = std::chrono::duration<double>(runStart - sWindLast).count();
+        sWindLast = runStart;
+        sWindSeconds += step > 0 ? step / 1000.0 : (passed < 0.25 ? passed : 0.25);
+        sSwayTime = (float)fmod(sWindSeconds, 7200.0);
+    }
+
     mGetPixelDepthPending.clear();
     mGetPixelDepthCached.clear();
 
@@ -5141,6 +6958,17 @@ void Interpreter::Run(Gfx* commands, const std::unordered_map<Mtx*, MtxF>& mtx_r
     mRapi->UpdateFramebufferParameters(0, mGfxCurrentWindowDimensions.width, mGfxCurrentWindowDimensions.height, 1,
                                        false, true, true, !mRendersToFb);
     mRapi->StartFrame();
+    // MergeShip2 real-time shadows: the world as the light sees it, first (where the last frame asked for shadows)
+    mShadowDrawn = false;
+    sShadowLit = mShadowArmed && ShadowLightFromGame();
+    if (sShadowLit && sShadowCasts && mRapi->StartShadowMap(sShadowMapSize, sShadowClip)) {
+        RunShadowPass(commands, mtx_replacements);
+        mShadowDrawn = true;
+        SpReset();
+        mCurMtxReplacements = &mtx_replacements;
+        lightMs = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - runStart).count();
+    }
+    mShadowArmed = false;
     mRapi->StartDrawToFramebuffer(mRendersToFb ? mGameFb : 0, (float)mCurDimensions.height / mNativeDimensions.height);
     mRapi->ClearFramebuffer(true, true);
     mRdp->viewport_or_scissor_changed = true;
@@ -5192,6 +7020,44 @@ void Interpreter::Run(Gfx* commands, const std::unordered_map<Mtx*, MtxF>& mtx_r
         mRapi->StartDrawToFramebuffer(0, 1);
 
         assert(0 && "active framebuffer was never reset back to original");
+    }
+
+    if (sShadowTiming) {
+        static double sLight = 0.0, sWhole = 0.0;
+        static int sFrames = 0, sWith = 0;
+        sWhole += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - runStart).count();
+        sLight += lightMs;
+        sWith += mShadowDrawn ? 1 : 0;
+        if (++sFrames >= 200) {
+            SPDLOG_INFO("shadow timing: {} frames, {} with shadows; drawing a frame {:.2f} ms, of that the light's "
+                        "pass {:.2f} ms (processor time; map {})",
+                        sFrames, sWith, sWhole / sFrames, sWith ? sLight / sWith : 0.0, sShadowMapSize);
+            // (and by command: the eight that took the most, their share of all commands' time and how many a frame)
+            uint64_t all = 0;
+            for (int op = 0; op < 256; op++) {
+                all += sOpTicks[op];
+            }
+            std::string most;
+            for (int n = 0; n < 8 && all > 0; n++) {
+                int top = 0;
+                for (int op = 1; op < 256; op++) {
+                    if (sOpTicks[op] > sOpTicks[top]) {
+                        top = op;
+                    }
+                }
+                if (sOpTicks[top] == 0) {
+                    break;
+                }
+                most += fmt::format(" {:02X}:{:.0f}%/{}", top, 100.0 * (double)sOpTicks[top] / (double)all,
+                                    sOpCount[top] / (uint32_t)sFrames);
+                sOpTicks[top] = 0;
+            }
+            SPDLOG_INFO("shadow timing, by command (share of time / number a frame):{}", most);
+            memset(sOpTicks, 0, sizeof(sOpTicks));
+            memset(sOpCount, 0, sizeof(sOpCount));
+            sLight = sWhole = 0.0;
+            sFrames = sWith = 0;
+        }
     }
 }
 
@@ -5384,7 +7250,8 @@ void Interpreter::SetResolutionMultiplier(float multiplier) {
 }
 
 void Interpreter::SetMsaaLevel(uint32_t level) {
-    mMsaaLevel = level;
+    sUserMsaaLevel = level;
+    mMsaaLevel = PixelStyle(mRenderStyle) ? 1 : level; // MergeShip2 (see sUserMsaaLevel)
 }
 
 void Interpreter::GetCurDimensions(uint32_t* width, uint32_t* height) {
@@ -5475,6 +7342,8 @@ void gfx_cc_get_features(uint64_t shader_id0, uint64_t shader_id1, struct CCFeat
     }
 
     cc_features->shader_id = Fast::ShaderIdUnmask(shader_id1);
+    cc_features->render_style = (int)((shader_id1 >> RENDER_STYLE_SHIFT) & 0xF);
+    cc_features->shade_slot = (int)((shader_id1 >> RENDER_STYLE_SHADE_SHIFT) & 7);
 }
 
 extern "C" int gfx_create_framebuffer(uint32_t width, uint32_t height, uint32_t native_width, uint32_t native_height,

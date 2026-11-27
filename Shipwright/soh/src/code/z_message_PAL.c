@@ -21,6 +21,8 @@
 #include "soh/MergeShip/MergeShipMMItems.h" // MergeShip2: MM's keg, box, bottle contents, trade items (32x32 icons)
 #include "soh/MergeShip/MergeShipPicto.h"   // MergeShip2: the Pictograph Box's "Keep this picture?"
 
+s32 MergeShipTest_Clean(void); // MergeShip2: test harness -- 1 while a script wants nothing but the scene in the picture
+
 // #region SOH [NTSC] - Allows custom messages to work on japanese
 static bool sDisplayNextMessageAsEnglish = false;
 static u8 sLastLanguage = LANGUAGE_ENG;
@@ -4425,7 +4427,7 @@ void Message_Draw(PlayState* play) {
         POLY_OPA_DISP = plusOne;
     }
     plusOne = Graph_GfxPlusOne(polyOpaP = POLY_OPA_DISP);
-    if (!GameInteractor_NoUIActive()) {
+    if (!GameInteractor_NoUIActive() && !MergeShipTest_Clean()) {
         gSPDisplayList(OVERLAY_DISP++, plusOne);
     }
     Message_DrawMain(play, &plusOne);

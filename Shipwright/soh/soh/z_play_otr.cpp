@@ -6,6 +6,7 @@
 #include "ResourceManagerHelpers.h"
 #include "soh/resource/type/Scene.h"
 #include "soh/Enhancements/game-interactor/GameInteractor_Hooks.h"
+#include "soh/MergeShip/MergeShipPort3ds.h"
 
 extern "C" {
 #include "functions.h"
@@ -84,6 +85,8 @@ void OTRPlay_InitScene(PlayState* play, s32 spawn) {
     OTRScene_ExecuteCommands(play, (SOH::Scene*)play->sceneSegment);
 
     GameInteractor_ExecuteAfterSceneCommands(play->sceneNum);
+    // MergeShip2 (MergeShipPort3ds.h): the sky the Ocarina of Time 3D scene has, when its rooms are drawn
+    play->skyboxId = (u8)MergeShipPort3ds_SceneSkybox(play, play->skyboxId);
     Play_InitEnvironment(play, play->skyboxId);
     /* auto data = static_cast<LUS::Vertex*>(Ship::Context::GetRawInstance()
                                                ->GetResourceManager()

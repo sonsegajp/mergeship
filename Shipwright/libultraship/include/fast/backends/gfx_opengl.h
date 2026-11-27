@@ -78,6 +78,7 @@ class GfxRenderingAPIOGL final : public GfxRenderingAPI {
     void SetViewport(int x, int y, int width, int height) override;
     void SetScissor(int x, int y, int width, int height) override;
     void SetUseAlpha(bool useAlpha) override;
+    void SetBlendMode(uint32_t mode, const uint8_t constantColor[4]) override;
     void DrawTriangles(float buf_vbo[], size_t buf_vbo_len, size_t buf_vbo_num_tris) override;
     void Init() override;
     void OnResize() override;
@@ -116,9 +117,10 @@ class GfxRenderingAPIOGL final : public GfxRenderingAPI {
     uint8_t mCurrentTile;
     int8_t mLastActiveTexture = -1;
     int8_t mLastBlendEnabled = -1;
+    uint32_t mLastBlendMode = 0; // MergeShip2: G_SETBLENDMODE_EX in effect
     int8_t mLastScissorEnabled = -1;
 
-    std::map<std::pair<uint64_t, uint32_t>, ShaderProgram> mShaderProgramPool;
+    std::map<std::pair<uint64_t, uint64_t>, ShaderProgram> mShaderProgramPool;
     ShaderProgram* mCurrentShaderProgram;
     ShaderProgram* mLastLoadedShader = nullptr;
 

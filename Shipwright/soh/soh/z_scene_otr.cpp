@@ -6,6 +6,7 @@
 
 #include "soh/Enhancements/game-interactor/GameInteractor_Hooks.h"
 #include "ResourceManagerHelpers.h"
+#include "soh/MergeShip/MergeShipPort3ds.h"
 #include "soh/resource/type/Scene.h"
 #include "soh/resource/type/scenecommand/SetCameraSettings.h"
 #include "soh/resource/type/scenecommand/SetCutscenes.h"
@@ -244,6 +245,8 @@ bool Scene_CommandSkyboxDisables(PlayState* play, SOH::ISceneCommand* cmd) {
 
     play->envCtx.sunMoonDisabled = cmdSky->modifier.sunMoonDisabled;
     play->envCtx.skyboxDisabled = cmdSky->modifier.skyboxDisabled;
+    // MergeShip2 (MergeShipPort3ds.h): the Ocarina of Time 3D room's own switches, when its rooms are drawn
+    MergeShipPort3ds_RoomSkyboxDisables(play, &play->envCtx.skyboxDisabled, &play->envCtx.sunMoonDisabled);
 
     return false;
 }

@@ -126,6 +126,7 @@
 //
 // Buttons: A B Z R L S CU CD CL CR DU DD DL DR, joined with '+'.
 
+#include <unordered_map>
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -160,7 +161,11 @@
 #include "soh/Enhancements/randomizer/settings.h"
 #include "soh/Enhancements/randomizer/item_category_adj.h"
 #include "soh/Enhancements/randomizer/randomizerEnumStrings.h"
+#include "soh/Enhancements/randomizer/randomizer.h" // Randomizer_ParseCheckSetting (GitHub issue #1)
 #include "soh/MergeShip/MergeShipTerminaGiDraw.h"
+namespace SohGui {
+void UpdateMenuLocations(); // SohMenuRandomizer.cpp: the Check Locations page's reader (GitHub issue #1)
+}
 #include "soh/Enhancements/randomizer/3drando/menu.hpp"
 #include "soh/MergeShip/MergeShipTerminaRando.h"
 #include "soh/MergeShip/MergeShipEntrances.h"
@@ -640,6 +645,11 @@ void TracePlayer() {
         SymbolName((void*)p->actionFunc).c_str(), SymbolName((void*)p->upperActionFunc).c_str(), p->stateFlags1,
         p->stateFlags2, p->stateFlags3, p->actor.bgCheckFlags, gSaveContext.health, gSaveContext.magic,
         p->currentMask, anim);
+    if (p->mergeShipForm == PLAYER_FORM_GORON) { // BUG-0150: the ball's squash, against Termina's
+        Log("T goron abc=%.3f b48=%.3f av2=%d av1=%d spk=%d b08=%.2f spd=%.2f scale=%.4f/%.4f s3=%08X", p->unk_ABC,
+            p->unk_B48, p->av2.actionVar2, p->av1.actionVar1, p->unk_B86[1], p->unk_B08, p->linearVelocity,
+            p->actor.scale.x, p->actor.scale.y, p->stateFlags3);
+    }
     Log("H lh=%d rh=%d lhDL=%s rhDL=%s upperAnim=%s ocMode=%d msgMode=%d", p->leftHandType, p->rightHandType,
         (p->leftHandDLists && p->leftHandDLists[0]) ? (const char*)p->leftHandDLists[0] + 7 : "-",
         (p->rightHandDLists && p->rightHandDLists[0]) ? (const char*)p->rightHandDLists[0] + 7 : "-",
@@ -2045,10 +2055,136 @@ bool RouteStart(const std::vector<std::string>& args, const std::string& op, int
 // "cinecam" (include/mergeship/CineCam.hpp): the film camera, a sub camera of the harness's own placed each frame.
 MsCineCam sCine;
 s16 sCineCamId = SUBCAM_NONE;
+// "camfocus on|off": the film camera frames the actor spawned last (spawnrel, spawn) instead of Link, for as long
+// as that actor is in the scene.
+Actor* sFocusActor = nullptr;
+bool sFocusOn = false;
+bool sFreezeActors = false; // "freeze on": no actor but Link updates (MergeShipTest_ActorsFrozen, z_actor.c)
+ActorFunc sLinkDraw = nullptr; // "linkhide on": Link's draw function while he is not drawn
+bool sFocusPoint = false;      // camauto: the film camera stands where the focused actor's model really is
+// Where each actor's joints were when it was last drawn (the box round its skeletons' limbs): an animation may
+// stand a model well off its actor's position (a shopkeeper leaning on his counter), and a model's height is not
+// its actor's focus point.
+struct JointBox {
+    Vec3f lo;
+    Vec3f hi;
+    int count;
+};
+Actor* sDrawingActor = nullptr;
+JointBox sDrawingBox = { { 0, 0, 0 }, { 0, 0, 0 }, 0 };
+std::unordered_map<Actor*, JointBox> sJointBoxes;
+bool sClean = false;           // "clean on": no Link, no Navi, no target arrow in the picture
+ActorFunc sNaviDraw = nullptr;
+// The box round every matrix an actor made while it was drawn (near its place): where the parts of a model without
+// a skeleton stand.
+JointBox sDrawingMatrices = { { 0, 0, 0 }, { 0, 0, 0 }, 0 };
+std::unordered_map<Actor*, JointBox> sMatrixBoxes;
+Actor* sHiddenActor = nullptr;  // "hide on": the focused actor is not drawn
+ActorFunc sHiddenDraw = nullptr;
+bool sFrozenCounters = false;   // "freeze on": the counters that scroll textures, and the hour, stand still too
+u32 sFrozenGameplayFrames = 0;
+u32 sFrozenStateFrames = 0;
+u16 sFrozenDayTime = 0;
+u16 sFrozenSkyboxTime = 0;
+s32 sRoomFinish = 0;            // "room": frames until the room before is let go
+bool sFilmView = false;         // the film camera's eye and aim for the next frame drawn (MergeShipTest_FilmView)
+bool sLatch = false;            // camauto: the film camera keeps the eye and aim it was set to
+bool sLatchWanted = false;
+Vec3f sLatchEye = { 0, 0, 0 };
+Vec3f sLatchAt = { 0, 0, 0 };
+Vec3f sFilmEye = { 0, 0, 0 };
+Vec3f sFilmAt = { 0, 0, 0 };
+
+// The box an actor's model was drawn in: round its skeleton's joints, or (no skeleton) round the matrices it made.
+const JointBox* ModelBox(Actor* actor, bool* joints) {
+    auto box = sJointBoxes.find(actor);
+    if (box != sJointBoxes.end() && box->second.count >= 2) {
+        *joints = true;
+        return &box->second;
+    }
+    auto made = sMatrixBoxes.find(actor);
+    if (made != sMatrixBoxes.end() && made->second.count >= 1) {
+        *joints = false;
+        return &made->second;
+    }
+    return nullptr;
+}
+// camauto: the film camera `dist` in front of an actor and `height` above its foot, looking at `look` above it,
+// `angle` degrees round from its front -- or, where the scene stands between that place and the actor, the nearest
+// angle to either side from which it is seen. Returns the angle taken.
+f32 FilmFront(Actor* a, f32 look, f32 dist, f32 height, f32 angle) {
+    // (where the camera takes the actor to stand: UpdateCineCam)
+    Vec3f base = a->world.pos;
+    bool joints = false;
+    const JointBox* box = ModelBox(a, &joints);
+    if (box != nullptr && joints) {
+        base = { (box->lo.x + box->hi.x) * 0.5f, box->lo.y, (box->lo.z + box->hi.z) * 0.5f };
+    } else {
+        const f32 dx = a->focus.pos.x - base.x;
+        const f32 dz = a->focus.pos.z - base.z;
+        if (dx * dx + dz * dz < 400.0f * 400.0f) {
+            base.x += dx;
+            base.z += dz;
+        }
+    }
+    const f32 tries[] = { angle,          -angle,           angle + 35.0f,  -(angle + 35.0f),  0.0f,
+                          angle + 70.0f,  -(angle + 70.0f), angle + 115.0f, -(angle + 115.0f), 180.0f };
+    f32 best = angle;
+    f32 bestFree = -1.0f;
+    Vec3f at = { base.x, base.y + look, base.z };
+    for (f32 turn : tries) {
+        const f32 yaw = (f32)a->shape.rot.y * (3.14159265f / 32768.0f) + turn * (3.14159265f / 180.0f);
+        Vec3f eye = { base.x + sinf(yaw) * dist, base.y + height, base.z + cosf(yaw) * dist };
+        Vec3f hit;
+        CollisionPoly* poly = nullptr;
+        s32 bgId = 0;
+        if (gPlayState == nullptr ||
+            !BgCheck_CameraLineTest1(&gPlayState->colCtx, &at, &eye, &hit, &poly, 1, 1, 1, -1, &bgId)) {
+            best = turn;
+            bestFree = dist;
+            break;
+        }
+        // (how far the line runs before it meets the scene: the least hidden view, if none is free)
+        const f32 free = sqrtf((hit.x - at.x) * (hit.x - at.x) + (hit.y - at.y) * (hit.y - at.y) +
+                               (hit.z - at.z) * (hit.z - at.z));
+        if (free > bestFree) {
+            bestFree = free;
+            best = turn;
+        }
+    }
+    if (bestFree >= 0.0f && bestFree < dist) {
+        // (no side sees it from that far: a corridor, a cell. As far off as the scene leaves room, the same slope)
+        const f32 nearer = bestFree - 8.0f > 30.0f ? bestFree - 8.0f : 30.0f;
+        height = look + (height - look) * (nearer / dist);
+        dist = nearer;
+    }
+    sCine.Command({ "look", std::to_string(look) });
+    sCine.Command({ "front", std::to_string(dist), std::to_string(height), std::to_string(best), "1" });
+    sCine.Command({ "cut" });
+    sFocusPoint = true;
+    Log("FILMFRONT angle %.0f (asked %.0f) free %.0f, at %.0f", best, angle, bestFree, dist);
+    return best;
+}
+
+Actor* FocusActor(PlayState* play) {
+    if (!sFocusOn || sFocusActor == nullptr) {
+        return nullptr;
+    }
+    for (int category = 0; category < ACTORCAT_MAX; category++) {
+        for (Actor* a = play->actorCtx.actorLists[category].head; a != nullptr; a = a->next) {
+            if (a == sFocusActor) {
+                return a;
+            }
+        }
+    }
+    sFocusActor = nullptr; // (it is gone)
+    return nullptr;
+}
 bool sHudOff = false; // "hud off": the HUD hidden (as the game hides it for cutscenes), every frame until "hud on"
 
 void UpdateCineCam() {
     PlayState* play = gPlayState;
+    sFilmView = false;
     if (play == nullptr) {
         sCineCamId = SUBCAM_NONE;
         return;
@@ -2078,16 +2214,102 @@ void UpdateCineCam() {
         Play_ChangeCameraStatus(play, sCineCamId, CAM_STAT_ACTIVE);
         sCine.primed = false;
     }
+    if (sClean && play->activeCamera != sCineCamId) {
+        // (a scene of the story that a person starts takes the camera: the picture stays the film camera's)
+        Play_ChangeCameraStatus(play, play->activeCamera, CAM_STAT_WAIT);
+        Play_ChangeCameraStatus(play, sCineCamId, CAM_STAT_ACTIVE);
+    }
     float at[3];
     float eye[3];
-    sCine.Update(player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z,
-                 player->actor.shape.rot.y, at, eye);
+    Actor* subject = FocusActor(play);
+    if (subject == nullptr) {
+        subject = &player->actor;
+    }
+    // (camauto: an actor's animation may stand it well off its own position -- a shopkeeper leaning on his counter;
+    // its focus point, which most actors keep at their head, says where it really is)
+    f32 subjectX = subject->world.pos.x;
+    f32 subjectY = subject->world.pos.y;
+    f32 subjectZ = subject->world.pos.z;
+    if (sFocusPoint && subject != &player->actor) {
+        bool joints = false;
+        const JointBox* box = ModelBox(subject, &joints);
+        if (box != nullptr && joints) {
+            // (the middle of its joints, from their lowest point up)
+            subjectX = (box->lo.x + box->hi.x) * 0.5f;
+            subjectY = box->lo.y;
+            subjectZ = (box->lo.z + box->hi.z) * 0.5f;
+        } else {
+            const f32 dx = subject->focus.pos.x - subjectX;
+            const f32 dz = subject->focus.pos.z - subjectZ;
+            if (dx * dx + dz * dz < 400.0f * 400.0f) {
+                subjectX += dx;
+                subjectZ += dz;
+            }
+        }
+    }
+    sCine.Update(subjectX, subjectY, subjectZ, subject->shape.rot.y, at, eye);
     Vec3f vAt = { at[0], at[1], at[2] };
     Vec3f vEye = { eye[0], eye[1], eye[2] };
+    if (sLatchWanted) {
+        sLatchWanted = false;
+        sLatch = true;
+        sLatchAt = vAt;
+        sLatchEye = vEye;
+    }
+    if (sLatch) {
+        vAt = sLatchAt;
+        vEye = sLatchEye;
+    }
     Play_CameraSetAtEye(play, sCineCamId, &vAt, &vEye);
+    sFilmEye = vEye;
+    sFilmAt = vAt;
+    sFilmView = true;
+}
+
+// After each frame, while a script holds the picture still ("freeze on") or clean ("clean on").
+void HoldStill() {
+    PlayState* play = gPlayState;
+    if (play == nullptr) {
+        sFrozenCounters = false;
+        return;
+    }
+    if (sFrozenCounters) {
+        // (this runs once a frame is drawn and before its counters step: the next frame is drawn with the same
+        // values, so scrolling textures, flames and the sky stand as they stood)
+        play->gameplayFrames = sFrozenGameplayFrames - 1;
+        play->state.frames = sFrozenStateFrames - 1;
+        gSaveContext.dayTime = sFrozenDayTime;
+        gSaveContext.skyboxTime = sFrozenSkyboxTime;
+    }
+    if (sClean) {
+        // (a scene's load makes Link and Navi anew, and drawn)
+        Player* p = GET_PLAYER(play);
+        if (p != nullptr) {
+            if (p->actor.draw != nullptr) {
+                sLinkDraw = p->actor.draw;
+                p->actor.draw = nullptr;
+            }
+            if (p->naviActor != nullptr && p->naviActor->draw != nullptr) {
+                sNaviDraw = p->naviActor->draw;
+                p->naviActor->draw = nullptr;
+            }
+            // (the Link nobody sees is not hurt: a batch of pictures does not end with his death)
+            p->invincibilityTimer = 20;
+            gSaveContext.health = gSaveContext.healthCapacity > 0x30 ? gSaveContext.healthCapacity : 0x140;
+        }
+    }
 }
 
 void Step() {
+    if (sRoomFinish > 0 && gPlayState != nullptr && --sRoomFinish == 0) {
+        // ("room": the room asked for is loaded, the one before is let go as when a door closes behind Link)
+        if (gPlayState->roomCtx.status == 0) {
+            Room_FinishRoomChange(gPlayState, &gPlayState->roomCtx);
+            Log("ROOM now %d", gPlayState->roomCtx.curRoom.num);
+        } else {
+            sRoomFinish = 1;
+        }
+    }
     if (sH.steerFrames > 0) {
         if (gPlayState == nullptr || gPlayState->transitionTrigger != TRANS_TRIGGER_OFF) {
             Log("STEER stopped: transition started (door %s)", MergeShipHost_DoorState());
@@ -2373,6 +2595,17 @@ void Step() {
             Log("RANDOGEN seed=%s ok=%d spoiler=%s", arg(0).c_str(), (int)ok,
                 CVarGetString(CVAR_GENERAL("SpoilerLog"), ""));
             LogRandoPlacements();
+        } else if (c.op == "exclparse") {
+            // GitHub issue #1: the Check Locations page's reader of the excluded locations (it threw on names), then
+            // what each entry of the setting parses to
+            SohGui::UpdateMenuLocations();
+            std::stringstream list(CVarGetString(CVAR_RANDOMIZER_SETTING("ExcludedLocations"), ""));
+            std::string entry;
+            while (std::getline(list, entry, ',')) {
+                const RandomizerCheck rc = Randomizer_ParseCheckSetting(entry);
+                Log("EXCLPARSE '%s' -> %d %s", entry.c_str(), (int)rc, EnumToString(rc).data());
+            }
+            Log("EXCLPARSE done");
         } else if (c.op == "randoterm") {
             for (const std::string& line : MergeShip_Termina_Summary()) {
                 Log("RANDOTERM %s", line.c_str());
@@ -2709,6 +2942,7 @@ void Step() {
                                 p->actor.world.pos.x + Math_SinS(yaw) * dist, p->actor.world.pos.y,
                                 p->actor.world.pos.z + Math_CosS(yaw) * dist, 0, (s16)(yaw + 0x8000), 0,
                                 arg(2).empty() ? 0 : (s16)ParseInt(arg(2)));
+                sFocusActor = a != nullptr ? a : sFocusActor;
             }
             Log("SPAWNREL %s -> %s", arg(0).c_str(), (a != nullptr) ? "ok" : "failed (object not loaded?)");
         } else if (c.op == "strayfairy") {
@@ -2764,6 +2998,25 @@ void Step() {
             // inftable <flag>: Flags_SetInfTable (BUG-0127: the gate guard has seen Zelda's Letter, 0x76)
             Flags_SetInfTable((s32)ParseInt(arg(0)));
             Log("INFTABLE %s set", arg(0).c_str());
+        } else if (c.op == "eventchk") {
+            // eventchk <flag> [0|1]: set (default) or clear an event flag (actors that look at them when they spawn:
+            // set it before the scene loads)
+            if (arg(1) == "0") {
+                Flags_UnsetEventChkInf((s32)ParseInt(arg(0)));
+            } else {
+                Flags_SetEventChkInf((s32)ParseInt(arg(0)));
+            }
+            Log("EVENTCHK %s = %d", arg(0).c_str(), Flags_GetEventChkInf((s32)ParseInt(arg(0))) ? 1 : 0);
+        } else if (c.op == "switchflag") {
+            // switchflag <n> [0|1]: set (default) or clear a switch flag of the scene (a Great Fairy comes out for 0x38)
+            if (gPlayState != nullptr) {
+                if (arg(1) == "0") {
+                    Flags_UnsetSwitch(gPlayState, (s32)ParseInt(arg(0)));
+                } else {
+                    Flags_SetSwitch(gPlayState, (s32)ParseInt(arg(0)));
+                }
+                Log("SWITCHFLAG %s = %d", arg(0).c_str(), Flags_GetSwitch(gPlayState, (s32)ParseInt(arg(0))) ? 1 : 0);
+            }
         } else if (c.op == "mmsongact") {
             // mmsongact <song>: what follows Majora's Mask's song `song` (MERGESHIP_SONG_*) once played -- its
             // MergeShip_Songs_OnSongPlayedAct and its box's closing (the harness cannot play notes in Hyrule; BUG-0144's
@@ -2827,6 +3080,7 @@ void Step() {
                                 (f32)atof(arg(2).c_str()), (f32)atof(arg(3).c_str()), 0,
                                 arg(5).empty() ? 0 : (s16)ParseInt(arg(5)), 0,
                                 arg(4).empty() ? 0 : (s16)ParseInt(arg(4)));
+                sFocusActor = a != nullptr ? a : sFocusActor;
             }
             Log("SPAWN 0x%s -> %s", arg(0).c_str(), (a != nullptr) ? "ok" : "failed");
         } else if (c.op == "cvarf") {
@@ -2843,7 +3097,311 @@ void Step() {
                 Interface_ChangeHudVisibilityMode(HUD_VISIBILITY_ALL);
             }
             Log("HUD %s", sHudOff ? "off" : "on");
+        } else if (c.op == "camfocus") {
+            sLatch = sLatchWanted = false;
+            // camfocus on|off: the film camera on the actor spawned last (its place and facing instead of Link's)
+            // camfocus id <actorId> [n]: on the n-th actor (from 0) of that kind standing in the scene
+            if (arg(0) == "idat") {
+                // idat <actorId> <x> <y> <z>: the actor of that kind nearest to where the scene places it (an actor
+                // keeps the place it was made at; its parameters it may change)
+                const s16 id = (s16)ParseInt(arg(1));
+                const Vec3f at = { (f32)atof(arg(2).c_str()), (f32)atof(arg(3).c_str()), (f32)atof(arg(4).c_str()) };
+                Actor* found = nullptr;
+                f32 best = 0.0f;
+                s32 seen = 0;
+                for (int category = 0; gPlayState != nullptr && category < ACTORCAT_MAX; category++) {
+                    for (Actor* a = gPlayState->actorCtx.actorLists[category].head; a != nullptr; a = a->next) {
+                        if (a->id != id || a->update == nullptr) {
+                            continue;
+                        }
+                        const f32 dx = a->home.pos.x - at.x;
+                        const f32 dy = a->home.pos.y - at.y;
+                        const f32 dz = a->home.pos.z - at.z;
+                        // (of two at one place the one a scene placed, not the part another actor made -- a cow's tail --
+                        // and the one that is drawn, not the ones waiting unseen -- a Floormaster's three small ones)
+                        const f32 d = dx * dx + dy * dy + dz * dz + (a->parent != nullptr ? 80.0f * 80.0f : 0.0f) +
+                                      (a->draw == nullptr ? 100.0f * 100.0f : 0.0f);
+                        if (found == nullptr || d < best) {
+                            found = a;
+                            best = d;
+                        }
+                        seen++;
+                    }
+                }
+                sFocusActor = found;
+                sFocusOn = found != nullptr;
+                sCine.primed = false;
+                if (found != nullptr) {
+                    Log("CAMFOCUS id %s of %d at %.0f %.0f %.0f params %04X off %.0f draw %d room %d", arg(1).c_str(),
+                        seen, found->world.pos.x, found->world.pos.y, found->world.pos.z, (u16)found->params,
+                        sqrtf(best), found->draw != nullptr, found->room);
+                } else {
+                    Log("CAMFOCUS id %s: none (%d in the scene)", arg(1).c_str(), seen);
+                }
+            } else if (arg(0) == "id" || arg(0) == "idp") {
+                // (idp <actorId> <params>: the first actor of that kind with those parameters)
+                const bool byParams = arg(0) == "idp";
+                const s16 id = (s16)ParseInt(arg(1));
+                const s16 wantParams = byParams ? (s16)ParseInt(arg(2)) : 0;
+                s32 skip = byParams || arg(2).empty() ? 0 : ParseInt(arg(2));
+                Actor* found = nullptr;
+                s32 seen = 0;
+                for (int category = 0; gPlayState != nullptr && category < ACTORCAT_MAX; category++) {
+                    for (Actor* a = gPlayState->actorCtx.actorLists[category].head; a != nullptr; a = a->next) {
+                        if (a->id == id && (!byParams || a->params == wantParams)) {
+                            if (found == nullptr && seen == skip) {
+                                found = a;
+                            }
+                            seen++;
+                        }
+                    }
+                }
+                sFocusActor = found;
+                sFocusOn = found != nullptr;
+                sCine.primed = false;
+                if (found != nullptr) {
+                    Log("CAMFOCUS id %s #%d of %d at %.0f %.0f %.0f params %04X", arg(1).c_str(), skip, seen,
+                        found->world.pos.x, found->world.pos.y, found->world.pos.z, (u16)found->params);
+                } else {
+                    Log("CAMFOCUS id %s: none (%d in the scene)", arg(1).c_str(), seen);
+                }
+            } else {
+                sFocusOn = (arg(0) != "off");
+                sCine.primed = false;
+                Log("CAMFOCUS %s", sFocusOn ? "on" : "off");
+            }
+        } else if (c.op == "linkhide") {
+            // linkhide on|off: Link is not drawn (pictures of other actors; several kinds only show while he is near)
+            if (gPlayState != nullptr) {
+                Player* p = GET_PLAYER(gPlayState);
+                if (arg(0) != "off") {
+                    if (p->actor.draw != nullptr) {
+                        sLinkDraw = p->actor.draw;
+                    }
+                    p->actor.draw = nullptr;
+                } else if (sLinkDraw != nullptr) {
+                    p->actor.draw = sLinkDraw;
+                }
+            }
+            Log("LINKHIDE %s", arg(0) != "off" ? "on" : "off");
+        } else if (c.op == "near") {
+            // near [dist] [degrees]: Link stands dist (default 200) from the focused actor (camfocus), that many
+            // degrees round from its front (default 0: in front of it), facing it
+            Actor* a = FocusActor(gPlayState);
+            if (a != nullptr) {
+                Player* p = GET_PLAYER(gPlayState);
+                const f32 dist = arg(0).empty() ? 200.0f : (f32)atof(arg(0).c_str());
+                const s16 yaw = (s16)(a->shape.rot.y + (s16)((arg(1).empty() ? 0.0 : atof(arg(1).c_str())) * 65536.0 / 360.0));
+                // (as far off as asked where the scene has ground there; else nearer, down to the actor's own spot)
+                const f32 tries[] = { 1.0f, 0.7f, 0.45f, 0.25f, 0.0f };
+                f32 used = -1.0f;
+                Vec3f spot = a->world.pos;
+                for (f32 part : tries) {
+                    Vec3f at = { a->world.pos.x + Math_SinS(yaw) * dist * part, a->world.pos.y + 60.0f,
+                                 a->world.pos.z + Math_CosS(yaw) * dist * part };
+                    CollisionPoly* poly = nullptr;
+                    s32 bgId = 0;
+                    const f32 floorY = BgCheck_EntityRaycastFloor3(&gPlayState->colCtx, &poly, &bgId, &at);
+                    if (floorY > BGCHECK_Y_MIN + 1.0f && at.y - floorY < 700.0f) {
+                        spot = { at.x, floorY, at.z };
+                        used = dist * part;
+                        break;
+                    }
+                }
+                p->actor.world.pos = p->actor.home.pos = p->actor.prevPos = spot;
+                p->actor.velocity.y = 0.0f;
+                p->actor.shape.rot.y = p->actor.world.rot.y = p->yaw = (s16)(yaw + 0x8000);
+                Log("NEAR ok at %.0f (asked %.0f)%s", used, dist, used < 0.0f ? ": no ground near it" : "");
+            } else {
+                Log("NEAR no actor in focus");
+            }
+        } else if (c.op == "camauto") {
+            // camauto [angle] [zoom]: the film camera in front of the focused actor (camfocus), as far off and as
+            // high as the actor is tall (its focus point above its feet); zoom > 1 stands further back.
+            Actor* a = FocusActor(gPlayState);
+            if (a != nullptr) {
+                a->flags &= ~ACTOR_FLAG_REACT_TO_LENS;
+                sLatch = false;
+                sLatchWanted = true;
+                const f32 zoom = arg(1).empty() ? 1.0f : (f32)atof(arg(1).c_str());
+                bool joints = false;
+                const JointBox* made = ModelBox(a, &joints);
+                if (made != nullptr && joints) {
+                    // By its joints: a model reaches a little past them (the top of a head, the soles, the hands).
+                    // The picture is as high as the model and a quarter more, or as wide as it and a quarter more
+                    // (the camera sees 60 degrees upward, 4:3).
+                    const JointBox& b = *made;
+                    const f32 high = (b.hi.y - b.lo.y) * 1.3f + 14.0f;
+                    const f32 dx = b.hi.x - b.lo.x;
+                    const f32 dz = b.hi.z - b.lo.z;
+                    const f32 across = sqrtf(dx * dx + dz * dz) * 1.25f + 14.0f;
+                    f32 dist = high * 1.11f > across * 0.81f ? high * 1.11f : across * 0.81f;
+                    dist = (dist < 45.0f ? 45.0f : dist) * zoom;
+                    const f32 middle = (b.hi.y - b.lo.y) * 0.5f + 2.0f;
+                    FilmFront(a, middle, dist, middle + high * 0.1f, arg(0).empty() ? 20.0f : (f32)atof(arg(0).c_str()));
+                    Log("CAMAUTO id=0x%03X joints=%d high=%.0f across=%.0f dist=%.0f", a->id, b.count, high, across, dist);
+                } else {
+                    // (no skeleton: as tall as its focus point, its collision cylinder or the box round the
+                    // matrices it made when it was drawn; as wide as that cylinder, its shadow or that box)
+                    f32 tall = a->focus.pos.y - a->world.pos.y;
+                    tall = tall < (f32)a->colChkInfo.cylHeight ? (f32)a->colChkInfo.cylHeight : tall;
+                    f32 wide = (f32)a->colChkInfo.cylRadius;
+                    const f32 shadow = a->shape.shadowScale * fabsf(a->scale.x) * 100.0f;
+                    wide = wide < shadow ? shadow : wide;
+                    s32 matrices = 0;
+                    f32 middle = -1.0f;
+                    if (made != nullptr) {
+                        matrices = made->count;
+                        const f32 dx = made->hi.x - made->lo.x;
+                        const f32 dz = made->hi.z - made->lo.z;
+                        const f32 boxHigh = made->hi.y - made->lo.y;
+                        const f32 boxWide = sqrtf(dx * dx + dz * dz) * 0.5f;
+                        // (how large it is, within reason: what it draws far off is not its body)
+                        const f32 high = boxHigh > 300.0f ? 300.0f : boxHigh;
+                        const f32 across = boxWide > 200.0f ? 200.0f : boxWide;
+                        if (made->count >= 2 && high > 8.0f) {
+                            tall = tall < high + 16.0f ? high + 16.0f : tall;
+                        }
+                        wide = wide < across + 8.0f ? across + 8.0f : wide;
+                    }
+                    tall = tall < 18.0f ? 18.0f : (tall > 600.0f ? 600.0f : tall);
+                    wide = wide < 0.0f ? 0.0f : (wide > 400.0f ? 400.0f : wide);
+                    const f32 size = tall > 2.0f * wide ? tall : 2.0f * wide;
+                    if (middle < 0.0f) {
+                        middle = tall * 0.5f;
+                    }
+                    FilmFront(a, middle, (size * 1.6f + 40.0f) * zoom, middle + size * 0.15f + 6.0f,
+                              arg(0).empty() ? 20.0f : (f32)atof(arg(0).c_str()));
+                    Log("CAMAUTO id=0x%03X matrices=%d tall=%.0f wide=%.0f dist=%.0f (no joints)", a->id, matrices,
+                        tall, wide, (size * 1.6f + 40.0f) * zoom);
+                }
+            } else {
+                Log("CAMAUTO: no actor in focus");
+            }
+        } else if (c.op == "chamber") {
+            // chamber <n>: which sage's scene the Chamber of Sages plays when it is entered next (0 forest, 1 fire,
+            // 2 water, 3 spirit, 4 shadow): the sages stand there only in their own scenes
+            gSaveContext.chamberCutsceneNum = (u8)ParseInt(arg(0));
+            Log("CHAMBER %d", gSaveContext.chamberCutsceneNum);
+        } else if (c.op == "room") {
+            // room <n>: the scene's room n is loaded as a door loads it, and the room before is let go with its
+            // actors (a scene is entered by one room; what the game places in the others stands there once they load)
+            PlayState* play = gPlayState;
+            const s32 room = ParseInt(arg(0));
+            if (play != nullptr && room >= 0 && room < play->numRooms && play->roomCtx.status == 0 &&
+                play->roomCtx.curRoom.num != room) {
+                Room_RequestNewRoom(play, &play->roomCtx, room);
+                sRoomFinish = 2;
+                Log("ROOM %d asked for (of %d)", room, play->numRooms);
+            } else {
+                Log("ROOM %d: %s", room,
+                    play == nullptr ? "no scene"
+                                    : (play->roomCtx.curRoom.num == room ? "already there" : "not possible"));
+            }
+        } else if (c.op == "hide") {
+            // hide on|off: the focused actor is not drawn (a picture of the place without it)
+            if (arg(0) != "off") {
+                Actor* a = FocusActor(gPlayState);
+                if (a != nullptr && a->draw != nullptr) {
+                    sHiddenActor = a;
+                    sHiddenDraw = a->draw;
+                    a->draw = nullptr;
+                }
+                Log("HIDE %s", a != nullptr ? "on" : "no actor in focus");
+            } else {
+                for (int category = 0; gPlayState != nullptr && sHiddenActor != nullptr && category < ACTORCAT_MAX;
+                     category++) {
+                    for (Actor* a = gPlayState->actorCtx.actorLists[category].head; a != nullptr; a = a->next) {
+                        if (a == sHiddenActor && a->draw == nullptr) {
+                            a->draw = sHiddenDraw;
+                        }
+                    }
+                }
+                sHiddenActor = nullptr;
+                sHiddenDraw = nullptr;
+                Log("HIDE off");
+            }
+        } else if (c.op == "clean") {
+            // clean on|off: nothing in the picture but the scene and its actors: Link and Navi are not drawn, nor the
+            // target arrow (several kinds of actor only show, or wake, while Link is near)
+            sClean = (arg(0) != "off");
+            if (gPlayState != nullptr) {
+                Player* p = GET_PLAYER(gPlayState);
+                if (sClean) {
+                    if (p->actor.draw != nullptr) {
+                        sLinkDraw = p->actor.draw;
+                    }
+                    p->actor.draw = nullptr;
+                    if (p->naviActor != nullptr) {
+                        if (p->naviActor->draw != nullptr) {
+                            sNaviDraw = p->naviActor->draw;
+                        }
+                        p->naviActor->draw = nullptr;
+                    }
+                } else {
+                    if (sLinkDraw != nullptr) {
+                        p->actor.draw = sLinkDraw;
+                    }
+                    if (p->naviActor != nullptr && sNaviDraw != nullptr) {
+                        p->naviActor->draw = sNaviDraw;
+                    }
+                }
+            }
+            Log("CLEAN %s", sClean ? "on" : "off");
+        } else if (c.op == "flags") {
+            // flags clear: no event, item or talk flag is set (the story has not begun: the people a finished save
+            // has sent away stand where the game first puts them); set before the scene is entered
+            if (arg(0) == "clear") {
+                memset(gSaveContext.eventChkInf, 0, sizeof(gSaveContext.eventChkInf));
+                memset(gSaveContext.itemGetInf, 0, sizeof(gSaveContext.itemGetInf));
+                memset(gSaveContext.infTable, 0, sizeof(gSaveContext.infTable));
+                // (nor a room cleared, a switch pressed, a chest opened: a boss whose room the save calls cleared is
+                // not there)
+                memset(gSaveContext.sceneFlags, 0, sizeof(gSaveContext.sceneFlags));
+            }
+            Log("FLAGS %s", arg(0).c_str());
+        } else if (c.op == "freeze") {
+            // freeze on|off: every actor but Link stops updating (z_actor.c), so that two pictures taken some frames
+            // apart show one and the same pose
+            sFreezeActors = (arg(0) != "off");
+            sFrozenCounters = sFreezeActors && gPlayState != nullptr;
+            if (sFrozenCounters) {
+                sFrozenGameplayFrames = gPlayState->gameplayFrames;
+                sFrozenStateFrames = gPlayState->state.frames;
+                sFrozenDayTime = gSaveContext.dayTime;
+                sFrozenSkyboxTime = gSaveContext.skyboxTime;
+            }
+            Log("FREEZE %s", sFreezeActors ? "on" : "off");
+        } else if (c.op == "actorlist") {
+            // actorlist: every actor in the scene, with its category, parameters, place and height
+            if (gPlayState != nullptr) {
+                s32 n = 0;
+                for (int cat = 0; cat < ACTORCAT_MAX; cat++) {
+                    for (Actor* a = gPlayState->actorCtx.actorLists[cat].head; a != nullptr; a = a->next) {
+                        // (the index among the actors of this kind in the scene, as camfocus id counts them)
+                        s32 nth = 0;
+                        for (int c2 = 0; c2 < ACTORCAT_MAX; c2++) {
+                            for (Actor* b = gPlayState->actorCtx.actorLists[c2].head; b != nullptr; b = b->next) {
+                                if (b == a) {
+                                    c2 = ACTORCAT_MAX;
+                                    break;
+                                }
+                                if (b->id == a->id) {
+                                    nth++;
+                                }
+                            }
+                        }
+                        Log("ACTORLIST cat=%d id=0x%03X nth=%d params=0x%04X pos=(%.0f,%.0f,%.0f) tall=%.0f draw=%d "
+                            "room=%d",
+                            cat, a->id, nth, (u16)a->params, a->world.pos.x, a->world.pos.y, a->world.pos.z,
+                            a->focus.pos.y - a->world.pos.y, a->draw != nullptr, a->room);
+                        n++;
+                    }
+                }
+                Log("ACTORLIST %d actors, scene %d", n, gPlayState->sceneNum);
+            }
         } else if (c.op == "cinecam") {
+            sLatch = sLatchWanted = false;            // (a camera set by hand moves again)
             Log("%s", sCine.Command(c.args).c_str()); // include/mergeship/CineCam.hpp
         } else if (c.op == "anchorloop") {
             MergeShipAnchor_TestLoopback((u8)ParseInt(arg(0)), (u8)ParseInt(arg(1)), (u8)ParseInt(arg(2)),
@@ -3127,6 +3685,7 @@ void RegisterMergeShipTest() {
     GameInteractor::Instance->RegisterGameHook<GameInteractor::OnGameFrameUpdate>([]() {
         sH.frame++;
         Step();
+        HoldStill();
         UpdateCineCam();
         if (sH.trace) {
             TracePlayer();
@@ -3137,6 +3696,100 @@ void RegisterMergeShipTest() {
 static RegisterShipInitFunc sInitFunc(RegisterMergeShipTest, {});
 
 } // namespace
+
+// Called by Actor_Draw around an actor's draw function, and by the skeleton draw for its root limb (the current
+// matrix is the root limb's): where the actor's model stands.
+extern "C" void MergeShipTest_DrawingActor(Actor* actor) {
+    if (sDrawingActor != nullptr) {
+        // (an actor that is not drawn -- hidden for a picture -- keeps its boxes; one drawn without joints or
+        // matrices loses them, so that a box never outlives the actor it was noted for)
+        if (sJointBoxes.size() > 2048) {
+            sJointBoxes.clear();
+        }
+        if (sMatrixBoxes.size() > 2048) {
+            sMatrixBoxes.clear();
+        }
+        if (sDrawingBox.count > 0) {
+            sJointBoxes[sDrawingActor] = sDrawingBox;
+        } else {
+            sJointBoxes.erase(sDrawingActor);
+        }
+        if (sDrawingMatrices.count > 0) {
+            sMatrixBoxes[sDrawingActor] = sDrawingMatrices;
+        } else {
+            sMatrixBoxes.erase(sDrawingActor);
+        }
+    }
+    sDrawingActor = sH.active ? actor : nullptr;
+    sDrawingBox.count = 0;
+    sDrawingMatrices.count = 0;
+}
+
+// Called for every matrix the game hands to the renderer (sys_matrix.c), with the place it puts its model at.
+extern "C" void MergeShipTest_MatrixMade(f32 x, f32 y, f32 z) {
+    if (sDrawingActor == nullptr) {
+        return;
+    }
+    // (only near the actor: what it draws far off -- the end of a beam, a thing it threw -- is not its body)
+    const f32 dx = x - sDrawingActor->world.pos.x;
+    const f32 dy = y - sDrawingActor->world.pos.y;
+    const f32 dz = z - sDrawingActor->world.pos.z;
+    if (dx * dx + dy * dy + dz * dz > 600.0f * 600.0f) {
+        return;
+    }
+    JointBox& b = sDrawingMatrices;
+    if (b.count == 0) {
+        b.lo = b.hi = { x, y, z };
+    } else {
+        b.lo.x = x < b.lo.x ? x : b.lo.x;
+        b.lo.y = y < b.lo.y ? y : b.lo.y;
+        b.lo.z = z < b.lo.z ? z : b.lo.z;
+        b.hi.x = x > b.hi.x ? x : b.hi.x;
+        b.hi.y = y > b.hi.y ? y : b.hi.y;
+        b.hi.z = z > b.hi.z ? z : b.hi.z;
+    }
+    b.count++;
+}
+
+extern "C" void MergeShipTest_SkeletonLimb(void) {
+    if (sDrawingActor == nullptr) {
+        return;
+    }
+    MtxF m;
+    Matrix_Get(&m);
+    const Vec3f at = { m.mf[3][0], m.mf[3][1], m.mf[3][2] };
+    if (sDrawingBox.count == 0) {
+        sDrawingBox.lo = sDrawingBox.hi = at;
+    } else {
+        sDrawingBox.lo.x = at.x < sDrawingBox.lo.x ? at.x : sDrawingBox.lo.x;
+        sDrawingBox.lo.y = at.y < sDrawingBox.lo.y ? at.y : sDrawingBox.lo.y;
+        sDrawingBox.lo.z = at.z < sDrawingBox.lo.z ? at.z : sDrawingBox.lo.z;
+        sDrawingBox.hi.x = at.x > sDrawingBox.hi.x ? at.x : sDrawingBox.hi.x;
+        sDrawingBox.hi.y = at.y > sDrawingBox.hi.y ? at.y : sDrawingBox.hi.y;
+        sDrawingBox.hi.z = at.z > sDrawingBox.hi.z ? at.z : sDrawingBox.hi.z;
+    }
+    sDrawingBox.count++;
+}
+
+// Called by Play_Draw before it sets the view up: while a script keeps its pictures clean, the film camera's eye
+// and aim are the view's, whatever setting the scene gives its cameras (a shop's fixed camera).
+extern "C" s32 MergeShipTest_FilmView(Vec3f* eye, Vec3f* at) {
+    if (!sH.active || !sClean || !sFilmView) {
+        return 0;
+    }
+    *eye = sFilmEye;
+    *at = sFilmAt;
+    return 1;
+}
+
+extern "C" s32 MergeShipTest_Clean(void) {
+    return sH.active && sClean;
+}
+
+// Called by Actor_UpdateAll for each actor category: 1 while a script holds the actors still ("freeze on").
+extern "C" s32 MergeShipTest_ActorsFrozen(s32 category) {
+    return sFreezeActors && category != ACTORCAT_PLAYER;
+}
 
 // Called by PadMgr_ProcessInputs for controller 1: while a script runs, the script *is* the
 // controller, so a stray key press or an unplugged pad cannot change the result.

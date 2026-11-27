@@ -336,6 +336,11 @@ void LogState(const char* tag) {
             player->heldItemId, player->rightHandType, player->leftHandType, player->meleeWeaponAnimation,
             player->unk_AA5, Inventory_GetBtnBItem(play),
             ((anim != nullptr) && ((uintptr_t)anim > 0x10000) && (anim[0] == '_')) ? anim : "?");
+        if (player->transformation == PLAYER_FORM_GORON) { // BUG-0150: the ball's squash, against Hyrule's
+            Log("%s goron abc=%.3f b48=%.3f av2=%d av1=%d spk=%d b08=%.2f spd=%.2f scale=%.4f/%.4f s3=%08X", tag,
+                player->unk_ABC, player->unk_B48, player->av2.actionVar2, player->av1.actionVar1, player->unk_B86[1],
+                player->unk_B08, player->speedXZ, player->actor.scale.x, player->actor.scale.y, player->stateFlags3);
+        }
     }
 }
 

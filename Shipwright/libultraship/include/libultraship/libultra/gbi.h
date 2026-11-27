@@ -194,6 +194,7 @@
 #define G_SETINTENSITY 0x40
 #define G_PUSH_SHADER 0x43
 #define G_POP_SHADER 0x44
+#define G_SETBLENDMODE_EX 0x4b
 #define G_SETTILESIZE_INTERP 0x45
 #define G_SETTARGETINTERPINDEX 0x46
 #define G_SETTILESIZE_LERP 0x4a
@@ -378,6 +379,33 @@
  */
 #define G_EX_INVERT_CULLING 0x00000001
 #define G_EX_ALWAYS_EXECUTE_BRANCH 0x00000002
+// MergeShip2 (Ocarina of Time 3D materials): a vertex keeps its own alpha as shade alpha while fog is on.
+#define G_EX_KEEP_VERTEX_ALPHA 0x00000004
+// MergeShip2: texture 1 takes its texture coordinates from the vertex 32 slots above each triangle vertex.
+#define G_EX_TEXEL1_UPPER_VERTEX 0x00000008
+
+// MergeShip2: explicit colour blending, G_SETBLENDMODE_EX. w0 bits 0-3 equation, 4-7 destination factor, 8-11 source
+// factor (0 in all = off: the N64 blender's alpha blending again); w1 the blend constant (RGBA8888).
+#define G_BLENDEX_ZERO 1
+#define G_BLENDEX_ONE 2
+#define G_BLENDEX_SRC_COLOR 3
+#define G_BLENDEX_ONE_MINUS_SRC_COLOR 4
+#define G_BLENDEX_SRC_ALPHA 5
+#define G_BLENDEX_ONE_MINUS_SRC_ALPHA 6
+#define G_BLENDEX_DST_COLOR 7
+#define G_BLENDEX_ONE_MINUS_DST_COLOR 8
+#define G_BLENDEX_DST_ALPHA 9
+#define G_BLENDEX_ONE_MINUS_DST_ALPHA 10
+#define G_BLENDEX_CONSTANT_COLOR 11
+#define G_BLENDEX_ONE_MINUS_CONSTANT_COLOR 12
+#define G_BLENDEX_CONSTANT_ALPHA 13
+#define G_BLENDEX_ONE_MINUS_CONSTANT_ALPHA 14
+#define G_BLENDEX_EQ_ADD 0
+#define G_BLENDEX_EQ_SUBTRACT 1
+#define G_BLENDEX_EQ_REVERSE_SUBTRACT 2
+#define G_BLENDEX_EQ_MIN 3
+#define G_BLENDEX_EQ_MAX 4
+#define G_BLENDEX_MODE(src, dst, eq) (((src) << 8) | ((dst) << 4) | (eq))
 
 /* Need these defined for Sprite Microcode */
 #ifdef _LANGUAGE_ASSEMBLY

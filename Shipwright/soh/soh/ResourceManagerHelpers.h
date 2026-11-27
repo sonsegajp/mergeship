@@ -50,6 +50,7 @@ AnimationHeaderCommon* ResourceMgr_LoadAnimByName(const char* path);
 char* ResourceMgr_GetNameByCRC(uint64_t crc, char* alloc);
 Gfx* ResourceMgr_LoadGfxByCRC(uint64_t crc);
 Gfx* ResourceMgr_LoadGfxByName(const char* path);
+Gfx* ResourceMgr_LoadGfxByNameForDraw(const char* path); // MergeShip2: see ResourceManagerHelpers.cpp
 uint8_t ResourceMgr_FileIsCustomByName(const char* path);
 void ResourceMgr_PatchGfxByName(const char* path, const char* patchName, int index, Gfx instruction);
 void ResourceMgr_PatchCustomGfxByName(const char* path, const char* patchName, int index, Gfx instruction);

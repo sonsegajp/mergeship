@@ -1,4 +1,6 @@
 #include <atomic>
+#include <cctype>
+#include <cstdlib>
 #include <fstream>
 #include <sstream>
 #include <tuple>
@@ -54,6 +56,74 @@ std::set<RandomizerCheck> excludedLocations;
 std::set<RandomizerCheck> spoilerExcludedLocations;
 
 static std::atomic<bool> randoGenerating;
+
+// MergeShip2 (GitHub issue #1, "Crash on selecting 'Check Locations'"): the settings read these lists with std::stoi,
+// and a shipofharkinian.json carried over from a newer Ship of Harkinian holds names there
+// (ExcludedLocations "RC_GANON_SOUL,RC_GANONS_TOWER_BOSS_KEY_CHEST,"): stoi threw std::invalid_argument and the game
+// closed the moment the Check Locations page or seed generation read the setting.
+static std::string TrimSetting(const std::string& text) {
+    const size_t begin = text.find_first_not_of(" \t\r\n");
+    if (begin == std::string::npos) {
+        return "";
+    }
+    return text.substr(begin, text.find_last_not_of(" \t\r\n") - begin + 1);
+}
+
+static bool ParseSettingNumber(const std::string& text, long& value) {
+    if (text.empty() || !std::isdigit((unsigned char)text[0])) {
+        return false;
+    }
+    char* end = nullptr;
+    value = std::strtol(text.c_str(), &end, 10);
+    return end != nullptr && *end == '\0';
+}
+
+RandomizerCheck Randomizer_ParseCheckSetting(const std::string& raw) {
+    const std::string text = TrimSetting(raw);
+    long value = 0;
+    if (ParseSettingNumber(text, value)) {
+        return (value > RC_UNKNOWN_CHECK && value < RC_MAX) ? (RandomizerCheck)value : RC_UNKNOWN_CHECK;
+    }
+    static std::unordered_map<std::string, RandomizerCheck> byEnumName;
+    if (byEnumName.empty()) {
+        for (int rc = RC_UNKNOWN_CHECK + 1; rc < RC_MAX; rc++) {
+            const std::string_view name = EnumToString((RandomizerCheck)rc);
+            if (!name.empty()) {
+                byEnumName.emplace(std::string(name), (RandomizerCheck)rc);
+            }
+        }
+    }
+    if (auto it = byEnumName.find(text); it != byEnumName.end()) {
+        return it->second;
+    }
+    if (auto it = Rando::StaticData::locationNameToEnum.find(text); it != Rando::StaticData::locationNameToEnum.end()) {
+        return it->second;
+    }
+    if (!text.empty()) {
+        SPDLOG_WARN("[Randomizer] unknown location in the settings, skipped: {}", text);
+    }
+    return RC_UNKNOWN_CHECK;
+}
+
+RandomizerTrick Randomizer_ParseTrickSetting(const std::string& raw) {
+    const std::string text = TrimSetting(raw);
+    long value = 0;
+    if (ParseSettingNumber(text, value)) {
+        return (value >= 0 && value < RT_MAX) ? (RandomizerTrick)value : RT_MAX;
+    }
+    for (int rt = 0; rt < RT_MAX; rt++) {
+        if (EnumToString((RandomizerTrick)rt) == text) {
+            return (RandomizerTrick)rt;
+        }
+    }
+    if (Rando::StaticData::trickToEnum.contains(text)) {
+        return Rando::StaticData::trickToEnum[text];
+    }
+    if (!text.empty()) {
+        SPDLOG_WARN("[Randomizer] unknown glitch in the settings, skipped: {}", text);
+    }
+    return RT_MAX;
+}
 
 bool Rando_HandleSpoilerDrop(char* filePath) {
     if (SohUtils::IsStringEmpty(filePath)) {
@@ -961,7 +1031,10 @@ void GenerateRandomizerImgui(std::string seed = "") {
     std::stringstream excludedLocationStringStream(CVarGetString(CVAR_RANDOMIZER_SETTING("ExcludedLocations"), ""));
     std::string excludedLocationString;
     while (getline(excludedLocationStringStream, excludedLocationString, ',')) {
-        excludedLocations.insert((RandomizerCheck)std::stoi(excludedLocationString));
+        const RandomizerCheck rc = Randomizer_ParseCheckSetting(excludedLocationString);
+        if (rc != RC_UNKNOWN_CHECK) {
+            excludedLocations.insert(rc);
+        }
     }
 
     // todo: better way to sort out linking tricks rather than name

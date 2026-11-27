@@ -2,6 +2,7 @@
 #include "soh/MergeShip/MergeShipHost.h"
 #include "soh/MergeShip/MergeShipSohFd.h"
 #include "soh/MergeShip/MergeShipAdultMask.h" // MergeShip2: the timeline an Adult Mask age keeps
+#include "soh/MergeShip/MergeShipPort3ds.h"
 #include "global.h"
 #include "vt.h"
 
@@ -267,6 +268,9 @@ u8 CheckStoneCount() {
 }
 
 u8 MergeShip_Goal_ExtraMedallions(void); // MergeShip2: soh/MergeShip/MergeShipGoal.cpp
+s32 MergeShipTest_ActorsFrozen(s32 category); // MergeShip2: test harness (soh/MergeShip/MergeShipTest.cpp)
+s32 MergeShipTest_FilmView(Vec3f* eye, Vec3f* at); // ... 1 with the film camera's eye and aim while it is the view
+s32 MergeShipTest_Clean(void);                      // ... 1 while a script wants nothing but the scene in the picture
 
 u8 CheckMedallionCount() {
     u8 medallionCount = 0;
@@ -1224,10 +1228,12 @@ void Play_Update(PlayState* play) {
                     func_800645A0(play, &play->csCtx);
 
                     PLAY_LOG(3651);
-                    Effect_UpdateAll(play);
+                    if (!MergeShipTest_ActorsFrozen(-1)) { // MergeShip2: the test harness holds the effects still too
+                        Effect_UpdateAll(play);
 
-                    PLAY_LOG(3657);
-                    EffectSs_UpdateAll(play);
+                        PLAY_LOG(3657);
+                        EffectSs_UpdateAll(play);
+                    }
 
                     PLAY_LOG(3662);
                 }
@@ -1337,12 +1343,424 @@ skip:
                        play->state.gfxCtx);
 }
 
+// MergeShip2 real-time shadows (the "Real-Time Shadows" option; libultraship fast/interpreter.cpp, "MergeShip2
+// real-time shadows"). The renderer draws the frame once more as the light sees it and darkens what lies in shadow;
+// the game says where the light is and where in the frame the darkening goes: behind the world's opaque surfaces
+// and before everything else, which is the head of the translucent buffer (its view matrices are in already).
+// Outdoors the light is the sun, or the moon while the sun is down (weaker); the two cross at the horizon, where
+// the shadows fade out and in again. Indoors it is a light from above, a little aslant, and only cast shadows are
+// drawn (a wall is not darkened for facing away from a lamp that is not there). That light comes down from a level
+// plane under the ceiling over Link: what is above the plane (window sills, beams, the next floor up) is not there
+// for it, and casts nothing into the room.
+typedef struct {
+    u8 on;
+    u8 bothSides; // what faces away from the light covers too
+    u8 fromPlane; // the light comes down from a level plane at `top`
+    u8 casts;     // shadows are cast (else the pass over the screen is only for the ambient shading and the clouds)
+    f32 dir[3];   // the way to the light
+    f32 focus[3]; // the middle of what the shadows cover
+    f32 radius;
+    f32 shade; // how bright a surface in shadow stays
+    f32 away;  // the same for a surface turned away from the light
+    f32 top;   // (fromPlane) the plane's height
+    f32 deep;  // (fromPlane) how far under it the light reaches
+    f32 reach; // (fromPlane) how high the plane is over the ground: a shadow fades out towards that far from what
+               // casts it (a wall the plane cuts off leaves no band behind it)
+    // The rest of what the same pass over the screen does (the "Ambient Shading" and "Cloud Shadows" options):
+    f32 ao;      // how dark the ambient shading goes: where other surfaces stand close over a place (a corner, the
+                 // foot of a wall, under a bush) less light arrives (0: none)
+    f32 aoReach; // how far it looks, in the world's units
+    f32 clouds;  // how dark a cloud's shadow is: they drift over open country with the wind (0: none)
+    f32 tint[3]; // what a shadow leaves of red, green and blue against its plain shade (by day a shadow is lit by
+                 // the sky: bluer than what the sun lights)
+    f32 sun[3];  // how much brighter what the light reaches is drawn (the "Warm Sunlight" option; 1: as it is)
+    // The game's lamps (the "Real Light Sources" option): its point lights -- torches, fires, fairies, explosions,
+    // spells -- light the surfaces about them, with the game's own colour, reach and flicker. The game itself
+    // lights only characters by them, and no wall or floor.
+    s32 lampCount;     // at most 12, the nearest to what the camera looks at
+    f32 lampStrength;  // how strongly their light is drawn
+    f32 lamps[12][8];  // each: its place (x, y, z), how far it reaches, its colour (0 to 1), one unused
+} MergeShipShadowLight;
+
+static MergeShipShadowLight sMergeShipShadowLight;
+static f32 sMergeShipShadowTop;
+static s32 sMergeShipShadowTopScene = -1;
+
+// A lamp's colour as the screen pass takes it: the game redraws a torch's brightness from nothing every frame
+// (anywhere between a half and all of it), which on a character is a flicker and on a whole wall would be a strobe.
+// So each lamp's colour follows the game's a part of the way a frame.
+typedef struct {
+    LightInfo* info;
+    f32 color[3];
+    u32 frame;
+} MergeShipLampEase;
+
+static MergeShipLampEase sMergeShipLampEase[32];
+static u32 sMergeShipLampFrame;
+static s32 sMergeShipLamps;
+
+static void Play_MergeShipLampColor(LightInfo* info, f32* color) {
+    MergeShipLampEase* found = NULL;
+    MergeShipLampEase* spare = NULL;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sMergeShipLampEase); i++) {
+        MergeShipLampEase* ease = &sMergeShipLampEase[i];
+        s32 fresh = ease->info != NULL && (sMergeShipLampFrame - ease->frame) <= 2;
+
+        if (fresh && ease->info == info) {
+            found = ease;
+            break;
+        }
+        if (!fresh && spare == NULL) {
+            spare = ease;
+        }
+    }
+    if (found != NULL) {
+        for (i = 0; i < 3; i++) {
+            found->color[i] += (color[i] - found->color[i]) * 0.22f;
+            color[i] = found->color[i];
+        }
+        found->frame = sMergeShipLampFrame;
+    } else if (spare != NULL) {
+        // (a lamp first seen: at the middle of a flicker)
+        spare->info = info;
+        for (i = 0; i < 3; i++) {
+            spare->color[i] = color[i];
+        }
+        spare->frame = sMergeShipLampFrame;
+    }
+}
+
+// Whether the screen pass draws the lamps' light this frame: it lights the characters as it does the walls, so the
+// game's own light from them on a character is left out (z_lights.c), or he would be lit twice.
+s32 Play_MergeShipLampsOn(void) {
+    return sMergeShipLamps && sMergeShipShadowLight.on;
+}
+
+// Whether this frame's world is drawn with them (the actors' own round shadows are then left out: z_actor.c). Not
+// where the room is a painted picture with no floor drawn (the Market, a shop seen from its fixed camera): nothing
+// is there for a shadow to fall on, so the round shadows stay.
+s32 Play_MergeShipShadowsOn(void) {
+    if (!sMergeShipShadowLight.on || !sMergeShipShadowLight.casts) {
+        return false;
+    }
+    if (gPlayState != NULL && gPlayState->roomCtx.curRoom.meshHeader != NULL &&
+        gPlayState->roomCtx.curRoom.meshHeader->base.type == 1 && !MergeShipPort3ds_RoomDrawn()) {
+        return false;
+    }
+    return true;
+}
+
+static void Play_MergeShipShadows(PlayState* play) {
+    MergeShipShadowLight* light = &sMergeShipShadowLight;
+    GraphicsContext* gfxCtx = play->state.gfxCtx;
+    f32 strength = CVarGetInteger("gMergeShip.ShadowStrength", 45) / 100.0f;
+    f32 length;
+    f32 high;
+    Vec3f forward;
+    Gfx* gfx;
+    s32 shadows = CVarGetInteger("gMergeShip.Shadows", 0);
+    s32 shading = CVarGetInteger("gMergeShip.AmbientShading", 0);
+    s32 clouds = CVarGetInteger("gMergeShip.CloudShadows", 0);
+    s32 lamps = CVarGetInteger("gMergeShip.RealLights", 0);
+    s32 sunUp = true;
+    f32 daylight = 1.0f;
+
+    light->on = false;
+    light->casts = false;
+    light->lampCount = 0;
+    sMergeShipLamps = false;
+    if ((!shadows && !shading && !clouds && !lamps) || !MergeShipPort3ds_ShadowsSupported()) {
+        return;
+    }
+    sMergeShipLamps = lamps != 0;
+    sMergeShipLampFrame++;
+    if (lamps) {
+        // the nearest twelve of the game's point lights to what the camera looks at
+        LightNode* node;
+        f32 far2[12];
+        s32 n;
+
+        light->lampStrength = CLAMP(CVarGetInteger("gMergeShip.RealLightsStrength", 100), 20, 200) / 100.0f;
+        for (node = play->lightCtx.listHead; node != NULL; node = node->next) {
+            LightPoint* point;
+            f32 color[3];
+            f32 dx;
+            f32 dy;
+            f32 dz;
+            f32 d2;
+            s32 slot;
+
+            if (node->info == NULL || node->info->type == LIGHT_DIRECTIONAL) {
+                continue;
+            }
+            point = &node->info->params.point;
+            if (point->radius <= 0 || (point->color[0] | point->color[1] | point->color[2]) == 0) {
+                continue;
+            }
+            dx = point->x - play->view.lookAt.x;
+            dy = point->y - play->view.lookAt.y;
+            dz = point->z - play->view.lookAt.z;
+            d2 = SQ(dx) + SQ(dy) + SQ(dz);
+            // (the pass draws a lamp's light up to 900 units from it)
+            if (d2 > SQ(1500.0f + 900.0f)) {
+                continue;
+            }
+            color[0] = point->color[0] / 255.0f;
+            color[1] = point->color[1] / 255.0f;
+            color[2] = point->color[2] / 255.0f;
+            Play_MergeShipLampColor(node->info, color);
+            // (kept in order of distance: a nearer lamp pushes the farthest out)
+            slot = light->lampCount;
+            if (slot == 12) {
+                if (d2 >= far2[11]) {
+                    continue;
+                }
+                slot = 11;
+            } else {
+                light->lampCount++;
+            }
+            while (slot > 0 && far2[slot - 1] > d2) {
+                far2[slot] = far2[slot - 1];
+                for (n = 0; n < 8; n++) {
+                    light->lamps[slot][n] = light->lamps[slot - 1][n];
+                }
+                slot--;
+            }
+            far2[slot] = d2;
+            light->lamps[slot][0] = point->x;
+            light->lamps[slot][1] = point->y;
+            light->lamps[slot][2] = point->z;
+            light->lamps[slot][3] = point->radius;
+            light->lamps[slot][4] = color[0];
+            light->lamps[slot][5] = color[1];
+            light->lamps[slot][6] = color[2];
+            light->lamps[slot][7] = 0.0f;
+        }
+    }
+    light->casts = shadows != 0;
+    light->ao = shading ? CLAMP(CVarGetInteger("gMergeShip.AmbientShadingStrength", 60), 0, 100) / 100.0f : 0.0f;
+    light->aoReach = 34.0f;
+    light->clouds = 0.0f;
+    light->tint[0] = light->tint[1] = light->tint[2] = 1.0f;
+    light->sun[0] = light->sun[1] = light->sun[2] = 1.0f;
+    strength = CLAMP(strength, 0.0f, 0.9f);
+    if (play->envCtx.indoors || play->envCtx.sunMoonDisabled) {
+        Player* player = GET_PLAYER(play);
+        Vec3f under = player->actor.world.pos;
+        f32 ceilingY;
+        f32 top = player->actor.world.pos.y + 160.0f;
+
+        // (leant far enough that a shadow shows beside its thing: the ceiling and the walls do not stand in its way)
+        light->dir[0] = 0.40f;
+        light->dir[1] = 0.87f;
+        light->dir[2] = 0.28f;
+        light->shade = 1.0f - strength * 0.75f;
+        light->away = 1.0f;
+        // (a room's ceiling and the walls on the light's side are drawn from inside alone: the light comes
+        // through them)
+        light->bothSides = false;
+        // the light's plane: over anyone's head, and under the ceiling over Link where that is lower (what is on
+        // the floor above would cast into this room)
+        under.y += 30.0f;
+        if (BgCheck_AnyCheckCeiling(&play->colCtx, &ceilingY, &under, 170.0f)) {
+            top = MIN(top, ceilingY + 170.0f - 10.0f);
+        }
+        top = MAX(top, player->actor.world.pos.y + 60.0f);
+        // (eased: a doorway's lintel is overhead for a few frames only)
+        if (sMergeShipShadowTopScene != play->sceneNum || fabsf(top - sMergeShipShadowTop) > 700.0f) {
+            sMergeShipShadowTop = top;
+            sMergeShipShadowTopScene = play->sceneNum;
+        } else {
+            Math_ApproachF(&sMergeShipShadowTop, top, 0.3f, 30.0f);
+        }
+        light->fromPlane = true;
+        light->top = sMergeShipShadowTop;
+        light->deep = 1600.0f;
+        light->reach = MAX(sMergeShipShadowTop - player->actor.world.pos.y, 40.0f);
+    } else {
+        Vec3f sun = play->envCtx.sunPos;
+
+        length = sqrtf(SQ(sun.x) + SQ(sun.y) + SQ(sun.z));
+        if (length < 1.0f) {
+            // (no sun to go by: nothing casts; what else is asked for stays)
+            sun.x = 0.0f;
+            sun.y = 1.0f;
+            sun.z = 0.0f;
+            length = 1.0f;
+            light->casts = false;
+        }
+        high = sun.y / length;
+        // (the moon is across the sky from the sun)
+        if (high < 0.0f) {
+            sun.x = -sun.x;
+            sun.y = -sun.y;
+            sun.z = -sun.z;
+            strength *= 0.55f;
+            sunUp = false;
+        }
+        high = fabsf(high);
+        // at the horizon no shadow; and none longer than a light a fifth up the sky throws
+        daylight = CLAMP((high - 0.04f) / 0.18f, 0.0f, 1.0f);
+        strength *= daylight;
+        if (strength <= 0.01f) {
+            // (the light is at the horizon: nothing casts; the ambient shading stays)
+            light->casts = false;
+        }
+        // the clouds' shadows, fainter under the moon; and the colour of shade: what the sun does not reach is lit
+        // by the sky, and is bluer
+        if (clouds) {
+            light->clouds = (sunUp ? 0.55f : 0.25f) * daylight;
+        }
+        light->tint[0] = sunUp ? 0.88f : 0.94f;
+        light->tint[1] = sunUp ? 0.94f : 0.97f;
+        light->tint[2] = 1.0f;
+        // (and what the sun does reach is a little brighter and warmer for it)
+        if (sunUp && CVarGetInteger("gMergeShip.SunWarmth", 0)) {
+            light->sun[0] = 1.0f + 0.12f * daylight;
+            light->sun[1] = 1.0f + 0.08f * daylight;
+            light->sun[2] = 1.0f + 0.01f * daylight;
+        }
+        light->dir[0] = sun.x / length;
+        light->dir[1] = MAX(sun.y / length, 0.3f);
+        light->dir[2] = sun.z / length;
+        // Nor a shadow shorter than half of what throws it: a light straight overhead puts every shadow under its
+        // own thing, where nobody sees it, and the sun and the moon pass close to that. So the light is leant out
+        // the way it leans already, until it stands 28 degrees off overhead.
+        {
+            f32 flat = sqrtf(SQ(light->dir[0]) + SQ(light->dir[2]));
+            f32 least = light->dir[1] * 0.53f;
+
+            if (flat < least) {
+                if (flat > 0.001f) {
+                    light->dir[0] *= least / flat;
+                    light->dir[2] *= least / flat;
+                } else {
+                    light->dir[2] = least;
+                }
+            }
+        }
+        light->shade = 1.0f - strength;
+        light->away = 1.0f - strength * 0.4f;
+        // (a cliff drawn from one side only still stands between the sun and the ground)
+        light->bothSides = true;
+        light->fromPlane = false;
+    }
+    // about what the camera looks at, and somewhat on from it
+    forward.x = play->view.lookAt.x - play->view.eye.x;
+    forward.y = 0.0f;
+    forward.z = play->view.lookAt.z - play->view.eye.z;
+    length = sqrtf(SQ(forward.x) + SQ(forward.z));
+    if (length > 1.0f) {
+        forward.x /= length;
+        forward.z /= length;
+    } else {
+        forward.x = forward.z = 0.0f;
+    }
+    light->radius = 1400.0f;
+    light->focus[0] = play->view.lookAt.x + forward.x * 500.0f;
+    light->focus[1] = play->view.lookAt.y;
+    light->focus[2] = play->view.lookAt.z + forward.z * 500.0f;
+    light->on = true;
+
+    OPEN_DISPS(gfxCtx);
+    gfx = POLY_XLU_DISP;
+    gfx->words.w0 = (0x4Fu << 24) | (9u << 16); // G_REGS_EX 9: the light
+    gfx->words.w1 = (uintptr_t)light;
+    gfx++;
+    gfx->words.w0 = (0x4Fu << 24) | (8u << 16); // G_REGS_EX 8: darken here
+    gfx->words.w1 = 0;
+    gfx++;
+    POLY_XLU_DISP = gfx;
+    CLOSE_DISPS(gfxCtx);
+}
+
+// The finished picture's glow and look (the "Glow", "Film Look", "Darker Corners" and "Background Blur" options):
+// one pass over the world as it has been drawn, before the game's fades, its HUD and its text
+// (GfxRenderingAPI::ApplyPost; Direct3D 11). `slot` is the place kept for it in the overlay's list, where the world
+// is finished; the world's camera is kept for it here, at the head of what is drawn of the world.
+static f32 sMergeShipPost[48];
+static f32 sMergeShipFocus;     // how far the background's blur has come in (0 to 1)
+static f32 sMergeShipFocusAt;   // the distance in focus
+static f32 sMergeShipFocusWide; // how far either side of it stays sharp
+
+static void Play_MergeShipPost(PlayState* play, Gfx* slot) {
+    GraphicsContext* gfxCtx = play->state.gfxCtx;
+    s32 glow = CVarGetInteger("gMergeShip.Glow", 0);
+    s32 film = CVarGetInteger("gMergeShip.FilmLook", 0);
+    s32 corners = CVarGetInteger("gMergeShip.Vignette", 0);
+    s32 blur = CVarGetInteger("gMergeShip.FocusBlur", 0);
+    f32* p = sMergeShipPost;
+    Gfx* gfx;
+
+    if (slot == NULL || (!glow && !film && !corners && !blur) || !MergeShipPort3ds_ShadowsSupported()) {
+        sMergeShipFocus = 0.0f;
+        return;
+    }
+    memset(sMergeShipPost, 0, sizeof(sMergeShipPost));
+    if (glow) {
+        p[0] = 0.70f;
+        p[1] = CLAMP(CVarGetInteger("gMergeShip.GlowStrength", 100), 10, 200) / 100.0f;
+    }
+    p[5] = 1.0f;
+    if (film) {
+        f32 amount = CLAMP(CVarGetInteger("gMergeShip.FilmLookStrength", 50), 0, 100) / 100.0f;
+
+        p[4] = 0.6f * amount;
+        p[5] = 1.0f + 0.14f * amount;
+        p[7] = 1.5f * amount;
+    }
+    if (corners) {
+        p[6] = 0.24f;
+    }
+    if (blur) {
+        // In a conversation and while Link is locked on to something, the two of them are sharp and what lies
+        // well behind or before them is blurred, as a camera focused on them would have it.
+        Player* player = GET_PLAYER(play);
+        Actor* subject = player->focusActor;
+
+        if (subject != NULL && subject != &player->actor) {
+            f32 toLink = Math_Vec3f_DistXYZ(&play->view.eye, &player->actor.focus.pos);
+            f32 toSubject = Math_Vec3f_DistXYZ(&play->view.eye, &subject->focus.pos);
+            f32 at = (toLink + toSubject) * 0.5f;
+            f32 wide = fabsf(toSubject - toLink) * 0.5f + 70.0f;
+
+            if (sMergeShipFocus <= 0.0f) {
+                sMergeShipFocusAt = at;
+                sMergeShipFocusWide = wide;
+            } else {
+                Math_ApproachF(&sMergeShipFocusAt, at, 0.3f, 60.0f);
+                Math_ApproachF(&sMergeShipFocusWide, wide, 0.3f, 40.0f);
+            }
+            Math_ApproachF(&sMergeShipFocus, 1.0f, 0.3f, 0.12f);
+        } else {
+            Math_ApproachF(&sMergeShipFocus, 0.0f, 0.3f, 0.12f);
+        }
+        p[8] = sMergeShipFocus * CLAMP(CVarGetInteger("gMergeShip.FocusBlurStrength", 70), 20, 100) / 100.0f;
+        p[9] = sMergeShipFocusAt;
+        p[10] = sMergeShipFocusWide;
+        p[11] = 260.0f + sMergeShipFocusAt * 0.6f;
+    } else {
+        sMergeShipFocus = 0.0f;
+    }
+    slot->words.w1 = (uintptr_t)sMergeShipPost;
+
+    OPEN_DISPS(gfxCtx);
+    gfx = POLY_XLU_DISP;
+    gfx->words.w0 = (0x4Fu << 24) | (13u << 16); // G_REGS_EX 13: the camera in effect is the world's
+    gfx->words.w1 = 0;
+    gfx++;
+    POLY_XLU_DISP = gfx;
+    CLOSE_DISPS(gfxCtx);
+}
+
 void Play_DrawOverlayElements(PlayState* play) {
     if ((play->pauseCtx.state != 0) || (play->pauseCtx.debugState != 0)) {
         KaleidoScopeCall_Draw(play);
     }
 
-    if (gSaveContext.gameMode == GAMEMODE_NORMAL) {
+    if (gSaveContext.gameMode == GAMEMODE_NORMAL && !MergeShipTest_Clean()) { // MergeShip2: test harness pictures: no HUD
         Interface_Draw(play);
     }
 
@@ -1357,6 +1775,7 @@ void Play_Draw(PlayState* play) {
     GraphicsContext* gfxCtx = play->state.gfxCtx;
     Lights* sp228;
     Vec3f sp21C;
+    Gfx* mergeShipPostSlot = NULL; // (MergeShip2: Play_MergeShipPost)
 
     // #region SOH [Port] Frame buffer effects for pause menu
     // Track render size when paused and that a copy was performed
@@ -1403,10 +1822,24 @@ void Play_Draw(PlayState* play) {
 
     if ((HREG(80) != 10) || (HREG(82) != 0)) {
         GameInteractor_ExecuteOnPlayDrawBegin();
+        // MergeShip2 (MergeShipPort3ds.h): the view distance of a scene that is real geometry in the 3DS rooms
+        MergeShipPort3ds_SceneView(play);
 
         POLY_OPA_DISP = Play_SetFog(play, POLY_OPA_DISP);
         POLY_XLU_DISP = Play_SetFog(play, POLY_XLU_DISP);
 
+        {
+            // MergeShip2: the test harness's film camera is the view while a script keeps its pictures clean,
+            // whatever setting the scene gives its cameras (a shop's fixed camera)
+            Vec3f filmEye;
+            Vec3f filmAt;
+            if (MergeShipTest_FilmView(&filmEye, &filmAt)) {
+                Vec3f filmUp = { 0.0f, 1.0f, 0.0f };
+                func_800AA358(&play->view, &filmEye, &filmAt, &filmUp);
+                play->view.fovy = 60.0f;
+                View_InitDistortion(&play->view); // (no wobble: Jabu-Jabu's belly, a hot room)
+            }
+        }
         func_800AA460(&play->view, play->view.fovy, play->view.zNear, play->lightCtx.fogFar);
         func_800AAA50(&play->view, 15);
 
@@ -1436,6 +1869,13 @@ void Play_Draw(PlayState* play) {
             Matrix_MtxFToMtx(MATRIX_CHECKFLOATS(&play->billboardMtxF), Graph_Alloc(gfxCtx, sizeof(Mtx)));
 
         gSPSegment(POLY_OPA_DISP++, 0x01, play->billboardMtx);
+
+        // MergeShip2, the finished picture's glow and look: a place for its command here, where the overlay's list
+        // has nothing of the game's yet (its fades, the HUD and the text come after and stay as they are). It is
+        // filled in where the world's drawing starts, and stays empty when the world is not drawn.
+        mergeShipPostSlot = OVERLAY_DISP++;
+        mergeShipPostSlot->words.w0 = (0x4Fu << 24) | (12u << 16); // G_REGS_EX 12
+        mergeShipPostSlot->words.w1 = 0;
 
         if ((HREG(80) != 10) || (HREG(92) != 0)) {
             Gfx* gfxP;
@@ -1505,6 +1945,10 @@ void Play_Draw(PlayState* play) {
             goto Play_Draw_DrawOverlayElements;
         }
 
+        // MergeShip2 real-time shadows: the world is drawn from here on
+        Play_MergeShipShadows(play);
+        Play_MergeShipPost(play, mergeShipPostSlot);
+
         if ((HREG(80) != 10) || (HREG(83) != 0)) {
             if (play->skyboxId && (play->skyboxId != SKYBOX_UNSET_1D) && !play->envCtx.skyboxDisabled) {
                 if ((play->skyboxId == SKYBOX_NORMAL_SKY) || (play->skyboxId == SKYBOX_CUTSCENE_MAP)) {
@@ -1551,11 +1995,15 @@ void Play_Draw(PlayState* play) {
                 Scene_Draw(play);
                 Room_Draw(play, &play->roomCtx.curRoom, roomDrawFlags & 3);
                 Room_Draw(play, &play->roomCtx.prevRoom, roomDrawFlags & 3);
+                MergeShipPort3ds_DrawGrass(play); // (MergeShip2: more grass, on the floors that are grass)
             }
         }
 
         if ((HREG(80) != 10) || (HREG(83) != 0)) {
-            if ((play->skyboxCtx.unk_140 != 0) && (GET_ACTIVE_CAM(play)->setting != CAM_SET_PREREND_FIXED)) {
+            // MergeShip2 (MergeShipPort3ds.h): the pre-rendered panorama of an interior would cover a room drawn
+            // from the Ocarina of Time 3D pack, which is real geometry.
+            if ((play->skyboxCtx.unk_140 != 0) && (GET_ACTIVE_CAM(play)->setting != CAM_SET_PREREND_FIXED) &&
+                !MergeShipPort3ds_RoomDrawn()) {
                 Vec3f quakeOffset;
 
                 Camera_GetSkyboxOffset(&quakeOffset, GET_ACTIVE_CAM(play));
@@ -1605,7 +2053,17 @@ void Play_Draw(PlayState* play) {
 
         if ((HREG(80) != 10) || (HREG(88) != 0)) {
             if (play->envCtx.sandstormState != SANDSTORM_OFF) {
+                // MergeShip2: the test harness's pictures: no sandstorm over them. The storm still runs (entering a
+                // desert scene waits for it to settle): what it drew is taken back.
+                Gfx* sandOpa = POLY_OPA_DISP;
+                Gfx* sandXlu = POLY_XLU_DISP;
+                Gfx* sandOverlay = OVERLAY_DISP;
                 Environment_DrawSandstorm(play, play->envCtx.sandstormState);
+                if (MergeShipTest_Clean()) {
+                    POLY_OPA_DISP = sandOpa;
+                    POLY_XLU_DISP = sandXlu;
+                    OVERLAY_DISP = sandOverlay;
+                }
             }
         }
 

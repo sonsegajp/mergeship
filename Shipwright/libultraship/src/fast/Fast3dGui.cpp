@@ -29,9 +29,38 @@
 #include <imgui_impl_sdl2.h>
 #endif
 
+#ifdef ENABLE_OPENGL
+namespace Fast {
+void MsOpenGLSetPictureFilter(uintptr_t texture, bool hardPixels); // gfx_opengl.cpp
+}
+#endif
+
 #if defined(ENABLE_DX11) || defined(ENABLE_DX12)
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
+#include <wrl/client.h>
+#include "fast/backends/gfx_direct3d_common.h"
+
+// MergeShip2 render styles: the 16-bit and 8-bit styles show the (small) game picture with hard pixels
+static void MsHardPixelsCallback(const ImDrawList* list, const ImDrawCmd* cmd) {
+    auto api = static_cast<Fast::GfxRenderingAPIDX11*>(static_cast<Fast::GfxRenderingAPI*>(cmd->UserCallbackData));
+    static Microsoft::WRL::ComPtr<ID3D11SamplerState> sSampler;
+    if (api == nullptr || api->mDevice == nullptr || api->mContext == nullptr) {
+        return;
+    }
+    if (sSampler == nullptr) {
+        D3D11_SAMPLER_DESC desc;
+        ZeroMemory(&desc, sizeof(desc));
+        desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+        desc.AddressU = desc.AddressV = desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+        desc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+        desc.MaxLOD = D3D11_FLOAT32_MAX;
+        if (FAILED(api->mDevice->CreateSamplerState(&desc, sSampler.GetAddressOf()))) {
+            return;
+        }
+    }
+    api->mContext->PSSetSamplers(0, 1, sSampler.GetAddressOf());
+}
 
 // NOLINTNEXTLINE
 IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -303,6 +332,18 @@ void Fast3dGui::DrawFloatingWindows() {
     }
 }
 
+// MergeShip2 render styles: the 16-bit and 8-bit styles draw the game small and show it with hard pixels, a whole
+// number of window pixels to each of its own. The picture's height in lines for a style (0: not one of these), and
+// the number of window pixels to a picture pixel.
+static int MsPixelStyleLines(uint32_t style) {
+    return style == RENDER_STYLE_16BIT ? 240 : style == RENDER_STYLE_8BIT ? 180 : 0;
+}
+
+static float MsPixelStyleFactor(float windowHeight, int lines) {
+    const float factor = floorf(windowHeight / lines + 0.5f);
+    return factor < 1.0f ? 1.0f : factor;
+}
+
 void Fast3dGui::CalculateGameViewport() {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
@@ -354,6 +395,13 @@ void Fast3dGui::CalculateGameViewport() {
             interpreter->mCurDimensions.height = vertRes;
             break;
         }
+    }
+
+    // MergeShip2 render styles (see MsPixelStyleLines)
+    if (const int lines = MsPixelStyleLines(interpreter->mRenderStyle); lines > 0 && size.x >= 1.0f && size.y >= 1.0f) {
+        const float factor = MsPixelStyleFactor(size.y, lines);
+        interpreter->mCurDimensions.width = (uint32_t)ceilf(size.x / factor);
+        interpreter->mCurDimensions.height = (uint32_t)ceilf(size.y / factor);
     }
 
     ImGui::End();
@@ -416,8 +464,44 @@ void Fast3dGui::DrawGame() {
     }
     uintptr_t fb = Ship::Context::GetRawInstance()->GetWindow()->GetGfxFrameBuffer();
     if (fb) {
+        // MergeShip2 render styles (see MsPixelStyleLines): the small picture fills the window from its top left
+        // corner at a whole number of window pixels to a pixel; what that leaves over on the right and at the bottom
+        // (less than one picture pixel) is not shown.
+        ImVec2 uv1 = ImVec2(1.0f, 1.0f);
+        bool hardPixels = false;
+        const ImVec2 avail = ImGui::GetContentRegionAvail();
+        if (const int lines = MsPixelStyleLines(interpreter->mRenderStyle);
+            lines > 0 && avail.x >= 1.0f && avail.y >= 1.0f) {
+            const float factor = MsPixelStyleFactor(avail.y, lines);
+            const float shownW = interpreter->mCurDimensions.width * factor;
+            const float shownH = interpreter->mCurDimensions.height * factor;
+            // (the picture is this style's only if it was drawn at the size the style asks for)
+            if (shownW >= avail.x && shownW < avail.x + factor && shownH >= avail.y && shownH < avail.y + factor) {
+                hardPixels = true;
+                pos = ImVec2(0, 0);
+                size = avail;
+                uv1 = ImVec2(avail.x / shownW, avail.y / shownH);
+            }
+        }
+#ifdef ENABLE_OPENGL
+        if (mImpl.Backend == WindowBackend::FAST3D_SDL_OPENGL) {
+            MsOpenGLSetPictureFilter(fb, hardPixels);
+        }
+#endif
+        bool samplerCallback = false;
+#if defined(ENABLE_DX11) || defined(ENABLE_DX12)
+        samplerCallback = hardPixels && mImpl.Backend == WindowBackend::FAST3D_DXGI_DX11;
+#endif
         ImGui::SetCursorPos(pos);
-        ImGui::Image(reinterpret_cast<ImTextureID>(fb), size);
+#if defined(ENABLE_DX11) || defined(ENABLE_DX12)
+        if (samplerCallback) {
+            ImGui::GetWindowDrawList()->AddCallback(MsHardPixelsCallback, interpreter->mRapi);
+        }
+#endif
+        ImGui::Image(reinterpret_cast<ImTextureID>(fb), size, ImVec2(0.0f, 0.0f), uv1);
+        if (samplerCallback) {
+            ImGui::GetWindowDrawList()->AddCallback(ImDrawCallback_ResetRenderState, nullptr);
+        }
     }
 
     ImGui::End();

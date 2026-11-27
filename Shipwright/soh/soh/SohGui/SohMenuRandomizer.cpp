@@ -335,8 +335,10 @@ void UpdateMenuLocations() {
     std::string excludedLocationString;
     excludedLocations.clear();
     while (getline(excludedLocationStringStream, excludedLocationString, ',')) {
-        if (!excludedLocationString.empty()) {
-            excludedLocations.insert((RandomizerCheck)std::stoi(excludedLocationString));
+        // MergeShip2 (GitHub issue #1): numbers or names, never std::stoi on a name
+        const RandomizerCheck rc = Randomizer_ParseCheckSetting(excludedLocationString);
+        if (rc != RC_UNKNOWN_CHECK) {
+            excludedLocations.insert(rc);
         }
     }
 }
@@ -356,8 +358,9 @@ void UpdateMenuTricks() {
     std::string enabledGlitchString;
     enabledGlitches.clear();
     while (getline(enabledGlitchStringStream, enabledGlitchString, ',')) {
-        if (!enabledGlitchString.empty()) {
-            enabledGlitches.insert((RandomizerTrick)std::stoi(enabledGlitchString));
+        const RandomizerTrick rt = Randomizer_ParseTrickSetting(enabledGlitchString);
+        if (rt != RT_MAX) {
+            enabledGlitches.insert(rt);
         }
     }
 }

@@ -1304,6 +1304,127 @@ void Environment_Update(PlayState* play, EnvironmentContext* envCtx, LightContex
     }
 }
 
+// MergeShip2 (soh/MergeShip/MergeShipPort3ds.h): the light setting Environment_Update's blend gives for another
+// settings list with the same indices, from the state it left this frame: ambient and both lights' colours with the
+// frame's adjustments applied, and the lights' directions (the sun and moon outdoors). Fog is not filled in.
+// Returns 0 when the game is not blending settings or the list is too short for the indices in use.
+s32 Environment_BlendLightsOf(PlayState* play, EnvLightSettings* list, s32 count, EnvLightSettings* out) {
+    EnvironmentContext* envCtx = &play->envCtx;
+    u16 i;
+    s32 j;
+    f32 ambient[3];
+    f32 light1[3];
+    f32 light2[3];
+
+    if (envCtx->unk_BF == 0xFE) {
+        return false;
+    }
+
+    if (!envCtx->indoors && (envCtx->unk_BF == 0xFF)) {
+        for (i = 0; i < ARRAY_COUNT(D_8011FB48[envCtx->unk_1F]); i++) {
+            if ((gSaveContext.skyboxTime >= TIME_ENTRY_1F.startTime) &&
+                ((gSaveContext.skyboxTime < TIME_ENTRY_1F.endTime) || TIME_ENTRY_1F.endTime == 0xFFFF)) {
+                f32 weight = Environment_LerpWeight(TIME_ENTRY_1F.endTime, TIME_ENTRY_1F.startTime,
+                                                    ((void)0, gSaveContext.skyboxTime));
+                // (Environment_Update has already counted this frame off unk_22)
+                f32 configBlend =
+                    envCtx->unk_21 ? ((f32)envCtx->unk_24 - (envCtx->unk_22 + 1)) / envCtx->unk_24 : 0.0f;
+                EnvLightSettings* a0 = &list[TIME_ENTRY_1F.unk_04];
+                EnvLightSettings* a1 = &list[TIME_ENTRY_1F.unk_05];
+                EnvLightSettings* b0 = &list[TIME_ENTRY_20.unk_04];
+                EnvLightSettings* b1 = &list[TIME_ENTRY_20.unk_05];
+
+                if ((TIME_ENTRY_1F.unk_04 >= count) || (TIME_ENTRY_1F.unk_05 >= count) ||
+                    (TIME_ENTRY_20.unk_04 >= count) || (TIME_ENTRY_20.unk_05 >= count)) {
+                    return false;
+                }
+                for (j = 0; j < 3; j++) {
+                    ambient[j] = LERP(LERP((f32)a0->ambientColor[j], (f32)a1->ambientColor[j], weight),
+                                      LERP((f32)b0->ambientColor[j], (f32)b1->ambientColor[j], weight), configBlend);
+                    light1[j] = LERP(LERP((f32)a0->light1Color[j], (f32)a1->light1Color[j], weight),
+                                     LERP((f32)b0->light1Color[j], (f32)b1->light1Color[j], weight), configBlend);
+                    light2[j] = LERP(LERP((f32)a0->light2Color[j], (f32)a1->light2Color[j], weight),
+                                     LERP((f32)b0->light2Color[j], (f32)b1->light2Color[j], weight), configBlend);
+                    // the sun and the moon, as Environment_Update placed them for the time of day
+                    out->light1Dir[j] = envCtx->lightSettings.light1Dir[j];
+                    out->light2Dir[j] = envCtx->lightSettings.light2Dir[j];
+                }
+                break;
+            }
+        }
+        if (i >= ARRAY_COUNT(D_8011FB48[envCtx->unk_1F])) {
+            return false;
+        }
+    } else {
+        EnvLightSettings* cur = &list[envCtx->unk_BD];
+        EnvLightSettings* prev = &list[envCtx->blendIndoorLights ? envCtx->unk_BE : envCtx->unk_BD];
+        f32 weight = envCtx->blendIndoorLights ? envCtx->unk_D8 : 1.0f;
+
+        if ((envCtx->unk_BD >= count) || (envCtx->blendIndoorLights && (envCtx->unk_BE >= count))) {
+            return false;
+        }
+        for (j = 0; j < 3; j++) {
+            ambient[j] = LERP((f32)prev->ambientColor[j], (f32)cur->ambientColor[j], weight);
+            light1[j] = LERP((f32)prev->light1Color[j], (f32)cur->light1Color[j], weight);
+            light2[j] = LERP((f32)prev->light2Color[j], (f32)cur->light2Color[j], weight);
+            out->light1Dir[j] = LERP16(prev->light1Dir[j], cur->light1Dir[j], weight);
+            out->light2Dir[j] = LERP16(prev->light2Dir[j], cur->light2Dir[j], weight);
+        }
+    }
+
+    for (j = 0; j < 3; j++) {
+        out->ambientColor[j] = (u8)CLAMP(ambient[j] + envCtx->adjAmbientColor[j], 0.0f, 255.0f);
+        out->light1Color[j] = (u8)CLAMP(light1[j] + envCtx->adjLight1Color[j], 0.0f, 255.0f);
+        out->light2Color[j] = (u8)CLAMP(light2[j] + envCtx->adjLight1Color[j], 0.0f, 255.0f);
+    }
+    return true;
+}
+
+// MergeShip2 (soh/MergeShip/MergeShipPort3ds.h): the same for a scene Ocarina of Time 3D lights by the time of day
+// while this game lights it with one fixed setting (the Market, the Temple of Time's grounds, Link's house). `list`
+// is the 3DS scene's own settings (dawn, day, dusk and night first, as an outdoor scene has them), blended by the
+// clock, with the sun and the moon where the clock puts them.
+s32 Environment_BlendLightsByTime(PlayState* play, EnvLightSettings* list, s32 count, EnvLightSettings* out) {
+    EnvironmentContext* envCtx = &play->envCtx;
+    u16 time = gSaveContext.dayTime;
+    u16 i;
+    s32 j;
+
+    for (i = 0; i < ARRAY_COUNT(D_8011FB48[0]); i++) {
+        if ((time >= D_8011FB48[0][i].startTime) &&
+            ((time < D_8011FB48[0][i].endTime) || D_8011FB48[0][i].endTime == 0xFFFF)) {
+            f32 weight = Environment_LerpWeight(D_8011FB48[0][i].endTime, D_8011FB48[0][i].startTime, time);
+            EnvLightSettings* a0;
+            EnvLightSettings* a1;
+
+            if ((D_8011FB48[0][i].unk_04 >= count) || (D_8011FB48[0][i].unk_05 >= count)) {
+                return false;
+            }
+            a0 = &list[D_8011FB48[0][i].unk_04];
+            a1 = &list[D_8011FB48[0][i].unk_05];
+            for (j = 0; j < 3; j++) {
+                out->ambientColor[j] = (u8)CLAMP(
+                    LERP((f32)a0->ambientColor[j], (f32)a1->ambientColor[j], weight) + envCtx->adjAmbientColor[j],
+                    0.0f, 255.0f);
+                out->light1Color[j] = (u8)CLAMP(
+                    LERP((f32)a0->light1Color[j], (f32)a1->light1Color[j], weight) + envCtx->adjLight1Color[j], 0.0f,
+                    255.0f);
+                out->light2Color[j] = (u8)CLAMP(
+                    LERP((f32)a0->light2Color[j], (f32)a1->light2Color[j], weight) + envCtx->adjLight1Color[j], 0.0f,
+                    255.0f);
+            }
+            out->light1Dir[0] = -(Math_SinS(time - 0x8000) * 120.0f);
+            out->light1Dir[1] = Math_CosS(time - 0x8000) * 120.0f;
+            out->light1Dir[2] = Math_CosS(time - 0x8000) * 20.0f;
+            for (j = 0; j < 3; j++) {
+                out->light2Dir[j] = -out->light1Dir[j];
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
 void Environment_DrawSunAndMoon(PlayState* play) {
     f32 alpha;
     f32 color;

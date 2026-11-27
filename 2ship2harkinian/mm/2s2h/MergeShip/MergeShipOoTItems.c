@@ -92,8 +92,11 @@ static s32 MsOwn_HyruleOcarinaOfTime(void) {
 
 s32 MergeShip_OoTItems_FairyOcarinaShown(void) {
     const MsSharedSave* shared = MergeShipHost_IsHosted() ? (const MsSharedSave*)MergeShipHost_SharedSave() : NULL;
+    // BUG-0163: not Termina's own. MM's Ocarina of Time is written to the shared save as an ocarina of Hyrule's first
+    // level too (MS_ITEM_OCARINA_FAIRY, MergeShipSharedSave.cpp), so the bit alone made the ocarina found in Termina
+    // look like the Fairy Ocarina. Only Hyrule's Fairy Ocarina held in MM's slot (MM owns none) looks like it.
     return (shared != NULL) && (shared->items & (1u << MS_ITEM_OCARINA_FAIRY)) &&
-           !(shared->items & (1u << MS_ITEM_OCARINA_OF_TIME));
+           !(shared->items & (1u << MS_ITEM_OCARINA_OF_TIME)) && !MergeShip_Own_MMOwns(ITEM_OCARINA_OF_TIME);
 }
 
 // Hyrule's "Form Instrument Icons" (Shipwright MergeShipSohFd.c; mergeship2.o2r's icons, mounted here by

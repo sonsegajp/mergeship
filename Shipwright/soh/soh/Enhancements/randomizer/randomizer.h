@@ -38,6 +38,12 @@ class Randomizer {
     RandomizerCheck GetCheckFromActor(s16 actorId, s16 sceneNum, s16 actorParams);
 };
 
+// MergeShip2 (GitHub issue #1): one entry of the ExcludedLocations / EnabledGlitches settings, written either as a
+// number (this fork) or as a name (a settings file from a newer Ship of Harkinian: RC_GANON_SOUL, or a check's
+// display name). Anything unknown gives RC_UNKNOWN_CHECK / RT_MAX, never an exception.
+RandomizerCheck Randomizer_ParseCheckSetting(const std::string& text);
+RandomizerTrick Randomizer_ParseTrickSetting(const std::string& text);
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -120,6 +120,62 @@ extern "C" Gfx* MergeShip_OoTEquip_RewriteDL(const char* path, u32 flags) {
     return stored.data();
 }
 
+// BUG-0164: a copy of a list that keeps only what is drawn with one texture loaded (`keep`: part of its name): the
+// triangles drawn before any texture or under another one become no-ops. MM's first-person bow list is young Link's
+// hand and MM's Hero's Bow together: with the hand's texture kept, it is the hand alone, where MM holds a bow in first
+// person, for Hyrule's Fairy Bow to be put in. The list's textures are logged once, in order.
+extern "C" Gfx* MergeShip_OoTEquip_KeepTextureDL(const char* path, const char* keep) {
+    std::string key = std::string(path) + "#keep#" + keep;
+    auto found = sRewrittenDLs.find(key);
+    if (found != sRewrittenDLs.end()) {
+        return found->second.empty() ? nullptr : found->second.data();
+    }
+    const char* resPath = (strncmp(path, "__OTR__", 7) == 0) ? path + 7 : path;
+    auto resourceManager = Ship::Context::GetRawInstance()->GetResourceManager();
+    auto dl = std::dynamic_pointer_cast<Fast::DisplayList>(resourceManager->LoadResource(resPath));
+    auto& stored = sRewrittenDLs[key];
+    if ((dl == nullptr) || dl->Instructions.empty()) {
+        SPDLOG_ERROR("MergeShip: list {} failed to load", resPath);
+        return nullptr;
+    }
+    std::vector<Gfx> out(dl->Instructions.begin(), dl->Instructions.end());
+    auto archiveManager = resourceManager->GetArchiveManager();
+    bool dropping = true;
+    size_t dropped = 0, kept = 0;
+    std::string names;
+
+    for (size_t i = 0; i < out.size(); i++) {
+        u8 opcode = (u8)(out[i].words.w0 >> 24);
+
+        if (opcode == G_SETTIMG_OTR_HASH && (i + 1 < out.size())) {
+            uint64_t hash = ((uint64_t)out[i + 1].words.w0 << 32) | (uint64_t)out[i + 1].words.w1;
+            const std::string* name = archiveManager->HashToString(hash);
+            if ((name != nullptr) && (name->find("TLUT") == std::string::npos)) {
+                dropping = name->find(keep) == std::string::npos;
+                names += " " + name->substr(name->find_last_of('/') + 1);
+            }
+        } else if ((opcode == 0x05) || (opcode == 0x06) || (opcode == 0x07) || (opcode == G_TRI1_OTR)) {
+            if (dropping) {
+                out[i].words.w0 = 0; // F3DEX2 G_NOOP
+                out[i].words.w1 = 0;
+                dropped++;
+            } else {
+                kept++;
+            }
+        }
+        if (IsExpanded(opcode)) {
+            i++;
+        }
+    }
+    MergeShipTest_Log("OOTEQ KEEP %s keep=%s kept=%zu dropped=%zu textures:%s", resPath, keep, kept, dropped,
+                      names.c_str());
+    if (kept == 0) {
+        return nullptr; // (the texture is not in the list: the caller keeps what it drew before)
+    }
+    stored = std::move(out);
+    return stored.data();
+}
+
 // MergeShip2: a copy of a list cut where a texture starts being loaded (include/mergeship/DlCut.hpp).
 #include <mergeship/DlCut.hpp>
 

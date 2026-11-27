@@ -7,6 +7,7 @@
 #include "soh/Enhancements/game-interactor/GameInteractor_Hooks.h"
 #include <libultraship/bridge/consolevariablebridge.h>
 #include "soh/MergeShip/MergeShip3dsSkin.h"
+#include "soh/MergeShip/MergeShipPort3ds.h"
 void MergeShip_MMMasks_DanceLimb(void** skeleton, s32 limbIndex, Vec3s* rot); // MergeShip2: Kamaro's dance partner's limbs
 
 #define ANIM_INTERP 1
@@ -53,7 +54,9 @@ void SkelAnime_DrawLimbLod(PlayState* play, s32 limbIndex, void** skeleton, Vec3
         MergeShip3dsSkin_RecordLimb(limbIndex - 1, dList);
         if ((dList != NULL) && !MergeShip3dsSkin_SuppressLimb(limbIndex - 1)) {
 #else
-        if (dList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(limbIndex - 1, dList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+        } else if (dList != NULL) {
 #endif
             gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(play->state.gfxCtx), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
@@ -111,6 +114,8 @@ void SkelAnime_DrawLod(PlayState* play, void** skeleton, Vec3s* jointTable, Over
     }
 
     OPEN_DISPS(play->state.gfxCtx);
+    MergeShipPort3ds_SkeletonBegin(play, skeleton);
+    MergeShipPort3ds_SkeletonJoints(jointTable); // MergeShip2 (3DS animations): whose pose this is
 #if MERGESHIP_OOT3D
     // MergeShip2 (OoT3D port): an Ocarina of Time 3D character would draw instead of the limb lists.
     const s32 ms3dsPrevSuppress = gMergeShip3dsSuppressLimbs;
@@ -133,7 +138,9 @@ void SkelAnime_DrawLod(PlayState* play, void** skeleton, Vec3s* jointTable, Over
         MergeShip3dsSkin_RecordLimb(0, dList);
         if ((dList != NULL) && !MergeShip3dsSkin_SuppressLimb(0)) {
 #else
-        if (dList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(0, dList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+        } else if (dList != NULL) {
 #endif
             gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(play->state.gfxCtx), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
@@ -164,6 +171,7 @@ void SkelAnime_DrawLod(PlayState* play, void** skeleton, Vec3s* jointTable, Over
     }
     gMergeShip3dsSuppressLimbs = ms3dsPrevSuppress;
 #endif
+    MergeShipPort3ds_SkeletonEnd(play);
 
     CLOSE_DISPS(play->state.gfxCtx);
 }
@@ -203,7 +211,13 @@ void SkelAnime_DrawFlexLimbLod(PlayState* play, s32 limbIndex, void** skeleton, 
         MergeShip3dsSkin_RecordLimb(limbIndex - 1, newDList);
         if ((newDList != NULL) && !MergeShip3dsSkin_SuppressLimb(limbIndex - 1)) {
 #else
-        if (newDList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(limbIndex - 1, newDList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+            if (limbDList != NULL) {
+                MATRIX_TOMTX(*mtx);
+                (*mtx)++;
+            }
+        } else if (newDList != NULL) {
 #endif
             MATRIX_TOMTX(*mtx);
             {
@@ -271,6 +285,8 @@ void SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, 
     }
 
     OPEN_DISPS(play->state.gfxCtx);
+    MergeShipPort3ds_SkeletonBegin(play, skeleton);
+    MergeShipPort3ds_SkeletonJoints(jointTable); // MergeShip2 (3DS animations): whose pose this is
 #if MERGESHIP_OOT3D
     // MergeShip2 (OoT3D port): an Ocarina of Time 3D character would draw instead of the limb lists.
     const s32 ms3dsPrevSuppress = gMergeShip3dsSuppressLimbs;
@@ -297,7 +313,13 @@ void SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, 
         MergeShip3dsSkin_RecordLimb(0, newDList);
         if ((newDList != NULL) && !MergeShip3dsSkin_SuppressLimb(0)) {
 #else
-        if (newDList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(0, newDList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+            if (limbDList != NULL) {
+                MATRIX_TOMTX(mtx);
+                mtx++;
+            }
+        } else if (newDList != NULL) {
 #endif
             MATRIX_TOMTX(mtx);
             gDPNoOpString(POLY_OPA_DISP++, "T5ST", 0);
@@ -335,6 +357,7 @@ void SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, 
     }
     gMergeShip3dsSuppressLimbs = ms3dsPrevSuppress;
 #endif
+    MergeShipPort3ds_SkeletonEnd(play);
 
     CLOSE_DISPS(play->state.gfxCtx);
 }
@@ -367,7 +390,9 @@ void SkelAnime_DrawLimbOpa(PlayState* play, s32 limbIndex, void** skeleton, Vec3
         MergeShip3dsSkin_RecordLimb(limbIndex - 1, dList);
         if ((dList != NULL) && !MergeShip3dsSkin_SuppressLimb(limbIndex - 1)) {
 #else
-        if (dList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(limbIndex - 1, dList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+        } else if (dList != NULL) {
 #endif
             gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(play->state.gfxCtx), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
@@ -446,6 +471,8 @@ void SkelAnime_DrawOpa(PlayState* play, void** skeleton, Vec3s* jointTable, Over
     }
 
     OPEN_DISPS(play->state.gfxCtx);
+    MergeShipPort3ds_SkeletonBegin(play, skeleton);
+    MergeShipPort3ds_SkeletonJoints(jointTable); // MergeShip2 (3DS animations): whose pose this is
 #if MERGESHIP_OOT3D
     // MergeShip2 (OoT3D port): an Ocarina of Time 3D character would draw instead of the limb lists.
     const s32 ms3dsPrevSuppress = gMergeShip3dsSuppressLimbs;
@@ -468,7 +495,9 @@ void SkelAnime_DrawOpa(PlayState* play, void** skeleton, Vec3s* jointTable, Over
         MergeShip3dsSkin_RecordLimb(0, dList);
         if ((dList != NULL) && !MergeShip3dsSkin_SuppressLimb(0)) {
 #else
-        if (dList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(0, dList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+        } else if (dList != NULL) {
 #endif
             gSPMatrix(POLY_OPA_DISP++, MATRIX_NEWMTX(play->state.gfxCtx), G_MTX_LOAD);
             gSPDisplayList(POLY_OPA_DISP++, dList);
@@ -500,6 +529,7 @@ void SkelAnime_DrawOpa(PlayState* play, void** skeleton, Vec3s* jointTable, Over
     }
     gMergeShip3dsSuppressLimbs = ms3dsPrevSuppress;
 #endif
+    MergeShipPort3ds_SkeletonEnd(play);
 
     CLOSE_DISPS(play->state.gfxCtx);
 }
@@ -539,7 +569,13 @@ void SkelAnime_DrawFlexLimbOpa(PlayState* play, s32 limbIndex, void** skeleton, 
         MergeShip3dsSkin_RecordLimb(limbIndex - 1, newDList);
         if ((newDList != NULL) && !MergeShip3dsSkin_SuppressLimb(limbIndex - 1)) {
 #else
-        if (newDList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(limbIndex - 1, newDList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+            if (limbDList != NULL) {
+                MATRIX_TOMTX(*limbMatricies);
+                (*limbMatricies)++;
+            }
+        } else if (newDList != NULL) {
 #endif
             MATRIX_TOMTX(*limbMatricies);
             gSPMatrix(POLY_OPA_DISP++, *limbMatricies, G_MTX_LOAD);
@@ -602,6 +638,8 @@ void SkelAnime_DrawFlexOpa(PlayState* play, void** skeleton, Vec3s* jointTable, 
     }
 
     OPEN_DISPS(play->state.gfxCtx);
+    MergeShipPort3ds_SkeletonBegin(play, skeleton);
+    MergeShipPort3ds_SkeletonJoints(jointTable); // MergeShip2 (3DS animations): whose pose this is
 #if MERGESHIP_OOT3D
     // MergeShip2 (OoT3D port): an Ocarina of Time 3D character would draw instead of the limb lists.
     const s32 ms3dsPrevSuppress = gMergeShip3dsSuppressLimbs;
@@ -628,7 +666,13 @@ void SkelAnime_DrawFlexOpa(PlayState* play, void** skeleton, Vec3s* jointTable, 
         MergeShip3dsSkin_RecordLimb(0, newDList);
         if ((newDList != NULL) && !MergeShip3dsSkin_SuppressLimb(0)) {
 #else
-        if (newDList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimb(0, newDList)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+            if (limbDList != NULL) {
+                MATRIX_TOMTX(mtx);
+                mtx++;
+            }
+        } else if (newDList != NULL) {
 #endif
             MATRIX_TOMTX(mtx);
             gSPMatrix(POLY_OPA_DISP++, mtx, G_MTX_LOAD);
@@ -666,6 +710,8 @@ void SkelAnime_DrawFlexOpa(PlayState* play, void** skeleton, Vec3s* jointTable, 
     }
     gMergeShip3dsSuppressLimbs = ms3dsPrevSuppress;
 #endif
+    MergeShipPort3ds_SkeletonEnd(play);
+
     CLOSE_DISPS(play->state.gfxCtx);
 }
 
@@ -750,7 +796,9 @@ Gfx* SkelAnime_DrawLimb(PlayState* play, s32 limbIndex, void** skeleton, Vec3s* 
         MergeShip3dsSkin_RecordLimb(limbIndex - 1, dList);
         if ((dList != NULL) && !MergeShip3dsSkin_SuppressLimb(limbIndex - 1)) {
 #else
-        if (dList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimbGfx(limbIndex - 1, dList, &gfx)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+        } else if (dList != NULL) {
 #endif
             gSPMatrix(gfx++, MATRIX_NEWMTX(play->state.gfxCtx), G_MTX_LOAD);
             gSPDisplayList(gfx++, dList);
@@ -802,6 +850,8 @@ Gfx* SkelAnime_Draw(PlayState* play, void** skeleton, Vec3s* jointTable, Overrid
         osSyncPrintf(VT_RST);
         return NULL;
     }
+    MergeShipPort3ds_SkeletonBegin(play, skeleton);
+    MergeShipPort3ds_SkeletonJoints(jointTable); // MergeShip2 (3DS animations): whose pose this is
 #if MERGESHIP_OOT3D
     // MergeShip2 (OoT3D port): an Ocarina of Time 3D character would draw instead of the limb lists.
     const s32 ms3dsPrevSuppress = gMergeShip3dsSuppressLimbs;
@@ -826,7 +876,9 @@ Gfx* SkelAnime_Draw(PlayState* play, void** skeleton, Vec3s* jointTable, Overrid
         MergeShip3dsSkin_RecordLimb(0, dList);
         if ((dList != NULL) && !MergeShip3dsSkin_SuppressLimb(0)) {
 #else
-        if (dList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimbGfx(0, dList, &gfx)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+        } else if (dList != NULL) {
 #endif
             gSPMatrix(gfx++, MATRIX_NEWMTX(play->state.gfxCtx), G_MTX_LOAD);
             gSPDisplayList(gfx++, dList);
@@ -858,6 +910,7 @@ Gfx* SkelAnime_Draw(PlayState* play, void** skeleton, Vec3s* jointTable, Overrid
     }
     gMergeShip3dsSuppressLimbs = ms3dsPrevSuppress;
 #endif
+    gfx = MergeShipPort3ds_SkeletonEndGfx(play, gfx);
 
     return gfx;
 }
@@ -892,7 +945,13 @@ Gfx* SkelAnime_DrawFlexLimb(PlayState* play, s32 limbIndex, void** skeleton, Vec
         MergeShip3dsSkin_RecordLimb(limbIndex - 1, newDList);
         if ((newDList != NULL) && !MergeShip3dsSkin_SuppressLimb(limbIndex - 1)) {
 #else
-        if (newDList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimbGfx(limbIndex - 1, newDList, &gfx)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+            if (limbDList != NULL) {
+                MATRIX_TOMTX(*mtx);
+                (*mtx)++;
+            }
+        } else if (newDList != NULL) {
 #endif
             MATRIX_TOMTX(*mtx);
             gSPMatrix(gfx++, *mtx, G_MTX_LOAD);
@@ -953,6 +1012,8 @@ Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32
         osSyncPrintf(VT_RST);
         return NULL;
     }
+    MergeShipPort3ds_SkeletonBegin(play, skeleton);
+    MergeShipPort3ds_SkeletonJoints(jointTable); // MergeShip2 (3DS animations): whose pose this is
 #if MERGESHIP_OOT3D
     // MergeShip2 (OoT3D port): an Ocarina of Time 3D character would draw instead of the limb lists.
     const s32 ms3dsPrevSuppress = gMergeShip3dsSuppressLimbs;
@@ -977,7 +1038,13 @@ Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32
         MergeShip3dsSkin_RecordLimb(0, newDList);
         if ((newDList != NULL) && !MergeShip3dsSkin_SuppressLimb(0)) {
 #else
-        if (newDList != NULL) {
+        if (MergeShipPort3ds_SkeletonLimbGfx(0, newDList, &gfx)) {
+            // (MergeShipPort3ds.h: the skeleton's 3DS model is drawn once the walk is done)
+            if (limbDList != NULL) {
+                MATRIX_TOMTX(mtx);
+                mtx++;
+            }
+        } else if (newDList != NULL) {
 #endif
             MATRIX_TOMTX(mtx);
             gSPMatrix(gfx++, mtx, G_MTX_LOAD);
@@ -1013,6 +1080,7 @@ Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32
     }
     gMergeShip3dsSuppressLimbs = ms3dsPrevSuppress;
 #endif
+    gfx = MergeShipPort3ds_SkeletonEndGfx(play, gfx);
 
     return gfx;
 }
@@ -1152,6 +1220,11 @@ void AnimationContext_SetLoadFrame(PlayState* play, LinkAnimationHeader* animati
             animation = (LinkAnimationHeader*)MergeShip3dsSkin_AgeAnimation((const char*)animation, LINK_IS_CHILD);
         }
 #endif
+        // MergeShip2 (Ocarina of Time 3D): the 3DS game's version of the animation, when that option is on
+        if ((ResourceMgr_OTRSigCheck(animation) != 0) &&
+            MergeShipPort3ds_PlayerAnimFrame(play, (const char*)animation, frame, limbCount, frameTable)) {
+            return;
+        }
         if (ResourceMgr_OTRSigCheck(animation) != 0)
             animation = ResourceMgr_LoadAnimByName(animation);
 
@@ -1736,6 +1809,7 @@ s32 SkelAnime_Init(PlayState* play, SkelAnime* skelAnime, SkeletonHeader* skelet
 #if MERGESHIP_OOT3D
     MergeShip3dsSkin_OnInit(skelAnime, ms3dsSkeletonPath);
 #endif
+    MergeShipPort3ds_OnSkelAnime(skelAnime, 1); // MergeShip2 (3DS animations): whose joint table this is
     if (animation != NULL) {
         Animation_PlayLoop(skelAnime, animation);
     }
@@ -1778,6 +1852,7 @@ s32 SkelAnime_InitFlex(PlayState* play, SkelAnime* skelAnime, FlexSkeletonHeader
 #if MERGESHIP_OOT3D
     MergeShip3dsSkin_OnInit(skelAnime, ms3dsSkeletonPath);
 #endif
+    MergeShipPort3ds_OnSkelAnime(skelAnime, 1); // MergeShip2 (3DS animations): whose joint table this is
     if (animation != NULL) {
         Animation_PlayLoop(skelAnime, animation);
     }
@@ -2202,6 +2277,7 @@ void SkelAnime_Free(SkelAnime* skelAnime, PlayState* play) {
 #if MERGESHIP_OOT3D
     MergeShip3dsSkin_OnFree(skelAnime);
 #endif
+    MergeShipPort3ds_OnSkelAnime(skelAnime, 0); // MergeShip2 (3DS animations)
     if (skelAnime->jointTable != NULL) {
         ZELDA_ARENA_FREE_DEBUG(skelAnime->jointTable);
     } else {

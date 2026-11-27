@@ -80,10 +80,11 @@ static InitChainEntry sInitChain[] = {
 static UNK_TYPE sUnused;
 
 static Gfx* EnBox_LoadChestDL(const char* dlName, const char* fallbackName) {
-    Gfx* dl = ResourceMgr_LoadGfxByName(dlName);
+    // MergeShip2: these are drawn as they are (EnBox_PostLimbDraw), so the 3DS pack may answer them
+    Gfx* dl = ResourceMgr_LoadGfxByNameForDraw(dlName);
 
     if (dl == NULL && fallbackName != NULL) {
-        dl = ResourceMgr_LoadGfxByName(fallbackName);
+        dl = ResourceMgr_LoadGfxByNameForDraw(fallbackName);
     }
 
     return dl;

@@ -249,6 +249,16 @@ std::string GfxRenderingAPIOGL::BuildFsShader(const CCFeatures& cc_features) {
         { "o_alpha_threshold", cc_features.opt_alpha_threshold },
         { "o_invisible", cc_features.opt_invisible },
         { "o_grayscale", cc_features.opt_grayscale },
+        // MergeShip2 render styles (RenderStyle in interpreter.h)
+        { "o_style", cc_features.render_style },
+        { "o_shade_slot", cc_features.shade_slot },
+        { "o_toon", (cc_features.render_style == RENDER_STYLE_TOON ||
+                     cc_features.render_style == RENDER_STYLE_TOON_FLAT ||
+                     cc_features.render_style == 14) && // (14: toon on a surface with painted light)
+                        cc_features.shade_slot > 0 },
+        { "o_dither", cc_features.render_style == RENDER_STYLE_16BIT ||
+                          cc_features.render_style == RENDER_STYLE_8BIT ||
+                          cc_features.render_style == RENDER_STYLE_GAME_BOY },
         { "o_prim_depth", cc_features.opt_prim_depth },
         { "o_textures", M_ARRAY(cc_features.usedTextures, bool, 2) },
         { "o_masks", M_ARRAY(cc_features.used_masks, bool, 2) },
@@ -348,6 +358,10 @@ static std::string BuildVsShader(const CCFeatures& cc_features) {
                                      { "o_clamp", M_ARRAY(cc_features.clamp, bool, 2, 2) },
                                      { "o_fog", cc_features.opt_fog },
                                      { "o_grayscale", cc_features.opt_grayscale },
+                                     { "o_style", cc_features.render_style },
+                                     { "o_shade_slot", cc_features.shade_slot },
+                                     { "o_toon", false },
+                                     { "o_dither", false },
                                      { "o_alpha", cc_features.opt_alpha },
                                      { "o_inputs", cc_features.numInputs },
                                      { "update_floats", (InvokeFunc)UpdateFloats },
@@ -648,6 +662,70 @@ void GfxRenderingAPIOGL::SetUseAlpha(bool use_alpha) {
             glDisable(GL_BLEND);
         }
     }
+}
+
+static GLenum BlendExFactor(uint32_t factor) {
+    switch (factor) {
+        case G_BLENDEX_ZERO:
+            return GL_ZERO;
+        case G_BLENDEX_ONE:
+            return GL_ONE;
+        case G_BLENDEX_SRC_COLOR:
+            return GL_SRC_COLOR;
+        case G_BLENDEX_ONE_MINUS_SRC_COLOR:
+            return GL_ONE_MINUS_SRC_COLOR;
+        case G_BLENDEX_SRC_ALPHA:
+            return GL_SRC_ALPHA;
+        case G_BLENDEX_ONE_MINUS_SRC_ALPHA:
+            return GL_ONE_MINUS_SRC_ALPHA;
+        case G_BLENDEX_DST_COLOR:
+            return GL_DST_COLOR;
+        case G_BLENDEX_ONE_MINUS_DST_COLOR:
+            return GL_ONE_MINUS_DST_COLOR;
+        case G_BLENDEX_DST_ALPHA:
+            return GL_DST_ALPHA;
+        case G_BLENDEX_ONE_MINUS_DST_ALPHA:
+            return GL_ONE_MINUS_DST_ALPHA;
+        case G_BLENDEX_CONSTANT_COLOR:
+            return GL_CONSTANT_COLOR;
+        case G_BLENDEX_ONE_MINUS_CONSTANT_COLOR:
+            return GL_ONE_MINUS_CONSTANT_COLOR;
+        case G_BLENDEX_CONSTANT_ALPHA:
+            return GL_CONSTANT_ALPHA;
+        case G_BLENDEX_ONE_MINUS_CONSTANT_ALPHA:
+            return GL_ONE_MINUS_CONSTANT_ALPHA;
+        default:
+            return GL_ONE;
+    }
+}
+
+static GLenum BlendExOp(uint32_t eq) {
+    switch (eq) {
+        case G_BLENDEX_EQ_SUBTRACT:
+            return GL_FUNC_SUBTRACT;
+        case G_BLENDEX_EQ_REVERSE_SUBTRACT:
+            return GL_FUNC_REVERSE_SUBTRACT;
+        case G_BLENDEX_EQ_MIN:
+            return GL_MIN;
+        case G_BLENDEX_EQ_MAX:
+            return GL_MAX;
+        default:
+            return GL_FUNC_ADD;
+    }
+}
+
+void GfxRenderingAPIOGL::SetBlendMode(uint32_t mode, const uint8_t constantColor[4]) {
+    // (the interpreter turns blending on with SetUseAlpha whenever a mode is set)
+    if (mode != 0) {
+        glBlendFuncSeparate(BlendExFactor((mode >> 8) & 0xF), BlendExFactor((mode >> 4) & 0xF), GL_ZERO, GL_ONE);
+        glBlendEquationSeparate(BlendExOp(mode & 0xF), GL_FUNC_ADD);
+        glBlendColor(constantColor[0] / 255.0f, constantColor[1] / 255.0f, constantColor[2] / 255.0f,
+                     constantColor[3] / 255.0f);
+    } else if (mLastBlendMode != 0) {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendEquation(GL_FUNC_ADD);
+    }
+    mLastBlendMode = mode;
 }
 
 void GfxRenderingAPIOGL::DrawTriangles(float buf_vbo[], size_t buf_vbo_len, size_t buf_vbo_num_tris) {
@@ -1104,6 +1182,17 @@ void GfxRenderingAPIOGL::SetSrgbMode() {
 
 ImTextureID GfxRenderingAPIOGL::GetTextureById(int id) {
     return reinterpret_cast<ImTextureID>(id);
+}
+
+// MergeShip2 render styles: how the game picture is magnified when it is shown (Fast3dGui::DrawGame). The 16-bit
+// and 8-bit styles show it with hard pixels.
+void MsOpenGLSetPictureFilter(uintptr_t texture, bool hardPixels) {
+    GLint bound = 0;
+    glGetIntegerv(GL_TEXTURE_BINDING_2D, &bound);
+    glBindTexture(GL_TEXTURE_2D, (GLuint)texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, hardPixels ? GL_NEAREST : GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, hardPixels ? GL_NEAREST : GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, (GLuint)bound);
 }
 } // namespace Fast
 #endif

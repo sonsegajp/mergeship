@@ -102,6 +102,7 @@ bool sHeldBack = false;
 // Adult Link in Termina is another workstream's (a player form of its own in 2Ship). It receives Link's Ocarina of
 // Time age here, and tells the age he leaves with; until it lands, these defaults stand in (MSVC's /alternatename is
 // a weak symbol: a real MergeShip_Hyrule_SetArrivalAge / _GetDepartureAge anywhere in 2ship.dll replaces them).
+extern "C" s32 MergeShip_PrepareFileForArrival(void); // BUG-0166 (Enhancements/Cutscenes/SkipIntroSequence.cpp)
 extern "C" void MergeShip_Hyrule_SetArrivalAge(u8 ootAge);
 extern "C" u8 MergeShip_Hyrule_GetDepartureAge(void);
 extern "C" void MergeShipHost_DefaultSetArrivalAge(u8 ootAge) {
@@ -483,6 +484,11 @@ void Boot() {
 
     ApplyShared(&sBoot);
     ApplyArrivalBody(&sBoot);
+    // BUG-0166: an arrival that does not start at the file's own entrance, on a file whose intro was never played.
+    if ((sBoot.flags & (MS_TRANSFER_FLAG_RANDO_ENTRANCE | MS_TRANSFER_FLAG_OWL_WARP | MS_TRANSFER_FLAG_ANCHOR_WARP)) &&
+        MergeShip_PrepareFileForArrival()) {
+        DoorLog("booting", "the file's intro was never played: prepared as the intro skip leaves it");
+    }
     if (sBoot.flags & MS_TRANSFER_FLAG_RANDO_ENTRANCE) {
         // M8: a shuffled entrance of Hyrule leads to Termina: the file starts there, not where it was saved.
         gSaveContext.save.entrance = MergeShipEntrances_Arrive((s16)sBoot.entrance, true);

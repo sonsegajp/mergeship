@@ -160,6 +160,13 @@ float random(float3 value) {
     return fract(sin(random) * 143758.5453);
 }
 
+// MergeShip2 render styles (RenderStyle in interpreter.h)
+@if(o_dither)
+    // 4x4 ordered dither threshold in [0, 1)
+    float msBayer2(float2 a) { a = floor(a); return fract(a.x / 2.0 + a.y * a.y * 0.75); }
+    float msBayer4(float2 a) { return msBayer2(0.5 * a) * 0.25 + msBayer2(a); }
+@end
+
 fragment FragOut fragmentShader(
     ProjectedVertex in [[stage_in]],
     constant FrameUniforms &frameUniforms [[buffer(0)]],
@@ -183,6 +190,23 @@ fragment FragOut fragmentShader(
     , texture2d<float> uTexBlend1 [[texture(5)]]
 @end
 ) {
+    @if(o_toon)
+        // MergeShip2 toon style: the vertex shade in four flat bands (its hue kept)
+        {
+            float msLight = max(in.input@{o_shade_slot}.x, max(in.input@{o_shade_slot}.y, in.input@{o_shade_slot}.z));
+            @if(o_style == 14)
+                // (a surface whose light is painted into its vertex colours, the rooms: finer bands, soft edges)
+                float msStep = msLight * 6.0;
+                float msEdge = 0.2;
+                float msBand = max((floor(msStep) + smoothstep(0.5 - msEdge, 0.5 + msEdge, fract(msStep))) / 6.0, 0.08);
+            @else
+                float msStep = msLight * 4.0;
+                float msEdge = fwidth(msStep) * 0.75 + 0.0001;
+                float msBand = max((floor(msStep) + smoothstep(0.5 - msEdge, 0.5 + msEdge, fract(msStep))) / 4.0, 0.125);
+            @end
+            in.input@{o_shade_slot}.xyz *= msBand / max(msLight, 0.0001);
+        }
+    @end
     @for(i in 0..2)
         @if(o_textures[i])
             @{s = o_clamp[i][0]}
@@ -279,6 +303,70 @@ fragment FragOut fragmentShader(
         float intensity = (texel.x + texel.y + texel.z) / 3.0;
         float3 new_texel = in.grayscale.xyz * intensity;
         texel.xyz = mix(texel.xyz, new_texel, in.grayscale.w);
+    @end
+
+    // MergeShip2 render styles: the colour filters, on the finished colour
+    @if(o_style == 5)
+        texel.xyz = floor(texel.xyz * 31.0 + msBayer4(in.position.xy)) / 31.0;
+    @end
+    @if(o_style == 6)
+        {
+            // an 8-bit console's palette: twelve hues, grey or coloured, in six steps of brightness
+            float msV = max(texel.x, max(texel.y, texel.z));
+            float msD = msV - min(texel.x, min(texel.y, texel.z));
+            float msS = msD / max(msV, 0.25);
+            float msH = 0.0;
+            if (msD > 0.0001) {
+                if (msV == texel.x) {
+                    msH = (texel.y - texel.z) / msD;
+                } else if (msV == texel.y) {
+                    msH = 2.0 + (texel.z - texel.x) / msD;
+                } else {
+                    msH = 4.0 + (texel.x - texel.y) / msD;
+                }
+                msH = fract(msH / 6.0);
+            }
+            msH = floor(msH * 12.0 + 0.5) / 12.0;
+            msS = msS < 0.2 ? 0.0 : (msS < 0.55 ? 0.5 : 0.9);
+            msV = min(floor(sqrt(msV) * 5.0 + 0.35 + 0.3 * msBayer4(in.position.xy)) / 5.0, 1.0);
+            msV = msV * msV;
+            float3 msK = clamp(abs(fract(float3(msH) + float3(1.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0, 0.0, 1.0);
+            texel.xyz = msV * mix(float3(1.0), msK, msS);
+        }
+    @end
+    @if(o_style == 8)
+        texel.xyz = float3(dot(texel.xyz, float3(0.299, 0.587, 0.114)));
+    @end
+    @if(o_style == 9)
+        texel.xyz = min(float3(dot(texel.xyz, float3(0.393, 0.769, 0.189)), dot(texel.xyz, float3(0.349, 0.686, 0.168)),
+                               dot(texel.xyz, float3(0.272, 0.534, 0.131))), float3(1.0));
+    @end
+    @if(o_style == 10)
+        texel.xyz = float3(1.0) - texel.xyz;
+    @end
+    @if(o_style == 11)
+        {
+            float msL = dot(texel.xyz, float3(0.299, 0.587, 0.114));
+            texel.xyz = float3(0.10, 1.0, 0.20) * min(msL * 1.5 + 0.04, 1.0) *
+                        (0.82 + 0.18 * step(1.0, mod(in.position.y, 2.0)));
+        }
+    @end
+    @if(o_style == 12)
+        {
+            float msT = dot(texel.xyz, float3(0.299, 0.587, 0.114)) * 4.0;
+            float3 msC = mix(float3(0.0, 0.0, 0.2), float3(0.25, 0.0, 0.8), saturate(msT));
+            msC = mix(msC, float3(0.9, 0.1, 0.25), saturate(msT - 1.0));
+            msC = mix(msC, float3(1.0, 0.8, 0.0), saturate(msT - 2.0));
+            texel.xyz = mix(msC, float3(1.0), saturate(msT - 3.0));
+        }
+    @end
+    @if(o_style == 13)
+        {
+            float msQ = floor(dot(texel.xyz, float3(0.299, 0.587, 0.114)) * 3.0 + msBayer4(in.position.xy));
+            float3 msC = mix(float3(0.06, 0.22, 0.06), float3(0.19, 0.38, 0.19), saturate(msQ));
+            msC = mix(msC, float3(0.55, 0.67, 0.06), saturate(msQ - 1.0));
+            texel.xyz = mix(msC, float3(0.61, 0.74, 0.06), saturate(msQ - 2.0));
+        }
     @end
 
     @if(o_alpha && o_noise)

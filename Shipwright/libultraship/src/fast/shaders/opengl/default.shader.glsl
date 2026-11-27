@@ -164,7 +164,42 @@
 
     #define TEX_SIZE(tex) vec2(texture_width[tex], texture_height[tex])
 
+    // MergeShip2 render styles (RenderStyle in interpreter.h)
+    @if(o_toon)
+        // Toon: the colour input that carries the vertex shade is read through msShade, which main() bands
+        @if(o_alpha)
+            vec4 msShadeIn() { return vInput@{o_shade_slot}; }
+            vec4 msShade;
+        @else
+            vec3 msShadeIn() { return vInput@{o_shade_slot}; }
+            vec3 msShade;
+        @end
+        #define vInput@{o_shade_slot} msShade
+    @end
+    @if(o_dither)
+        // 4x4 ordered dither threshold in [0, 1)
+        float msBayer2(vec2 a) { a = floor(a); return fract(a.x / 2.0 + a.y * a.y * 0.75); }
+        float msBayer4(vec2 a) { return msBayer2(0.5 * a) * 0.25 + msBayer2(a); }
+    @end
+
     void main() {
+        @if(o_toon)
+            msShade = msShadeIn();
+            {
+                float msLight = max(msShade.r, max(msShade.g, msShade.b));
+                @if(o_style == 14)
+                    // (a surface whose light is painted into its vertex colours, the rooms: finer bands, soft edges)
+                    float msStep = msLight * 6.0;
+                    float msEdge = 0.2;
+                    float msBand = max((floor(msStep) + smoothstep(0.5 - msEdge, 0.5 + msEdge, fract(msStep))) / 6.0, 0.08);
+                @else
+                    float msStep = msLight * 4.0;
+                    float msEdge = fwidth(msStep) * 0.75 + 0.0001;
+                    float msBand = max((floor(msStep) + smoothstep(0.5 - msEdge, 0.5 + msEdge, fract(msStep))) / 4.0, 0.125);
+                @end
+                msShade.rgb *= msBand / max(msLight, 0.0001);
+            }
+        @end
         @for(i in 0..2)
             @if(o_textures[i])
                 @{s = o_clamp[i][0]}
@@ -272,6 +307,70 @@
             float intensity = (texel.r + texel.g + texel.b) / 3.0;
             vec3 new_texel = vGrayscaleColor.rgb * intensity;
             texel.rgb = mix(texel.rgb, new_texel, vGrayscaleColor.a);
+        @end
+
+        // MergeShip2 render styles: the colour filters, on the finished colour
+        @if(o_style == 5)
+            texel.rgb = floor(texel.rgb * 31.0 + msBayer4(gl_FragCoord.xy)) / 31.0;
+        @end
+        @if(o_style == 6)
+            {
+                // an 8-bit console's palette: twelve hues, grey or coloured, in six steps of brightness
+                float msV = max(texel.r, max(texel.g, texel.b));
+                float msD = msV - min(texel.r, min(texel.g, texel.b));
+                float msS = msD / max(msV, 0.25);
+                float msH = 0.0;
+                if (msD > 0.0001) {
+                    if (msV == texel.r) {
+                        msH = (texel.g - texel.b) / msD;
+                    } else if (msV == texel.g) {
+                        msH = 2.0 + (texel.b - texel.r) / msD;
+                    } else {
+                        msH = 4.0 + (texel.r - texel.g) / msD;
+                    }
+                    msH = fract(msH / 6.0);
+                }
+                msH = floor(msH * 12.0 + 0.5) / 12.0;
+                msS = msS < 0.2 ? 0.0 : (msS < 0.55 ? 0.5 : 0.9);
+                msV = min(floor(sqrt(msV) * 5.0 + 0.35 + 0.3 * msBayer4(gl_FragCoord.xy)) / 5.0, 1.0);
+                msV = msV * msV;
+                vec3 msK = clamp(abs(fract(vec3(msH) + vec3(1.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0) - 1.0, 0.0, 1.0);
+                texel.rgb = msV * mix(vec3(1.0), msK, msS);
+            }
+        @end
+        @if(o_style == 8)
+            texel.rgb = vec3(dot(texel.rgb, vec3(0.299, 0.587, 0.114)));
+        @end
+        @if(o_style == 9)
+            texel.rgb = min(vec3(dot(texel.rgb, vec3(0.393, 0.769, 0.189)), dot(texel.rgb, vec3(0.349, 0.686, 0.168)),
+                                 dot(texel.rgb, vec3(0.272, 0.534, 0.131))), vec3(1.0));
+        @end
+        @if(o_style == 10)
+            texel.rgb = vec3(1.0) - texel.rgb;
+        @end
+        @if(o_style == 11)
+            {
+                float msL = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+                texel.rgb = vec3(0.10, 1.0, 0.20) * min(msL * 1.5 + 0.04, 1.0) *
+                            (0.82 + 0.18 * step(1.0, mod(gl_FragCoord.y, 2.0)));
+            }
+        @end
+        @if(o_style == 12)
+            {
+                float msT = dot(texel.rgb, vec3(0.299, 0.587, 0.114)) * 4.0;
+                vec3 msC = mix(vec3(0.0, 0.0, 0.2), vec3(0.25, 0.0, 0.8), clamp(msT, 0.0, 1.0));
+                msC = mix(msC, vec3(0.9, 0.1, 0.25), clamp(msT - 1.0, 0.0, 1.0));
+                msC = mix(msC, vec3(1.0, 0.8, 0.0), clamp(msT - 2.0, 0.0, 1.0));
+                texel.rgb = mix(msC, vec3(1.0), clamp(msT - 3.0, 0.0, 1.0));
+            }
+        @end
+        @if(o_style == 13)
+            {
+                float msQ = floor(dot(texel.rgb, vec3(0.299, 0.587, 0.114)) * 3.0 + msBayer4(gl_FragCoord.xy));
+                vec3 msC = mix(vec3(0.06, 0.22, 0.06), vec3(0.19, 0.38, 0.19), clamp(msQ, 0.0, 1.0));
+                msC = mix(msC, vec3(0.55, 0.67, 0.06), clamp(msQ - 1.0, 0.0, 1.0));
+                texel.rgb = mix(msC, vec3(0.61, 0.74, 0.06), clamp(msQ - 2.0, 0.0, 1.0));
+            }
         @end
 
         @if(o_alpha)

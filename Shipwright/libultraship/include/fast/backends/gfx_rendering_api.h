@@ -80,6 +80,59 @@ class GfxRenderingAPI {
     virtual ImTextureID GetTextureById(int id) = 0;
     virtual void SetCurrentPrimDepth(float depth) = 0;
 
+    // MergeShip2 additions. They stay at the end of the virtual table, and everything they need is kept out of the
+    // classes above, so that a game module built before them still runs against this library.
+    //
+    // Explicit blend factors (G_BLENDEX_MODE in lus_gbi.h), or 0 for the usual alpha blending. A backend without it
+    // keeps alpha blending.
+    virtual void SetBlendMode(uint32_t mode, const uint8_t constantColor[4]) {
+    }
+
+    // Real-time shadows (Interpreter::ApplyShadows). What has been drawn on the framebuffer in use is darkened where
+    // it lies in the shadow of what was drawn into `shadowFb` from the light (that framebuffer's depth is the light's
+    // view). `cameraInverse` takes a point of the framebuffer (x and y from -1 to 1 with y up, z from -1 to 1) back
+    // into the world, `light` takes a point of the world into the light's view (the same ranges); both are the
+    // interpreter's matrices (a row vector times the matrix). `lightDir`: the way to the light, in the world.
+    // params: [0] how bright a surface in shadow stays (0 to 1), [1] the same for a surface turned away from the
+    // light (1: left as it is), [2] the depth bias, in the light's depth, [3] unused, [4] a texel of the shadow map
+    // in the world's units, [5] the light's whole depth in them, [6] how much wider a shadow's edge grows per unit
+    // between what casts it and what it falls on, [7] the widest edge, in texels, [8] and [9] the distances from
+    // what casts it between which a shadow fades away ([9] of 0: it does not), [10] 1 where the shadow map was
+    // drawn this frame (0: no cast shadows, only the rest), [11] the wind's clock in seconds, [12] how dark the
+    // ambient shading goes (0: none) and [13] how far it looks in the world's units, [14] how dark a cloud's shadow
+    // is (0: none) and [15] a cloud's size in the world's units, [16] to [18] what a shadow leaves of red, green and
+    // blue against its plain shade, [19] the clouds' speed in units a second, [20] to [22] how much brighter what
+    // the light reaches is drawn, red, green and blue (1: as it is), [23] unused, [24] how many lamps follow (at
+    // most 12) and [25] how strongly their light is drawn, [26] and [27] unused, then eight a lamp from [28]: its
+    // place (x, y, z), how far it reaches, its colour (red, green, blue, 0 to 1) and one unused. viewport: the
+    // part of the framebuffer the world is drawn into, as SetViewport takes it (x, y, width, height). A backend
+    // without it draws none of this.
+    virtual void ApplyShadows(int shadowFb, const float cameraInverse[4][4], const float light[4][4],
+                              const float lightDir[3], const float params[124], const int viewport[4]) {
+    }
+
+    // Real-time shadows: what is drawn from here until the next StartDrawToFramebuffer goes into the shadow map, a
+    // square picture of depth alone, `size` texels a side, that the backend keeps for it (and lets go of when it
+    // has not been asked for in a while); it starts cleared, its viewport and scissor the whole of it. ApplyShadows
+    // with a shadowFb of 0 reads that map. false: this backend has none, and nothing was changed.
+    // clip: what lies nearer the light than the map's near side is cut away there (the light starts at that plane);
+    // without it such a thing is pressed onto the near side and still covers what is behind it.
+    virtual bool StartShadowMap(int size, bool clip) {
+        return false;
+    }
+
+    // The finished picture's glow and look (Interpreter, G_REGS_EX 12). What has been drawn on the framebuffer in use
+    // -- the world, before the game's fades, its HUD and its text -- is drawn over itself with: what is out of focus
+    // blurred, the bright parts glowing over what is about them, and a film's look. `cameraInverse` and `viewport`
+    // are the world's, as ApplyShadows takes them. params: [0] how bright a thing must be to glow (0 to 1), [1] how
+    // strongly the glow is laid over the picture (0: none), [2], [3] unused; [4] how much of the film's curve (0:
+    // none), [5] saturation (1: as it is), [6] how dark the corners go (0: not at all), [7] how much of the grade
+    // (cool shadows, warm lights); [8] how strongly what is out of focus is blurred (0: nothing is), [9] the
+    // distance in focus (the world's units from the eye), [10] how far either side of it stays sharp, [11] over how
+    // much further the blur grows to its full; the rest unused (0). A backend without it draws none of this.
+    virtual void ApplyPost(const float cameraInverse[4][4], const float params[48], const int viewport[4]) {
+    }
+
   protected:
     int8_t mCurrentDepthTest = 0;
     int8_t mCurrentDepthMask = 0;

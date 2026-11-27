@@ -3937,6 +3937,13 @@ s32 func_80835588(Player* this, PlayState* play) {
     return true;
 }
 
+// MergeShip2 (3DS animations, z_player_lib.c): Link's upper body draws, holds or has just loosed a bow or a
+// slingshot (the upper body's animation is one of the bow's then: ready, wait, shoot next).
+s32 Player_MergeShipAimsBow(Player* this) {
+    return !Player_HoldsHookshot(this) && (this->heldItemAction != PLAYER_IA_BOOMERANG) &&
+           ((this->upperActionFunc == func_808351D4) || (this->upperActionFunc == func_808353D8));
+}
+
 void Player_SetParallel(Player* this) {
     this->stateFlags1 |= PLAYER_STATE1_PARALLEL;
 

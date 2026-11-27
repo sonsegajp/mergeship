@@ -48,7 +48,7 @@ static size_t cantor(uint64_t a, uint64_t b) {
 }
 
 struct hash_pair_shader_ids {
-    size_t operator()(const std::pair<uint64_t, uint32_t>& p) const {
+    size_t operator()(const std::pair<uint64_t, uint64_t>& p) const {
         auto value1 = p.first;
         auto value2 = p.second;
         return cantor(value1, value2);
@@ -191,7 +191,7 @@ class GfxRenderingAPIMetal final : public GfxRenderingAPI {
 
     int mCurrentVertexBufferPoolIndex = 0;
     MTL::Buffer* mVertexBufferPool[kMaxVertexBufferPoolSize];
-    std::unordered_map<std::pair<uint64_t, uint32_t>, struct ShaderProgramMetal, hash_pair_shader_ids>
+    std::unordered_map<std::pair<uint64_t, uint64_t>, struct ShaderProgramMetal, hash_pair_shader_ids>
         mShaderProgramPool;
 
     std::vector<struct TextureDataMetal> mTextures;

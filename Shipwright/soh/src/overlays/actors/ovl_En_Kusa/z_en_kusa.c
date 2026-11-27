@@ -516,6 +516,27 @@ void EnKusa_Draw(Actor* thisx, PlayState* play) {
     if (this->actor.flags & ACTOR_FLAG_GRASS_DESTROYED) {
         Gfx_DrawDListOpa(play, object_kusa_DL_0002E0);
     } else {
+        // MergeShip2 (the "Grass Moves in the Wind" option; libultraship G_REGS_EX 10, SwayEx): the grass and the
+        // bush stand in the renderer's wind, their feet still and their tops moving. {how far the top moves, the
+        // weight a unit of the model's height gives, the height that holds still}
+        static const f32 sWindBush[4] = { 2.8f, 1.0f / 98.0f, 0.0f, 0.0f };
+        static const f32 sWindGrass[4] = { 4.2f, 1.0f / 61.0f, 0.0f, 0.0f };
+        s32 wind = CVarGetInteger("gMergeShip.GrassWind", 0);
+
+        if (wind) {
+            OPEN_DISPS(play->state.gfxCtx);
+            POLY_OPA_DISP->words.w0 = (0x4Fu << 24) | (10u << 16);
+            POLY_OPA_DISP->words.w1 = (uintptr_t)((thisx->params & 3) == 0 ? sWindBush : sWindGrass);
+            POLY_OPA_DISP++;
+            CLOSE_DISPS(play->state.gfxCtx);
+        }
         Gfx_DrawDListOpa(play, dLists[thisx->params & 3]);
+        if (wind) {
+            OPEN_DISPS(play->state.gfxCtx);
+            POLY_OPA_DISP->words.w0 = (0x4Fu << 24) | (10u << 16);
+            POLY_OPA_DISP->words.w1 = 0;
+            POLY_OPA_DISP++;
+            CLOSE_DISPS(play->state.gfxCtx);
+        }
     }
 }

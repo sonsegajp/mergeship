@@ -631,9 +631,18 @@ void MergeShip_ItemTracker_DrawTerminaColumn(float originX, float originY) {
         if ((path == nullptr) || (path[0] == '\0')) {
             continue;
         }
-        ImGui::SetCursorPos(ImVec2(originX + (i % 6) * (iconSize + iconSpacing), originY + (i / 6) * (iconSize + iconSpacing)));
+        // BUG-0162: a song's icon is the note (16 x 24), drawn as Hyrule's songs are (randomizer_item_tracker.cpp
+        // DrawSong: two thirds of the cell wide, 6 in from its left), not stretched over the square cell.
+        const bool isSong =
+            (icon.item == ITEM_MM_SONG_SONATA) || (icon.item == ITEM_MM_SONG_GORON_LULLABY) ||
+            (icon.item == ITEM_MM_SONG_NEW_WAVE) || (icon.item == ITEM_MM_SONG_ELEGY) ||
+            (icon.item == ITEM_MM_SONG_OATH) || (icon.item == ITEM_MM_SONG_HEALING) ||
+            (icon.item == ITEM_MM_SONG_SOARING);
+        ImGui::SetCursorPos(ImVec2(originX + (i % 6) * (iconSize + iconSpacing) + (isSong ? 6.0f : 0.0f),
+                                   originY + (i / 6) * (iconSize + iconSpacing)));
         const bool owned = TerminaOwns(icon.item);
-        ImGui::Image(gui->GetTextureByName(TerminaTexture(path, owned, icon.tint)), ImVec2(iconSize, iconSize));
+        ImGui::Image(gui->GetTextureByName(TerminaTexture(path, owned, icon.tint)),
+                     ImVec2(isSong ? (iconSize / 1.5f) : iconSize, iconSize));
         if (ImGui::IsItemHovered()) {
             ImGui::SetTooltip("%s", icon.name);
         }

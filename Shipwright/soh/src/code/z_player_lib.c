@@ -25,6 +25,7 @@
 #include "soh/MergeShip/MergeShipMMItems.h" // MergeShip2: MM's keg and bottle contents (PLAYER_BOTTLE_MM_*)
 #include "soh/MergeShip/MergeShipSohFd.h"   // MergeShip2 (soh_fd): soh_fd's form options
 #include "soh/MergeShip/MergeShipChildLink.h" // MergeShip2: MM's human as the child (MergeShipChildLinkDraw.inc, at the end)
+#include "soh/MergeShip/MergeShipPort3ds.h" // MergeShip2: Ocarina of Time 3D models (what Link wears and holds)
 #include "soh/MergeShip/forms/MergeShipDekuDraw.h" // MergeShip2: the Deku's drawing (MM z_player_lib.c)
 #include "soh/MergeShip/forms/MergeShipGoron.h" // MergeShip2: the Goron's drawing (forms/MergeShipGoronLib.c)
 #include "soh/MergeShip/forms/MergeShipZora.h"  // MergeShip2: the Zora's drawing (forms/MergeShipZoraDraw.inc, at the end)
@@ -1722,14 +1723,57 @@ void Player_DrawImpl(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dL
         MergeShip_Ganondorf_DrawPlayer(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, data, lod,
                                        eyeIndex, overrideLimbDraw == Player_OverrideLimbDrawGameplayFirstPerson,
                                        overrideLimbDraw == Player_OverrideLimbDrawPause);
+    s32 msPort3ds = false;
     if (!msGanondorf) {
+        // MergeShip2 (Ocarina of Time 3D models, MergeShipPort3ds.h): what Link wears that the 3DS model has its own
+        // pieces for, by the conditions of the boots, gauntlets and bracelet drawn below.
+        if (!MERGESHIP_FORM_IS_MM(form)) {
+            u32 wear = 0;
+            Color_RGB8 plates = sGauntletColors[0];
+
+            if (gSaveContext.gameMode != GAMEMODE_END_CREDITS) {
+                if (LINK_IS_ADULT) {
+                    s32 strengthUpgrade = CUR_UPG_VALUE(UPG_STRENGTH);
+
+                    if (strengthUpgrade >= 2) {
+                        wear |= PORT3DS_WEAR_GAUNTLETS;
+                        plates = sGauntletColors[strengthUpgrade - 2];
+                        if (strengthUpgrade == PLAYER_STR_SILVER_G &&
+                            CVarGetInteger(CVAR_COSMETIC("Gloves.SilverGauntlets.Changed"), 0)) {
+                            plates = CVarGetColor24(CVAR_COSMETIC("Gloves.SilverGauntlets.Value"), plates);
+                        } else if (strengthUpgrade == PLAYER_STR_GOLD_G &&
+                                   CVarGetInteger(CVAR_COSMETIC("Gloves.GoldenGauntlets.Changed"), 0)) {
+                            plates = CVarGetColor24(CVAR_COSMETIC("Gloves.GoldenGauntlets.Value"), plates);
+                        }
+                    }
+                    if (boots == 1) {
+                        wear |= PORT3DS_WEAR_IRON_BOOTS;
+                    } else if (boots == 2) {
+                        wear |= PORT3DS_WEAR_HOVER_BOOTS;
+                    }
+                } else if (Player_GetStrength() > PLAYER_STR_NONE) {
+                    wear |= PORT3DS_WEAR_BRACELET;
+                }
+            }
+            if (INV_CONTENT(ITEM_HOOKSHOT) == ITEM_LONGSHOT) {
+                wear |= PORT3DS_WEAR_LONGSHOT;
+            }
+            if (gSaveContext.equips.buttonItems[0] == ITEM_SWORD_BGS) {
+                wear |= PORT3DS_WEAR_LONG_SWORD;
+            }
+            if (overrideLimbDraw == Player_OverrideLimbDrawGameplayFirstPerson) {
+                wear |= PORT3DS_LOOK_FIRST_PERSON;
+            }
+            MergeShipPort3ds_SetPlayerLook(tunic, wear, plates.r, plates.g, plates.b);
+        }
         SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, data, lod);
+        msPort3ds = MergeShipPort3ds_SkeletonDrawn(); // (the model drew its own boots, gauntlets and bracelet)
     }
 #if MERGESHIP_OOT3D
     gMergeShip3dsTunic = -1;
 #endif
 
-    if (!msGanondorf && !MERGESHIP_FORM_IS_MM(form) && !GameInteractor_InvisibleLinkActive() &&
+    if (!msGanondorf && !msPort3ds && !MERGESHIP_FORM_IS_MM(form) && !GameInteractor_InvisibleLinkActive() &&
         ((CVarGetInteger(CVAR_ENHANCEMENT("FirstPersonGauntlets"), 0) && LINK_IS_ADULT) ||
          (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson)) &&
         (overrideLimbDraw != Player_OverrideLimbDrawGameplayCrawling) &&
@@ -1920,6 +1964,57 @@ void func_8008F87C(PlayState* play, Player* this, SkelAnime* skelAnime, Vec3f* p
 extern MsSprint gMergeShipSprint;             // z_player.c
 extern MsSprintParams gMergeShipSprintParams; // z_player.c
 
+// MergeShip2 (3DS animations): a drawn bow or slingshot (MergeShipPort3ds_PlayerAim). The 3DS animation's hands are
+// posed for the 3DS bow, which the game's constants for the arrow and the string do not fit: the arrow and the
+// string are carried by the bow as the 3DS model holds it, and the upper body is turned as a whole so that this
+// arrow lies, and flies, where the game aims.
+s32 Player_MergeShipAimsBow(Player* this); // z_player.c
+static f32 sPort3dsAimWeight = 0.0f;
+static u32 sPort3dsAimFrame = 0xFFFFFFFF;
+static MtxF sPort3dsAimTurn;
+
+static s32 Player_Port3dsAim(PlayState* play, Player* this, MtxF* atBow, MtxF* sits, MtxF* turn) {
+    if ((this != GET_PLAYER(play)) || !Player_MergeShipAimsBow(this) || MergeShip_MMEquip_HeroBowInUse(play, this)) {
+        return 0;
+    }
+    return MergeShipPort3ds_PlayerAim(play, this->unk_6AD == 2, atBow, sits, turn);
+}
+
+// (at the upper body's limb, after the game's own aiming turns; eased in and out over four frames)
+static void Player_Port3dsAimTurn(PlayState* play, Player* this) {
+    MtxF turn;
+    Vec3f axis;
+    f32 sine;
+    f32 cosine;
+    s32 aims;
+
+    if (this != GET_PLAYER(play)) {
+        return;
+    }
+    aims = Player_Port3dsAim(play, this, NULL, NULL, &turn);
+    if (aims) {
+        sPort3dsAimTurn = turn;
+    }
+    if (sPort3dsAimFrame != play->gameplayFrames) { // (once a frame, however often he is drawn)
+        sPort3dsAimFrame = play->gameplayFrames;
+        Math_StepToF(&sPort3dsAimWeight, aims ? 1.0f : 0.0f, 0.25f);
+    }
+    if (sPort3dsAimWeight <= 0.0f) {
+        return;
+    }
+    axis.x = sPort3dsAimTurn.zy - sPort3dsAimTurn.yz;
+    axis.y = sPort3dsAimTurn.xz - sPort3dsAimTurn.zx;
+    axis.z = sPort3dsAimTurn.yx - sPort3dsAimTurn.xy;
+    sine = sqrtf(SQ(axis.x) + SQ(axis.y) + SQ(axis.z)) * 0.5f;
+    cosine = (sPort3dsAimTurn.xx + sPort3dsAimTurn.yy + sPort3dsAimTurn.zz - 1.0f) * 0.5f;
+    if (sine > 0.0001f) {
+        axis.x /= 2.0f * sine;
+        axis.y /= 2.0f * sine;
+        axis.z /= 2.0f * sine;
+        Matrix_RotateAxis(Math_FAtan2F(sine, cosine) * sPort3dsAimWeight, &axis, MTXMODE_APPLY);
+    }
+}
+
 s32 Player_OverrideLimbDrawGameplayCommon(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot,
                                           void* thisx) {
     Player* this = (Player*)thisx;
@@ -2071,6 +2166,7 @@ s32 Player_OverrideLimbDrawGameplayCommon(PlayState* play, s32 limbIndex, Gfx** 
             if (this->upperLimbRot.z != 0) {
                 Matrix_RotateZ(this->upperLimbRot.z * (M_PI / 0x8000), MTXMODE_APPLY);
             }
+            Player_Port3dsAimTurn(play, this); // MergeShip2 (3DS animations): a drawn bow's aim
             // MergeShip2: MM -- the Deku leans back as its bubble grows.
             if (this->mergeShipForm == PLAYER_FORM_DEKU) {
                 MergeShip_Deku_OverrideLimbUpper(this);
@@ -2180,6 +2276,7 @@ s32 Player_OverrideLimbDrawGameplayDefault(PlayState* play, s32 limbIndex, Gfx**
         // MergeShip2: MM's swords, shields, bow and hookshot in hand and on the back (MergeShipMMEquipmentDraw.inc);
         // otherwise MM's human, as the child -- MM's hands holding OoT's equipment, OoT's sheath where OoT's sheath
         // limb is, MM's waist (MergeShipChildLinkDraw.inc).
+        MergeShipPort3ds_NoteLimbList(limbIndex - 1, *dList); // (Ocarina of Time 3D models: Ocarina of Time's choice)
         if (!MergeShip_MMEquip_OverrideLimb(play, this, limbIndex, dList, pos)) {
             MergeShip_MMChildLink_OverrideLimb(play, this, limbIndex, dList, pos);
         }
@@ -2858,6 +2955,14 @@ void Player_PostLimbDrawGameplay(PlayState* play, s32 limbIndex, Gfx** dList, Ve
 
             Matrix_Push();
             MergeShip_MMChildLink_FitAdultBowString(this, stringModelToUse); // MergeShip2: the adult's bow, fitted
+            {
+                // MergeShip2 (3DS animations): the string on the bow as the 3DS model holds it
+                MtxF port3dsSits;
+
+                if (Player_Port3dsAim(play, this, NULL, &port3dsSits, NULL)) {
+                    Matrix_Mult(&port3dsSits, MTXMODE_APPLY);
+                }
+            }
             Matrix_Translate(stringData->pos.x, stringData->pos.y, stringData->pos.z, MTXMODE_APPLY);
 
             if ((this->stateFlags1 & PLAYER_STATE1_READY_TO_FIRE) && (this->unk_860 >= 0) && (this->unk_834 <= 10)) {
@@ -2895,6 +3000,26 @@ void Player_PostLimbDrawGameplay(PlayState* play, s32 limbIndex, Gfx** dList, Ve
         } else if ((this->actor.scale.y >= 0.0f) && (this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD)) {
             Matrix_Get(&this->shieldMf);
             Player_UpdateShieldCollider(play, this, &this->shieldQuad, sRightHandLimbModelShieldQuadVertices);
+        }
+
+        // MergeShip2 (3DS animations): the nocked arrow lies on the bow as the 3DS model holds it, whatever the hand
+        // that pulls does (the left hand's limb, drawn before this one, put it where the game's constants say)
+        if ((this->actor.scale.y >= 0.0f) && (heldActor != NULL) && (this->stateFlags1 & PLAYER_STATE1_READY_TO_FIRE) &&
+            (this->mergeShipForm != PLAYER_FORM_DEKU)) {
+            MtxF port3dsAtBow;
+            MtxF port3dsSits;
+            MtxF port3dsArrow;
+
+            if (Player_Port3dsAim(play, this, &port3dsAtBow, &port3dsSits, NULL)) {
+                Matrix_Push();
+                Matrix_Mult(&port3dsSits, MTXMODE_APPLY);
+                Matrix_Mult(&port3dsAtBow, MTXMODE_APPLY);
+                Matrix_MultVec3f(&sZeroVec, &heldActor->world.pos);
+                Matrix_Get(&port3dsArrow);
+                Matrix_MtxFToYXZRotS(&port3dsArrow, &heldActor->world.rot, 0);
+                heldActor->shape.rot = heldActor->world.rot;
+                Matrix_Pop();
+            }
         }
 
         if (this->actor.scale.y >= 0.0f) {
@@ -3064,6 +3189,7 @@ s32 Player_OverrideLimbDrawPause(PlayState* play, s32 limbIndex, Gfx** dList, Ve
 
     dLists = &sPlayerDListGroups[type][form];
     *dList = dLists[dListOffset];
+    MergeShipPort3ds_NoteLimbList(limbIndex - 1, *dList); // (Ocarina of Time 3D models: Ocarina of Time's choice)
 
     // MergeShip2: MM's equipment switched to in the pause screen; otherwise MM's human wearing OoT's gear.
     // MergeShip2 (soh_fd): neither is for a form on the equipment screen, which keeps its own hands and waist.

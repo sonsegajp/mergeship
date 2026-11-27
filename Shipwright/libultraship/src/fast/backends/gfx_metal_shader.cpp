@@ -234,6 +234,16 @@ MTL::VertexDescriptor* gfx_metal_build_shader(std::string& result, size_t& numFl
         { "o_alpha_threshold", cc_features.opt_alpha_threshold },
         { "o_invisible", cc_features.opt_invisible },
         { "o_grayscale", cc_features.opt_grayscale },
+        // MergeShip2 render styles (RenderStyle in interpreter.h)
+        { "o_style", cc_features.render_style },
+        { "o_shade_slot", cc_features.shade_slot },
+        { "o_toon", (cc_features.render_style == RENDER_STYLE_TOON ||
+                     cc_features.render_style == RENDER_STYLE_TOON_FLAT ||
+                     cc_features.render_style == 14) && // (14: toon on a surface with painted light)
+                        cc_features.shade_slot > 0 },
+        { "o_dither", cc_features.render_style == RENDER_STYLE_16BIT ||
+                          cc_features.render_style == RENDER_STYLE_8BIT ||
+                          cc_features.render_style == RENDER_STYLE_GAME_BOY },
         { "o_prim_depth", cc_features.opt_prim_depth },
         { "o_textures", M_ARRAY(cc_features.usedTextures, bool, 2) },
         { "o_masks", M_ARRAY(cc_features.used_masks, bool, 2) },

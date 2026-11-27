@@ -329,8 +329,8 @@ static Gfx* MSEq_ShieldWithoutScabbard(PlayState* play, const char* path, s32 ad
 // The sheath limb: `swordId` an MM sword (-1: Ocarina of Time's), `shieldId` an MM shield on the back (-1: Ocarina of
 // Time's or none), with Ocarina of Time's sheath model type and shield. `form`/`lod` index Ocarina of Time's tables.
 // `*allMM` tells whether every part drawn is MM's (MM's human then keeps MM's own sheath joint).
-static Gfx* MSEq_ComposeSheath(PlayState* play, s32 model, s32 lod, s32 form, s32 sheathType, s32 shield, s32 swordId,
-                               s32 shieldId, s32* allMM) {
+static Gfx* MSEq_ComposeSheath(PlayState* play, s32 model, s32 lod, s32 form, s32 sheathType, s32 shield, s32 sword,
+                               s32 swordId, s32 shieldId, s32* allMM) {
     s32 swordInSheath = (sheathType == PLAYER_MODELTYPE_SHEATH_16) || (sheathType == PLAYER_MODELTYPE_SHEATH_18);
     s32 shieldOnBack = ((sheathType == PLAYER_MODELTYPE_SHEATH_18) || (sheathType == PLAYER_MODELTYPE_SHEATH_19)) &&
                        (shield != PLAYER_SHIELD_NONE);
@@ -388,8 +388,21 @@ static Gfx* MSEq_ComposeSheath(PlayState* play, s32 model, s32 lod, s32 form, s3
             MSEq_Pop(&dl);
         }
     } else {
-        // Ocarina of Time's sword and scabbard without a shield (sSwordAndSheathDLs / sSheathDLs).
-        MSEq_Call(&dl, (const char*)(swordInSheath ? sSwordAndSheathDLs[row] : sSheathDLs[row]));
+        // BUG-0165: MM's young Link with the Master Sword or Biggoron's Sword on B wears the adult's (the Master Sword
+        // in its scabbard, Biggoron's Sword alone on the back: MergeShip_MMChild_ComposeAdultSheath, asked without a
+        // shield). Under an MM shield that composer steps aside, and the child's row here drew the Kokiri Sword.
+        Gfx* adultSword = (model == MSEQ_MODEL_MM_CHILD)
+                              ? MergeShip_MMChild_ComposeAdultSheath(
+                                    play, lod, swordInSheath ? PLAYER_MODELTYPE_SHEATH_16 : PLAYER_MODELTYPE_SHEATH_17,
+                                    PLAYER_SHIELD_NONE, sword, NULL)
+                              : NULL;
+
+        if (adultSword != NULL) {
+            gSPDisplayList(dl.p++, adultSword);
+        } else {
+            // Ocarina of Time's sword and scabbard without a shield (sSwordAndSheathDLs / sSheathDLs).
+            MSEq_Call(&dl, (const char*)(swordInSheath ? sSwordAndSheathDLs[row] : sSheathDLs[row]));
+        }
     }
 
     // MM's shield on the back (MM Player_PostLimbDrawGameplay, PLAYER_LIMB_SHEATH); its list multiplies in MM's own
@@ -507,7 +520,8 @@ s32 MergeShip_MMEquip_OverrideLimb(PlayState* play, Player* this, s32 limbIndex,
         if ((swordId >= 0) || (shieldId >= 0)) {
             s32 allMM;
             Gfx* sheath = MSEq_ComposeSheath(play, model, lod, this->mergeShipForm, this->sheathType,
-                                             this->currentShield, swordId, shieldId, &allMM);
+                                             this->currentShield, MergeShip_MMChild_BSword(), swordId, shieldId,
+                                             &allMM);
 
             if (sheath != NULL) {
                 *dList = sheath;
@@ -639,7 +653,8 @@ s32 MergeShip_MMEquip_OverrideLimbPause(PlayState* play, s32 limbIndex, s32 type
 
         if ((swordId >= 0) || (shieldId >= 0)) {
             s32 allMM;
-            Gfx* sheath = MSEq_ComposeSheath(play, model, 0, form, type, swordAndShield[1], swordId, shieldId, &allMM);
+            Gfx* sheath = MSEq_ComposeSheath(play, model, 0, form, type, swordAndShield[1], swordAndShield[0], swordId, shieldId,
+                                             &allMM);
 
             if (sheath != NULL) {
                 *dList = sheath;

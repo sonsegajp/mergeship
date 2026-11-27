@@ -93,6 +93,7 @@ class GfxRenderingAPIDX11 final : public GfxRenderingAPI {
     void SetViewport(int x, int y, int width, int height) override;
     void SetScissor(int x, int y, int width, int height) override;
     void SetUseAlpha(bool useAlpha) override;
+    void SetBlendMode(uint32_t mode, const uint8_t constantColor[4]) override;
     void DrawTriangles(float buf_vbo[], size_t buf_vbo_len, size_t buf_vbo_num_tris) override;
     void Init() override;
     void OnResize() override;
@@ -160,7 +161,7 @@ class GfxRenderingAPIDX11 final : public GfxRenderingAPI {
     PerDrawCB mPerDrawCbData;
     PerPrimDepthCB mPerPrimDepthCbData;
 
-    std::map<std::pair<uint64_t, uint32_t>, struct ShaderProgramD3D11> mShaderProgramPool;
+    std::map<std::pair<uint64_t, uint64_t>, struct ShaderProgramD3D11> mShaderProgramPool;
 
     std::vector<struct TextureData> mTextures;
     int mCurrentTile;
@@ -181,6 +182,11 @@ class GfxRenderingAPIDX11 final : public GfxRenderingAPI {
     struct ShaderProgramD3D11* mLastShaderProgram = nullptr;
     uint32_t mLastVertexBufferStride = 0;
     Microsoft::WRL::ComPtr<ID3D11BlendState> mLastBlendState = nullptr;
+    // MergeShip2: G_SETBLENDMODE_EX. One blend state per mode; 0 = the shader program's own.
+    uint32_t mCurrentBlendMode = 0;
+    float mCurrentBlendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+    float mLastBlendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+    std::map<uint32_t, Microsoft::WRL::ComPtr<ID3D11BlendState>> mBlendModeStates;
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mLastResourceViews[SHADER_MAX_TEXTURES] = { nullptr, nullptr };
     Microsoft::WRL::ComPtr<ID3D11SamplerState> mLastSamplerStates[SHADER_MAX_TEXTURES] = { nullptr, nullptr };
 
@@ -190,6 +196,75 @@ class GfxRenderingAPIDX11 final : public GfxRenderingAPI {
     Microsoft::WRL::ComPtr<ID3D11Texture2D> mReadbackStaging;
     uint32_t mReadbackStagingW = 0;
     uint32_t mReadbackStagingH = 0;
+
+    // MergeShip2 real-time shadows (appended): one pass over the whole framebuffer, made when first asked for.
+  public:
+    void ApplyShadows(int shadowFb, const float cameraInverse[4][4], const float light[4][4], const float lightDir[3],
+                      const float params[124], const int viewport[4]) override;
+
+  private:
+    Microsoft::WRL::ComPtr<ID3D11VertexShader> mShadowVs;
+    Microsoft::WRL::ComPtr<ID3D11PixelShader> mShadowPs[2]; // the framebuffer's depth plain, and multisampled
+    Microsoft::WRL::ComPtr<ID3D11Buffer> mShadowCb;
+    Microsoft::WRL::ComPtr<ID3D11BlendState> mShadowBlend;
+    Microsoft::WRL::ComPtr<ID3D11DepthStencilState> mShadowDepthOff;
+    Microsoft::WRL::ComPtr<ID3D11RasterizerState> mShadowRaster;
+    bool mShadowFailed = false;
+
+  public:
+    bool StartShadowMap(int size, bool clip) override;
+
+  private:
+    Microsoft::WRL::ComPtr<ID3D11Texture2D> mShadowMap; // depth alone, 16 bits a texel
+    Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mShadowMapDsv;
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mShadowMapSrv;
+    int mShadowMapSize = 0;
+    int mShadowMapIdle = 0; // frames since it was last drawn into
+    bool mShadowMapDrawing = false; // between StartShadowMap and the next StartDrawToFramebuffer
+    bool mShadowMapClip = false;    // (while drawing it) the near side cuts
+    Microsoft::WRL::ComPtr<ID3D11SamplerState> mShadowSampler; // the map read as "is this depth in the light?"
+    // (with lamps about, the pass writes the finished colour from a copy of the picture: ApplyShadows)
+    Microsoft::WRL::ComPtr<ID3D11PixelShader> mShadowReadPs[2];
+    Microsoft::WRL::ComPtr<ID3D11BlendState> mShadowPlain; // no blending: the colour as the shader gives it
+    // A copy of the framebuffer in use, one sample a pixel, for a pass that reads the picture it writes.
+    bool CopyScene();
+    Microsoft::WRL::ComPtr<ID3D11Texture2D> mSceneCopy;
+    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> mSceneCopySrv;
+    uint32_t mSceneCopyWidth = 0;
+    uint32_t mSceneCopyHeight = 0;
+    uint32_t mSceneCopyFormat = 0;
+    int mSceneCopyIdle = 0; // frames since it was last asked for
+    bool mSceneCopyFailed = false;
+
+    // MergeShip2, the finished picture's glow and look (appended): gfx_rendering_api.h, ApplyPost.
+  public:
+    void ApplyPost(const float cameraInverse[4][4], const float params[48], const int viewport[4]) override;
+
+  private:
+    struct PostTarget {
+        Microsoft::WRL::ComPtr<ID3D11Texture2D> texture;
+        Microsoft::WRL::ComPtr<ID3D11RenderTargetView> target;
+        Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> view;
+        uint32_t width = 0;
+        uint32_t height = 0;
+    };
+    Microsoft::WRL::ComPtr<ID3D11VertexShader> mPostVs;
+    Microsoft::WRL::ComPtr<ID3D11PixelShader> mPostPs[3];      // a half, the bright parts, growing
+    Microsoft::WRL::ComPtr<ID3D11PixelShader> mPostFinalPs[2]; // the framebuffer's depth plain, and multisampled
+    Microsoft::WRL::ComPtr<ID3D11Buffer> mPostCb;
+    Microsoft::WRL::ComPtr<ID3D11SamplerState> mPostSampler;
+    Microsoft::WRL::ComPtr<ID3D11BlendState> mPostPlain; // the colour as the shader gives it
+    Microsoft::WRL::ComPtr<ID3D11BlendState> mPostAdd;   // added to what is there
+    Microsoft::WRL::ComPtr<ID3D11BlendState> mPostKeepAlpha; // the colour as given, the framebuffer's alpha left
+    Microsoft::WRL::ComPtr<ID3D11DepthStencilState> mPostDepthOff;
+    Microsoft::WRL::ComPtr<ID3D11RasterizerState> mPostRaster;
+    PostTarget mPostSoft[3]; // the picture at a half, a quarter and an eighth of its size
+    PostTarget mPostGlow[5]; // what glows, from a quarter of the picture's size down to a 64th
+    uint32_t mPostWidth = 0;
+    uint32_t mPostHeight = 0;
+    uint32_t mPostFormat = 0;
+    int mPostIdle = 0; // frames since it was last run
+    bool mPostFailed = false;
 };
 
 std::string gfx_direct3d_common_build_shader(size_t& numFloats, const CCFeatures& cc_features,

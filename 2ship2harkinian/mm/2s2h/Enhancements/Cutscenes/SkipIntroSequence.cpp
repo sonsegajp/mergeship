@@ -14,6 +14,29 @@ void MergeShipHostTest_Log(const char* fmt, ...);
 #define FIRST_CYCLE_CVAR_NAME "gEnhancements.Cutscenes.SkipFirstCycle"
 #define FIRST_CYCLE_CVAR CVarGetInteger(FIRST_CYCLE_CVAR_NAME, 0)
 
+// MergeShip2 (BUG-0166): a Termina file of the door that starts somewhere else than its intro -- the Song of Soaring
+// from Hyrule to an owl statue, a shuffled entrance of Hyrule's, Anchor's warp to a teammate. The intro skip below
+// only answers the intro's own entrance, so such a file arrived as it was made: Clock Town not entered yet, no Tatl,
+// and South Clock Town played its first-arrival scene on a Link who was never released (the softlock). The same state
+// the skip leaves on the door's file (nothing given: the user's rule), whatever the Skip Intro Sequence setting says,
+// as the intro itself is not what this arrival plays. Link's form is the arrival's (MergeShipHost.cpp).
+// Call it before the arrival's entrance is written. Returns true when the file was prepared.
+extern "C" s32 MergeShip_PrepareFileForArrival(void) {
+    // (isFirstCycle alone tells: "Link has entered Clock Town", true forever once set. A file just made still carries
+    // Sram_InitSave's cutscene index 0xFFF0, so the skip's own test of the intro's entrance does not fit here.)
+    if (gSaveContext.save.isFirstCycle) {
+        return false;
+    }
+    gSaveContext.save.hasTatl = true;
+    gSaveContext.cycleSceneFlags[SCENE_INSIDETOWER].switch0 |= (1 << 0);
+    gSaveContext.cycleSceneFlags[SCENE_OPENINGDAN].switch0 |= (1 << 2);
+    gSaveContext.cycleSceneFlags[SCENE_OPENINGDAN].switch0 |= (1 << 0);
+    gSaveContext.cycleSceneFlags[SCENE_OPENINGDAN].chest |= (1 << 0);
+    gSaveContext.save.isFirstCycle = true;
+    MergeShipHostTest_Log("FORM intro skipped for an arrival past it: form=%d", gSaveContext.save.playerForm);
+    return true;
+}
+
 void RegisterSkipIntroSequence() {
     COND_VB_SHOULD(VB_PLAY_TRANSITION_CS, INTRO_CVAR, {
         // Intro cutscene
